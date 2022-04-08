@@ -6,14 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/08 11:33:01 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/08 15:33:25 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= lem-in
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-SRC_FILES	= test.c
+SRC_FILES	= main.c read_map.c
 SRCS_DIR	= ./sources/
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS_DIR	= ./objects/
@@ -28,21 +28,17 @@ RED		= "\x1b[31m"
 EOC		= "\x1b[0m"
 
 all: $(NAME)
-#	@echo "7"
 	@echo $(GREEN) "Compiled" $(EOC)
 
 $(NAME): $(OBJS)
-#	@echo "6"
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIB)
 	@echo $(RED) "Comiling..." $(EOC)
-#	@echo "5"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@make -sC libft
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
-	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $(OBJS)
-
+#	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $(OBJS)
 
 clean:
 	rm -rf $(OBJS_DIR)
