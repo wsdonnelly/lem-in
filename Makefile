@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/11 15:20:54 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/11 15:27:16 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@make -sC libft
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
-#	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $(OBJS)
 
 clean:
 	rm -rf $(OBJS_DIR)
