@@ -28,7 +28,5 @@ typedef struct s_data
 }				t_data;
 
 void	read_map(t_data *data);
-//void	add_room(t_room **room_arr, int num_rooms, char *line);
-void	add_room(t_room **room_arr, int num_rooms);
 
 #endif
