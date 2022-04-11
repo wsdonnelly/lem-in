@@ -2,11 +2,8 @@
 # define LEM_IN_H
 
 # include "libft.h"
-<<<<<<< HEAD
-=======
 # include "get_next_line.h"
 #include <stdio.h>
->>>>>>> will
 
 # define TRUE 1
 # define FALSE 0
@@ -15,16 +12,11 @@
 typedef struct s_room
 {
 	char	*name;
-<<<<<<< HEAD
-	//neighbors
-=======
 	int		start;
 	int		end;
-	int		x;
-	int		y;
+	int capacity;
 	//test
 	int room_num;
->>>>>>> will
 
 
 }				t_room;
