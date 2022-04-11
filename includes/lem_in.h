@@ -9,14 +9,18 @@
 # define FALSE 0
 
 
-typedef struct s_vertex
+typedef struct s_room
 {
 	char	*name;
 	int		start;
 	int		end;
+	int		x;
+	int		y;
+	//test
+	int room_num;
 
 
-}				t_vertex;
+}				t_room;
 
 typedef struct s_data
 {
@@ -25,5 +29,7 @@ typedef struct s_data
 }				t_data;
 
 void	read_map(t_data *data);
+//void	add_room(t_room **room_arr, int num_rooms, char *line);
+void	add_room(t_room **room_arr, int num_rooms);
 
 #endif
