@@ -8,16 +8,19 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef struct s_edge
+{
+	int				room_index;
+	int				capacity;
+	struct s_edge	*reverse_edge;
+	struct s_edge	*next;
+
+}				t_edge;
 
 typedef struct s_room
 {
-	char	*name;
-	int		start;
-	int		end;
-	int capacity;
-	//test
-	int room_num;
-
+	char			*name;
+	struct s_edge	*neighbors;
 
 }				t_room;
 
