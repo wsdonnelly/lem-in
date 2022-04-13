@@ -10,10 +10,9 @@
 
 typedef struct s_edge
 {
-	int				room_index;
+	int				next_room_index;
 	int				capacity;
 	struct s_edge	*reverse_edge;
-	struct s_edge	*next;
 
 }				t_edge;
 
