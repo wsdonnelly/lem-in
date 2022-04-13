@@ -1,34 +1,68 @@
 #include "lem_in.h"
 
+void	free_str_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free (arr[i++]);
+	free (arr);
+}
+
+static void set_start_end(int *start, int *end, t_data *data, char *line)
+{
+	char **all;
+
+	if (*start || *end)
+	{
+		all = ft_strsplit(line, ' ');
+		if (*start)
+		{
+			data->start = ft_strdup(all[0]);
+			*start = FALSE;
+		}
+		else
+		{
+			data->end = ft_strdup(all[0]);
+			*end = FALSE;
+		}
+		free_str_arr(all);
+	}
+}
+
+static void	get_number_ants_rooms(t_data *data, char **line)
+{
+	//get number of ants //ADD ft_is_int()
+	if (get_next_line(0, line))
+	{
+		if (data->num_ants < 0 && !ft_strchr(*line, (int)' '))
+			data->num_ants = ft_atoi(*line);
+		else
+			data->num_ants = 0;
+	}
+	//else
+		//return ERROR empty file
+}
+
 void	read_map(t_data *data)
 {
 	char	*line;
 	int		start;
 	int		end;
 
-	start = 0;
-	end = 0;
-	//get number of ants //ADD ft_is_int()
-	if (get_next_line(0, &line))
-	{
-		if (data->num_ants < 0 && !ft_strchr(line, (int)' '))
-			data->num_ants = ft_atoi(line);
-		else
-			data->num_ants = 0;
-	}
-	//else
-		//return ERROR empty file
+	start = FALSE;
+	end = FALSE;
+
+	get_number_ants_rooms(data, &line);
 	while (get_next_line(0, &line) > 0)
-	{	
-		if (!ft_strcmp("##start", line))
+	{
+		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
 		{
-			start = 1;
-			free (line);
-			continue ;
-		}
-		else if (!ft_strcmp("##end", line))
-		{
-			end = 1;
+			if (!ft_strcmp("##start", line))
+				start = TRUE;
+			else
+				end = TRUE;
 			free (line);
 			continue ;
 		}
@@ -38,23 +72,14 @@ void	read_map(t_data *data)
 			free (line);
 			continue ;
 		}
-		//do untill links
 		if (ft_strchr(line, (int)' '))
 		{
-			//get room
-			
+			set_start_end(&start, &end, data, line);
 			data->num_rooms++;
-			//add_room(&room_arr, data->num_rooms);
 		}
-		//get links
-		
 		free (line);
 	}
 }
 
-void	read_map(t_data *data)
-{
-	get_number_ants_rooms();
-	
-	get_rooms_and_links();
-}
+
+

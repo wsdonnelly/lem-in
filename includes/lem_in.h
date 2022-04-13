@@ -20,13 +20,18 @@ typedef struct s_room
 {
 	char			*name;
 	struct s_edge	*neighbors;
+	int				start;
+	int				end;
+	
 
 }				t_room;
 
 typedef struct s_data
 {
-	int	num_ants;
-	int	num_rooms;
+	int		num_ants;
+	int		num_rooms;
+	char	*start;
+	char	*end;
 }				t_data;
 
 void	read_map(t_data *data);
