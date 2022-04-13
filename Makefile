@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/09 14:47:56 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/12 20:18:45 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIB			= -L libft -lft
 INCLUDES	= -I includes -I libft/includes
 
 GREEN	= "\x1b[32m"
-YELLOW	="\x1b[33m"
+YELLOW	= "\x1b[33m"
 BLUE	= "\x1b[34m"
 RED		= "\x1b[31m"
 EOC		= "\x1b[0m"
@@ -32,13 +32,12 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIB)
-	@echo $(RED) "Comiling..." $(EOC)
+	@echo $(RED) "Compiling..." $(EOC)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@make -sC libft
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
-#	@$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $(OBJS)
 
 clean:
 	rm -rf $(OBJS_DIR)
