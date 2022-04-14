@@ -6,14 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/12 20:18:45 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/13 15:15:47 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= lem-in
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-SRC_FILES	= main.c read_map.c
+SRC_FILES	= main.c read_map.c util.c graph.c
 SRCS_DIR	= ./sources/
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS_DIR	= ./objects/

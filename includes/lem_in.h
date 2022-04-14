@@ -35,5 +35,8 @@ typedef struct s_data
 }				t_data;
 
 void	read_map(t_data *data);
+void	create_graph(t_data *data, t_room **graph);
+//util
+void	free_str_arr(char **arr);
 
 #endif

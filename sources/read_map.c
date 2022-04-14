@@ -1,15 +1,5 @@
 #include "lem_in.h"
 
-void	free_str_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		free (arr[i++]);
-	free (arr);
-}
-
 static void set_start_end(int *start, int *end, t_data *data, char *line)
 {
 	char **all;
@@ -76,6 +66,11 @@ void	read_map(t_data *data)
 		{
 			set_start_end(&start, &end, data, line);
 			data->num_rooms++;
+		}
+		if (ft_strchr(line, (int)'-'))//make better
+		{
+			free (line);
+			break ;
 		}
 		free (line);
 	}
