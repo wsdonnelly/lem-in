@@ -45,6 +45,7 @@ void	read_map(t_data *data)
 	end = FALSE;
 
 	get_number_ants_rooms(data, &line);
+	free (line);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
