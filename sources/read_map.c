@@ -62,7 +62,7 @@ void	read_map(t_data *data)
 			free (line);
 			continue ;
 		}
-		if (ft_strchr(line, (int)' '))
+		if (ft_strchr(line, (int)' '))//make better error checking
 		{
 			set_start_end(&start, &end, data, line);
 			data->num_rooms++;
