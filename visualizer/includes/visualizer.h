@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/15 15:42:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/15 21:18:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef struct s_line
 }				t_line;
 
 void	read_in_info(t_info *info);
-void	read_rooms(t_info *info, t_room *room_arr);
+void	read_rooms(t_info *info, t_room *room_arr, char *line, int *max_coordiante);
 void	free_str_arr(char **arr);
 t_room *add_room(t_info *info);
 
