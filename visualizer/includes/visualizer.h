@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/15 21:18:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/16 11:47:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,24 @@ typedef struct	s_room
 	char	*name;
 	int		x;
 	int		y;
-	int		z;
 	int		link;
+	int		t_x;
+	int		t_y;
+	int		t_z;
 }				t_room;
 
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	//controls
+	int		zoom;
+	//room and info
+	struct s_room	*room_arr;
+	struct s_info	*info;
+}				t_data;
 
+/*
 typedef struct s_data
 {
 	void	*mlx;
@@ -80,7 +93,7 @@ typedef struct s_data
 	int		color;
 
 }				t_data;
-
+*/
 typedef struct s_point
 {
 	int	x;
@@ -98,9 +111,11 @@ typedef struct s_line
 	int	e2;
 }				t_line;
 
-void	read_in_info(t_info *info);
-void	read_rooms(t_info *info, t_room *room_arr, char *line, int *max_coordiante);
+void	read_in_info(t_info *info, t_room **room_arr);
+void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordiante);
 void	free_str_arr(char **arr);
 t_room *add_room(t_info *info);
+void	draw_graph(t_data *data);
+int	controls(int key, t_data *data);
 
 #endif

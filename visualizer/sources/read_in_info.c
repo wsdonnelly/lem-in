@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/15 21:16:39 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/16 11:47:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ t_room *malloc_room_arr(t_info *info)
 }
 
 
-void	read_in_info(t_info *info)
+void	read_in_info(t_info *info, t_room **room_arr)
 {
 	char	*line;
 	int		start;
 	int		end;
 	int		flag = 0;
 	int max_coordinate;
-	t_room *room_arr;
+	//t_room *room_arr;
 
 	start = FALSE;
 	end = FALSE;
@@ -85,12 +85,12 @@ void	read_in_info(t_info *info)
 		}
 		if (info->end != NULL && !flag)
 		{
-			
-			room_arr = malloc_room_arr(info);
+			*room_arr = malloc_room_arr(info);
 			printf("malloc array\n");
 			flag = 1;
 		}
-		
+		//printf("HERE\n");
+		//printf("room_arr[7]->name: %s\n", (*room_arr)[7].name);
 		if (ft_strchr(line, (int)' '))//make better error checking
 		{
 			//printf("room arr[1]-> %s\n", room_arr[1].name);
@@ -106,14 +106,8 @@ void	read_in_info(t_info *info)
 		//}
 		free (line);
 	}
-	int i = 0;
+	
 
-	while (i < info->num_rooms)
-	{
-		printf("arr[%d].name: %s\n", i, room_arr[i].name);
-		printf("arr[%d].x: %d\n", i, room_arr[i].x);
-		printf("arr[%d].y: %d\n", i, room_arr[i].y);
-		i++;
-	}
+	
 	printf("MAx COOrdinate: %d\n", max_coordinate);
 }

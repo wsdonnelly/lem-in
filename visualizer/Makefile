@@ -6,14 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 12:16:33 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/15 15:56:04 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/16 11:47:22 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= visualizer
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-SOURCES		= main.c read_in_info.c read_rooms.c util.c add_room.c
+SOURCES		= main.c read_in_info.c read_rooms.c util.c add_room.c controls.c draw_graph.c
 SRCS_DIR	= sources/
 SRCS		= $(addprefix	$(SRCS_DIR), $(SOURCES))
 OBJS		= $(addprefix	$(OBJS_DIR), $(SOURCES:.c=.o))

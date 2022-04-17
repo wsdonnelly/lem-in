@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/04/17 11:21:50 by wdonnell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static void set_start_end(int *start, int *end, t_data *data, char *line)
@@ -35,12 +47,14 @@ static void	get_number_ants_rooms(t_data *data, char **line)
 		//return ERROR empty file
 }
 
-void	read_map(t_data *data)
+void	read_map(t_data *data, t_room **graph)
 {
 	char	*line;
 	int		start;
 	int		end;
+	int		flag;
 
+	flag = FALSE;
 	start = FALSE;
 	end = FALSE;
 
@@ -70,8 +84,16 @@ void	read_map(t_data *data)
 		}
 		if (ft_strchr(line, (int)'-'))//make better
 		{
+			if (!flag)
+			{
+				printf("malloc graph\n");
+				*graph = malloc_graph(data);
+				flag = TRUE;
+			}
+			
+			create_graph(data, graph, line);
 			free (line);
-			break ;
+			continue;
 		}
 		free (line);
 	}

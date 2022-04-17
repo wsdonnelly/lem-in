@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   draw_graph.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/17 11:21:51 by wdonnell         ###   ########.fr       */
+/*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/04/17 09:12:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "visualizer.h"
 
-void	free_str_arr(char **arr)
+void	draw_graph(t_data *data)
 {
-	int	i;
+	int i;
 
+	
 	i = 0;
-	while (arr[i])
-		free (arr[i++]);
-	free (arr);
+	while (i < data->info->num_rooms)
+	{
+		data->room_arr[i].t_x = data->zoom * data->room_arr[i].x;
+		data->room_arr[i].t_y = data->zoom * data->room_arr[i].y;
+		mlx_string_put(data->mlx, data->win, data->room_arr[i].t_x, data->room_arr[i].t_y, 0x00FF0000);
+		i++;
+	}
 }

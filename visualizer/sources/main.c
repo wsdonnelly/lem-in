@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/15 21:16:55 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/16 11:47:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,58 @@ void	init_info(t_info *info)
 	info->end = NULL;
 }
 
-
+void init_data(t_data *data)
+{
+	data->zoom = 5;
+}
 
 int	main()
 {
-	//t_data data;
+	t_data data;
 	t_info	info;
-	//t_room	*room_arr = NULL;
+	t_room	*room_arr = NULL;
 
-	//data.mlx = mlx_init();
-	//data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
+	
 	init_info(&info);
+	init_data(&data);
 	
-	read_in_info(&info);
-
-
-	
-	//draw_graph();
-	//mlx_hook(data.win, 3, 0, controls, &data);
+	read_in_info(&info, &room_arr);
+	data.room_arr = room_arr;
+	data.info = &info;
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
+	/*
+	int i = 0;
+	while (i < info.num_rooms)
+	{
+		printf("arr[%d].name: %s\n", i, room_arr[i].name);
+		printf("arr[%d].x: %d\n", i, room_arr[i].x);
+		printf("arr[%d].y: %d\n", i, room_arr[i].y);
+		i++;
+	}
+	*/
+	draw_graph(&data);
+	mlx_hook(data.win, 3, 0, controls, &data);
 	/*
 	printf("num ants: %d\n", info.num_ants);
 	printf("num rooms: %d\n", info.num_rooms);
 	printf("start room: %s\n", info.start);
 	printf("end room: %s\n", info.end);
 	*/
+	/*
+	int i = 0;
+	while (i < info.num_rooms)
+	{
+		printf("arr[%d].name: %s\n", i, room_arr[i].name);
+		printf("arr[%d].x: %d\n", i, room_arr[i].x);
+		printf("arr[%d].y: %d\n", i, room_arr[i].y);
+		i++;
+	}
+	*/
 	
-
 	
 	
-	
-	//mlx_loop(data.mlx);
+	mlx_loop(data.mlx);
 
 	
 

@@ -30,13 +30,17 @@ typedef struct s_data
 {
 	int		num_ants;
 	int		num_rooms;
+	int		size;
 	char	*start;
 	char	*end;
 }				t_data;
 
-void	read_map(t_data *data);
-void	create_graph(t_data *data, t_room **graph);
+void	read_map(t_data *data, t_room **graph);
+t_room	*malloc_graph(t_data *data);
+void	create_graph(t_data *data, t_room **graph, char *line);
 //util
 void	free_str_arr(char **arr);
+//hash_map
+int	hash_map(char *name, int num_rooms, t_room **graph);
 
 #endif

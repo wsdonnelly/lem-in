@@ -6,12 +6,50 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/15 14:26:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/16 11:47:23 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "visualizer.h"
 
+static void	move_zoom(int key, t_data *data)
+{
+	//if (key == DOWNARROW)
+	//	data->y_offset += 10;
+	//else if (key == UPARROW)
+	//	data->y_offset -= 10;
+	//else if (key == LEFTARROW)
+	//	data->x_offset -= 10;
+	//else if (key == RIGHTARROW)
+	//	data->x_offset += 10;
+	if (key == EQUAL)
+		data->zoom += 1;
+	else if (key == MINUS)
+		data->zoom -= 1;
+}
+
+static void	basic_controls(int key)
+{
+	
+	if (key == ESCAPE)
+	{
+		//free_map(data);
+		exit (0);
+	}
+}
+
+int	controls(int key, t_data *data)
+{
+	if (key == ESCAPE)
+		basic_controls(key);
+	else if ((key >= 0x7B && key <= 0x7E) || key == MINUS || key == EQUAL)
+		move_zoom(key, data);
+	mlx_clear_window(data->mlx, data->win);
+	draw_graph(data);
+	return (0);
+}
+
+/*
 static void	move_zoom_elev(int key, t_data *data)
 {
 	if (key == DOWNARROW)
@@ -94,3 +132,4 @@ int	controls(int key, t_data *data)
 	draw(data);
 	return (0);
 }
+*/

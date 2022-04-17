@@ -6,13 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:14:49 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/15 21:18:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/16 11:47:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-int	hasher(char *name, t_info *info, t_room *room_arr)
+int	hasher(char *name, t_info *info, t_room **room_arr)
 {
 	int	index;
 	int	i;
@@ -25,19 +25,18 @@ int	hasher(char *name, t_info *info, t_room *room_arr)
 		i++;
 	}
 	index %= info->num_rooms;
-printf("INIDEX %d \n", index);
-	while (room_arr[index].name != NULL)
+	printf("INDEX %d \n", index);
+	while ((*room_arr)[index].name != NULL)
 	{
-		
 		index++;
 		index %= info->num_rooms;
 	}
-	room_arr[index].name = ft_strdup(name);
-	
+	(*room_arr)[index].name = ft_strdup(name);
+
 	return (index);
 }
 
-void	read_rooms(t_info *info, t_room *room_arr, char *line, int *max_coordinate)
+void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordinate)
 {
 	char	**room_info;
 	int		index;
@@ -49,10 +48,10 @@ void	read_rooms(t_info *info, t_room *room_arr, char *line, int *max_coordinate)
 	//hasher room[0]
 	
 	index = hasher(room_info[0], info, room_arr);
-	room_arr[index].x = ft_atoi(room_info[1]);
-	room_arr[index].y = ft_atoi(room_info[2]);
-	if (room_arr[index].x > *max_coordinate)
-		*max_coordinate = room_arr[index].x;
+	(*room_arr)[index].x = ft_atoi(room_info[1]);
+	(*room_arr)[index].y = ft_atoi(room_info[2]);
+	if ((*room_arr)[index].x > *max_coordinate)
+		*max_coordinate = (*room_arr)[index].x;
 	//printf("room_arr[%d]->x %d\n", index, room_arr[index].x);
 	//printf("room_arr[%d]->y %d\n", index, room_arr[index].y);
 	//add link to room[1]
