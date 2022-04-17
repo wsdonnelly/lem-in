@@ -6,19 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/17 11:21:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/17 12:16:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-
-/*
-static int	hasher(char *room, int size, t_room *graph)
-{
-
-}
-*/
 
 t_room *malloc_graph(t_data *data)
 {
@@ -26,7 +18,7 @@ t_room *malloc_graph(t_data *data)
 	int	i;
 	t_room *temp;
 	
-	printf("size: %d\n", size);
+	//printf("size: %d\n", size);
 	data->size = size;
 	temp = (t_room *)malloc(sizeof(t_room ) * size);
 	//if (!temp)
@@ -62,6 +54,8 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, int num_roo
 	free(name_2in);
 	index_2out = hash_map(name_2out, num_rooms, graph);
 	free(name_2out);
+
+	(*graph)[index_start].start = TRUE;
 }
 
 void	set_end_rooms(char *end_room, char *room_2, t_room **graph, int num_rooms)
@@ -84,6 +78,8 @@ void	set_end_rooms(char *end_room, char *room_2, t_room **graph, int num_rooms)
 	free(name_2in);
 	index_2out = hash_map(name_2out, num_rooms, graph);
 	free(name_2out);
+
+	(*graph)[index_end].end = TRUE;
 }
 
 void	set_rooms(char **room, t_room **graph, int num_rooms)
@@ -120,7 +116,7 @@ void	create_graph(t_data *data, t_room **graph, char *line)
 	int		num_rooms;
 
 	num_rooms = data->size;
-	printf("num_rooms: %d\n", num_rooms);
+	//printf("num_rooms: %d\n", num_rooms);
 	room = ft_strsplit(line, '-');
 	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))
 		set_start_rooms(room[0], room[1], graph, num_rooms);
@@ -130,6 +126,10 @@ void	create_graph(t_data *data, t_room **graph, char *line)
 		set_end_rooms(room[0], room[1], graph, num_rooms);
 	else if (!ft_strcmp(room[1], data->end) && ft_strcmp(room[0], data->start))
 		set_end_rooms(room[1], room[0], graph, num_rooms);
+
+	else if ((!ft_strcmp(room[0], data->start) || !ft_strcmp(room[1], data->start)) \
+	 && (ft_strcmp(room[0], data->end) || ft_strcmp(room[1], data->end)))
+	 	return ;
 	else
 		set_rooms(room, graph, num_rooms);
 

@@ -22,6 +22,15 @@ int main()
 	printf("start room: %s\n", data.start);
 	printf("end room: %s\n", data.end);
 	*/
+	int i = 0;
+	while (i < data.size)
+	{
+		printf("graph[%d].name: %s\n", i, graph[i].name);
+		printf("graph[%d].start: %d\n", i, graph[i].start);
+		printf("graph[%d].end: %d\n", i, graph[i].end);
+		printf("\n");
+		i++;
+	}
 	//free_data()
 	//free_graph()
 	return (0);

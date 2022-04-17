@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/17 11:21:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/17 12:01:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	read_map(t_data *data, t_room **graph)
 		{
 			if (!flag)
 			{
-				printf("malloc graph\n");
+				//printf("malloc graph\n");
 				*graph = malloc_graph(data);
 				flag = TRUE;
 			}
