@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/17 12:16:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:28:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_room *malloc_graph(t_data *data)
 		temp[i].name = NULL;
 		temp[i].start = FALSE;
 		temp[i].end = FALSE;
+		temp[i].neighbors = NULL;
 		i++;
 	}
 	return (temp);
@@ -107,6 +108,11 @@ void	set_rooms(char **room, t_room **graph, int num_rooms)
 	free(name_2in);
 	index_2out = hash_map(name_2out, num_rooms, graph);
 	free(name_2out);
+
+	add_edge(&(*graph)[index_1in].neighbors, index_1out);
+	add_edge(&(*graph)[index_1out].neighbors, index_2in);
+	add_edge(&(*graph)[index_2in].neighbors, index_2out);
+	add_edge(&(*graph)[index_2out].neighbors, index_1in);
 
 }
 

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   linked_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/17 16:21:54 by wdonnell         ###   ########.fr       */
+/*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/04/17 16:21:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	free_str_arr(char **arr)
+void	add_edge(t_edge **head, int next)
 {
-	int	i;
+	//malloc new edge
+	t_edge	*temp;
 
-	i = 0;
-	while (arr[i])
-		free (arr[i++]);
-	free (arr);
+	temp = malloc(sizeof(t_edge));
+	//ERROR
+	temp->next_room_index = next;
+	temp->capacity = 1;
+	temp->reverse_edge = NULL;
+	temp->next = *head;
+	*head = temp;
 }

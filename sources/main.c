@@ -22,14 +22,29 @@ int main()
 	printf("start room: %s\n", data.start);
 	printf("end room: %s\n", data.end);
 	*/
+	t_edge *temp;
 	int i = 0;
 	while (i < data.size)
 	{
 		printf("graph[%d].name: %s\n", i, graph[i].name);
 		printf("graph[%d].start: %d\n", i, graph[i].start);
 		printf("graph[%d].end: %d\n", i, graph[i].end);
+		
+		temp = graph[i].neighbors;
+		while(temp)
+		{
+			printf("neighbor: %d\n", temp->next_room_index);
+			temp = temp->next;
+		}
 		printf("\n");
 		i++;
+	}
+	
+	while(temp)
+	{
+		temp = graph[i].neighbors;
+
+		
 	}
 	//free_data()
 	//free_graph()
