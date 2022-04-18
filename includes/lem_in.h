@@ -10,58 +10,53 @@
 
 typedef struct s_edge
 {
-	int				next_room_index; //can we directly include a pointer to the room?
-	int				capacity; //not required if we only add rooms with capacity as neighbours
-	struct s_edge	*reverse_edge; //can we add room as neighbour of reverse_edge based on next_room index and function add_neighbour(next_room_index, room_index)
-	struct s_edge	*next_neighbor;
+	int				next_room_index;
+	int				capacity;
+	struct s_edge	*reverse_edge;
+	struct s_edge	*next;
 
 }				t_edge;
 
 typedef struct s_room
 {
 	char			*name;
-	t_room			*queue_next;
-	t_room			*visited_next;
-	t_room			*previous;
+	char			*previous;
 	struct s_edge	*neighbors;
-
+	int				start;
+	int				end;
 }				t_room;
-
-typedef struct s_solution
-{
-	t_room		*room;
-	t_solution	*next_room;
-}				t_solution;
-
-typedef struct s_solutions
-{
-	t_solution	*solution;
-	t_solutions	*next_solution;
-}				t_solutions;
 
 typedef struct s_path
 {
-	t_room	*room;
-	t_path	*next_room;
+	struct s_room	room;
+	struct s_path	*next_room;
 }				t_path;
 
 typedef struct s_paths
 {
-	t_path	*path;
-	t_paths	*next_path;
+	struct s_path	*path;
+	struct s_paths	*next_path;
 }				t_paths;
 
 typedef struct s_data
 {
-	int			num_ants;
-	int			num_rooms;
-	t_room		*queue;
-	t_room		*visited;
-	t_solutions	*solutions;
-	t_paths		*paths;
+
+	int		num_ants;
+	int		num_rooms;
+	int		size;
+	char	*start;
+	char	*end;
 }				t_data;
 
-void	read_map(t_data *data);
-void	solve(t_room *start);
-
+void	read_map(t_data *data, t_room **graph);
+t_room	*malloc_graph(t_data *data);
+void	create_graph(t_data *data, t_room **graph, char *line);
+//util
+void	free_str_arr(char **arr);
+//hash_map
+int	hash_map(char *name, int num_rooms, t_room **graph);
+//linked list
+t_edge	*add_edge(t_edge **head, int next);
+t_edge	*add_reverse_edge(t_edge **head, int next, t_edge *forward);
+void	solve(t_data data, t_room *graph);
 #endif
