@@ -44,5 +44,6 @@ void	free_str_arr(char **arr);
 //hash_map
 int	hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
-void	add_edge(t_edge **head, int next);
+t_edge	*add_edge(t_edge **head, int next);
+t_edge	*add_reverse_edge(t_edge **head, int next, t_edge *forward);
 #endif

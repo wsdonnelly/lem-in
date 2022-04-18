@@ -27,13 +27,14 @@ int main()
 	while (i < data.size)
 	{
 		printf("graph[%d].name: %s\n", i, graph[i].name);
-		printf("graph[%d].start: %d\n", i, graph[i].start);
-		printf("graph[%d].end: %d\n", i, graph[i].end);
+		//printf("graph[%d].start: %d\n", i, graph[i].start);
+		//printf("graph[%d].end: %d\n", i, graph[i].end);
 		
 		temp = graph[i].neighbors;
 		while(temp)
 		{
-			printf("neighbor: %d\n", temp->next_room_index);
+			printf("neighbor: %s\n", graph[temp->next_room_index].name);
+			printf("capacity: %d\n\n", temp->capacity);
 			temp = temp->next;
 		}
 		printf("\n");
