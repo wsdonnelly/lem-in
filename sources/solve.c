@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/18 23:38:10 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/04/19 12:03:50 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,23 @@ static void	build_shortest_path(t_path **path, t_room *graph)
 	*path = tmp2;
 }
 
-static t_paths	*create_path_for_paths(t_path *path)
+static t_paths	*create_path_for_paths(t_path *path, int solution)
 {
 	t_paths	*paths;
 	
 	paths = (t_paths*)malloc(sizeof(t_paths));
 	if (!paths)
 		return (NULL);
-	paths->path = path;
+	if (solution)
+	{
+		while (path)
+		{
+			add_room_to_path(path->room, &paths->path);
+			path = path->next_room;
+		}
+	}
+	else
+		paths->path = path;
 	paths->next_path = NULL;
 	return (paths);
 }
@@ -107,13 +116,13 @@ static void	add_shortest_path_to_all_paths(t_paths **all_paths, t_path *shortest
 	t_paths	*tmp;
 
 	if (!*all_paths)
-		*all_paths = create_path_for_paths(shortest_path);
+		*all_paths = create_path_for_paths(shortest_path, 0);
 	else
 	{
 		tmp = *all_paths;
 		while (tmp->next_path)
 			tmp = tmp->next_path;
-		tmp->next_path = create_path_for_paths(shortest_path);
+		tmp->next_path = create_path_for_paths(shortest_path, 0);
 	}
 }
 
@@ -160,25 +169,114 @@ static void	map_paths(t_paths *all_paths, t_path *shortest_path)
 	}
 }
 
+static int	avg_path_len(t_paths *paths, int *mod)
+{
+	int		num_paths;
+	int		total_len;
+	t_path	*path;
+
+	num_paths = 0;
+	total_len = 0;
+	while (paths)
+	{
+		path = paths->path;
+		while (path)
+		{
+			total_len++;
+			path = path->next_room;
+		}
+		num_paths++;
+		paths = paths->next_path;
+	}
+	total_len /= 2;
+	*mod = total_len % num_paths;
+	return (total_len / num_paths);
+}
+
+static int	get_required_moves(t_data data, t_paths *paths)
+{
+	int			required_moves;
+	static int	num_paths;
+	int			avg_path;
+	int			mod1;
+	int			mod2;
+
+	num_paths++;
+	avg_path = avg_path_len(paths, &mod1);
+	required_moves = data.num_ants / num_paths + avg_path + mod1;
+	mod2 = data.num_ants % num_paths;
+	if ((mod1 + mod2) % num_paths == 0)
+		required_moves--;
+	return (required_moves);
+}
+
+static void	free_path(t_path **path)
+{
+	t_path	*tmp1;
+	t_path	*tmp2;
+
+	tmp1 = *path;
+	while (tmp1)
+	{	
+		tmp2 = tmp1;
+		tmp1 = tmp1->next_room;
+		free(tmp2);
+	}
+}
+
+static void	free_paths(t_paths **paths)
+{
+	t_paths	*tmp1;
+	t_paths	*tmp2;
+
+	tmp1 = *paths;
+	while (tmp1)
+	{
+		tmp2 = tmp1;
+		free_path(&tmp1->path);
+		tmp1 = tmp1->next_path;
+		free(tmp2);
+	}
+}
+
+static void	copy_all_paths_to_solution_paths(t_paths **solution_paths, t_paths *all_paths)
+{
+	t_paths	*tmp1;
+	t_paths	*tmp2;
+
+	if (*solution_paths)
+		free_paths(solution_paths);
+	tmp2 = all_paths;
+	*solution_paths = create_path_for_paths(tmp2->path, 1);
+	tmp2 = tmp2->next_path;
+	tmp1 = *solution_paths;
+	while (tmp2)
+	{
+		tmp1->next_path = create_path_for_paths(tmp2->path, 1);
+		tmp1 = tmp1->next_path;
+		tmp2 = tmp2->next_path;
+	}
+}
+
 void	solve(t_data data, t_room *graph)
 {
-	int	augmented_path;
-//	int	current_best_solution;
-//	int	current_length;
+	int		augmented_path;
+	int		best_solution;
+	int		required_moves;
 	t_path	*queue;
 	t_path	*visited;
 	t_path	*shortest_path;
 	t_path	*tmp;
 	t_edge	*neighbor;
 	t_paths	*all_paths;
+	t_paths	*solution_paths;
 	t_paths	*tmp2;
 
-	data.num_ants = 100;
 	graph[4].previous = NULL; //include in initialization of data
-//	current_length = 0;
-//	current_best_solution = 0;
+	best_solution = 0;
 	augmented_path = 1;
 	all_paths = NULL;
+	solution_paths = NULL;
 	while (augmented_path)
 	{
 		queue = NULL;
@@ -226,8 +324,15 @@ void	solve(t_data data, t_room *graph)
 			if (all_paths)
 				map_paths(all_paths, shortest_path);
 			add_shortest_path_to_all_paths(&all_paths, shortest_path);
-			printf("new round:\n");
-			tmp2 = all_paths;
+			required_moves = get_required_moves(data, all_paths);
+			if (!best_solution || required_moves < best_solution)
+			{
+				best_solution = required_moves;
+				copy_all_paths_to_solution_paths(&solution_paths, all_paths);
+			}
+			printf("required moves: %d\n", required_moves);
+			printf("best_solution: %d\n", best_solution);
+			tmp2 = solution_paths;
 			while (tmp2)
 			{
 				tmp = tmp2->path;
@@ -240,13 +345,8 @@ void	solve(t_data data, t_room *graph)
 				tmp2 = tmp2->next_path;
 			}
 		}
-		/*
-			if augmented_path
-				minimum required moves = sum length of all identified paths
-				if minimum required moves < current best solution || !current best solution
-					current best solution = minimum required moves
-					solution_path_list = all_identified path_list
-				set room.queue, room.visited and room.previous to NULL for all rooms
-		*/
 	}
+	//print solution
+	free_paths(&solution_paths);
+	free_paths(&all_paths);
 }

@@ -14,6 +14,9 @@ int main()
 	init_data(&data);
 	read_map(&data, &graph);
 	solve(data, graph);
+	//free initial structure
+
+	
 	//out_put();
 	//printf("HERE-> %s\n", graph[1].name);
 	/*
