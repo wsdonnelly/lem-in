@@ -41,12 +41,6 @@ int main()
 		i++;
 	}
 	
-	while(temp)
-	{
-		temp = graph[i].neighbors;
-
-		
-	}
 	//free_data()
 	//free_graph()
 	return (0);

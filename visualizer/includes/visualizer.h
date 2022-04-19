@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/16 11:47:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:12:28 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,18 @@ typedef struct s_info
 	char	*end;
 }				t_info;
 
+typedef struct s_link
+{
+	int				link;
+	struct s_link	*next;
+}				t_link;
+
 typedef struct	s_room
 {
 	char	*name;
 	int		x;
 	int		y;
-	int		link;
+	t_link	*link;
 	int		t_x;
 	int		t_y;
 	int		t_z;
@@ -113,9 +119,14 @@ typedef struct s_line
 
 void	read_in_info(t_info *info, t_room **room_arr);
 void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordiante);
+void	add_links(t_room **room_arr, char *line, int num_rooms);
 void	free_str_arr(char **arr);
 t_room *add_room(t_info *info);
 void	draw_graph(t_data *data);
 int	controls(int key, t_data *data);
+//hash-map
+int	hash_map(char *name, t_info *info, t_room **room_arr);
+int	hasher(char *name, int num_rooms);
+int	lookup(char *name, int num_rooms, t_room **room_arr);
 
 #endif

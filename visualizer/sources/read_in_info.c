@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/16 11:47:25 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:18:30 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,12 @@ t_room *malloc_room_arr(t_info *info)
 	temp = malloc(sizeof(t_room) * info->num_rooms);
 	//ERROR
 	i = 0;
-	while (i < info->num_rooms)
-		temp[i++].name = NULL;
+	while (i < info->num_rooms)//init
+	{
+		temp[i].name = NULL;
+		temp[i].link = NULL;
+		i++;
+	}
 	return (temp);
 }
 
@@ -77,37 +81,30 @@ void	read_in_info(t_info *info, t_room **room_arr)
 		}
 		if (line[0] == '#')
 		{
-			
 			get_comment(info, line);
-			
 			free (line);
 			continue ;
 		}
 		if (info->end != NULL && !flag)
 		{
 			*room_arr = malloc_room_arr(info);
-			printf("malloc array\n");
 			flag = 1;
 		}
-		//printf("HERE\n");
-		//printf("room_arr[7]->name: %s\n", (*room_arr)[7].name);
+
 		if (ft_strchr(line, (int)' '))//make better error checking
 		{
-			//printf("room arr[1]-> %s\n", room_arr[1].name);
 			read_rooms(info, room_arr, line, &max_coordinate);
 			free(line);
 			continue ;
 		}
-		//if (ft_strchr(line, (int)'-'))//make better
-		//{
-		//	//add links
-		//	free (line);
-		//	break ;
-		//}
+		if (ft_strchr(line, (int)'-'))//make better
+		{
+			add_links(room_arr, line, info->num_rooms);
+			free (line);
+			continue ;
+		}
 		free (line);
 	}
-	
-
-	
 	printf("MAx COOrdinate: %d\n", max_coordinate);
+
 }

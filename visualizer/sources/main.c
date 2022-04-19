@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/16 11:47:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:30:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,24 @@ int	main()
 	printf("start room: %s\n", info.start);
 	printf("end room: %s\n", info.end);
 	*/
-	/*
+	
 	int i = 0;
+	t_link *temp;
 	while (i < info.num_rooms)
 	{
 		printf("arr[%d].name: %s\n", i, room_arr[i].name);
-		printf("arr[%d].x: %d\n", i, room_arr[i].x);
-		printf("arr[%d].y: %d\n", i, room_arr[i].y);
+		//printf("arr[%d].x: %d\n", i, room_arr[i].x);
+		//printf("arr[%d].y: %d\n", i, room_arr[i].y);
+		temp = room_arr[i].link;
+		while (temp)
+		{
+			printf("link name : %s\n", room_arr[temp->link].name);
+			temp = temp->next;
+		}
+		printf("\n");
 		i++;
 	}
-	*/
+	
 	
 	
 	
