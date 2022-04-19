@@ -34,6 +34,8 @@ typedef struct s_data
 	int		size;
 	char	*start;
 	char	*end;
+	int		end_index;
+	int		start_index;
 }				t_data;
 
 void	read_map(t_data *data, t_room **graph);

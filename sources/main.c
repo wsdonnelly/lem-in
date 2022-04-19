@@ -40,6 +40,8 @@ int main()
 		printf("\n");
 		i++;
 	}
+	printf("index end: %d\n", data.end_index);
+	printf("index start: %d\n", data.start_index);
 	
 	//free_data()
 	//free_graph()
