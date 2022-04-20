@@ -6,27 +6,33 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:02:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:11:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_edge	*add_edge(t_edge **head, int next)
+t_edge	*add_edge(t_room **graph, t_data *data, int index1, int index2)
 {
-	//malloc new edge
+	t_edge **head;
 	t_edge	*temp;
 
+	head = &(*graph)[index1].neighbors;
 	temp = *head;
 	while (temp)
 	{
-		if (temp->next_room_index == next && temp->capacity == 1)
+		if (temp->next_room_index == index2 && temp->capacity == 1)
 			return NULL;
 		temp = temp->next;
 	}
 	temp = malloc(sizeof(t_edge));
-	//ERROR
-	temp->next_room_index = next;
+	if (!temp)
+	{
+		free_graph(graph, data);
+		free_data(data);
+		exit_error("ERROR");
+	}
+	temp->next_room_index = index2;
 	temp->capacity = 1;
 	temp->reverse_edge = NULL;
 	temp->next = *head;
@@ -39,8 +45,10 @@ t_edge	*add_reverse_edge(t_edge **head, int next, t_edge *forward)
 {
 	t_edge	*temp;
 
+
 	temp = malloc(sizeof(t_edge));
-	//ERROR
+	if (!temp)
+		return (NULL);
 	temp->next_room_index = next;
 	temp->capacity = 0;
 	temp->reverse_edge = forward;

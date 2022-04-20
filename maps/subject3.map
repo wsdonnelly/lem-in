@@ -1,10 +1,10 @@
-4
+90
 3 2 2
 ##start
 start 4 0
 ##end
 end 4 6
-4 0 4
+4 0 987
 1 4 2
 2 4 4
 5 8 2
@@ -16,6 +16,6 @@ start-1
 6-5
 end-6
 1-2
-2-end
+2-end-iuy
 3-start
-	
+2-start

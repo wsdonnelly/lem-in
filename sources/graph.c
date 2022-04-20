@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 16:00:06 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:23:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@ t_room *malloc_graph(t_data *data)
 	int	i;
 	t_room *temp;
 	
-	//printf("size: %d\n", size);
 	data->size = size;
 	temp = (t_room *)malloc(sizeof(t_room ) * size);
-	//if (!temp)
-		//exit ERROR
+	if (!temp)
+		exit_error("ERROR");
 	i = 0;
 	while (i < size) //init here
 	{
 		temp[i].name = NULL;
-		temp[i].start = FALSE;
-		temp[i].end = FALSE;
 		temp[i].neighbors = NULL;
 		i++;
 	}
@@ -57,22 +54,21 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, t_data *dat
 	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
-	(*graph)[index_start].start = TRUE;
-
-	forward = add_edge(&(*graph)[index_start].neighbors, index_2in);
+	//forward = add_edge(&(*graph)[index_start].neighbors, index_2in);
+	forward = add_edge(graph, data, index_start, index_2in);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_2in].neighbors, index_start, forward);
 		forward->reverse_edge = reverse;
 	}
 
-	forward = add_edge(&(*graph)[index_2in].neighbors, index_2out);
+	forward = add_edge(graph, data, index_2in, index_2out);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_2out].neighbors, index_2in, forward);
 		forward->reverse_edge = reverse;
 	}
-	forward = add_edge(&(*graph)[index_2out].neighbors, index_start);
+	forward = add_edge(graph, data, index_2out, index_start);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_start].neighbors, index_2out, forward);
@@ -103,22 +99,21 @@ void	set_end_rooms(char *end_room, char *room_2, t_room **graph, t_data *data)
 	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
-	(*graph)[index_end].end = TRUE;
 
-	forward = add_edge(&(*graph)[index_end].neighbors, index_2in);
+	forward = add_edge(graph, data, index_end, index_2in);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_2in].neighbors, index_end, forward);
 		forward->reverse_edge = reverse;
 	}
 
-	forward = add_edge(&(*graph)[index_2in].neighbors, index_2out);
+	forward = add_edge(graph, data, index_2in, index_2out);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_2out].neighbors, index_2in, forward);
 		forward->reverse_edge = reverse;
 	}
-	forward = add_edge(&(*graph)[index_2out].neighbors, index_end);
+	forward = add_edge(graph, data, index_2out, index_end);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_end].neighbors, index_2out, forward);
@@ -137,10 +132,7 @@ void	both_start_end(char *start_room, char *end_room, t_room **graph, t_data *da
 	index_start = hash_map(start_room, data->size, graph);
 	index_end = hash_map(end_room, data->size, graph);
 
-	(*graph)[index_start].start = TRUE;
-	(*graph)[index_end].end = TRUE;
-
-	forward = add_edge(&(*graph)[index_start].neighbors, index_end);
+	forward = add_edge(graph, data, index_start, index_end);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_end].neighbors, index_start, forward);
@@ -178,26 +170,33 @@ void	set_rooms(char **room, t_room **graph, t_data *data)
 	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
-	forward = add_edge(&(*graph)[index_1in].neighbors, index_1out);
+	if (index_1in < 0 || index_1out < 0 || index_2in < 0 || index_2out < 0)
+	{
+		free_graph(graph, data);
+		free(data);
+		exit_error("ERROR too many rooms");
+	}
+
+	forward = add_edge(graph, data, index_1in, index_1out);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_1out].neighbors, index_1in, forward);
 		forward->reverse_edge = reverse;
 	}
 
-	forward = add_edge(&(*graph)[index_1out].neighbors, index_2in);
+	forward = add_edge(graph, data, index_1out, index_2in);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_2in].neighbors, index_1out, forward);
 		forward->reverse_edge = reverse;
 	}
-	forward = add_edge(&(*graph)[index_2in].neighbors, index_2out);
+	forward = add_edge(graph, data, index_2in, index_2out);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_2out].neighbors, index_2in, forward);
 		forward->reverse_edge = reverse;
 	}
-	forward = add_edge(&(*graph)[index_2out].neighbors, index_1in);
+	forward = add_edge(graph, data, index_2out, index_1in);
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_1in].neighbors, index_2out, forward);
@@ -208,11 +207,16 @@ void	set_rooms(char **room, t_room **graph, t_data *data)
 void	create_graph(t_data *data, t_room **graph, char *line)
 {
 	char	**room;
-	//int		data->size;
-
-	//data->size = data->size;
-	//printf("data->size: %d\n", data->size);
+	
 	room = ft_strsplit(line, '-');
+	if (room[2] || !room[1])
+	{
+		free(line);
+		free_str_arr(room);
+		free_graph(graph, data);
+		free(data);
+		exit_error("ERROR link");
+	}
 	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))
 		set_start_rooms(room[0], room[1], graph, data);
 	else if (!ft_strcmp(room[1], data->start) && ft_strcmp(room[0], data->end))
