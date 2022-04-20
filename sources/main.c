@@ -4,6 +4,7 @@ static void	init_data(t_data *data)
 {
 	data->num_ants = -1;
 	data->num_rooms = 0;
+	data->size = -1;
 	data->start = NULL;
 	data->end = NULL;
 }
@@ -13,6 +14,7 @@ int main()
 	t_data	data;
 	t_room	*graph;
 
+	graph = NULL;
 	init_data(&data);
 	read_map(&data, &graph);
 	//solve();
@@ -24,7 +26,7 @@ int main()
 	printf("start room: %s\n", data.start);
 	printf("end room: %s\n", data.end);
 	*/
-	/*
+	
 	t_edge *temp;
 	int i = 0;
 	while (i < data.size)
@@ -45,7 +47,7 @@ int main()
 	}
 	printf("index end: %d\n", data.end_index);
 	printf("index start: %d\n", data.start_index);
-	*/
+	
 	
 	free_graph(&graph, &data);
 	free_data(&data);

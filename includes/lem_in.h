@@ -43,11 +43,12 @@ void	free_str_arr(char **arr);
 void	free_graph(t_room **graph, t_data *data);
 void	free_edge_list(t_edge *head);
 void	free_data(t_data *data);
-int	exit_error(char *message);
+int	exit_error(t_room **graph, t_data *data, char *message);
 int	is_valid_int(char *num);
 //hash_map
 int	hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_room **graph, t_data *data, int index1, int index2);
-t_edge	*add_reverse_edge(t_edge **head, int next, t_edge *forward);
+//t_edge	*add_reverse_edge(t_edge **head, int next, t_edge *forward);
+t_edge	*add_reverse_edge(t_room **graph, t_data *data, int index1,  int next, t_edge *forward);
 #endif
