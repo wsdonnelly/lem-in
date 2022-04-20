@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/20 15:23:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:46:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,19 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, t_data *dat
 	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
+	if (index_2in < 0 || index_2out < 0)
+	{
+		free_graph(graph, data);
+		free_data(data);
+		exit_error("ERROR too many rooms");
+	}
+	
 	//forward = add_edge(&(*graph)[index_start].neighbors, index_2in);
 	forward = add_edge(graph, data, index_start, index_2in);
 	if (forward)
 	{
-		reverse = add_reverse_edge(&(*graph)[index_2in].neighbors, index_start, forward);
+		//reverse = add_reverse_edge(&(*graph)[index_2in].neighbors, index_start, forward);
+		//reverse = add_reverse_edge(graph, data, index2, forward);
 		forward->reverse_edge = reverse;
 	}
 
@@ -72,6 +80,7 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, t_data *dat
 	if (forward)
 	{
 		reverse = add_reverse_edge(&(*graph)[index_start].neighbors, index_2out, forward);
+
 		forward->reverse_edge = reverse;
 	}
 
@@ -100,6 +109,12 @@ void	set_end_rooms(char *end_room, char *room_2, t_room **graph, t_data *data)
 	free(name_2out);
 
 
+	if (index_2in < 0 || index_2out < 0)
+	{
+		free_graph(graph, data);
+		free_data(data);
+		exit_error("ERROR too many rooms");
+	}
 	forward = add_edge(graph, data, index_end, index_2in);
 	if (forward)
 	{
@@ -173,7 +188,7 @@ void	set_rooms(char **room, t_room **graph, t_data *data)
 	if (index_1in < 0 || index_1out < 0 || index_2in < 0 || index_2out < 0)
 	{
 		free_graph(graph, data);
-		free(data);
+		free_data(data);
 		exit_error("ERROR too many rooms");
 	}
 
@@ -214,7 +229,7 @@ void	create_graph(t_data *data, t_room **graph, char *line)
 		free(line);
 		free_str_arr(room);
 		free_graph(graph, data);
-		free(data);
+		free_data(data);
 		exit_error("ERROR link");
 	}
 	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/20 14:50:31 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:30:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	read_map(t_data *data, t_room **graph)
 		if (!line[0])
 		{
 			free(line);
+			free_graph(graph, data);
+			free_data(data);
 			exit_error("ERROR empty line");
 		}
 		if (line[0] == '#')
@@ -137,6 +139,3 @@ void	read_map(t_data *data, t_room **graph)
 		exit_error("BAD LINE");
 	}
 }
-
-
-

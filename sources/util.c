@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/20 14:48:43 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:35:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	free_graph(t_room **graph, t_data *data)
 		free_edge_list((*graph)[i].neighbors);
 		i++;
 	}
+	free (*graph);
 }
 
 void	free_edge_list(t_edge *head)
