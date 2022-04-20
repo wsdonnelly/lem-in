@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solve.c                                            :+:      :+:    :+:   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 22:26:39 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/04/19 22:51:12 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	solve(t_data data, t_room *graph)
+void	free_path(t_path **path)
 {
-	while (data.augmented_path)
-	{
-		find_shortest_path(&data, graph);
-		if (data.augmented_path)
-		{
-			find_fewest_moves(&data, graph);
-			data.num_paths++;
-		}
+	t_path	*tmp1;
+	t_path	*tmp2;
+
+	tmp1 = *path;
+	while (tmp1)
+	{	
+		tmp2 = tmp1;
+		tmp1 = tmp1->next_room;
+		free(tmp2);
 	}
-	if (data.num_paths)
+}
+
+void	free_paths(t_paths **paths)
+{
+	t_paths	*tmp1;
+	t_paths	*tmp2;
+
+	tmp1 = *paths;
+	while (tmp1)
 	{
-		print_solution(data);
-		free_paths(&data.solution_paths);
-		free_paths(&data.all_paths);
+		tmp2 = tmp1;
+		free_path(&tmp1->path);
+		tmp1 = tmp1->next_path;
+		free(tmp2);
 	}
-	else
-		printf("no valid path found\n"); // change to ft_printf     
 }

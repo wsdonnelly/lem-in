@@ -4,6 +4,11 @@ static void	init_data(t_data *data)
 {
 	data->num_ants = -1;
 	data->num_rooms = 0;
+	data->best_solution = 0;
+	data->augmented_path = 1;
+	data->num_paths = 0;
+	data->all_paths = NULL;
+	data->solution_paths = NULL;
 }
 
 int main()
@@ -13,10 +18,11 @@ int main()
 
 	init_data(&data);
 	read_map(&data, &graph);
+	graph[data.start_index].previous = NULL;
 	solve(data, graph);
 	//free initial structure
 
-	
+
 	//out_put();
 	//printf("HERE-> %s\n", graph[1].name);
 	/*
@@ -43,6 +49,8 @@ int main()
 		printf("\n");
 		i++;
 	}
+	printf("index end: %d\n", data.end_index);
+	printf("index start: %d\n", data.start_index);
 	
 	while(temp)
 	{
@@ -52,5 +60,6 @@ int main()
 	}*/
 	//free_data()
 	//free_graph()
+	system("leaks lem-in");
 	return (0);
 }

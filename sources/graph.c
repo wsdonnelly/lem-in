@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/18 09:36:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:00:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_room *malloc_graph(t_data *data)
 	return (temp);
 }
 
-void	set_start_rooms(char *start_room, char *room_2, t_room **graph, int num_rooms)
+void	set_start_rooms(char *start_room, char *room_2, t_room **graph, t_data *data)
 {
 	int index_start;
 	int index_2in;
@@ -50,10 +50,11 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, int num_roo
 	name_2in = ft_strjoin(room_2, "in");
 	name_2out = ft_strjoin(room_2, "out");
 
-	index_start = hash_map(start_room, num_rooms, graph);
-	index_2in = hash_map(name_2in, num_rooms, graph);
+	index_start = hash_map(start_room, data->size, graph);
+	data->start_index = index_start;
+	index_2in = hash_map(name_2in, data->size, graph);
 	free(name_2in);
-	index_2out = hash_map(name_2out, num_rooms, graph);
+	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
 	(*graph)[index_start].start = TRUE;
@@ -80,7 +81,7 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, int num_roo
 
 }
 
-void	set_end_rooms(char *end_room, char *room_2, t_room **graph, int num_rooms)
+void	set_end_rooms(char *end_room, char *room_2, t_room **graph, t_data *data)
 {
 	int index_end;
 	int index_2in;
@@ -95,10 +96,11 @@ void	set_end_rooms(char *end_room, char *room_2, t_room **graph, int num_rooms)
 	name_2in = ft_strjoin(room_2, "in");
 	name_2out = ft_strjoin(room_2, "out");
 
-	index_end = hash_map(end_room, num_rooms, graph);
-	index_2in = hash_map(name_2in, num_rooms, graph);
+	index_end = hash_map(end_room, data->size, graph);
+	data->end_index = index_end;
+	index_2in = hash_map(name_2in, data->size, graph);
 	free(name_2in);
-	index_2out = hash_map(name_2out, num_rooms, graph);
+	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
 	(*graph)[index_end].end = TRUE;
@@ -124,7 +126,7 @@ void	set_end_rooms(char *end_room, char *room_2, t_room **graph, int num_rooms)
 	}
 }
 
-void	both_start_end(char *start_room, char *end_room, t_room **graph, int num_rooms)
+void	both_start_end(char *start_room, char *end_room, t_room **graph, t_data *data)
 {
 	int index_start;
 	int index_end;
@@ -132,8 +134,8 @@ void	both_start_end(char *start_room, char *end_room, t_room **graph, int num_ro
 	t_edge *forward;
 	t_edge *reverse;
 
-	index_start = hash_map(start_room, num_rooms, graph);
-	index_end = hash_map(end_room, num_rooms, graph);
+	index_start = hash_map(start_room, data->size, graph);
+	index_end = hash_map(end_room, data->size, graph);
 
 	(*graph)[index_start].start = TRUE;
 	(*graph)[index_end].end = TRUE;
@@ -147,7 +149,7 @@ void	both_start_end(char *start_room, char *end_room, t_room **graph, int num_ro
 
 }
 
-void	set_rooms(char **room, t_room **graph, int num_rooms)
+void	set_rooms(char **room, t_room **graph, t_data *data)
 {
 	int index_1in;
 	int index_1out;
@@ -167,13 +169,13 @@ void	set_rooms(char **room, t_room **graph, int num_rooms)
 	name_2in = ft_strjoin(room[1], "in");
 	name_2out = ft_strjoin(room[1], "out");
 
-	index_1in = hash_map(name_1in, num_rooms, graph);
+	index_1in = hash_map(name_1in, data->size, graph);
 	free(name_1in);
-	index_1out = hash_map(name_1out, num_rooms, graph);
+	index_1out = hash_map(name_1out, data->size, graph);
 	free(name_1out);
-	index_2in = hash_map(name_2in, num_rooms, graph);
+	index_2in = hash_map(name_2in, data->size, graph);
 	free(name_2in);
-	index_2out = hash_map(name_2out, num_rooms, graph);
+	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
 	forward = add_edge(&(*graph)[index_1in].neighbors, index_1out);
@@ -206,27 +208,26 @@ void	set_rooms(char **room, t_room **graph, int num_rooms)
 void	create_graph(t_data *data, t_room **graph, char *line)
 {
 	char	**room;
-	int		num_rooms;
+	//int		data->size;
 
-	num_rooms = data->size;
-	//printf("num_rooms: %d\n", num_rooms);
+	//data->size = data->size;
+	//printf("data->size: %d\n", data->size);
 	room = ft_strsplit(line, '-');
 	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))
-		set_start_rooms(room[0], room[1], graph, num_rooms);
+		set_start_rooms(room[0], room[1], graph, data);
 	else if (!ft_strcmp(room[1], data->start) && ft_strcmp(room[0], data->end))
-		set_start_rooms(room[1], room[0], graph, num_rooms);
+		set_start_rooms(room[1], room[0], graph, data);
 	else if (!ft_strcmp(room[0], data->end) && ft_strcmp(room[1], data->start))
-		set_end_rooms(room[0], room[1], graph, num_rooms);
+		set_end_rooms(room[0], room[1], graph, data);
 	else if (!ft_strcmp(room[1], data->end) && ft_strcmp(room[0], data->start))
-		set_end_rooms(room[1], room[0], graph, num_rooms);
+		set_end_rooms(room[1], room[0], graph, data);
 
 	else if (!ft_strcmp(room[0], data->start) && !ft_strcmp(room[1], data->end))
-		both_start_end(room[0], room[1], graph, num_rooms);
+		both_start_end(room[0], room[1], graph, data);
 	else if (!ft_strcmp(room[0], data->end) && !ft_strcmp(room[1], data->start))
-	 	both_start_end(room[1], room[0], graph, num_rooms);
-		//return ;
+	 	both_start_end(room[1], room[0], graph, data);
 	else
-		set_rooms(room, graph, num_rooms);
+		set_rooms(room, graph, data);
 
 	free_str_arr(room);
 }
