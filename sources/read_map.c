@@ -6,28 +6,28 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/21 14:19:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:58:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void set_start_end(int *start, int *end, t_data *data, char *line)
+static void set_start_end(t_data *data, char *line)
 {
 	char **all;
 
-	if (*start || *end)
+	if (data->start_index || data->end_index)
 	{
 		all = ft_strsplit(line, ' ');
-		if (*start)
+		if (data->start_index)
 		{
 			data->start = ft_strdup(all[0]);
-			*start = FALSE;
+			data->start_index = FALSE;
 		}
 		else
 		{
 			data->end = ft_strdup(all[0]);
-			*end = FALSE;
+			data->end_index = FALSE;
 		}
 		free_str_arr(all);
 	}
@@ -89,19 +89,18 @@ int	check_coordinate_errors(t_data *data, char *line)
 	return (1);
 }
 
+void	check_rooms()
+{
 
+}
 
 
 void	read_map(t_data *data, t_room **graph)
 {
 	char	*line;
-	int		start;
-	int		end;
 	int		flag;
 
 	flag = FALSE;
-	start = FALSE;
-	end = FALSE;
 
 	if (!get_number_ants(data, &line))
 	{
@@ -120,20 +119,22 @@ void	read_map(t_data *data, t_room **graph)
 		{
 			//skip comments
 			if (!ft_strcmp("##start", line))
-				start = TRUE;
+				data->start_index = TRUE;
 			else if (!ft_strcmp("##end", line))
-				end = TRUE;
+				data->end_index = TRUE;
 			free (line);
 			continue ;
 		}
 		if (ft_strchr(line, (int)' '))
 		{
+			check_rooms();
+
 			if (!check_coordinate_errors(data, line))
 			{
 				free(line);
 				exit_error(graph, data, "ERROR coord");
 			}
-			set_start_end(&start, &end, data, line);
+			set_start_end(data, line);
 			data->num_rooms++;
 			free (line);
 			continue ;

@@ -8,6 +8,9 @@ static void	init_data(t_data *data)
 	data->start = NULL;
 	data->end = NULL;
 	data->name_list = NULL;
+	data->start_index = FALSE;
+	data->end_index = FALSE;
+
 }
 
 int main()
