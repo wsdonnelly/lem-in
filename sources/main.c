@@ -19,6 +19,7 @@ int main()
 	//data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
+	ft_printf("%B", "a big hello from ftprintf");
 	//freename_list
 	//solve();
 	//out_put();
