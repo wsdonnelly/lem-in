@@ -7,6 +7,7 @@ static void	init_data(t_data *data)
 	data->size = -1;
 	data->start = NULL;
 	data->end = NULL;
+	data->name_list = NULL;
 }
 
 int main()
@@ -15,8 +16,10 @@ int main()
 	t_room	*graph;
 
 	graph = NULL;
+	//data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
+	//freename_list
 	//solve();
 	//out_put();
 	//printf("HERE-> %s\n", graph[1].name);

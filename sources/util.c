@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/20 20:58:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:19:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,27 @@ void	free_edge_list(t_edge *head)
 		free (temp);
 	}
 }
+void	free_name_list(t_node *head)
+{
+	t_node	*temp;
 
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		free (temp->name);
+		free (temp);
+	}
+
+}
 void	free_data(t_data *data)
 {
 	if (data->start)
 		free(data->start);
 	if (data->end)
 		free(data->end);
+	if (data->name_list)
+		free_name_list(data->name_list);
 }
 
 int	exit_error(t_room **graph, t_data *data, char *message)

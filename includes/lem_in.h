@@ -24,6 +24,12 @@ typedef struct s_room
 	struct s_edge	*neighbors;
 }				t_room;
 
+typedef struct s_node
+{
+	char *name;
+	struct s_node *next;
+}				t_node;
+
 typedef struct s_data
 {
 	int		num_ants;
@@ -33,7 +39,11 @@ typedef struct s_data
 	char	*end;
 	int		end_index;
 	int		start_index;
+	//t_room	**graph;
+	t_node	*name_list;
 }				t_data;
+
+
 
 void	read_map(t_data *data, t_room **graph);
 t_room	*malloc_graph(t_data *data);

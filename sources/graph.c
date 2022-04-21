@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/20 21:12:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:19:36 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	set_start_rooms(char *start_room, char *room_2, t_room **graph, t_data *dat
 	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
-	if (index_2in < 0 || index_2out < 0)
-		exit_error(graph, data, "ERROR too many rooms");
+	//if (index_2in < 0 || index_2out < 0)
+	//	exit_error(graph, data, "ERROR too many rooms");
 	
 	//forward = add_edge(&(*graph)[index_start].neighbors, index_2in);
 	forward = add_edge(graph, data, index_start, index_2in);
@@ -106,8 +106,8 @@ void	set_end_rooms(char *end_room, char *room_2, t_room **graph, t_data *data)
 	free(name_2out);
 
 
-	if (index_2in < 0 || index_2out < 0)
-		exit_error(graph, data, "ERROR too many rooms");
+	//if (index_2in < 0 || index_2out < 0)
+		//exit_error(graph, data, "ERROR too many rooms");
 	forward = add_edge(graph, data, index_end, index_2in);
 	if (forward)
 	{
@@ -182,8 +182,8 @@ void	set_rooms(char **room, t_room **graph, t_data *data)
 	index_2out = hash_map(name_2out, data->size, graph);
 	free(name_2out);
 
-	if (index_1in < 0 || index_1out < 0 || index_2in < 0 || index_2out < 0)
-		exit_error(graph, data, "ERROR too many rooms");
+	//if (index_1in < 0 || index_1out < 0 || index_2in < 0 || index_2out < 0)
+	//	exit_error(graph, data, "ERROR too many rooms");
 
 	forward = add_edge(graph, data, index_1in, index_1out);
 	if (forward)
@@ -216,12 +216,34 @@ void	set_rooms(char **room, t_room **graph, t_data *data)
 	}
 }
 
+int	names_in_list(t_data *data, char *name1, char *name2)
+{
+	t_node *temp;
+	int 	check1;
+	int		check2;
+
+	check1 = 0;
+	check2 = 0;
+	temp = data->name_list;
+	while (temp)
+	{
+		if (!ft_strcmp(temp->name, name1))
+			check1 = 1;
+		else if (!ft_strcmp(temp->name, name2))
+			check2 = 1;
+		if (check1 && check2)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
+}
+
 void	create_graph(t_data *data, t_room **graph, char *line)
 {
 	char	**room;
 	
 	room = ft_strsplit(line, '-');
-	if (room[2] || !room[1])
+	if (room[2] || !room[1] || !names_in_list(data, room[0], room[1]))
 	{
 		free(line);
 		free_str_arr(room);
