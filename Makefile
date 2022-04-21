@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/21 15:04:24 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/21 15:37:59 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	rm -rf $(OBJS_DIR)
-	rm -f libft/objects/*.o
+	rm -rf libft/objects/
 
 fclean: clean
 	rm -f $(NAME)
