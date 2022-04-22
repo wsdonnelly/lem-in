@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/21 14:19:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:56:39 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	free_edge_list(t_edge *head)
 		free (temp);
 	}
 }
+
 void	free_name_list(t_node *head)
 {
 	t_node	*temp;
@@ -60,8 +61,8 @@ void	free_name_list(t_node *head)
 		free (temp->name);
 		free (temp);
 	}
-
 }
+
 void	free_data(t_data *data)
 {
 	if (data->start)
@@ -74,7 +75,6 @@ void	free_data(t_data *data)
 
 int	exit_error(t_room **graph, t_data *data, char *message)
 {
-	
 	free_graph(graph, data);
 	free_data(data);
 	write(2, message, ft_strlen(message));
@@ -105,5 +105,5 @@ int	is_valid_int(char *num)
 	}
 	if (val * sign > INT_MAX || val * sign < INT_MIN)
 		return (0);
-	return (1);	
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/21 14:19:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:58:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	hasher(char *name, int num_rooms)
 		i++;
 	}
 	return (index %= num_rooms);
-
 }
 
 int	hash_map(char *name, int num_rooms, t_room **graph)

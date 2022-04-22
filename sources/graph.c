@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/21 14:19:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:00:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,4 +266,5 @@ void	create_graph(t_data *data, t_room **graph, char *line)
 		set_rooms(room, graph, data);
 
 	free_str_arr(room);
+	free (line);
 }
