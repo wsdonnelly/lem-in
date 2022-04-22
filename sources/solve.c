@@ -6,13 +6,13 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 22:26:39 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/04/21 11:20:51 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	solve(t_data data, t_room *graph)
+void	solve(t_data data, t_room *graph, int argc)
 {
 	while (data.augmented_path)
 	{
@@ -26,6 +26,8 @@ void	solve(t_data data, t_room *graph)
 	if (data.num_paths)
 	{
 		print_solution(data);
+		if (argc == 2)
+			print_paths(data);
 		free_paths(&data.solution_paths);
 		free_paths(&data.all_paths);
 	}

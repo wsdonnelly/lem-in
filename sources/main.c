@@ -11,15 +11,20 @@ static void	init_data(t_data *data)
 	data->solution_paths = NULL;
 }
 
-int main()
+int main(int argc, char **argv)
 {
 	t_data	data;
 	t_room	*graph;
 
+	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
+	{
+		//add error message
+		return (1);
+	}
 	init_data(&data);
 	read_map(&data, &graph);
 	graph[data.start_index].previous = NULL;
-	solve(data, graph);
+	solve(data, graph, argc);
 	//free initial structure
 
 
