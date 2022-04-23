@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 	printf("end room: %s\n", data.end);
 	*/
 	
-	t_edge *temp;
+
 /*	t_edge *temp;
 	int i = 0;
 	while (i < data.size)
