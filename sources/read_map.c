@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/21 14:19:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:41:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void set_start_end(int *start, int *end, t_data *data, char *line)
 	}
 }
 
-
+//zero ants?
 static int	get_number_ants(t_data *data, char **line)
 {
 
@@ -47,20 +47,7 @@ static int	get_number_ants(t_data *data, char **line)
 	return (0);
 }
 
-int	add_name_to_list(t_node **head, char *name)
-{
-	t_node *temp;
-
-	temp = malloc(sizeof(t_node));
-	if (!temp)
-		return (0);
-	temp->name = ft_strdup(name);
-	temp->next = *head;
-	*head = temp;
-	return (1);
-}
-
-int	check_coordinate_errors(t_data *data, char *line)
+int	check_coordinate_errors(char *line)
 {
 	char **coordinate;
 
@@ -81,14 +68,9 @@ int	check_coordinate_errors(t_data *data, char *line)
 		free_str_arr(coordinate);
 		return (0);
 	}
-	//add name here
-	if (!add_name_to_list(&data->name_list, coordinate[0]))
-		return (0);
-	//
 	free_str_arr(coordinate);
 	return (1);
 }
-
 
 
 
@@ -128,7 +110,7 @@ void	read_map(t_data *data, t_room **graph)
 		}
 		if (ft_strchr(line, (int)' '))
 		{
-			if (!check_coordinate_errors(data, line))
+			if (!check_coordinate_errors(line))
 			{
 				free(line);
 				exit_error(graph, data, "ERROR coord");
