@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:12:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:34:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
-#include <stdio.h>
+# include <stdio.h>
 # include <fcntl.h>
+# include <time.h>
 
 # define KEYPAD4		0x56
 # define KEYPAD5		0x57
@@ -58,15 +59,21 @@ typedef struct s_link
 	struct s_link	*next;
 }				t_link;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	z;
+}				t_point;
+
 typedef struct	s_room
 {
 	char	*name;
 	int		x;
 	int		y;
+	int		z;
 	t_link	*link;
-	int		t_x;
-	int		t_y;
-	int		t_z;
+	struct s_point point;
 }				t_room;
 
 typedef struct s_data
@@ -75,10 +82,26 @@ typedef struct s_data
 	void	*win;
 	//controls
 	int		zoom;
+	int		x_offset;
+	int		y_offset;
+	double	alpha;
+	double	beta;
+	double	gamma;
+	int		color;
 	//room and info
 	struct s_room	*room_arr;
 	struct s_info	*info;
 }				t_data;
+
+typedef struct s_line
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
+}				t_line;
 
 /*
 typedef struct s_data
@@ -100,22 +123,9 @@ typedef struct s_data
 
 }				t_data;
 */
-typedef struct s_point
-{
-	int	x;
-	int	y;
-	int	z;
-}				t_point;
 
-typedef struct s_line
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-}				t_line;
+
+
 
 void	read_in_info(t_info *info, t_room **room_arr);
 void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordiante);
@@ -128,5 +138,9 @@ int	controls(int key, t_data *data);
 int	hash_map(char *name, t_info *info, t_room **room_arr);
 int	hasher(char *name, int num_rooms);
 int	lookup(char *name, int num_rooms, t_room **room_arr);
+
+void	make_line(t_data *data, t_point a, t_point b);
+
+void	rotate(t_point *a, t_data *data);
 
 #endif

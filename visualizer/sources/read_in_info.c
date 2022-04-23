@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:18:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:30:52 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ t_room *malloc_room_arr(t_info *info)
 	temp = malloc(sizeof(t_room) * info->num_rooms);
 	//ERROR
 	i = 0;
-	while (i < info->num_rooms)//init
+	while (i < info->num_rooms)//init room array
 	{
 		temp[i].name = NULL;
 		temp[i].link = NULL;
+		temp[i].z = rand() % 23;
 		i++;
 	}
 	return (temp);
@@ -63,7 +64,6 @@ void	read_in_info(t_info *info, t_room **room_arr)
 	int		end;
 	int		flag = 0;
 	int max_coordinate;
-	//t_room *room_arr;
 
 	start = FALSE;
 	end = FALSE;
@@ -73,7 +73,7 @@ void	read_in_info(t_info *info, t_room **room_arr)
 	
 	while (get_next_line(0, &line) > 0)
 	{
-	
+		
 		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
 		{
 			free (line);
@@ -91,7 +91,7 @@ void	read_in_info(t_info *info, t_room **room_arr)
 			flag = 1;
 		}
 
-		if (ft_strchr(line, (int)' '))//make better error checking
+		if (ft_strchr(line, (int)' '))
 		{
 			read_rooms(info, room_arr, line, &max_coordinate);
 			free(line);

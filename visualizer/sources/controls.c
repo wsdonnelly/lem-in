@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/16 11:47:23 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:30:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	move_zoom(int key, t_data *data)
 {
-	//if (key == DOWNARROW)
-	//	data->y_offset += 10;
-	//else if (key == UPARROW)
-	//	data->y_offset -= 10;
-	//else if (key == LEFTARROW)
-	//	data->x_offset -= 10;
-	//else if (key == RIGHTARROW)
-	//	data->x_offset += 10;
+	if (key == DOWNARROW)
+		data->y_offset += 10;
+	else if (key == UPARROW)
+		data->y_offset -= 10;
+	else if (key == LEFTARROW)
+		data->x_offset -= 10;
+	else if (key == RIGHTARROW)
+		data->x_offset += 10;
 	if (key == EQUAL)
 		data->zoom += 1;
 	else if (key == MINUS)
@@ -36,38 +36,6 @@ static void	basic_controls(int key)
 		//free_map(data);
 		exit (0);
 	}
-}
-
-int	controls(int key, t_data *data)
-{
-	if (key == ESCAPE)
-		basic_controls(key);
-	else if ((key >= 0x7B && key <= 0x7E) || key == MINUS || key == EQUAL)
-		move_zoom(key, data);
-	mlx_clear_window(data->mlx, data->win);
-	draw_graph(data);
-	return (0);
-}
-
-/*
-static void	move_zoom_elev(int key, t_data *data)
-{
-	if (key == DOWNARROW)
-		data->y_offset += 10;
-	else if (key == UPARROW)
-		data->y_offset -= 10;
-	else if (key == LEFTARROW)
-		data->x_offset -= 10;
-	else if (key == RIGHTARROW)
-		data->x_offset += 10;
-	else if (key == EQUAL)
-		data->zoom += 5;
-	else if (key == MINUS)
-		data->zoom -= 1;
-	else if (key == W)
-		data->elev += 1;
-	else if (key == Q)
-		data->elev -= 1;
 }
 
 static void	rotation(int key, t_data *data)
@@ -86,6 +54,21 @@ static void	rotation(int key, t_data *data)
 		data->gamma += .05;
 }
 
+int	controls(int key, t_data *data)
+{
+	if (key == ESCAPE)
+		basic_controls(key);
+	else if ((key >= 0x7B && key <= 0x7E) || key == MINUS || key == EQUAL)
+		move_zoom(key, data);
+	else if (key >= 0x56 && key <= 0x5C)
+		rotation(key, data);
+	mlx_clear_window(data->mlx, data->win);
+	draw_graph(data);
+	return (0);
+}
+
+
+/*
 static void	basic_controls(int key, t_data *data)
 {
 	if (key == P)

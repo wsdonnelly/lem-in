@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:35:23 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:18:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:30:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	hash_map(char *name, t_info *info, t_room **room_arr)
 {
 	int	index;
 	int	i;
+
 
 	i = 0;
 	index = hasher(name, info->num_rooms);

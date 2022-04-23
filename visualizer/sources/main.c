@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:30:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:30:56 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ void	init_info(t_info *info)
 	info->num_rooms = 0;
 	info->start = NULL;
 	info->end = NULL;
+
 }
 
 void init_data(t_data *data)
 {
 	data->zoom = 5;
+	data->x_offset = 0;
+	data->y_offset = 0;
+	data->color = 0x00FFFFFF;
 }
 
 int	main()
@@ -31,7 +35,7 @@ int	main()
 	t_info	info;
 	t_room	*room_arr = NULL;
 
-	
+	srand(time(0));
 	init_info(&info);
 	init_data(&data);
 	
@@ -58,7 +62,7 @@ int	main()
 	printf("start room: %s\n", info.start);
 	printf("end room: %s\n", info.end);
 	*/
-	
+	/*
 	int i = 0;
 	t_link *temp;
 	while (i < info.num_rooms)
@@ -69,13 +73,16 @@ int	main()
 		temp = room_arr[i].link;
 		while (temp)
 		{
-			printf("link name : %s\n", room_arr[temp->link].name);
+			printf("link name: %s link index: %d\n", room_arr[temp->link].name, temp->link);
+			//printf("x: %d\n", room_arr[i].point.x);
+			//printf("y: %d\n", room_arr[i].point.y);
+			//printf("z: %d\n", room_arr[i].point.z);
 			temp = temp->next;
 		}
 		printf("\n");
 		i++;
 	}
-	
+	*/
 	
 	
 	
