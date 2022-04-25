@@ -6,11 +6,23 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/21 11:29:19 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/04/25 10:53:58 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+static void	get_room_name(t_data data, t_print *print, char *room_name)
+{
+	if (ft_strcmp(room_name, data.end))
+	{
+		print->name_len = ft_strlen(room_name) - 2;
+		print->room_name = ft_strnew(print->name_len);
+		ft_strncpy(print->room_name, room_name, print->name_len);
+	}
+	else
+		print->room_name = ft_strdup(data.end);
+}
 
 static void	print_line(t_data data, t_print *print, char *room_name)
 {
@@ -24,14 +36,7 @@ static void	print_line(t_data data, t_print *print, char *room_name)
 			printf(" "); //change to ft_printf   
 		if (print->print_room % 2 == 0)
 		{
-			if (ft_strcmp(room_name, data.end))
-			{
-				print->name_len = ft_strlen(room_name) - 2;
-				print->room_name = ft_strnew(print->name_len);
-				ft_strncpy(print->room_name, room_name, print->name_len);
-			}
-			else
-				print->room_name = ft_strdup(data.end);
+			get_room_name(data, print, room_name);
 			printf("L%d-%s", print->ant_num, print->room_name); //change to ft_printf   
 			ft_strdel(&print->room_name);
 			print->start_of_line++;
@@ -75,14 +80,21 @@ void	print_paths(t_data data)
 	t_path	*tmp;
 	t_paths	*tmp2;
 
-	printf("\nPaths"); //change to ft_printf   
+	printf("\nSolution Paths\n"); //change to ft_printf   
 	tmp2 = data.solution_paths;
 	while (tmp2)
 	{
-		tmp = tmp2->path;
+		printf("%s", tmp2->path->room.name); //change to ft_printf    
+		tmp = tmp2->path->next_room;
+		print.print_room = 0;
 		while (tmp)
 		{
-			printf("%s ", tmp->room.name); //change to ft_printf    
+			if (print.print_room++ % 2 == 0)
+			{
+				get_room_name(data, &print, tmp->room.name);
+				printf("-%s", print.room_name); //change to ft_printf    
+				ft_strdel(&print.room_name);
+			}
 			tmp = tmp->next_room;
 		}
 		tmp2 = tmp2->next_path;
