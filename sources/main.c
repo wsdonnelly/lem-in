@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	//data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
-	ft_printf("%B", "a big hello from ftprintf");
+	//ft_printf("%B", "a big hello from ftprintf");
 	//freename_list
 	//solve();
 	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
@@ -32,9 +32,7 @@ int main(int argc, char **argv)
 	}
 	init_data(&data);
 	read_map(&data, &graph);
-	graph[data.start_index].previous = NULL;
-	solve(data, graph, argc);
-	//free initial structure
+	
 
 
 	//out_put();
