@@ -8,11 +8,9 @@ static void	init_data(t_data *data)
 	data->start = NULL;
 	data->end = NULL;
 	data->name_list = NULL;
-	data->best_solution = 0;
-	data->augmented_path = 1;
-	data->num_paths = 0;
-	data->all_paths = NULL;
-	data->solution_paths = NULL;
+	data->start_index = FALSE;
+	data->end_index = FALSE;
+
 }
 
 int main(int argc, char **argv)

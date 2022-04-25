@@ -6,60 +6,58 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/21 20:41:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 09:25:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void set_start_end(int *start, int *end, t_data *data, char *line)
+static void	set_start_end(t_data *data, char *line)
 {
-	char **all;
+	char	**all;
 
-	if (*start || *end)
+	if (data->start_index || data->end_index)
 	{
 		all = ft_strsplit(line, ' ');
-		if (*start)
+		if (data->start_index)
 		{
 			data->start = ft_strdup(all[0]);
-			*start = FALSE;
+			data->start_index = FALSE;
 		}
 		else
 		{
 			data->end = ft_strdup(all[0]);
-			*end = FALSE;
+			data->end_index = FALSE;
 		}
 		free_str_arr(all);
 	}
 }
 
-//zero ants?
-static int	get_number_ants(t_data *data, char **line)
+int	add_name_to_list(t_node **head, char *name)
 {
+	t_node	*temp;
 
-	if (get_next_line(0, line) && *line[0] && is_valid_int(*line) && !ft_strchr(*line, (int)' '))
-	{
-		data->num_ants = ft_atoi(*line);
-		if (data->num_ants <= 0)
-			return (0);
-		return (1);
-	}
-	return (0);
+	temp = malloc(sizeof(t_node));
+	if (!temp)
+		return (0);
+	temp->name = ft_strdup(name);
+	temp->next = *head;
+	*head = temp;
+	return (1);
 }
 
-int	check_coordinate_errors(char *line)
+int	check_coordinate_errors(t_data *data, char *line)
 {
-	char **coordinate;
+	char	**coordinate;
 
 	coordinate = ft_strsplit(line, ' ');
 	if (!coordinate[1] || !coordinate[2] || coordinate[3])
 	{
 		free_str_arr(coordinate);
-			return (0);
+		return (0);
 	}
 	if (!is_valid_int(coordinate[1]) || !is_valid_int(coordinate[2]))
 	{
-		
 		free_str_arr(coordinate);
 		return (0);
 	}
@@ -68,70 +66,88 @@ int	check_coordinate_errors(char *line)
 		free_str_arr(coordinate);
 		return (0);
 	}
+	if (!add_name_to_list(&data->name_list, coordinate[0]))
+		return (0);
 	free_str_arr(coordinate);
 	return (1);
 }
 
+void	check_rooms(t_data *data, t_room **graph, char *line)
+{
+	if (!check_coordinate_errors(data, line))
+	{
+		free(line);
+		exit_error(graph, data, "ERROR coord");
+	}
+	set_start_end(data, line);
+	data->num_rooms++;
+	free (line);
+}
 
+void	make_graph(int *flag, t_data *data, t_room **graph)
+{
+	if (!*flag)
+	{
+		*graph = malloc_graph(data);
+		*flag = TRUE;
+	}
+}
 
-void	read_map(t_data *data, t_room **graph)
+void	get_start_end(t_data *data, char *line)
+{
+	if (!ft_strcmp("##start", line))
+		data->start_index = TRUE;
+	else if (!ft_strcmp("##end", line))
+		data->end_index = TRUE;
+	free (line);
+}
+
+void	parse_data(t_data *data, t_room **graph)
 {
 	char	*line;
-	int		start;
-	int		end;
 	int		flag;
 
 	flag = FALSE;
-	start = FALSE;
-	end = FALSE;
-
-	if (!get_number_ants(data, &line))
-	{
-		free(line);
-		exit_error(graph, data, "ERROR");
-	}
-	free(line);
 	while (get_next_line(0, &line) > 0)
 	{
-		if (!line[0])
-		{
-			free(line);
-			exit_error(graph, data, "ERROR empty line");
-		}
 		if (line[0] == '#')
 		{
-			//skip comments
-			if (!ft_strcmp("##start", line))
-				start = TRUE;
-			else if (!ft_strcmp("##end", line))
-				end = TRUE;
-			free (line);
+			get_start_end(data, line);
 			continue ;
 		}
-		if (ft_strchr(line, (int)' '))
+		if (ft_strchr(line, (int) ' '))
 		{
-			if (!check_coordinate_errors(line))
-			{
-				free(line);
-				exit_error(graph, data, "ERROR coord");
-			}
-			set_start_end(&start, &end, data, line);
-			data->num_rooms++;
-			free (line);
+			check_rooms(data, graph, line);
 			continue ;
 		}
-		if (ft_strchr(line, (int)'-'))
+		if (ft_strchr(line, (int) '-'))
 		{
-			if (!flag)
-			{
-				*graph = malloc_graph(data);
-				flag = TRUE;
-			}
+			make_graph(&flag, data, graph);
 			create_graph(data, graph, line);
-			free (line);
-			continue;
+			continue ;
 		}
 		free (line);
-		exit_error(graph, data, "BAD LINE");
+		exit_error(graph, data, "ERROR");
 	}
+}
+
+void	get_number_ants(t_data *data, t_room **graph)
+{
+	char	*line;
+
+	if (get_next_line(0, &line) && line[0] && is_valid_int(line) \
+	&& !ft_strchr(line, (int) ' '))
+	{
+		data->num_ants = ft_atoi(line);
+		free (line);
+		if (data->num_ants > 0)
+			return ;
+	}
+	exit_error(graph, data, "ERROR");
+}
+
+void	read_map(t_data *data, t_room **graph)
+{
+	get_number_ants(data, graph);
+	parse_data(data, graph);
 }

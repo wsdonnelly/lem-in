@@ -45,6 +45,7 @@ typedef struct s_data
 	t_node	*name_list;
 }				t_data;
 
+<<<<<<< HEAD
 
 	int				start;
 	int				end;
@@ -96,6 +97,21 @@ typedef struct s_print
 	int		ant_num;
 	char	*room_name;
 }				t_print;
+=======
+typedef struct s_name
+{
+	char *one_in;
+	char *one_out;
+	char *two_in;
+	char *two_out;
+	int index_1in;
+	int index_1out;
+	int index_2in;
+	int index_2out;
+	int index_end;
+	int index_start;
+}				t_name;
+>>>>>>> will3
 
 void	read_map(t_data *data, t_room **graph);
 t_room	*malloc_graph(t_data *data);
