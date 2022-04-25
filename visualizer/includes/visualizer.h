@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 15:34:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:26:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ typedef struct s_data
 void	read_in_info(t_info *info, t_room **room_arr);
 void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordiante);
 void	add_links(t_room **room_arr, char *line, int num_rooms);
-void	free_str_arr(char **arr);
+
 t_room *add_room(t_info *info);
 void	draw_graph(t_data *data);
 int	controls(int key, t_data *data);
@@ -143,4 +143,7 @@ void	make_line(t_data *data, t_point a, t_point b);
 
 void	rotate(t_point *a, t_data *data);
 
+void	free_data(t_data *data);
+void	free_str_arr(char **arr);
+void exit_error(t_data *data, char *message);
 #endif

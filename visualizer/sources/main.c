@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 18:24:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:10:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	main()
 
 	
 
-	//free_graph();
+	free_data(&data);
 
-
+	system ("leaks visualizer");
 	return (0);
 }
 

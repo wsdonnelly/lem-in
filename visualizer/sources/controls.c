@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 18:24:08 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:25:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ static void	basic_controls(int key)
 static void	rotation(int key, t_data *data)
 {
 	if (key == KEYPAD8)
-		data->alpha += .05;
+		data->alpha += .02;
 	else if (key == KEYPAD5)
-		data->alpha -= .05;
+		data->alpha -= .02;
 	else if (key == KEYPAD4)
-		data->beta -= .05;
+		data->beta -= .02;
 	else if (key == KEYPAD6)
-		data->beta += .05;
+		data->beta += .02;
 	else if (key == KEYPAD7)
-		data->gamma -= .05;
+		data->gamma -= .02;
 	else if (key == KEYPAD9)
-		data->gamma += .05;
+		data->gamma += .02;
 }
 
 int	controls(int key, t_data *data)

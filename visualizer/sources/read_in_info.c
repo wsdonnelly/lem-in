@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 18:24:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:25:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 static void	get_number_ants(t_info *info, char **line)
 {
-	//get number of ants //ADD ft_is_int()
 	if (get_next_line(0, line))
 	{
-		if (info->num_ants < 0 && !ft_strchr(*line, (int)' '))
-			info->num_ants = ft_atoi(*line);
-		else
-			info->num_ants = 0;
-	}
+		info->num_ants = ft_atoi(*line);
+	}	
 	//else
-		//return ERROR empty file
+		//exit_error("empty error");
 }
 void	get_comment(t_info *info, char *line)
 {

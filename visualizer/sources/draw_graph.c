@@ -6,16 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 15:42:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:47:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-void draw_line()
-{
-	
-}
 
 void	draw_graph(t_data *data)
 {
