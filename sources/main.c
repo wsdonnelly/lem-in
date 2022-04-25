@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 	t_room	*graph;
 
 	graph = NULL;
-	//data.graph = &graph;
+	data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
 	//ft_printf("%B", "a big hello from ftprintf");
@@ -30,9 +30,7 @@ int main(int argc, char **argv)
 		//add error message
 		return (1);
 	}
-	init_data(&data);
-	read_map(&data, &graph);
-	
+
 
 
 	//out_put();
@@ -45,7 +43,7 @@ int main(int argc, char **argv)
 	*/
 	
 
-/*	t_edge *temp;
+	t_edge *temp;
 	int i = 0;
 	while (i < data.size)
 	{
@@ -69,14 +67,6 @@ int main(int argc, char **argv)
 	
 	free_graph(&graph, &data);
 	free_data(&data);
-	while(temp)
-	{
-		temp = graph[i].neighbors;
 
-		
-	}*/
-	//free_data()
-	//free_graph()
-	system("leaks lem-in");
 	return (0);
 }

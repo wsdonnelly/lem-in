@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/22 14:56:39 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:10:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	free_data(t_data *data)
 		free_name_list(data->name_list);
 }
 
-int	exit_error(t_room **graph, t_data *data, char *message)
+int	exit_error(t_data *data, char *message)
 {
-	free_graph(graph, data);
+	free_graph(data->graph, data);
 	free_data(data);
 	write(2, message, ft_strlen(message));
 	write(2, "\n", 1);
