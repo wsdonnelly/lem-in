@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 15:30:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/23 18:24:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main()
 	}
 	*/
 	draw_graph(&data);
-	mlx_hook(data.win, 3, 0, controls, &data);
+	mlx_hook(data.win, 2, 0, controls, &data);
 	/*
 	printf("num ants: %d\n", info.num_ants);
 	printf("num rooms: %d\n", info.num_rooms);
