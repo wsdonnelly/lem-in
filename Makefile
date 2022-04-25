@@ -6,14 +6,15 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/12 20:18:45 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/25 10:53:48 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= lem-in
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-SRC_FILES	= main.c read_map.c
+#EXTRA_FLAGS = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits -O3
+SRC_FILES	= main.c read_map.c util.c make_graph.c add_rooms_to_graph.c hash_map.c linked_list.c check_rooms.c
 SRCS_DIR	= ./sources/
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS_DIR	= ./objects/
@@ -41,7 +42,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	rm -rf $(OBJS_DIR)
-	rm -f libft/objects/*.o
+	rm -rf libft/objects/
 
 fclean: clean
 	rm -f $(NAME)

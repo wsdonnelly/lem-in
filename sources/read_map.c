@@ -1,60 +1,72 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/04/25 11:27:22 by wdonnell         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-void	read_map(t_data *data)
+static void	get_start_end(t_data *data, char *line)
+{
+	if (!ft_strcmp("##start", line))
+		data->start_index = TRUE;
+	else if (!ft_strcmp("##end", line))
+		data->end_index = TRUE;
+	free (line);
+}
+
+static void	parse_data(t_data *data, t_room **graph)
 {
 	char	*line;
-	int		start;
-	int		end;
+	int		flag;
 
-	start = 0;
-	end = 0;
-	//get number of ants //ADD ft_is_int()
-	if (get_next_line(0, &line))
-	{
-		if (data->num_ants < 0 && !ft_strchr(line, (int)' '))
-			data->num_ants = ft_atoi(line);
-		else
-			data->num_ants = 0;
-	}
-	//else
-		//return ERROR empty file
+	flag = FALSE;
 	while (get_next_line(0, &line) > 0)
-	{	
-		if (!ft_strcmp("##start", line))
-		{
-			start = 1;
-			free (line);
-			continue ;
-		}
-		else if (!ft_strcmp("##end", line))
-		{
-			end = 1;
-			free (line);
-			continue ;
-		}
+	{
 		if (line[0] == '#')
 		{
-			//get comment?
-			free (line);
+			get_start_end(data, line);
 			continue ;
 		}
-		//do untill links
-		if (ft_strchr(line, (int)' '))
+		if (ft_strchr(line, (int) ' '))
 		{
-			//get room
-			
-			data->num_rooms++;
-			//add_room(&room_arr, data->num_rooms);
+			check_rooms(data, line);
+			continue ;
 		}
-		//get links
-		
+		if (ft_strchr(line, (int) '-'))
+		{
+			make_graph(&flag, data, graph);
+			add_to_graph(data, line);
+			continue ;
+		}
 		free (line);
+		exit_error(data, "ERRORparse");
 	}
 }
 
-void	read_map(t_data *data)
+static void	get_number_ants(t_data *data)
 {
-	get_number_ants_rooms();
-	
-	get_rooms_and_links();
+	char	*line;
+
+	if (get_next_line(0, &line) && line[0] && is_valid_int(line) \
+	&& !ft_strchr(line, (int) ' '))
+	{
+		data->num_ants = ft_atoi(line);
+		free (line);
+		if (data->num_ants > 0)
+			return ;
+	}
+	exit_error(data, "ERRORants");
+}
+
+void	read_map(t_data *data, t_room **graph)
+{
+	get_number_ants(data);
+	parse_data(data, graph);
 }
