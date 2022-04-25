@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:31:28 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 10:40:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:27:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ static int	check_coordinate_errors(t_data *data, char *line)
 	return (1);
 }
 
-void	check_rooms(t_data *data, t_room **graph, char *line)
+void	check_rooms(t_data *data, char *line)
 {
 	if (!check_coordinate_errors(data, line))
 	{
 		free(line);
-		exit_error(graph, data, "ERROR coord");
+		exit_error(data, "ERROR coord");
 	}
 	set_start_end(data, line);
 	data->num_rooms++;

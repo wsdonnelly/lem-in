@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 11:13:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:30:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	add_to_graph(t_data *data, char *line)
 	else if (!ft_strcmp(room[0], data->end) && ft_strcmp(room[1], data->start))
 		set_end_rooms(room[0], room[1], data);
 	else if (!ft_strcmp(room[1], data->end) && ft_strcmp(room[0], data->start))
-		set_end_rooms(room[1], room[0],  data);
+		set_end_rooms(room[1], room[0], data);
 	else if (!ft_strcmp(room[0], data->start) && !ft_strcmp(room[1], data->end))
 		both_start_end(room[0], room[1], data);
 	else if (!ft_strcmp(room[0], data->end) && !ft_strcmp(room[1], data->start))
-		both_start_end(room[1], room[0],  data);
+		both_start_end(room[1], room[0], data);
 	else
 		set_rooms(room, data);
 	free_str_arr(room);

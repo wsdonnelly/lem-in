@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 11:16:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:29:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_edge	*add_edge(t_data *data, int index1, int index2)
 	t_edge	**head;
 	t_edge	*temp;
 
-	//head = &(*graph)[index1].neighbors;
 	head = &(*data->graph)[index1].neighbors;
 	temp = *head;
 	while (temp)
@@ -42,7 +41,6 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward)
 	t_edge	*temp;
 	t_edge	**head;
 
-	//head = &(*graph)[index1].neighbors;
 	head = &(*data->graph)[index1].neighbors;
 	temp = malloc(sizeof(t_edge));
 	if (!temp)

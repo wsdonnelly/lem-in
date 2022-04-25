@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 11:12:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:27:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	parse_data(t_data *data, t_room **graph)
 		}
 		if (ft_strchr(line, (int) ' '))
 		{
-			check_rooms(data, graph, line);
+			check_rooms(data, line);
 			continue ;
 		}
 		if (ft_strchr(line, (int) '-'))
 		{
 			make_graph(&flag, data, graph);
-			add_to_graph(data, graph, line);
+			add_to_graph(data, line);
 			continue ;
 		}
 		free (line);
