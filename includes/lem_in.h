@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 11:35:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:34:17 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,52 @@ typedef struct s_node
 	struct s_node	*next;
 }				t_node;
 
+typedef struct s_path
+{
+	struct s_room	room;
+	struct s_path	*next_room;
+}				t_path;
+
+typedef struct s_paths
+{
+	struct s_path	*path;
+	struct s_paths	*next_path;
+}				t_paths;
+
 typedef struct s_data
 {
-	int		num_ants;
-	int		num_rooms;
-	int		size;
-	char	*start;
-	char	*end;
-	int		end_index;
-	int		start_index;
-	t_room	**graph;
-	t_node	*name_list;
+	int				num_ants;
+	int				num_rooms;
+	int				size;
+	char			*start;
+	char			*end;
+	int				end_index;
+	int				start_index;
+	t_room			**graph;
+	t_node			*name_list;
+	int				augmented_path;
+	int				best_solution;
+	int				required_moves;
+	int				num_paths;
+	struct s_path	*queue;
+	struct s_path	*visited;
+	struct s_path	*shortest_path;
+	struct s_edge	*neighbor;
+	struct s_paths	*all_paths;
+	struct s_paths	*solution_paths;
 }				t_data;
+
+typedef struct s_print
+{
+	int		line_num;
+	int		start_of_line;
+	int		print_room;
+	int		path_num;
+	int		room_num;
+	int		name_len;
+	int		ant_num;
+	char	*room_name;
+}				t_print;
 
 typedef struct s_name
 {
@@ -93,5 +127,18 @@ int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);
 t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
+void	solve(t_data data, t_room *graph, int argc);
+void	find_shortest_path(t_data *data, t_room *graph);
+void	add_room_to_path(t_room room, t_path **path);
+void	free_path(t_path **path);
+void	find_fewest_moves(t_data *data, t_room *graph);
+void	build_shortest_path(t_path **path, t_room *graph);
+void	add_shortest_path_to_all_paths(t_paths **all_paths, t_path *shortest_path);
+void	free_paths(t_paths **paths);
+void	copy_all_paths_to_solution(t_paths **solution_paths, t_paths *all_paths);
+void	map_paths(t_paths *all_paths, t_path *shortest_path);
+t_path	*create_room_on_path(t_room room);
+void	print_solution(t_data data);
+void	print_paths(t_data data);
 
 #endif

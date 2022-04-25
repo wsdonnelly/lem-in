@@ -10,7 +10,11 @@ static void	init_data(t_data *data)
 	data->name_list = NULL;
 	data->start_index = FALSE;
 	data->end_index = FALSE;
-
+	data->best_solution = 0;
+	data->augmented_path = 1;
+	data->num_paths = 0;
+	data->all_paths = NULL;
+	data->solution_paths = NULL;
 }
 
 int main(int argc, char **argv)
@@ -18,31 +22,19 @@ int main(int argc, char **argv)
 	t_data	data;
 	t_room	*graph;
 
-	graph = NULL;
-	data.graph = &graph;
-	init_data(&data);
-	read_map(&data, &graph);
-	//ft_printf("%B", "a big hello from ftprintf");
-	//freename_list
-	//solve();
 	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
 	{
 		//add error message
 		return (1);
 	}
-
-
-
-	//out_put();
-	//printf("HERE-> %s\n", graph[1].name);
-	/*
-	printf("num ants: %d\n", data.num_ants);
-	printf("num rooms: %d\n", data.num_rooms);
-	printf("start room: %s\n", data.start);
-	printf("end room: %s\n", data.end);
-	*/
+	graph = NULL;
+	data.graph = &graph;
+	init_data(&data);
+	read_map(&data, &graph);
+	graph[data.start_index].previous = NULL;
+	solve(data, graph, argc);
 	
-
+/*
 	t_edge *temp;
 	int i = 0;
 	while (i < data.size)
@@ -63,7 +55,7 @@ int main(int argc, char **argv)
 	}
 	printf("index end: %d\n", data.end_index);
 	printf("index start: %d\n", data.start_index);
-	
+	*/
 	
 	free_graph(&graph, &data);
 	free_data(&data);
