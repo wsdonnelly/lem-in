@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/28 10:31:31 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:52:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	solve(t_data data, t_room *graph, int argc) //can we pass data as *data?
 	}
 	if (data.num_paths)
 	{
+		ft_printf("%d\n", data.num_ants);
 		print_comments(&data);
 		print_data(&data);
 		ft_putchar('\n');

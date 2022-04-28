@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/28 10:40:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:52:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ static void	get_number_ants(t_data *data)
 		data->num_ants = ft_atoi(line);
 		free (line);
 		if (data->num_ants > 0)
-		{
-			ft_printf("%d\n", data->num_ants);
 			return ;
-		}
 	}
 	exit_error(data, "ERRORants");
 }
