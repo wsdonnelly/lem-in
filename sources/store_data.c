@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/28 10:41:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:48:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void store_data(t_data *data, char *line)
 	else
 	{
 		data->store_input = ft_strdup(line);
+		free (line);
 		ft_strjoin_inplace(&data->store_input, &c);
 	}
 }
