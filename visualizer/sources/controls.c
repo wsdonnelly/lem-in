@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 13:25:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:10:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ static void	move_zoom(int key, t_data *data)
 		data->zoom -= 1;
 }
 
-static void	basic_controls(int key)
+static void	basic_controls(t_data *data, int key)
 {
 	
 	if (key == ESCAPE)
 	{
-		//free_map(data);
+		free_data(data);
+		system ("leaks visualizer");
 		exit (0);
 	}
 }
@@ -57,7 +58,7 @@ static void	rotation(int key, t_data *data)
 int	controls(int key, t_data *data)
 {
 	if (key == ESCAPE)
-		basic_controls(key);
+		basic_controls(data, key);
 	else if ((key >= 0x7B && key <= 0x7E) || key == MINUS || key == EQUAL)
 		move_zoom(key, data);
 	else if (key >= 0x56 && key <= 0x5C)

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 13:26:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:23:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_data
 
 
 
-void	read_in_info(t_info *info, t_room **room_arr);
+void	read_in_info(t_data *data, t_info *info, t_room **room_arr);
 void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordiante);
 void	add_links(t_room **room_arr, char *line, int num_rooms);
 

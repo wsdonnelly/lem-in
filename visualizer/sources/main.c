@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 13:10:42 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:11:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	main()
 	init_info(&info);
 	init_data(&data);
 	
-	read_in_info(&info, &room_arr);
+	data.room_arr = NULL;
+	
+	read_in_info(&data, &info, &room_arr);
 	data.room_arr = room_arr;
 	data.info = &info;
 	data.mlx = mlx_init();
@@ -90,9 +92,7 @@ int	main()
 
 	
 
-	free_data(&data);
-
-	system ("leaks visualizer");
+	//free_data(&data);
 	return (0);
 }
 

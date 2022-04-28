@@ -6,20 +6,23 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 13:25:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:03:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-static void	get_number_ants(t_info *info, char **line)
+static void	get_number_ants(t_data *data, t_info *info, char **line)
 {
 	if (get_next_line(0, line))
 	{
 		info->num_ants = ft_atoi(*line);
-	}	
-	//else
-		//exit_error("empty error");
+		printf("numantz: %d\n", info->num_ants);
+		free (*line);
+		return ;
+	}
+	exit_error(data, "GNL error");
+
 }
 void	get_comment(t_info *info, char *line)
 {
@@ -35,12 +38,14 @@ void	get_comment(t_info *info, char *line)
 	free_str_arr(list);
 }
 
-t_room *malloc_room_arr(t_info *info)
+t_room *malloc_room_arr(t_data *data, t_info *info)
 {
 	t_room *temp;
 	int		i;
-	temp = malloc(sizeof(t_room) * info->num_rooms);
-	//ERROR
+	//temp = malloc(sizeof(t_room) * info->num_rooms);
+	temp = NULL;
+	if (!temp)
+		exit_error(data, "malloc error");
 	i = 0;
 	while (i < info->num_rooms)//init room array
 	{
@@ -53,7 +58,7 @@ t_room *malloc_room_arr(t_info *info)
 }
 
 
-void	read_in_info(t_info *info, t_room **room_arr)
+void	read_in_info(t_data *data, t_info *info, t_room **room_arr)
 {
 	char	*line;
 	int		start;
@@ -64,9 +69,9 @@ void	read_in_info(t_info *info, t_room **room_arr)
 	start = FALSE;
 	end = FALSE;
 	max_coordinate = 0;
-	get_number_ants(info, &line);
-	free (line);
-	
+	get_number_ants(data, info, &line);
+	//free (line);
+
 	while (get_next_line(0, &line) > 0)
 	{
 		
@@ -83,7 +88,8 @@ void	read_in_info(t_info *info, t_room **room_arr)
 		}
 		if (info->end != NULL && !flag)
 		{
-			*room_arr = malloc_room_arr(info);
+				
+			*room_arr = malloc_room_arr(data, info);
 			flag = 1;
 		}
 
