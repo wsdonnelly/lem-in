@@ -7,6 +7,7 @@ static void	init_data(t_data *data)
 	data->size = -1;
 	data->start = NULL;
 	data->end = NULL;
+	data->store_input = NULL;
 	data->name_list = NULL;
 	data->start_index = FALSE;
 	data->end_index = FALSE;

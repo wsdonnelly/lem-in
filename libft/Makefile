@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 10:23:27 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/21 15:06:03 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/04/28 09:20:31 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strnequ.c \
 ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strsplit.c ft_strstr.c \
 ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c get_next_line.c \
 ft_num_digits.c ft_strset.c ft_putnbr_base.c ft_putstr_len.c \
-ft_strchr_i.c ft_word_count.c ft_abs.c \
+ft_strchr_i.c ft_word_count.c ft_abs.c ft_strjoin_inplace.c \
 ft_printf.c pf_get_format_data.c pf_modifier.c pf_prefix.c pf_print_banner.c \
 pf_print_binary.c pf_print_di.c pf_print_float.c pf_print_hex.c pf_print_octal.c \
 pf_print_ppc.c pf_print_unsigned.c pf_print_hex_upper.c pf_print_str.c pf_util.c
+
 SRCS_DIR = ./sources/
 OBJS = $(addprefix	$(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIR = ./objects/
