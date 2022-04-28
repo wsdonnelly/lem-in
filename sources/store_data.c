@@ -6,13 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/28 10:49:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:57:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void print_comments(t_data *data)
+void	print_comments(t_data *data)
 {
 	ft_printf("# num_rooms %d\n", data->num_rooms);
 	ft_printf("# start %s\n", data->start);
@@ -25,9 +25,9 @@ void	print_data(t_data *data)
 	free(data->store_input);
 }
 
-void store_data(t_data *data, char *line)
+void	store_data(t_data *data, char *line)
 {
-	char *c;
+	char	*c;
 
 	c = strdup("\n");
 	if (data->store_input)
@@ -42,4 +42,3 @@ void store_data(t_data *data, char *line)
 		ft_strjoin_inplace(&data->store_input, &c);
 	}
 }
-
