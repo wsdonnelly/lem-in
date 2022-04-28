@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:31:28 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/28 09:55:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:41:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	check_rooms(t_data *data, char *line)
 	set_start_end(data, line);
 	store_data(data, line);
 	data->num_rooms++;
-	free (line);
+	//free (line);
 }
