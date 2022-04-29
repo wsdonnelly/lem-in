@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 12:47:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:45:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ void	draw_graph(t_data *data)
 		temp = data->room_arr[i].link;
 		while (temp)
 		{
+			if (data->room_arr[i].in_path && data->room_arr[temp->link].in_path)
+				data->color = 0x00FF00FF;
+			else
+				data->color = 0x00FFFFFF;
 			make_line(data, data->room_arr[i].point, data->room_arr[temp->link].point);
-			printf("i: %d\n", i);
-			printf("point a: %s\n", data->room_arr[i].name);
-			printf("point b: %s\n\n", data->room_arr[temp->link].name);
+			//printf("i: %d\n", i);
+			//printf("point a: %s\n", data->room_arr[i].name);
+			//printf("point b: %s\n\n", data->room_arr[temp->link].name);
 			temp = temp->next;
 		}
 		i++;

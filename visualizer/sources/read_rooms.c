@@ -6,23 +6,24 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:14:49 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/26 11:10:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:44:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordinate)
+void	read_rooms(t_info *info, t_room **room_arr, char *line)
 {
 	char	**room_info;
 	int		index;
 
+	
 	room_info = ft_strsplit(line, ' ');	
 	index = hash_map(room_info[0], info, room_arr);
 	(*room_arr)[index].x = ft_atoi(room_info[1]);
 	(*room_arr)[index].y = ft_atoi(room_info[2]);
-	if ((*room_arr)[index].x > *max_coordinate)
-		*max_coordinate = (*room_arr)[index].x;
+	//if ((*room_arr)[index].x > *max_coordinate)
+		//*max_coordinate = (*room_arr)[index].x;
 	free_str_arr(room_info);
 }
 

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:27:42 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/26 11:23:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:32:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,22 @@ void free_info(t_info *info)
 {
 
 	if (info->start)
-	{ 
-		printf("AAAA\n");
 		free (info->start);
-	}
-	
 	if (info->end)
-	{
-		
 		free (info->end);
-	}
 }
 
 void free_data(t_data *data)
 {
 	
 	if (data->room_arr)
-	{
-		
 		free_room_arr(data);
-	}
 	free_info(data->info);
 }
 
 void exit_error(t_data *data, char *message)
 {
-printf("XXXX\n");
+	
 	free_data(data);
 	write(2, message, ft_strlen(message));
 	write(2, "\n", 1);

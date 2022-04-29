@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/26 11:11:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:48:35 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	main()
 	init_data(&data);
 	
 	data.room_arr = NULL;
-	
-	read_in_info(&data, &info, &room_arr);
-	data.room_arr = room_arr;
 	data.info = &info;
+	read_in_info(&data, &info, &room_arr);
+		printf("HERE\n");
+	data.room_arr = room_arr;
+
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
 	/*
