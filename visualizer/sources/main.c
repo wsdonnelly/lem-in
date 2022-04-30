@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 15:48:35 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:57:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void init_data(t_data *data)
 	data->x_offset = 0;
 	data->y_offset = 0;
 	data->color = 0x00FFFFFF;
+	data->alpha = 0;
+	data->beta = 0;
+	data->gamma = 0;
 }
 
 int	main()
@@ -42,7 +45,6 @@ int	main()
 	data.room_arr = NULL;
 	data.info = &info;
 	read_in_info(&data, &info, &room_arr);
-		printf("HERE\n");
 	data.room_arr = room_arr;
 
 	data.mlx = mlx_init();

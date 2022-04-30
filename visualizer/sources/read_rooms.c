@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:14:49 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 14:44:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/30 12:49:39 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	read_rooms(t_info *info, t_room **room_arr, char *line)
 	int		index;
 
 	
-	room_info = ft_strsplit(line, ' ');	
+	room_info = ft_strsplit(line, ' ');
+	printf("HETE\n");
+	printf("num_rooms %d\n", info->num_rooms);
 	index = hash_map(room_info[0], info, room_arr);
+	printf("idx: %d\n", index);
 	(*room_arr)[index].x = ft_atoi(room_info[1]);
 	(*room_arr)[index].y = ft_atoi(room_info[2]);
 	//if ((*room_arr)[index].x > *max_coordinate)

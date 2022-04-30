@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 14:54:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:12:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	get_number_ants(t_data *data, t_info *info, char **line)
 {
+	
 	if (get_next_line(0, line))
 	{
 		info->num_ants = ft_atoi(*line);
@@ -74,6 +75,7 @@ void	read_in_info(t_data *data, t_info *info, t_room **room_arr)
 
 	while (get_next_line(0, &line) > 0)
 	{
+		
 		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
 		{
 			free (line);

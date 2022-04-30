@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/28 10:57:17 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:19:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	print_comments(t_data *data)
 {
-	ft_printf("# num_rooms %d\n", data->num_rooms);
-	ft_printf("# start %s\n", data->start);
-	ft_printf("# end %s\n", data->end);
+	ft_printf("#num_rooms %d\n", data->num_rooms);
+	ft_printf("#start %s\n", data->start);
+	ft_printf("#end %s\n", data->end);
 }
 
 void	print_data(t_data *data)
