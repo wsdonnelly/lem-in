@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 15:57:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/30 16:22:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main()
 	t_data data;
 	t_info	info;
 	t_room	*room_arr = NULL;
+	int idx;
 
 	srand(time(0));
 	init_info(&info);
@@ -46,7 +47,8 @@ int	main()
 	data.info = &info;
 	read_in_info(&data, &info, &room_arr);
 	data.room_arr = room_arr;
-
+	idx = lookup(info.start, info.num_rooms, &room_arr);
+	room_arr[idx].in_path = TRUE;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
 	/*
