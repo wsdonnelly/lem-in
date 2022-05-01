@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/21 11:20:51 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/01 15:51:31 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	solve(t_data data, t_room *graph, int argc)
 		free_paths(&data.all_paths);
 	}
 	else
-		printf("no valid path found\n"); // change to ft_printf     
+		ft_printf("no valid path found\n");
 }

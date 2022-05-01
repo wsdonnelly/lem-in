@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 14:34:17 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/01 16:03:48 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct s_path
 typedef struct s_paths
 {
 	struct s_path	*path;
+	int				steps;
+	int				new_ant;
 	struct s_paths	*next_path;
 }				t_paths;
 
@@ -80,18 +82,6 @@ typedef struct s_data
 	struct s_paths	*solution_paths;
 }				t_data;
 
-typedef struct s_print
-{
-	int		line_num;
-	int		start_of_line;
-	int		print_room;
-	int		path_num;
-	int		room_num;
-	int		name_len;
-	int		ant_num;
-	char	*room_name;
-}				t_print;
-
 typedef struct s_name
 {
 	char	*one_in;
@@ -105,6 +95,22 @@ typedef struct s_name
 	int		index_end;
 	int		index_start;
 }				t_name;
+
+typedef struct s_ant
+{
+	int				num;
+	struct s_path	*path;
+	int				name_len;
+	char			*room_name;
+	struct s_ant	*next_ant;
+}				t_ant;
+
+typedef struct s_print
+{
+	int		print_room;
+	char	*room_name;
+	int		name_len;
+}				t_print;
 
 void	read_map(t_data *data, t_room **graph);
 void	make_graph(int *flag, t_data *data, t_room **graph);
@@ -140,5 +146,6 @@ void	map_paths(t_paths *all_paths, t_path *shortest_path);
 t_path	*create_room_on_path(t_room room);
 void	print_solution(t_data data);
 void	print_paths(t_data data);
+void	print_line(t_data data, t_ant *ant, int i);
 
 #endif

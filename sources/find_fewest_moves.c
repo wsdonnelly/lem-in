@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:40:18 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/04/25 16:34:38 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	change_capacity(t_path *path, t_room *graph)
 		neighbor->capacity = 1;
 }
 
-static int	avg_path_len(t_paths *paths, int *mod)
+static int	get_path_len(t_paths *paths)
 {
 	int		num_paths;
 	int		total_len;
@@ -56,24 +56,20 @@ static int	avg_path_len(t_paths *paths, int *mod)
 		paths = paths->next_path;
 	}
 	total_len /= 2;
-	*mod = total_len % num_paths;
-	return (total_len / num_paths);
+	return (total_len - num_paths);
 }
 
 static int	get_required_moves(t_data data, t_paths *paths)
 {
 	int			required_moves;
 	static int	num_paths;
-	int			avg_path;
-	int			mod1;
-	int			mod2;
+	int			path_len;
 
 	num_paths++;
-	avg_path = avg_path_len(paths, &mod1);
-	required_moves = data.num_ants / num_paths + avg_path + mod1;
-	mod2 = data.num_ants % num_paths;
-	if ((mod1 + mod2) % num_paths == 0)
-		required_moves--;
+	path_len = get_path_len(paths);
+	required_moves = 0;
+	while (data.num_ants > num_paths * required_moves - path_len)
+		required_moves++;
 	return (required_moves);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
+/*   Updated: 2022/05/01 15:54:48 by manuelbeele      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 static void	init_data(t_data *data)
@@ -17,14 +29,14 @@ static void	init_data(t_data *data)
 	data->solution_paths = NULL;
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_room	*graph;
 
 	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
 	{
-		//add error message
+		ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
 		return (1);
 	}
 	graph = NULL;
@@ -33,7 +45,6 @@ int main(int argc, char **argv)
 	read_map(&data, &graph);
 	graph[data.start_index].previous = NULL;
 	solve(data, graph, argc);
-	
 /*
 	t_edge *temp;
 	int i = 0;
@@ -56,9 +67,8 @@ int main(int argc, char **argv)
 	printf("index end: %d\n", data.end_index);
 	printf("index start: %d\n", data.start_index);
 	*/
-	
 	free_graph(&graph, &data);
 	free_data(&data);
-
+	system("leaks lem-in"); //   
 	return (0);
 }
