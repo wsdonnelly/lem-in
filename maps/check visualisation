@@ -1,0 +1,55 @@
+error maps
+comment_after_end
+comment_after_start
+end_after_end
+end_after_start
+invalid_room_in_link_5
+link_after_end ||| seg fault
+link_after_start ||| seg fault
+link_among_rooms ||| seg fault
+no_end ||| seg fault
+no_links ||| seg faulst
+no_path_from_start_to_end (end_index = 0, graph[0].name = din)
+no_start ||| seg fault
+room_among_links
+same_link_twice
+same_room_twice
+start_after_end
+start_after_start
+two_ends
+two_starts ||| seg fault
+
+generator maps
+gen_flow_one_0
+gen_flow_thousand_0
+gen_superposition_2
+gen_superposition_3
+map_big_sup_1
+map_big_sup_3
+map_big_sup_4
+map_big_sup_6
+map_big_sup_7
+map_big_sup_8
+map_big_sup_9
+map_big_sup_11
+map_big_sup_12
+map_big_sup_13
+map_big_sup_14
+map_big_sup_16
+map_big_sup_17
+map_big_sup_20
+map_big_sup_21
+map_big_sup_23
+map_big_sup_24
+map_big_sup_25
+map_big_sup_26
+map_big_sup_27
+map_big_sup_28
+
+more maps
+mmap_big_2
+map_big_13
+map_big_98
+
+other maps
+map_10_extralines
