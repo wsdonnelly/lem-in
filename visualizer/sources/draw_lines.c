@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:37:59 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 14:32:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:49:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	draw_line(t_data *data, t_line *line, t_point *a, t_point *b)
 {
 	while (1)
 	{
-		//mlx_pixel_put(data->mlx, data->win, a->x + data->x_offset, \
-		//a->y + data->y_offset, data->color);
 		mlx_pixel_put(data->mlx, data->win, a->x, \
 		a->y, data->color);
 		if (a->x == b->x && a->y == b->y)

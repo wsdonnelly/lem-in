@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:35:23 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/01 10:04:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:49:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,11 @@ int	hasher(char *name, int num_rooms)
 	i = 0;
 	while (name[i])
 	{
-		//printf("name[%d] %c\n", i, name[i]);
 		index += ((int)name[i]) / 13;
-		//printf("INSIDE\n");
 		i++;
 	}
 	
 	index %= num_rooms;
-	//printf("index %d\n", index);
 	return (index);
 }
 
@@ -40,10 +37,8 @@ int	hash_map(char *name, t_info *info, t_room **room_arr)
 	i = 0;
 	
 	index = hasher(name, info->num_rooms);
-	
 	while ((*room_arr)[index].name != NULL)
 	{
-		
 		index++;
 		index %= info->num_rooms;
 	}

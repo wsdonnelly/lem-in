@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:07:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 15:53:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:49:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void color_paths(t_room **room_arr, char *line, int num_rooms)
 	int		i;
 	int		idx;
 	
-	//room_arr[0]->in_path = num_rooms;
 	list = ft_strsplit(line, ' ');
 	i = 0;
 	while (list[i])

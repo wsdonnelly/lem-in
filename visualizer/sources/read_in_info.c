@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/01 10:03:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:50:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,10 @@ void	read_in_info(t_data *data, t_info *info, t_room **room_arr)
 		}
 		if (ft_strchr(line, (int)'L'))
 		{
-			//printf("ANTZ LINE\n");
 			color_paths(room_arr, line, info->num_rooms);
 			free (line);
 			continue ;
 		}
 		free (line);
 	}
-	//printf("MAx COOrdinate: %d\n", max_coordinate);
-
 }

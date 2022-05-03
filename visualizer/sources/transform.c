@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 11:03:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/23 15:33:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:51:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,4 @@ void	rotate(t_point *a, t_data *data)
 	rotate_x(a, data);
 	rotate_y(a, data);
 	rotate_z(a, data);
-	//rotate_x(b, data);
-	//rotate_y(b, data);
-	//rotate_z(b, data);
 }

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:14:49 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/30 14:49:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:50:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,10 @@ void	read_rooms(t_info *info, t_room **room_arr, char *line)
 	char	**room_info;
 	int		index;
 
-	
 	room_info = ft_strsplit(line, ' ');
-	printf("HETE\n");
-	
 	index = hash_map(room_info[0], info, room_arr);
-	printf("idx: %d\n", index);
 	(*room_arr)[index].x = ft_atoi(room_info[1]);
 	(*room_arr)[index].y = ft_atoi(room_info[2]);
-	//if ((*room_arr)[index].x > *max_coordinate)
-		//*max_coordinate = (*room_arr)[index].x;
 	free_str_arr(room_info);
 }
 
@@ -52,14 +46,7 @@ void	add_links(t_room **room_arr, char *line, int num_rooms)
 	
 	index1 = lookup(room[0], num_rooms, room_arr);
 	index2 = lookup(room[1], num_rooms, room_arr);
-
-	//printf("room[0]: %s. index: %d\n", room[0], index1);
-	//printf("room[1]: %s. index: %d\n", room[1], index2);
-	//printf("\n");
-
-	//add index2 to (*room_arr)[index1].link
 	add_edge(&(*room_arr)[index1].link, index2);
-	//add_edge(&(*room_arr)[index2].link, index1);
 	free_str_arr(room);
 }
 

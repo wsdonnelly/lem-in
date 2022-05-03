@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/01 10:02:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/03 21:28:39 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,29 +107,6 @@ typedef struct s_line
 	int	err;
 	int	e2;
 }				t_line;
-
-/*
-typedef struct s_data
-{
-	void	*mlx;
-	void	*win;
-	int		**map;
-	int		height;
-	int		width;
-	int		elev;
-	int		zoom;
-	int		x_offset;
-	int		y_offset;
-	double	alpha;
-	double	beta;
-	double	gamma;
-	int		projection;
-	int		color;
-
-}				t_data;
-*/
-
-
 
 
 void	read_in_info(t_data *data, t_info *info, t_room **room_arr);
