@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/01 15:54:48 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/02 14:57:20 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ int	main(int argc, char **argv)
 	*/
 	free_graph(&graph, &data);
 	free_data(&data);
-	system("leaks lem-in"); //   
 	return (0);
 }
