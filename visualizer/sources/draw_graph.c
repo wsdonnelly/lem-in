@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 15:45:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/01 10:13:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	draw_graph(t_data *data)
 	
 
 		//transform
-		data->room_arr[i].point.x = data->zoom * data->room_arr[i].x;
-		data->room_arr[i].point.y = data->zoom * data->room_arr[i].y;
+
+		//data->room_arr[i].point.x = data->room_arr[i].x * data->x_zoom;
+		//data->room_arr[i].point.y = data->room_arr[i].y * data->y_zoom;
+
+		data->room_arr[i].point.x = data->zoom * data->room_arr[i].x * data->x_zoom;
+		data->room_arr[i].point.y = data->zoom * data->room_arr[i].y * data->y_zoom;
 		data->room_arr[i].point.z = data->zoom * data->room_arr[i].z;
 
 		data->room_arr[i].point.x += data->x_offset;
@@ -33,6 +37,7 @@ void	draw_graph(t_data *data)
 	
 		rotate(&data->room_arr[i].point, data);
 		//put name
+		//if (!ft_strcmp(data->room_arr[i].name, data->info->start))
 		mlx_string_put(data->mlx, data->win, data->room_arr[i].point.x, data->room_arr[i].point.y, \
 		0x00FFFFFF, data->room_arr[i].name);
 		i++;

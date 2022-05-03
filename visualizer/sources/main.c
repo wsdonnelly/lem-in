@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/30 16:22:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/01 10:09:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	init_info(t_info *info)
 void init_data(t_data *data)
 {
 	data->zoom = 5;
+	data->x_zoom = 1;
+	data->y_zoom = 1;
 	data->x_offset = 0;
 	data->y_offset = 0;
 	data->color = 0x00FFFFFF;

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/29 15:46:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/01 10:02:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@
 # define W				0x0D
 # define MINUS			0x1B
 # define EQUAL			0x18
-# define P				0x23
 # define SPACE			0x31
 # define ESCAPE			0x35
+
+# define X				0x07
+# define Y				0x10
 
 # define TRUE 1
 # define FALSE 0
@@ -83,6 +85,8 @@ typedef struct s_data
 	void	*win;
 	//controls
 	int		zoom;
+	int		x_zoom;
+	int		y_zoom;
 	int		x_offset;
 	int		y_offset;
 	double	alpha;
