@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/26 11:10:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/01 10:10:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ static void	move_zoom(int key, t_data *data)
 		data->x_offset -= 10;
 	else if (key == RIGHTARROW)
 		data->x_offset += 10;
-	if (key == EQUAL)
+	else if (key == EQUAL)
 		data->zoom += 1;
 	else if (key == MINUS)
 		data->zoom -= 1;
+	else if (key == X)
+		data->x_zoom += 1;
+	else if (key == Y)
+		data->y_zoom += 1;
 }
 
 static void	basic_controls(t_data *data, int key)
@@ -59,7 +63,8 @@ int	controls(int key, t_data *data)
 {
 	if (key == ESCAPE)
 		basic_controls(data, key);
-	else if ((key >= 0x7B && key <= 0x7E) || key == MINUS || key == EQUAL)
+	else if ((key >= 0x7B && key <= 0x7E) || key == MINUS || key == EQUAL \
+	|| key == X || key == Y)
 		move_zoom(key, data);
 	else if (key >= 0x56 && key <= 0x5C)
 		rotation(key, data);

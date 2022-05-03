@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/26 11:11:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/01 10:09:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ void	init_info(t_info *info)
 void init_data(t_data *data)
 {
 	data->zoom = 5;
+	data->x_zoom = 1;
+	data->y_zoom = 1;
 	data->x_offset = 0;
 	data->y_offset = 0;
 	data->color = 0x00FFFFFF;
+	data->alpha = 0;
+	data->beta = 0;
+	data->gamma = 0;
 }
 
 int	main()
@@ -34,16 +39,18 @@ int	main()
 	t_data data;
 	t_info	info;
 	t_room	*room_arr = NULL;
+	int idx;
 
 	srand(time(0));
 	init_info(&info);
 	init_data(&data);
 	
 	data.room_arr = NULL;
-	
+	data.info = &info;
 	read_in_info(&data, &info, &room_arr);
 	data.room_arr = room_arr;
-	data.info = &info;
+	idx = lookup(info.start, info.num_rooms, &room_arr);
+	room_arr[idx].in_path = TRUE;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
 	/*

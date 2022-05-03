@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/26 11:23:57 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/01 10:02:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@
 # define W				0x0D
 # define MINUS			0x1B
 # define EQUAL			0x18
-# define P				0x23
 # define SPACE			0x31
 # define ESCAPE			0x35
+
+# define X				0x07
+# define Y				0x10
 
 # define TRUE 1
 # define FALSE 0
@@ -72,6 +74,7 @@ typedef struct	s_room
 	int		x;
 	int		y;
 	int		z;
+	int		in_path;
 	t_link	*link;
 	struct s_point point;
 }				t_room;
@@ -82,6 +85,8 @@ typedef struct s_data
 	void	*win;
 	//controls
 	int		zoom;
+	int		x_zoom;
+	int		y_zoom;
 	int		x_offset;
 	int		y_offset;
 	double	alpha;
@@ -128,7 +133,7 @@ typedef struct s_data
 
 
 void	read_in_info(t_data *data, t_info *info, t_room **room_arr);
-void	read_rooms(t_info *info, t_room **room_arr, char *line, int *max_coordiante);
+void	read_rooms(t_info *info, t_room **room_arr, char *line);
 void	add_links(t_room **room_arr, char *line, int num_rooms);
 
 t_room *add_room(t_info *info);
@@ -142,6 +147,8 @@ int	lookup(char *name, int num_rooms, t_room **room_arr);
 void	make_line(t_data *data, t_point a, t_point b);
 
 void	rotate(t_point *a, t_data *data);
+
+void color_paths(t_room **room_arr, char *line, int num_rooms);
 
 void	free_data(t_data *data);
 void	free_str_arr(char **arr);

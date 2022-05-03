@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/01 16:03:48 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/03 19:24:41 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
@@ -66,6 +67,7 @@ typedef struct s_data
 	int				size;
 	char			*start;
 	char			*end;
+	char			*store_input;
 	int				end_index;
 	int				start_index;
 	t_room			**graph;
@@ -116,6 +118,10 @@ void	read_map(t_data *data, t_room **graph);
 void	make_graph(int *flag, t_data *data, t_room **graph);
 void	add_to_graph(t_data *data, char *line);
 void	check_rooms(t_data *data, char *line);
+//store_data
+void	store_data(t_data *data, char *line);
+void	print_data(t_data *data);
+void	print_comments(t_data *data);
 //rooms
 void	set_rooms(char **room, t_data *data);
 void	both_start_end(char *start_room, char *end_room, t_data *data);

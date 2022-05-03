@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 11:27:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:52:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 static void	get_start_end(t_data *data, char *line)
 {
 	if (!ft_strcmp("##start", line))
+	{
 		data->start_index = TRUE;
+		store_data(data, line);
+	}
 	else if (!ft_strcmp("##end", line))
+	{
 		data->end_index = TRUE;
-	free (line);
+		store_data(data, line);
+	}
+	else
+		free (line);
 }
 
 static void	parse_data(t_data *data, t_room **graph)
