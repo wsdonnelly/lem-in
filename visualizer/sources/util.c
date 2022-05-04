@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:27:42 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/01 10:01:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:39:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	free_str_arr(char **arr)
 	free (arr);
 }
 
-void free_room_arr(t_data *data)
+void	free_room_arr(t_data *data)
 {
-	int	i;
-	t_link *temp;
-	t_link *head;
+	int		i;
+	t_link	*temp;
+	t_link	*head;
 
 	i = 0;
 	while (i < data->info->num_rooms)
@@ -43,29 +43,25 @@ void free_room_arr(t_data *data)
 	}
 }
 
-void free_info(t_info *info)
+void	free_info(t_info *info)
 {
-
 	if (info->start)
 		free (info->start);
 	if (info->end)
 		free (info->end);
 }
 
-void free_data(t_data *data)
+void	free_data(t_data *data)
 {
-	
 	if (data->room_arr)
 		free_room_arr(data);
 	free_info(data->info);
 }
 
-void exit_error(t_data *data, char *message)
+void	exit_error(t_data *data, char *message)
 {
-	
 	free_data(data);
 	write(2, message, ft_strlen(message));
 	write(2, "\n", 1);
-	system ("leaks visualizer");
 	exit (EXIT_FAILURE);
 }

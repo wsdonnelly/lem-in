@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/03 21:49:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:39:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ static void	move_zoom(int key, t_data *data)
 
 static void	basic_controls(t_data *data, int key)
 {
-	
 	if (key == ESCAPE)
 	{
 		free_data(data);
-		system ("leaks visualizer");
 		exit (0);
 	}
 }
@@ -72,8 +70,6 @@ int	controls(int key, t_data *data)
 	draw_graph(data);
 	return (0);
 }
-
-
 /*
 static void	basic_controls(int key, t_data *data)
 {

@@ -6,22 +6,20 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/03 21:49:08 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:09:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-
 void	draw_graph(t_data *data)
 {
-	int i;
-	t_link *temp;
-	
+	int		i;
+	t_link	*temp;
+
 	i = 0;
 	while (i < data->info->num_rooms)
 	{
-		//transform
 		data->room_arr[i].point.x = data->room_arr[i].x * data->x_zoom;
 		data->room_arr[i].point.y = data->room_arr[i].y * data->y_zoom;
 		data->room_arr[i].point.x = data->zoom * data->room_arr[i].x * data->x_zoom;
@@ -41,7 +39,6 @@ void	draw_graph(t_data *data)
 			0x00FFFFFF, data->room_arr[i].name);
 		i++;
 	}
-
 	i = 0;
 	while (i < data->info->num_rooms)
 	{
@@ -53,7 +50,6 @@ void	draw_graph(t_data *data)
 			else
 				data->color = 0x00FFFFFF;
 			make_line(data, data->room_arr[i].point, data->room_arr[temp->link].point);
-			
 			temp = temp->next;
 		}
 		i++;

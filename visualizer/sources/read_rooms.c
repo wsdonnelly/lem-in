@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:14:49 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/03 21:50:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:29:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	add_edge(t_link **head, int index)
 
 	temp = *head;
 	temp = malloc(sizeof(t_link));
-	//ERRor
+	if (!temp)
+		exit(0);
 	temp->link = index;
 	temp->next = *head;
 	*head = temp;
@@ -43,11 +44,8 @@ void	add_links(t_room **room_arr, char *line, int num_rooms)
 	int		index2;
 
 	room = ft_strsplit(line, '-');
-	
 	index1 = lookup(room[0], num_rooms, room_arr);
 	index2 = lookup(room[1], num_rooms, room_arr);
 	add_edge(&(*room_arr)[index1].link, index2);
 	free_str_arr(room);
 }
-
-
