@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:55:16 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 void	build_shortest_path(t_path **path, t_room *graph)
 {

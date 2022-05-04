@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/19 22:51:12 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 void	free_path(t_path **path)
 {

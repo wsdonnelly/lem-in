@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   find_fewest_moves.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/25 16:34:38 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	change_capacity(t_path *path, t_room *graph)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:52:41 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	relink_paths(t_path *shortest_path, t_path *path, int *switched)
 {

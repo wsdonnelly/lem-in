@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_solution.c                                   :+:      :+:    :+:   */
+/*   XXXXprint_solution copy.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/25 10:53:58 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	get_room_name(t_data data, t_print *print, char *room_name)
 {
@@ -33,11 +33,11 @@ static void	print_line(t_data data, t_print *print, char *room_name)
 	if (print->ant_num > 0 && print->ant_num <= data.num_ants)
 	{
 		if (print->start_of_line && print->print_room % 2 == 0)
-			printf(" "); //change to ft_printf   
+			ft_printf(" ");
 		if (print->print_room % 2 == 0)
 		{
 			get_room_name(data, print, room_name);
-			printf("L%d-%s", print->ant_num, print->room_name); //change to ft_printf   
+			ft_printf("L%d-%s", print->ant_num, print->room_name);
 			ft_strdel(&print->room_name);
 			print->start_of_line++;
 		}
@@ -70,7 +70,7 @@ void	print_solution(t_data data)
 			tmp2 = tmp2->next_path;
 			print.path_num++;
 		}
-		printf("\n"); //change to ft_printf    
+		ft_printf("\n");
 	}
 }
 
@@ -80,11 +80,11 @@ void	print_paths(t_data data)
 	t_path	*tmp;
 	t_paths	*tmp2;
 
-	printf("\nSolution Paths\n"); //change to ft_printf   
+	ft_printf("\nSolution Paths\n");
 	tmp2 = data.solution_paths;
 	while (tmp2)
 	{
-		printf("%s", tmp2->path->room.name); //change to ft_printf    
+		ft_printf("%s", tmp2->path->room.name);
 		tmp = tmp2->path->next_room;
 		print.print_room = 0;
 		while (tmp)
@@ -92,13 +92,13 @@ void	print_paths(t_data data)
 			if (print.print_room++ % 2 == 0)
 			{
 				get_room_name(data, &print, tmp->room.name);
-				printf("-%s", print.room_name); //change to ft_printf    
+				ft_printf("-%s", print.room_name);
 				ft_strdel(&print.room_name);
 			}
 			tmp = tmp->next_room;
 		}
 		tmp2 = tmp2->next_path;
-		printf("\n"); //change to ft_printf    
+		ft_printf("\n");
 	}
-	printf("\n"); //change to ft_printf   
+	ft_printf("\n");
 }

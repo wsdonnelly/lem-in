@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_solution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/01 15:50:20 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:46:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	count_steps(t_paths *tmp2, int best_solution)
 {

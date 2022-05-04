@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   find_shortest_path.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:25:05 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	finish_breadth_search(t_data *data, t_room *graph)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_paths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/02 17:31:54 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/04 16:54:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	get_room_name(t_data data, t_print *print, char *room_name)
 {

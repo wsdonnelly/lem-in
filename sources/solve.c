@@ -6,14 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/03 19:21:15 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:42:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lem_in.h"
 
-#include "../includes/lem_in.h"
-
-void	solve(t_data data, t_room *graph, int argc) //can we pass data as *data?
+void	solve(t_data data, t_room *graph, int argc)
 {
 	while (data.augmented_path)
 	{
@@ -31,7 +30,6 @@ void	solve(t_data data, t_room *graph, int argc) //can we pass data as *data?
 		print_data(&data);
 		ft_putchar('\n');
 		print_solution(data);
-		
 		if (argc == 2)
 			print_paths(data);
 		free_paths(&data.solution_paths);
