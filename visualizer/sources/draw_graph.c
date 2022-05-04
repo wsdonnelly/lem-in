@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 16:09:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:09:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	draw_graph(t_data *data)
 {
 	int		i;
 	t_link	*temp;
+	int colors[3] = {COLOR1, COLOR2, COLOR3};
 
 	i = 0;
 	while (i < data->info->num_rooms)
@@ -45,8 +46,13 @@ void	draw_graph(t_data *data)
 		temp = data->room_arr[i].link;
 		while (temp)
 		{
-			if (data->room_arr[i].in_path && data->room_arr[temp->link].in_path)
-				data->color = 0x00FF00FF;
+			if (data->room_arr[i].in_path == 0 && data->room_arr[temp->link].in_path > - 1)
+				data->color = colors[data->room_arr[temp->link].in_path % 3];
+			else if ((data->room_arr[i].in_path > -1 && data->room_arr[i].in_path == data->room_arr[temp->link].in_path) || \
+				(data->room_arr[i].in_path > -1 && data->room_arr[temp->link].in_path == 0))
+				data->color = colors[data->room_arr[i].in_path % 3];
+			
+				//data->color = COLOR1;
 			else
 				data->color = 0x00FFFFFF;
 			make_line(data, data->room_arr[i].point, data->room_arr[temp->link].point);

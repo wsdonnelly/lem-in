@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 16:39:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:48:30 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@
 # define RIGHTARROW		0x7C
 # define DOWNARROW		0x7D
 # define UPARROW		0x7E
-# define Q				0x0C
-# define W				0x0D
 # define MINUS			0x1B
 # define EQUAL			0x18
-# define SPACE			0x31
+//# define SPACE			0x31
 # define ESCAPE			0x35
-
 # define X				0x07
 # define Y				0x10
 
 # define TRUE 1
 # define FALSE 0
+
+# define COLOR1 0x00FF00FF
+# define COLOR2 0x0000FFFF
+# define COLOR3 0x00FF8080
 
 typedef struct s_info
 {
@@ -125,8 +126,8 @@ void	make_line(t_data *data, t_point a, t_point b);
 
 void	rotate(t_point *a, t_data *data);
 
-void color_paths(t_room **room_arr, char *line, int num_rooms);
-
+void	color_paths(t_room **room_arr, char *line, int num_rooms, int num_paths);
+int color_paths_firstline(t_room **room_arr, char *line, int num_rooms);
 void	free_data(t_data *data);
 void	free_str_arr(char **arr);
 void exit_error(t_data *data, char *message);

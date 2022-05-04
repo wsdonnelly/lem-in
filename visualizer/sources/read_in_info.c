@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 16:38:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:32:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_room	*malloc_room_arr(t_info *info)
 		temp[i].name = NULL;
 		temp[i].link = NULL;
 		temp[i].z = rand() % 23;
-		temp[i].in_path = FALSE;
+		temp[i].in_path = -1;
 		i++;
 	}
 	return (temp);
@@ -73,8 +73,11 @@ void	read_in_info(t_data *data, t_info *info, t_room **room_arr)
 	int		start;
 	int		end;
 	int		flag;
+	int		flag2;
+	int		num_paths;
 
 	flag = 0;
+	flag2 = 0;
 	start = FALSE;
 	end = FALSE;
 	get_first_line(data, info, &line);
@@ -109,8 +112,14 @@ void	read_in_info(t_data *data, t_info *info, t_room **room_arr)
 			continue ;
 		}
 		if (ft_strchr(line, (int) 'L'))
-		{
-			color_paths(room_arr, line, info->num_rooms);
+		{	
+			if (!flag2)
+			{
+				num_paths = color_paths_firstline(room_arr, line, info->num_rooms);
+				flag2 = 1;
+			}
+			else
+				color_paths(room_arr, line, info->num_rooms, num_paths);
 			free (line);
 			continue ;
 		}
