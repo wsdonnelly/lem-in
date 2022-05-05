@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 12:45:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:11:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,11 @@ void	add_room_to_path(t_room room, t_path **path)
 {
 	t_path	*tmp;
 
-	
 	if (!*path)
 		*path = create_room_on_path(room);
-	
 	else
 	{
 		tmp = *path;
-		printf("path: %p\n", tmp->next_room);
-	
 		while (tmp->next_room)
 		{
 			tmp = tmp->next_room;

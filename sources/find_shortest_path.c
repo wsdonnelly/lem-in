@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 12:18:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:28:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,11 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	data->augmented_path = 0;
 	add_room_to_path(graph[data->start_index], &data->queue);
 	add_room_to_path(graph[data->start_index], &data->visited);
-	
 	while (data->queue && !data->augmented_path)
 	{
-		
 		data->neighbor = data->queue->room.neighbors;
 		while (data->neighbor && !data->augmented_path)
 		{
-			
 			if (data->neighbor->capacity
 				&& data->neighbor->next_room_index == data->end_index)
 				finish_breadth_search(data, graph);
@@ -76,5 +73,4 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	}
 	free_path(&data->queue);
 	free_path(&data->visited);
-	
 }

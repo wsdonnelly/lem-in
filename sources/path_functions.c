@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/04 16:54:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:06:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static t_paths	*create_path_for_paths(t_path *path, int solution)
 	paths = (t_paths *)malloc(sizeof(t_paths));
 	if (!paths)
 		return (NULL);
+	paths->path = NULL;
+	paths->next_path = NULL;
 	if (solution)
 	{
 		while (path)

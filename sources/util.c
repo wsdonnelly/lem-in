@@ -6,21 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/25 11:10:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:31:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void	free_str_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		free (arr[i++]);
-	free (arr);
-}
 
 void	free_graph(t_room **graph, t_data *data)
 {
@@ -36,18 +26,6 @@ void	free_graph(t_room **graph, t_data *data)
 	}
 	if (*graph)
 		free (*graph);
-}
-
-void	free_edge_list(t_edge *head)
-{
-	t_edge	*temp;
-
-	while (head)
-	{
-		temp = head;
-		head = head->next;
-		free (temp);
-	}
 }
 
 void	free_name_list(t_node *head)

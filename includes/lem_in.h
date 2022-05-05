@@ -6,10 +6,9 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/05 12:12:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:25:36 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
@@ -19,7 +18,7 @@
 # include "ft_printf.h"
 # include <stdio.h>
 # include <limits.h>
-#include <stdlib.h>
+# include <stdlib.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -145,9 +144,11 @@ void	add_room_to_path(t_room room, t_path **path);
 void	free_path(t_path **path);
 void	find_fewest_moves(t_data *data, t_room *graph);
 void	build_shortest_path(t_path **path, t_room *graph);
-void	add_shortest_path_to_all_paths(t_paths **all_paths, t_path *shortest_path);
+void	add_shortest_path_to_all_paths(t_paths **all_paths, \
+t_path *shortest_path);
 void	free_paths(t_paths **paths);
-void	copy_all_paths_to_solution(t_paths **solution_paths, t_paths *all_paths);
+void	copy_all_paths_to_solution(t_paths **solution_paths, \
+t_paths *all_paths);
 void	map_paths(t_paths *all_paths, t_path *shortest_path);
 t_path	*create_room_on_path(t_room room);
 void	print_solution(t_data data);
