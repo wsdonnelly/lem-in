@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/04 16:56:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:28:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ static void	init_data(t_data *data)
 	data->start = NULL;
 	data->end = NULL;
 	data->store_input = NULL;
-	data->name_list = NULL;
+
 	data->start_index = FALSE;
 	data->end_index = FALSE;
-	data->best_solution = 0;
+	//data->graph = NULL;
+
+	data->name_list = NULL;
+
 	data->augmented_path = 1;
+	data->best_solution = 0;
+	data->required_moves = 0;
 	data->num_paths = 0;
 	data->all_paths = NULL;
 	data->solution_paths = NULL;
@@ -40,7 +45,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
 		return (1);
 	}
-	graph = NULL;
+	//graph = NULL;
 	data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);

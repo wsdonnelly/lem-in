@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 21:48:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:04:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@
 # define TRUE 1
 # define FALSE 0
 
-# define COLOR1 0x00FF00FF
+# define COLOR1 0x00FF8080
 # define COLOR2 0x0000FFFF
-# define COLOR3 0x00FF8080
+# define COLOR3 0x00FF00FF
+
 
 typedef struct s_info
 {

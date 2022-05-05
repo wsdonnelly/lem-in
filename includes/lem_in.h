@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/03 19:24:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:12:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "ft_printf.h"
 # include <stdio.h>
 # include <limits.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 
 # define TRUE 1
 # define FALSE 0
