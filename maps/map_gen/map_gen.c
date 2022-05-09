@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:35:45 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/03 21:41:23 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/09 15:19:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int main(int ac, char **av)
 {
 	int num_rooms;
 	int i;
+	int j;
 	FILE *fp;
 	int end;
 	int num;
+	int density;
 
 	if (ac != 2)
 	{
@@ -44,11 +46,18 @@ int main(int ac, char **av)
 		i++;
 	}
 	i = 0;
+
 	while (i < num_rooms)
-	{	
-		num = rand() % num_rooms;
-		if (num != i)
-			fprintf(fp, "%d-%d\n", i, num);
+	{
+		density = rand() % num_rooms;
+		j = 0;
+		while (j < density % 6)
+		{
+			num = rand() % num_rooms;
+			if (num != i)
+				fprintf(fp, "%d-%d\n", i, num);
+			j++;
+		}
 		i++;
 	}
 	fclose(fp);

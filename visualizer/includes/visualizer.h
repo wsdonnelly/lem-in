@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/05 13:04:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/09 15:16:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define UPARROW		0x7E
 # define MINUS			0x1B
 # define EQUAL			0x18
-//# define SPACE			0x31
+# define SPACE			0x31
 # define ESCAPE			0x35
 # define X				0x07
 # define Y				0x10
@@ -47,6 +47,13 @@
 # define COLOR1 0x00FF8080
 # define COLOR2 0x0000FFFF
 # define COLOR3 0x00FF00FF
+# define COLOR4 0x00FFEE58
+# define COLOR5 0x00FF7043
+# define COLOR6 0x00F44336
+# define COLOR7 0x007B1FA2
+# define COLOR8 0x0000796B
+# define COLOR9 0x005E35B1
+# define COLOR10 0x00F9A825
 
 
 typedef struct s_info
@@ -123,6 +130,9 @@ int	hash_map(char *name, t_info *info, t_room **room_arr);
 int	hasher(char *name, int num_rooms);
 int	lookup(char *name, int num_rooms, t_room **room_arr);
 
+
+void	init_data(t_data *data);
+void	init_info(t_info *info);
 void	make_line(t_data *data, t_point a, t_point b);
 
 void	rotate(t_point *a, t_data *data);
