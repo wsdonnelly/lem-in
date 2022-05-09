@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 15:28:55 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:42:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	init_data(t_data *data)
 	data->start = NULL;
 	data->end = NULL;
 	data->store_input = NULL;
-	data->start_index = FALSE;
-	data->end_index = FALSE;
+	data->start_index = -2;
+	data->end_index = -2;
 	data->name_list = NULL;
 	data->augmented_path = 1;
 	data->best_solution = 0;
@@ -44,6 +44,8 @@ int	main(int argc, char **argv)
 	data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
+	if (!graph)
+		exit_error(&data, "ERROR graph not made");
 	graph[data.start_index].previous = NULL;
 	solve(data, graph, argc);
 	free_graph(&graph, &data);

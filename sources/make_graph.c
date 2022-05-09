@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 16:54:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:42:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_room	*malloc_graph(t_data *data)
 	data->size = size;
 	temp = (t_room *)malloc(sizeof(t_room) * size);
 	if (!temp)
-		exit_error(data, "ERRORmalloc");
+		exit_error(data, "ERROR malloc");
 	i = 0;
 	while (i < size)
 	{

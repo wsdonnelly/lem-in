@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/05 15:25:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:59:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,13 @@ typedef struct s_print
 	char	*room_name;
 	int		name_len;
 }				t_print;
+
+typedef struct s_parse
+{
+	char	*line;
+	int		flag;
+	int		room_check;
+}				t_parse;
 
 void	read_map(t_data *data, t_room **graph);
 void	make_graph(int *flag, t_data *data, t_room **graph);
