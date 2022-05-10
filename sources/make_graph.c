@@ -6,11 +6,15 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:50:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:06:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+* check if one of two names are found in room list
+*/
 
 static int	names_in_list(t_data *data, char *name1, char *name2)
 {
@@ -34,6 +38,10 @@ static int	names_in_list(t_data *data, char *name1, char *name2)
 	return (0);
 }
 
+/*
+* create and init graph array
+*/
+
 static t_room	*malloc_graph(t_data *data)
 {
 	int		size;
@@ -56,7 +64,7 @@ static t_room	*malloc_graph(t_data *data)
 }
 
 /*
-*
+* check that graph is only malloc'd once
 */
 
 void	make_graph(int *flag, t_data *data, t_room **graph)
@@ -67,6 +75,10 @@ void	make_graph(int *flag, t_data *data, t_room **graph)
 		*flag = TRUE;
 	}
 }
+
+/* 
+* read each link and add each room to graph (if not already added)
+*/
 
 void	add_to_graph(t_data *data, char *line)
 {

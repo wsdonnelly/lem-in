@@ -6,11 +6,17 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/22 14:58:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:04:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+* slightly unnecessary hasher function
+* the lookup portion is used in the visualizer
+* opted to also use a hasher to input the rooms due to their non-linearity
+*/
 
 static int	hasher(char *name, int num_rooms)
 {

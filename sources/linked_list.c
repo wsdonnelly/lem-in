@@ -6,11 +6,15 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:02:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:05:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/* 
+* functions related to adding edges and reverse edges to lists of edges
+*/
 
 t_edge	*add_edge(t_data *data, int index1, int index2)
 {
