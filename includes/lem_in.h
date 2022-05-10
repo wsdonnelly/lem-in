@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:50:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:05:01 by mbeeler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,15 +153,16 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
 //solver
 void	solve(t_data data, t_room *graph, int argc);
 void	find_shortest_path(t_data *data, t_room *graph);
-void	add_room_to_path(t_room room, t_path **path);
-void	free_path(t_path **path);
 void	find_fewest_moves(t_data *data, t_room *graph);
-void	build_shortest_path(t_path **path, t_room *graph);
+//path
+void	add_room_to_path(t_room room, t_path **path);
 void	add_shortest_path_to_all_paths(t_paths **all_paths, \
 t_path *shortest_path);
+t_path	*create_room_on_path(t_room room);
+void	build_shortest_path(t_path **path, t_room *graph);
 void	copy_all_paths_to_solution(t_paths **solution_paths, \
 t_paths *all_paths);
+void	free_path(t_path **path);
 void	map_paths(t_paths *all_paths, t_path *shortest_path);
-t_path	*create_room_on_path(t_room room);
 
 #endif
