@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/09 12:59:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:50:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
-# include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
 
@@ -120,31 +119,38 @@ typedef struct s_parse
 	int		room_check;
 }				t_parse;
 
+//parser
 void	read_map(t_data *data, t_room **graph);
+void	get_start_end(t_data *data, char *line);
+void	check_links(t_parse *parse, t_data *data, t_room **graph);
+void	check_rooms(t_data *data, char *line);
+//graph creation
 void	make_graph(int *flag, t_data *data, t_room **graph);
 void	add_to_graph(t_data *data, char *line);
-void	check_rooms(t_data *data, char *line);
-//store_data
-void	store_data(t_data *data, char *line);
-void	print_data(t_data *data);
-void	print_comments(t_data *data);
-//rooms
 void	set_rooms(char **room, t_data *data);
 void	both_start_end(char *start_room, char *end_room, t_data *data);
 void	set_end_rooms(char *end_room, char *room_2, t_data *data);
 void	set_start_rooms(char *start_room, char *room_2, t_data *data);
-//util
+//store_data
+void	store_data(t_data *data, char *line);
+void	print_data(t_data *data);
+void	print_comments(t_data *data);
+//util and additional functions
 void	free_str_arr(char **arr);
 void	free_graph(t_room **graph, t_data *data);
 void	free_edge_list(t_edge *head);
 void	free_data(t_data *data);
 int		exit_error(t_data *data, char *message);
 int		is_valid_int(char *num);
-//hash_map
+void	free_paths(t_paths **paths);
+void	print_solution(t_data data);
+void	print_paths(t_data data);
+void	print_line(t_data data, t_ant *ant, int i);
 int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);
 t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
+//solver
 void	solve(t_data data, t_room *graph, int argc);
 void	find_shortest_path(t_data *data, t_room *graph);
 void	add_room_to_path(t_room room, t_path **path);
@@ -153,13 +159,9 @@ void	find_fewest_moves(t_data *data, t_room *graph);
 void	build_shortest_path(t_path **path, t_room *graph);
 void	add_shortest_path_to_all_paths(t_paths **all_paths, \
 t_path *shortest_path);
-void	free_paths(t_paths **paths);
 void	copy_all_paths_to_solution(t_paths **solution_paths, \
 t_paths *all_paths);
 void	map_paths(t_paths *all_paths, t_path *shortest_path);
 t_path	*create_room_on_path(t_room room);
-void	print_solution(t_data data);
-void	print_paths(t_data data);
-void	print_line(t_data data, t_ant *ant, int i);
 
 #endif

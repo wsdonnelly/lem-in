@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/09 12:42:57 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:50:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_room	*malloc_graph(t_data *data)
 	data->size = size;
 	temp = (t_room *)malloc(sizeof(t_room) * size);
 	if (!temp)
-		exit_error(data, "ERROR malloc");
+		exit_error(data, "ERROR");
 	i = 0;
 	while (i < size)
 	{
@@ -54,6 +54,10 @@ static t_room	*malloc_graph(t_data *data)
 	}
 	return (temp);
 }
+
+/*
+*
+*/
 
 void	make_graph(int *flag, t_data *data, t_room **graph)
 {
@@ -73,7 +77,7 @@ void	add_to_graph(t_data *data, char *line)
 	{
 		free(line);
 		free_str_arr(room);
-		exit_error(data, "ERROR link");
+		exit_error(data, "ERROR");
 	}
 	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))
 		set_start_rooms(room[0], room[1], data);

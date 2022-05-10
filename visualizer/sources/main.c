@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 21:51:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:32:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,17 @@ int	main(void)
 	srand(time(0));
 	init_info(&info);
 	init_data(&data);
-	//*room_arr = NULL;
-	//data.room_arr = NULL;
 	data.info = &info;
 	read_in_info(&data, &info, &room_arr);
-
-
-
 	data.room_arr = room_arr;
 	idx = lookup(info.start, info.num_rooms, &room_arr);
 	room_arr[idx].in_path = 0;
 	idx = lookup(info.end, info.num_rooms, &room_arr);
 	room_arr[idx].in_path = 0;
-	//test
-	int i = 0;
-	while (i < info.num_rooms)
-	{
-		printf("room[%d] in path: %d\n", i, room_arr[i].in_path);
-		i++;
-	}
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
+	data.win = mlx_new_window(data.mlx, 1920, 1080, " lem-in visualizer");
 	draw_graph(&data);
 	mlx_hook(data.win, 2, 0, controls, &data);
 	mlx_loop(data.mlx);
-
 	return (0);
 }

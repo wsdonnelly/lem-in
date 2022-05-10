@@ -6,11 +6,16 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:31:28 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/09 12:44:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:50:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+* if flag is on set this room as "start" or "end"
+* deactivate flag
+*/
 
 static void	set_start_end(t_data *data, char *line)
 {
@@ -20,19 +25,23 @@ static void	set_start_end(t_data *data, char *line)
 	if (data->start_index == -1)
 	{
 		if (data->start)
-			exit_error(data, "ERROR double start");
+			exit_error(data, "ERROR");
 		data->start = ft_strdup(all[0]);
 		data->start_index = -2;
 	}
 	else
 	{
 		if (data->end)
-			exit_error(data, "ERROR double end");
+			exit_error(data, "ERROR");
 		data->end = ft_strdup(all[0]);
 		data->end_index = -2;
 	}
 	free_str_arr(all);
 }
+
+/*
+* add valid room name to list
+*/
 
 static int	add_name_to_list(t_node **head, char *name)
 {
@@ -47,6 +56,10 @@ static int	add_name_to_list(t_node **head, char *name)
 	return (1);
 }
 
+/*
+* check for room name duplicates
+*/
+
 static int	name_in_list(t_data *data, char *name)
 {
 	t_node	*temp;
@@ -60,6 +73,11 @@ static int	name_in_list(t_data *data, char *name)
 	}
 	return (0);
 }
+
+/*
+* if no errors
+* add room name to list
+*/
 
 static int	check_coordinate_errors(t_data *data, char *line)
 {
@@ -89,12 +107,18 @@ static int	check_coordinate_errors(t_data *data, char *line)
 	return (1);
 }
 
+/*
+* count number of valid rooms
+* save "start" and "end" room names
+* save valid room and coordinates for later output
+*/
+
 void	check_rooms(t_data *data, char *line)
 {
 	if (!check_coordinate_errors(data, line))
 	{
 		free(line);
-		exit_error(data, "ERROR coord OR double name");
+		exit_error(data, "ERROR");
 	}
 	if (data->start_index == -1 || data->end_index == -1)
 		set_start_end(data, line);
