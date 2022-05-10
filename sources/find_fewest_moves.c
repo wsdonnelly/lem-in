@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_fewest_moves.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 15:27:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:35:43 by mbeeler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ static int	get_required_moves(t_data data, t_paths *paths)
 	return (required_moves);
 }
 
+/*
+** The latest shortest path is added to a list of all identified paths and
+** the capacities along this path are set to 0. The moves to get all ants
+** from start to end are calculated (assuming all paths are used). If the
+** number of moves is lower than the current best solution, the caluclated
+** number of moves is set as the new solution.
+*/
 void	find_fewest_moves(t_data *data, t_room *graph)
 {
 	data->shortest_path = create_room_on_path(graph[data->end_index]);

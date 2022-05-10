@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_solution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/04 16:46:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:43:40 by mbeeler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ static t_ant	*create_ant_structure(int num_ants)
 	return (ant);
 }
 
+/*
+** Print the solution line-by-line. All ants which are neither in start nor
+** in end are displayed. A ant structure is used to keep track of the room
+** the ant is currently in and to move the ant one room forward in each
+** iteration until the end room is reached.
+*/
 void	print_solution(t_data data)
 {
 	t_ant	*ant;

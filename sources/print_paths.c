@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_paths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/04 16:54:17 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:47:30 by mbeeler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ static void	get_room_name(t_data data, t_print *print, char *room_name)
 		print->room_name = ft_strdup(data.end);
 }
 
+/*
+** All paths which were identified in the optimal solution are printed out
+** room-by-room. Also the number of required moves in the optimal solution is
+** printed to the standard output.
+*/
 void	print_paths(t_data data)
 {
 	t_print	print;
@@ -48,7 +53,7 @@ void	print_paths(t_data data)
 			tmp = tmp->next_room;
 		}
 		tmp2 = tmp2->next_path;
-		ft_printf("\n");
+		ft_printf("\n\n");
 	}
 	ft_printf("\nNumber of lines:\n%d\n\n", data.best_solution);
 }
