@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_shortest_path.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 15:28:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:15:18 by mbeeler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ static void	remove_first_room_from_queue(t_path **path)
 	free(tmp);
 }
 
+/*
+** Breadth-first-search algorithm to identify the shortest valid path from
+** start to end.
+*/
 void	find_shortest_path(t_data *data, t_room *graph)
 {
 	data->queue = NULL;

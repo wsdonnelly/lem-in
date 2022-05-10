@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 15:29:15 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:10:05 by mbeeler          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+/*
+** The functions searches for the shortes path from start to end until no more
+** valid paths are found. After each iteration, it is checked whether the
+** current combination of paths requires less moves to move the ants from start
+** to end than the current best solution.
+** If a valid solution was found, the solution is printed to the standard
+** output.
+*/
 void	solve(t_data data, t_room *graph, int argc)
 {
 	while (data.augmented_path)
