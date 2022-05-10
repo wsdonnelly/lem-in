@@ -6,48 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:33:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:45:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-static void	get_first_line(t_data *data, t_info *info, char **line)
-{
-	if (get_next_line(0, line))
-	{
-		if (!ft_strcmp(*line, "no valid path found"))
-		{
-			ft_putendl("no valid path found");
-			exit (0);
-		}
-		else if (!ft_strcmp(*line, "ERROR"))
-		{
-			ft_putendl("ERROR");
-			exit(0);
-		}
-		info->num_ants = ft_atoi(*line);
-		free (*line);
-		return ;
-	}
-	exit_error(data, "GNL error");
-}
-
-void	get_comment(t_info *info, char *line)
-{
-	char	**list;
-
-	list = ft_strsplit(line, ' ');
-	if (!ft_strcmp(list[0], "#num_rooms"))
-		info->num_rooms = ft_atoi(list[1]);
-	else if (!ft_strcmp(list[0], "#start"))
-		info->start = ft_strdup(list[1]);
-	else if (!ft_strcmp(list[0], "#end"))
-		info->end = ft_strdup(list[1]);
-	free_str_arr(list);
-}
-
-t_room	*malloc_room_arr(t_info *info)
+static t_room	*malloc_room_arr(t_info *info)
 {
 	t_room	*temp;
 	int		i;
@@ -67,62 +32,60 @@ t_room	*malloc_room_arr(t_info *info)
 	return (temp);
 }
 
-void	read_in_info(t_data *data, t_info *info, t_room **room_arr)
+static void	init_parse(t_parse *parse)
 {
-	char	*line;
-	int		start;
-	int		end;
-	int		flag;
-	int		flag2;
-	int		num_paths;
+	parse->flag = 0;
+	parse->flag2 = 0;
+	parse->start = FALSE;
+	parse->end = FALSE;
+}
 
-	flag = 0;
-	flag2 = 0;
-	start = FALSE;
-	end = FALSE;
-	get_first_line(data, info, &line);
-	while (get_next_line(0, &line) > 0)
+static void	make_room_arr(t_info *info, t_room **room_arr, t_parse *parse)
+{
+	if (info->end != NULL && !parse->flag)
 	{
-		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
-		{
-			free (line);
+		*room_arr = malloc_room_arr(info);
+		parse->flag = 1;
+	}
+}
+
+static int	parse_input(t_info *info, t_room **room_arr, t_parse *parse)
+{
+	if (parse->line[0] == '#')
+	{
+		get_comment(info, parse->line);
+		return (1);
+	}
+	make_room_arr(info, room_arr, parse);
+	if (ft_strchr(parse->line, (int) ' ') && !ft_strchr(parse->line, (int) 'L'))
+	{
+		read_rooms(info, room_arr, parse->line);
+		return (1);
+	}
+	if (ft_strchr(parse->line, (int) '-') && !ft_strchr(parse->line, (int) 'L'))
+	{
+		add_links(room_arr, parse->line, info->num_rooms);
+		return (1);
+	}
+	if (ft_strchr(parse->line, (int) 'L'))
+	{
+		add_paths(info, room_arr, parse);
+		free (parse->line);
+		return (1);
+	}
+	return (0);
+}
+
+void	read_in_info(t_info *info, t_room **room_arr)
+{
+	t_parse	parse;
+
+	init_parse(&parse);
+	get_first_line(info, &parse.line);
+	while (get_next_line(0, &parse.line) > 0)
+	{
+		if (parse_input(info, room_arr, &parse))
 			continue ;
-		}
-		if (line[0] == '#')
-		{
-			get_comment(info, line);
-			free (line);
-			continue ;
-		}
-		if (info->end != NULL && !flag)
-		{
-			*room_arr = malloc_room_arr(info);
-			flag = 1;
-		}
-		if (ft_strchr(line, (int) ' ') && !ft_strchr(line, (int) 'L'))
-		{
-			read_rooms(info, room_arr, line);
-			free(line);
-			continue ;
-		}
-		if (ft_strchr(line, (int) '-') && !ft_strchr(line, (int) 'L'))
-		{
-			add_links(room_arr, line, info->num_rooms);
-			free (line);
-			continue ;
-		}
-		if (ft_strchr(line, (int) 'L'))
-		{	
-			if (!flag2)
-			{
-				num_paths = color_paths_firstline(room_arr, line, info->num_rooms);
-				flag2 = 1;
-			}
-			else
-				color_paths(room_arr, line, info->num_rooms, num_paths);
-			free (line);
-			continue ;
-		}
-		free (line);
+		free (parse.line);
 	}
 }

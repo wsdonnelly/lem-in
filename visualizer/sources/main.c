@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:32:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:58:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(void)
 	init_info(&info);
 	init_data(&data);
 	data.info = &info;
-	read_in_info(&data, &info, &room_arr);
+	read_in_info(&info, &room_arr);
 	data.room_arr = room_arr;
 	idx = lookup(info.start, info.num_rooms, &room_arr);
 	room_arr[idx].in_path = 0;

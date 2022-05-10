@@ -6,14 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/15 12:16:33 by wdonnell          #+#    #+#              #
-#    Updated: 2022/04/29 14:37:23 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/05/10 14:50:28 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= visualizer
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-SOURCES		= main.c read_in_info.c read_rooms.c util.c controls.c draw_graph.c \
+SOURCES		= main.c read_in_info.c read_in_info2.c read_rooms.c util.c controls.c draw_graph.c \
 hash_map.c draw_lines.c transform.c color_paths.c
 SRCS_DIR	= sources/
 SRCS		= $(addprefix	$(SRCS_DIR), $(SOURCES))

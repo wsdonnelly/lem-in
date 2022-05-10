@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/10 11:02:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:52:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
 		return (1);
 	}
+	graph = NULL;
 	data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);

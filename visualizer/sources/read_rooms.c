@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:14:49 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/04 16:29:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:21:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	read_rooms(t_info *info, t_room **room_arr, char *line)
 	(*room_arr)[index].x = ft_atoi(room_info[1]);
 	(*room_arr)[index].y = ft_atoi(room_info[2]);
 	free_str_arr(room_info);
+	free(line);
 }
 
 void	add_edge(t_link **head, int index)
@@ -48,4 +49,5 @@ void	add_links(t_room **room_arr, char *line, int num_rooms)
 	index2 = lookup(room[1], num_rooms, room_arr);
 	add_edge(&(*room_arr)[index1].link, index2);
 	free_str_arr(room);
+	free(line);
 }

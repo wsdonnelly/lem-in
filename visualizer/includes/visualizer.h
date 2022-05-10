@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:19:07 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/09 15:16:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:53:30 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@
 # define COLOR9 0x005E35B1
 # define COLOR10 0x00F9A825
 
-
 typedef struct s_info
 {
 	int		num_ants;
@@ -77,32 +76,30 @@ typedef struct s_point
 	int	z;
 }				t_point;
 
-typedef struct	s_room
+typedef struct s_room
 {
-	char	*name;
-	int		x;
-	int		y;
-	int		z;
-	int		in_path;
-	t_link	*link;
-	struct s_point point;
+	char			*name;
+	int				x;
+	int				y;
+	int				z;
+	int				in_path;
+	t_link			*link;
+	struct s_point	point;
 }				t_room;
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	//controls
-	int		zoom;
-	int		x_zoom;
-	int		y_zoom;
-	int		x_offset;
-	int		y_offset;
-	double	alpha;
-	double	beta;
-	double	gamma;
-	int		color;
-	//room and info
+	void			*mlx;
+	void			*win;
+	int				zoom;
+	int				x_zoom;
+	int				y_zoom;
+	int				x_offset;
+	int				y_offset;
+	double			alpha;
+	double			beta;
+	double			gamma;
+	int				color;
 	struct s_room	*room_arr;
 	struct s_info	*info;
 }				t_data;
@@ -117,29 +114,38 @@ typedef struct s_line
 	int	e2;
 }				t_line;
 
+typedef struct s_parse
+{
+	char	*line;
+	int		start;
+	int		end;
+	int		flag;
+	int		flag2;
+	int		num_paths;
+}				t_parse;
 
-void	read_in_info(t_data *data, t_info *info, t_room **room_arr);
+void	read_in_info(t_info *info, t_room **room_arr);
 void	read_rooms(t_info *info, t_room **room_arr, char *line);
 void	add_links(t_room **room_arr, char *line, int num_rooms);
-
-t_room *add_room(t_info *info);
+void	add_paths(t_info *info, t_room **room_arr, t_parse *parse);
+void	get_comment(t_info *info, char *line);
+void	get_first_line(t_info *info, char **line);
+t_room	*add_room(t_info *info);
 void	draw_graph(t_data *data);
-int	controls(int key, t_data *data);
-//hash-map
-int	hash_map(char *name, t_info *info, t_room **room_arr);
-int	hasher(char *name, int num_rooms);
-int	lookup(char *name, int num_rooms, t_room **room_arr);
-
-
+int		controls(int key, t_data *data);
+void	display_controls(t_data *data);
+int		hash_map(char *name, t_info *info, t_room **room_arr);
+int		hasher(char *name, int num_rooms);
+int		lookup(char *name, int num_rooms, t_room **room_arr);
 void	init_data(t_data *data);
 void	init_info(t_info *info);
 void	make_line(t_data *data, t_point a, t_point b);
-
 void	rotate(t_point *a, t_data *data);
-
-void	color_paths(t_room **room_arr, char *line, int num_rooms, int num_paths);
-int color_paths_firstline(t_room **room_arr, char *line, int num_rooms);
+void	color_paths(t_room **room_arr, char *line, \
+int num_rooms, int num_paths);
+int		color_paths_firstline(t_room **room_arr, char *line, int num_rooms);
 void	free_data(t_data *data);
 void	free_str_arr(char **arr);
-void exit_error(t_data *data, char *message);
+void	exit_error(t_data *data, char *message);
+
 #endif
