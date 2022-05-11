@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 12:40:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 14:50:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:55:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	move_zoom(int key, t_data *data)
 {
 	if (key == DOWNARROW)
-		data->y_offset += 10;
+		data->y_offset += 15;
 	else if (key == UPARROW)
-		data->y_offset -= 10;
+		data->y_offset -= 15;
 	else if (key == LEFTARROW)
-		data->x_offset -= 10;
+		data->x_offset -= 15;
 	else if (key == RIGHTARROW)
-		data->x_offset += 10;
+		data->x_offset += 15;
 	else if (key == EQUAL)
 		data->zoom += 1;
 	else if (key == MINUS)
@@ -74,15 +74,15 @@ int	controls(int key, t_data *data)
 void	display_controls(t_data *data)
 {
 	mlx_string_put(data->mlx, data->win, \
-	1600, 930, 0xFFFFFF, "------------->Controls");
+	1600, 30, 0xFFFFFF, "------------->Controls");
 	mlx_string_put(data->mlx, data->win, \
-	1600, 950, 0xFFFFFF, "arrow keys: move graph");
+	1600, 50, 0xFFFFFF, "arrow keys: move graph");
 	mlx_string_put(data->mlx, data->win, \
-	1600, 970, 0xFFFFFF, "+(=) and - : zoom");
+	1600, 70, 0xFFFFFF, "+(=) and - : zoom");
 	mlx_string_put(data->mlx, data->win, \
-	1600, 990, 0xFFFFFF, "x and y : stretch graph");
+	1600, 90, 0xFFFFFF, "x and y : stretch graph");
 	mlx_string_put(data->mlx, data->win, \
-	1600, 1010, 0xFFFFFF, "numpad 4-5-6-7-8-9: rotate");
+	1600, 110, 0xFFFFFF, "numpad 4-5-6-7-8-9: rotate");
 	mlx_string_put(data->mlx, data->win, \
-	1600, 1050, 0xFFFFFF, "esc: exit");
+	1600, 130, 0xFFFFFF, "esc: exit");
 }

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 10:36:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 14:48:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:50:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	draw_room_names(t_data *data, int i)
 {
 	if (!ft_strcmp(data->room_arr[i].name, data->info->start))
 		mlx_string_put(data->mlx, data->win, data->room_arr[i].point.x, \
-		data->room_arr[i].point.y, 0x000000FF, "start");
+		data->room_arr[i].point.y, 0x000080FF, "start");
 	else if (!ft_strcmp(data->room_arr[i].name, data->info->end))
 		mlx_string_put(data->mlx, data->win, data->room_arr[i].point.x, \
 		data->room_arr[i].point.y, 0x0000FF00, "end");

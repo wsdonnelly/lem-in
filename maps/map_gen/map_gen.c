@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:35:45 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 15:03:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:35:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_links(t_info *info)
 	{
 		info->density = rand() % info->num_rooms;
 		j = 0;
-		while (j < info->density % 6)
+		while (j < info->density % 5)
 		{
 			info->num = rand() % info->num_rooms;
 			if (info->num != i)

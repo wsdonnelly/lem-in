@@ -6,11 +6,15 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 14:45:55 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:49:30 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
+
+/*
+* set random z coordinate here
+*/
 
 static t_room	*malloc_room_arr(t_info *info)
 {
