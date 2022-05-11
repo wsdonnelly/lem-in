@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:35:45 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 15:03:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:52:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,24 @@ static void	set_rooms(t_info *info)
 	}
 }
 
-static void	set_links(t_info *info)
+static void	set_links_large(t_info *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < info->num_rooms)
+	{
+		j = 0;
+		info->num = rand() % info->num_rooms;
+		if (info->num != i)
+			fprintf(info->fp, "%d-%d\n", i, info->num);
+			j++;
+		i++;
+	}
+}
+
+static void	set_links_small(t_info *info)
 {
 	int	i;
 	int	j;
@@ -76,7 +93,10 @@ int	main(int ac, char **av)
 	fprintf(info.fp, "%d\n", rand() % 100 + 1);
 	fprintf(info.fp, "##start\n");
 	set_rooms(&info);
-	set_links(&info);
+	if (info.num_rooms >= 1000)
+		set_links_large(&info);
+	else
+		set_links_small(&info);
 	fclose(info.fp);
 	return (0);
 }
