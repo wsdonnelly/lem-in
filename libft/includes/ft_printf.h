@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 21:38:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/02/14 11:59:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:00:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdint.h>
 # include "libft.h"
 
 # define HASH	0x01	//0b00000001
