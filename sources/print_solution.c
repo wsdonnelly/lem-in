@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_solution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbeeler <mbeeler@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/10 11:43:40 by mbeeler          ###   ########.fr       */
+/*   Updated: 2022/05/19 15:31:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ static t_ant	*create_ant_structure(int num_ants)
 ** the ant is currently in and to move the ant one room forward in each
 ** iteration until the end room is reached.
 */
-void	print_solution(t_data data)
+void	print_solution(t_data *data)
 {
 	t_ant	*ant;
 	t_ant	*tmp;
 	int		i;
 
-	count_steps(data.solution_paths, data.best_solution);
-	ant = create_ant_structure(data.num_ants);
+	count_steps(data->solution_paths, data->best_solution);
+	ant = create_ant_structure(data->num_ants);
 	i = -1;
-	while (++i < data.best_solution)
+	while (++i < data->best_solution)
 		print_line(data, ant, i);
 	while (ant)
 	{

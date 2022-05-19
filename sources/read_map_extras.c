@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:17:30 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:50:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:14:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	check_links(t_parse *parse, t_data *data, t_room **graph)
 	if (data->start_index == -1 || data->end_index == -1 \
 	|| !data->end || !data->start)
 		exit_error(data, "ERROR");
-	make_graph(&parse->flag, data, graph);
+	if (!parse->flag)
+		make_graph(&parse->flag, data, graph);
 	add_to_graph(data, parse->line);
 }

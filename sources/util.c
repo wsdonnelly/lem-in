@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 15:00:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:05:15 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,31 +83,3 @@ int	is_valid_int(char *num)
 		return (0);
 	return (1);
 }
-
-/*
-int	is_valid_int(char *num)
-{
-	int		i;
-	int		sign;
-	long	val;
-
-	i = 0;
-	val = 0;
-	sign = 1;
-	if (num[i] == '-')
-		sign = -1;
-	if (num[i] == '-' || num[i] == '+')
-		i++;
-	while (num[i])
-	{
-		if (ft_isdigit(num[i]))
-			val = (val * 10) + num[i] - '0';
-		else
-			return (0);
-		i++;
-	}
-	if (val * sign > INT_MAX || val * sign < INT_MIN)
-		return (0);
-	return (1);
-}
-*/

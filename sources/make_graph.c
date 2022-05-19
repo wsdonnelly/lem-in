@@ -6,14 +6,14 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 12:06:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:24:56 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-* check if one of two names are found in room list
+* check both names are found in room list
 */
 
 static int	names_in_list(t_data *data, char *name1, char *name2)
@@ -69,11 +69,8 @@ static t_room	*malloc_graph(t_data *data)
 
 void	make_graph(int *flag, t_data *data, t_room **graph)
 {
-	if (!*flag)
-	{
-		*graph = malloc_graph(data);
-		*flag = TRUE;
-	}
+	*graph = malloc_graph(data);
+	*flag = TRUE;
 }
 
 /* 

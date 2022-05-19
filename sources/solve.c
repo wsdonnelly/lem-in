@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/11 13:58:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:31:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	solve(t_data data, t_room *graph, int argc)
 		print_comments(&data);
 		print_data(&data);
 		ft_putchar('\n');
-		print_solution(data);
+		print_solution(&data);
 		if (argc == 2)
-			print_paths(data);
+			print_paths(&data);
 		free_paths(&data.solution_paths);
 		free_paths(&data.all_paths);
 	}

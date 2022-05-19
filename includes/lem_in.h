@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 14:52:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:30:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,9 @@ void	free_data(t_data *data);
 int		exit_error(t_data *data, char *message);
 int		is_valid_int(char *num);
 void	free_paths(t_paths **paths);
-void	print_solution(t_data data);
-void	print_paths(t_data data);
-void	print_line(t_data data, t_ant *ant, int i);
+void	print_solution(t_data *data);
+void	print_paths(t_data *data);
+void	print_line(t_data *data, t_ant *ant, int i);
 int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);

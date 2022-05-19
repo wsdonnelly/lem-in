@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:31:28 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 15:02:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:24:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,6 @@ static int	check_coordinate_errors(t_data *data, char *line)
 		free_str_arr(coordinate);
 		return (0);
 	}
-	/*
-	if (ft_atoi(coordinate[1]) < 0 || ft_atoi(coordinate[2]) < 0)
-	{
-		free_str_arr(coordinate);
-		return (0);
-	}
-	*/
 	if (!add_name_to_list(&data->name_list, coordinate[0]))
 		return (0);
 	free_str_arr(coordinate);

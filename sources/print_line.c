@@ -6,29 +6,29 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/04 16:54:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:31:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	get_room_name(t_data data, t_ant *ant, char *room_name)
+static void	get_room_name(t_data *data, t_ant *ant, char *room_name)
 {
-	if (ft_strcmp(room_name, data.end))
+	if (ft_strcmp(room_name, data->end))
 	{
 		ant->name_len = ft_strlen(room_name) - 2;
 		ant->room_name = ft_strnew(ant->name_len);
 		ft_strncpy(ant->room_name, room_name, ant->name_len);
 	}
 	else
-		ant->room_name = ft_strdup(data.end);
+		ant->room_name = ft_strdup(data->end);
 }
 
-static void	send_new_ant(t_data data, t_ant *tmp1, int *j)
+static void	send_new_ant(t_data *data, t_ant *tmp1, int *j)
 {
 	t_paths	*tmp2;
 
-	tmp2 = data.solution_paths;
+	tmp2 = data->solution_paths;
 	while (tmp2 && tmp2->new_ant)
 		tmp2 = tmp2->next_path;
 	if (tmp2)
@@ -44,7 +44,7 @@ static void	send_new_ant(t_data data, t_ant *tmp1, int *j)
 	}
 }
 
-static void	move_ant(t_data data, t_ant *tmp1, int *j)
+static void	move_ant(t_data *data, t_ant *tmp1, int *j)
 {
 	if (tmp1->path->next_room)
 	{
@@ -58,14 +58,14 @@ static void	move_ant(t_data data, t_ant *tmp1, int *j)
 	}
 }
 
-void	print_line(t_data data, t_ant *ant, int i)
+void	print_line(t_data *data, t_ant *ant, int i)
 {
 	t_paths	*tmp2;
 	t_ant	*tmp1;
 	int		j;
 
 	j = 0;
-	tmp2 = data.solution_paths;
+	tmp2 = data->solution_paths;
 	while (tmp2)
 	{
 		if (tmp2->steps > i)
