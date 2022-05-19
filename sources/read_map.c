@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 11:50:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:44:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	get_number_ants(t_data *data)
 {
 	char	*line;
 
-	if (get_next_line(0, &line) && line[0] && is_valid_int(line) \
+	if (get_next_line(0, &line) > 0 && line[0] && is_valid_int(line) \
 	&& !ft_strchr(line, (int) ' '))
 	{
 		data->num_ants = ft_atoi(line);
