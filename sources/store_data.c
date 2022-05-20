@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/30 14:19:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:58:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,45 @@ void	print_comments(t_data *data)
 
 void	print_data(t_data *data)
 {
-	ft_putstr(data->store_input);
-	free(data->store_input);
+	t_line *temp;
+	t_line *cpy;
+
+	temp = data->store_input_head;
+
+	while (temp)
+	{
+		ft_putendl(temp->line);
+		cpy = temp;
+		temp = temp->next;
+		free(cpy->line);
+		free(cpy);
+	}
 }
+
+// linked list (Q) version
 
 void	store_data(t_data *data, char *line)
 {
-	char	*c;
 
-	c = strdup("\n");
-	if (data->store_input)
+	t_line *temp;
+
+
+	temp = (t_line *)malloc(sizeof(t_line));
+	if (!temp)
+		exit_error(data, "ERROR");
+
+	temp->line = ft_strdup(line);
+	temp->next = NULL;
+	if (data->store_input_tail)
 	{
-		ft_strjoin_inplace(&data->store_input, &line);
-		ft_strjoin_inplace(&data->store_input, &c);
+		*(&data->store_input_tail->next)= temp;
+		*(&data->store_input_tail) = temp;
+
 	}
 	else
 	{
-		data->store_input = ft_strdup(line);
-		free (line);
-		ft_strjoin_inplace(&data->store_input, &c);
+		*(&data->store_input_head) = temp;
+		*(&data->store_input_tail) = temp;
 	}
+	free(line);
 }

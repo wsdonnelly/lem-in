@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 15:05:15 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:46:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	free_name_list(t_node *head)
 		free (temp);
 	}
 }
+
 
 void	free_data(t_data *data)
 {

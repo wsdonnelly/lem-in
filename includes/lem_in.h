@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 15:30:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:13:28 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ typedef struct s_paths
 	struct s_paths	*next_path;
 }				t_paths;
 
+typedef struct s_line
+{
+	char			*line;
+	struct s_line	*next;
+}				t_line;
+
 typedef struct s_data
 {
 	int				num_ants;
@@ -65,7 +71,8 @@ typedef struct s_data
 	int				size;
 	char			*start;
 	char			*end;
-	char			*store_input;
+	t_line			*store_input_head;
+	t_line			*store_input_tail;
 	int				end_index;
 	int				start_index;
 	t_room			**graph;

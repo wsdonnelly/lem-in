@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 15:24:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:49:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	parse_data(t_data *data, t_room **graph)
 			check_links(&parse, data, graph);
 			continue ;
 		}
-		free (parse.line);
+		free(parse.line);
 		exit_error(data, "ERROR");
 	}
 }

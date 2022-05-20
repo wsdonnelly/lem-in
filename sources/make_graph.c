@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/19 15:24:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:51:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,14 @@ void	add_to_graph(t_data *data, char *line)
 	char	**room;
 
 	room = ft_strsplit(line, '-');
+	
 	if (room[2] || !room[1] || !names_in_list(data, room[0], room[1]))
 	{
 		free(line);
 		free_str_arr(room);
 		exit_error(data, "ERROR");
 	}
+	
 	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))
 		set_start_rooms(room[0], room[1], data);
 	else if (!ft_strcmp(room[1], data->start) && ft_strcmp(room[0], data->end))

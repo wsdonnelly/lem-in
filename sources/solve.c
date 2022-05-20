@@ -6,14 +6,15 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/19 15:31:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/20 14:46:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <stdio.h>
 
 /*
-** The functions searches for the shortes path from start to end until no more
+** The functions searches for the shortest path from start to end until no more
 ** valid paths are found. After each iteration, it is checked whether the
 ** current combination of paths requires less moves to move the ants from start
 ** to end than the current best solution.
