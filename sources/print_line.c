@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/19 15:31:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	send_new_ant(t_data *data, t_ant *tmp1, int *j)
 	if (tmp2)
 	{
 		tmp1->path = tmp2->path->next_room;
-		get_room_name(data, tmp1, tmp1->path->room.name);
+		get_room_name(data, tmp1, tmp1->path->room->name);
 		if (*j)
 			ft_putchar(' ');
 		ft_printf("L%d-%s", tmp1->num, tmp1->room_name);
@@ -51,7 +51,7 @@ static void	move_ant(t_data *data, t_ant *tmp1, int *j)
 		if (*j)
 			ft_putchar(' ');
 		tmp1->path = tmp1->path->next_room->next_room;
-		get_room_name(data, tmp1, tmp1->path->room.name);
+		get_room_name(data, tmp1, tmp1->path->room->name);
 		ft_printf("L%d-%s", tmp1->num, tmp1->room_name);
 		ft_strdel(&tmp1->room_name);
 		*j = *j + 1;

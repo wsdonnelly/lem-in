@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/23 10:17:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:38:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_path
 {
 	struct s_room	*room;
 	struct s_path	*next_room;
+	//struct s_path	*tail;
+	//struct s_path 	*head;
 }				t_path;
 
 typedef struct s_paths

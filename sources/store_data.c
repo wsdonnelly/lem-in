@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/20 14:58:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:15:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ void	print_data(t_data *data)
 	}
 }
 
-// linked list (Q) version
+//queue version
 
 void	store_data(t_data *data, char *line)
 {
 
 	t_line *temp;
-
 
 	temp = (t_line *)malloc(sizeof(t_line));
 	if (!temp)

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/04 16:54:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	iterate_paths(t_paths *paths, int *switched, char **rooms, \
 	path = paths->path;
 	while (path->next_room && !*switched)
 	{
-		if (!ft_strcmp(path->room.name, rooms[1])
-			&& !ft_strcmp(path->next_room->room.name, rooms[0]))
+		if (!ft_strcmp(path->room->name, rooms[1])
+			&& !ft_strcmp(path->next_room->room->name, rooms[0]))
 			relink_paths(shortest_path, path, switched);
 		path = path->next_room;
 	}
@@ -53,8 +53,8 @@ void	map_paths(t_paths *all_paths, t_path *shortest_path)
 	while (shortest_path->next_room)
 	{
 		switched = 0;
-		rooms[0] = shortest_path->room.name;
-		rooms[1] = shortest_path->next_room->room.name;
+		rooms[0] = shortest_path->room->name;
+		rooms[1] = shortest_path->next_room->room->name;
 		paths = all_paths;
 		while (paths && !switched)
 		{

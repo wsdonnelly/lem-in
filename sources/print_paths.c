@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/19 15:32:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	print_paths(t_data *data)
 	tmp2 = data->solution_paths;
 	while (tmp2)
 	{
-		ft_printf("%s", tmp2->path->room.name);
+		ft_printf("%s", tmp2->path->room->name);
 		tmp = tmp2->path->next_room;
 		print.print_room = 0;
 		while (tmp)
 		{
 			if (print.print_room++ % 2 == 0)
 			{
-				get_room_name(data, &print, tmp->room.name);
+				get_room_name(data, &print, tmp->room->name);
 				ft_printf("-%s", print.room_name);
 				ft_strdel(&print.room_name);
 			}

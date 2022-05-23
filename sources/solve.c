@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 10:08:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ void	solve(t_data data, t_room *graph, int argc)
 	while (data.augmented_path)
 	{
 		find_shortest_path(&data, graph);
-		/*
 		if (data.augmented_path)
 		{
 			find_fewest_moves(&data, graph);
 			data.num_paths++;
 		}
-		*/
+		
 	}
 	if (data.num_paths)
 	{

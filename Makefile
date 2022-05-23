@@ -6,13 +6,13 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/05/20 15:11:45 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/05/23 10:29:53 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME		= lem-in
-CC			= clang
+CC			= gcc
 #CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 CFLAGS		= -Wall -Wextra -Werror -O3
 #EXTRA_FLAGS = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits -O3 -g -fsanitize=address

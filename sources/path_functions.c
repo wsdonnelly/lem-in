@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 15:06:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:27:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	build_shortest_path(t_path **path, t_room *graph)
 	t_edge	*neighbor;
 
 	tmp1 = *path;
-	neighbor = tmp1->room.neighbors;
-	while (ft_strcmp(tmp1->room.previous, graph[neighbor->next_room_index].name)
+	neighbor = tmp1->room->neighbors;
+	while (ft_strcmp(tmp1->room->previous, graph[neighbor->next_room_index].name)
 		&& neighbor)
 		neighbor = neighbor->next;
-	tmp2 = create_room_on_path(graph[neighbor->next_room_index]);
+	tmp2 = create_room_on_path(&graph[neighbor->next_room_index]);
 	tmp2->next_room = tmp1;
 	*path = tmp2;
 }
