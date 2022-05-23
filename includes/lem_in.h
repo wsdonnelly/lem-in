@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/20 13:13:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:17:28 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_node
 
 typedef struct s_path
 {
-	struct s_room	room;
+	struct s_room	*room;
 	struct s_path	*next_room;
 }				t_path;
 
@@ -163,10 +163,10 @@ void	solve(t_data data, t_room *graph, int argc);
 void	find_shortest_path(t_data *data, t_room *graph);
 void	find_fewest_moves(t_data *data, t_room *graph);
 //path
-void	add_room_to_path(t_room room, t_path **path);
+void	add_room_to_path(t_room *room, t_path **path);
 void	add_shortest_path_to_all_paths(t_paths **all_paths, \
 t_path *shortest_path);
-t_path	*create_room_on_path(t_room room);
+t_path	*create_room_on_path(t_room *room);
 void	build_shortest_path(t_path **path, t_room *graph);
 void	copy_all_paths_to_solution(t_paths **solution_paths, \
 t_paths *all_paths);

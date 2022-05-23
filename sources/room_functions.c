@@ -6,25 +6,25 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/05 15:11:58 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:13:35 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_path	*create_room_on_path(t_room room)
+t_path	*create_room_on_path(t_room *room)
 {
 	t_path	*path;
 
 	path = (t_path *)malloc(sizeof(t_path));
 	if (!path)
 		return (NULL);
-	path->room = room;
+	path->room = *room;
 	path->next_room = NULL;
 	return (path);
 }
 
-void	add_room_to_path(t_room room, t_path **path)
+void	add_room_to_path(t_room *room, t_path **path)
 {
 	t_path	*tmp;
 
