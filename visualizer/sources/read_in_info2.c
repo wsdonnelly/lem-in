@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:43:24 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 15:10:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:26:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_first_line(t_info *info, char **line)
 {
-	if (get_next_line(0, line))
+	if (get_next_line(0, line) > 0)
 	{
 		if (!ft_strcmp(*line, "no valid path found"))
 		{

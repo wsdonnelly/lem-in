@@ -6,32 +6,47 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:17:30 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 12:24:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:02:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-* activate a flag siginfying the "start" or "end" has been found
-* if the next line is valid set as "end" or "start" and deactivte flag
+* create and init graph array
 */
 
-void	get_start_end(t_data *data, char *line)
+static t_room	*malloc_graph(t_data *data)
 {
-	if (data->start_index == -1 || data->end_index == -1)
+	int		size;
+	int		i;
+	t_room	*temp;
+
+	size = (data->num_rooms - 2) * 2 + 2;
+	data->size = size;
+	temp = (t_room *)malloc(sizeof(t_room) * size);
+	if (!temp)
 		exit_error(data, "ERROR");
-	if (!ft_strcmp("##start", line))
+	i = 0;
+	while (i < size)
 	{
-		data->start_index = -1;
-		store_data(data, line);
+		temp[i].name = NULL;
+		temp[i].neighbors = NULL;
+		i++;
 	}
-	else if (!ft_strcmp("##end", line))
-	{
-		data->end_index = -1;
-		store_data(data, line);
-	}
+	return (temp);
 }
+
+/*
+* check that graph is only malloc'd once
+*/
+
+static void	make_graph(int *flag, t_data *data, t_room **graph)
+{
+	*graph = malloc_graph(data);
+	*flag = TRUE;
+}
+
 
 /*
 * check links for errors
@@ -42,7 +57,10 @@ void	check_links(t_parse *parse, t_data *data, t_room **graph)
 	parse->room_check = TRUE;
 	if (data->start_index == -1 || data->end_index == -1 \
 	|| !data->end || !data->start)
+	{
+		free(parse->line);
 		exit_error(data, "ERROR");
+	}
 	if (!parse->flag)
 		make_graph(&parse->flag, data, graph);
 	add_to_graph(data, parse->line);

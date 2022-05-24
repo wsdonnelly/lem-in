@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 12:33:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:24:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	print_comments(t_data *data)
 void	print_data(t_data *data)
 {
 	t_line	*temp;
-	t_line	*cpy;
+	//t_line	*cpy;
 
 	temp = data->store_input_head;
 	while (temp)
 	{
 		ft_putendl(temp->line);
-		cpy = temp;
+		//cpy = temp;
 		temp = temp->next;
-		free(cpy->line);
-		free(cpy);
+		//free(cpy->line);
+		//free(cpy);
 	}
 }
 

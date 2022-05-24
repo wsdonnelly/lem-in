@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/11 11:49:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:44:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	read_in_info(t_info *info, t_room **room_arr)
 	get_first_line(info, &parse.line);
 	while (get_next_line(0, &parse.line) > 0)
 	{
+		if (!ft_strcmp(parse.line, "Solution Paths"))
+			exit(0);
 		if (parse_input(info, room_arr, &parse))
 			continue ;
 		free (parse.line);

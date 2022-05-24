@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 12:24:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:26:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,6 @@ static int	names_in_list(t_data *data, char *name1, char *name2)
 		temp = temp->next;
 	}
 	return (0);
-}
-
-/*
-* create and init graph array
-*/
-
-static t_room	*malloc_graph(t_data *data)
-{
-	int		size;
-	int		i;
-	t_room	*temp;
-
-	size = (data->num_rooms - 2) * 2 + 2;
-	data->size = size;
-	temp = (t_room *)malloc(sizeof(t_room) * size);
-	if (!temp)
-		exit_error(data, "ERROR");
-	i = 0;
-	while (i < size)
-	{
-		temp[i].name = NULL;
-		temp[i].neighbors = NULL;
-		i++;
-	}
-	return (temp);
-}
-
-/*
-* check that graph is only malloc'd once
-*/
-
-void	make_graph(int *flag, t_data *data, t_room **graph)
-{
-	*graph = malloc_graph(data);
-	*flag = TRUE;
 }
 
 /* 

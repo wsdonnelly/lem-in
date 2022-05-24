@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 12:48:54 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:24:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ void	free_name_list(t_node *head)
 	}
 }
 
+void free_store_data(t_line *store_input_head)
+{
+	t_line *temp;
+	t_line *cpy;
+
+	temp = store_input_head;
+	while (temp)
+	{
+		cpy = temp;
+		free(cpy->line);
+		free(cpy);
+		temp = temp->next;
+	}
+}
+
 void	free_data(t_data *data)
 {
 	if (data->start)
@@ -49,6 +64,8 @@ void	free_data(t_data *data)
 		free(data->end);
 	if (data->name_list)
 		free_name_list(data->name_list);
+	if (data->store_input_head)
+		free_store_data(data->store_input_head);
 }
 
 int	exit_error(t_data *data, char *message)

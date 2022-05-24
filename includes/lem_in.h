@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 12:28:06 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:22:23 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,10 @@ typedef struct s_parse
 
 //parser
 void	read_map(t_data *data, t_room **graph);
-void	get_start_end(t_data *data, char *line);
+//void	get_start_end(t_data *data, char *line);
 void	check_links(t_parse *parse, t_data *data, t_room **graph);
 void	check_rooms(t_data *data, char *line);
 //graph creation
-void	make_graph(int *flag, t_data *data, t_room **graph);
 void	add_to_graph(t_data *data, char *line);
 void	set_rooms(char **room, t_data *data);
 void	both_start_end(char *start_room, char *end_room, t_data *data);
