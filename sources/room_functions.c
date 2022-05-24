@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 12:29:23 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:24:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,15 @@ t_path	*create_room_on_path(t_room *room)
 	return (path);
 }
 
-//make into queue
-/*
-void	add_room_to_path(t_room *room, t_path **path)
-{
-	if (*path)
-	{
-		*path = create_room_on_path(room);
-		((*path)->tail)->next_room = *path;
-		(*path)->tail = *path;
-	}
-	else
-	{
-		*path = create_room_on_path(room);
-		(*path)->head = *path;
-		(*path)->tail = *path;
-	}
-}
-*/
-
 void	add_room_to_path(t_room *room, t_path **path)
 {
 	t_path	*tmp;
 
 	if (!*path)
-	{
 		*path = create_room_on_path(room);
-	}
 	else
 	{
 		tmp = *path;
-
-		
 		while (tmp->next_room)
 		{
 			tmp = tmp->next_room;
@@ -63,4 +40,3 @@ void	add_room_to_path(t_room *room, t_path **path)
 		tmp->next_room = create_room_on_path(room);
 	}
 }
-

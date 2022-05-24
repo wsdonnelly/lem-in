@@ -6,15 +6,15 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/05/23 10:29:53 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/05/24 12:42:31 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME		= lem-in
 CC			= gcc
-#CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
-CFLAGS		= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror 
+#CFLAGS		= -Wall -Wextra -Werror -O3 -g
 #EXTRA_FLAGS = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits -O3 -g -fsanitize=address
 SRC_FILES	= main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c hash_map.c \
 linked_list.c check_rooms.c solve.c find_shortest_path.c find_fewest_moves.c free_functions.c \

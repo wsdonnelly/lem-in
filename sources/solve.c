@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 10:27:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:25:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 ** If a valid solution was found, the solution is printed to the standard
 ** output.
 */
+
 void	solve(t_data data, t_room *graph, int argc)
 {
 	while (data.augmented_path)
@@ -31,7 +32,6 @@ void	solve(t_data data, t_room *graph, int argc)
 			find_fewest_moves(&data, graph);
 			data.num_paths++;
 		}
-		
 	}
 	if (data.num_paths)
 	{
@@ -47,5 +47,4 @@ void	solve(t_data data, t_room *graph, int argc)
 	}
 	else
 		ft_printf("no valid path found\n");
-	
 }

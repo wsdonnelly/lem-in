@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 10:30:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:45:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_data(t_data *data)
 	data->name_list = NULL;
 	data->augmented_path = 1;
 	data->best_solution = 0;
-	data->required_moves = 0; 
+	data->required_moves = 0;
 	data->num_paths = 0;
 	data->all_paths = NULL;
 	data->solution_paths = NULL;

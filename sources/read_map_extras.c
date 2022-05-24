@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:17:30 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/20 14:46:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:24:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	get_start_end(t_data *data, char *line)
 		data->end_index = -1;
 		store_data(data, line);
 	}
-	
 }
 
 /*

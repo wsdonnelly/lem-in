@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/23 12:38:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:28:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ typedef struct s_path
 {
 	struct s_room	*room;
 	struct s_path	*next_room;
-	//struct s_path	*tail;
-	//struct s_path 	*head;
 }				t_path;
 
 typedef struct s_paths
@@ -113,7 +111,6 @@ typedef struct s_ant
 	char			*room_name;
 	struct s_ant	*next_ant;
 }				t_ant;
-
 
 typedef struct s_print
 {

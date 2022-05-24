@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 12:03:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 12:24:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	change_capacity(t_path *path, t_room *graph)
 	t_edge	*neighbor;
 
 	neighbor = path->room->neighbors;
-	while (ft_strcmp(path->room->previous, graph[neighbor->next_room_index].name)
+	while (ft_strcmp(path->room->previous, \
+	graph[neighbor->next_room_index].name)
 		&& neighbor)
 		neighbor = neighbor->next;
 	if (neighbor->capacity)
