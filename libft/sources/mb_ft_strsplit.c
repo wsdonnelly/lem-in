@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 09:53:10 by manuelbeele       #+#    #+#             */
-/*   Updated: 2021/11/23 12:30:14 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/25 20:42:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

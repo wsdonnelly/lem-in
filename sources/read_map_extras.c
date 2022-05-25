@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:17:30 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 15:02:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/25 20:53:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	make_graph(int *flag, t_data *data, t_room **graph)
 	*graph = malloc_graph(data);
 	*flag = TRUE;
 }
-
 
 /*
 * check links for errors

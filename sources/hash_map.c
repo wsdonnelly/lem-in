@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/20 13:24:27 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/25 20:46:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static int	hasher(char *name, int num_rooms)
 int	hash_map(char *name, int num_rooms, t_room **graph)
 {
 	int	index;
-	int	i;
 
-	i = 0;
 	index = hasher(name, num_rooms);
 	while ((*graph)[index].name != NULL)
 	{

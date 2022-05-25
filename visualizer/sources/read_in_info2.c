@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:43:24 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 15:26:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:10:30 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	get_comment(t_info *info, char *line)
 	char	**list;
 
 	if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
+	{
+		free(line);
 		return ;
+	}
 	list = ft_strsplit(line, ' ');
 	if (!ft_strcmp(list[0], "#num_rooms"))
 		info->num_rooms = ft_atoi(list[1]);

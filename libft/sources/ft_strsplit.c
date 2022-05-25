@@ -3,65 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 09:53:10 by manuelbeele       #+#    #+#             */
-/*   Updated: 2021/11/23 12:30:14 by manuelbeele      ###   ########.fr       */
+/*   Created: 2021/11/05 10:16:58 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/05/25 20:42:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**ft_fillarray(char const *s, char c, char **array, \
-	unsigned int count)
+static char	*ft_dstrtrim(char **p, char d)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	start;
+	char				*new;
+	char				*temp;
+	unsigned int		start;
+	unsigned int		end;
+	unsigned int		i;
 
-	j = 0;
+	start = 0;
+	while (((*p)[start] == d && (*p)[start] != '\0'))
+		start++;
+	end = start;
+	while ((*p)[end] != d && (*p)[end] != '\0')
+		end++;
+	new = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (new == NULL)
+		return (NULL);
 	i = 0;
-	while (j < count)
+	while (i < (end - start))
 	{
-		if (i == 0 && s[i] != c)
-			start = 0;
-		else
-		{
-			while (s[i] == c)
-				i++;
-			start = i;
-		}
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		array[j] = ft_strsub(s, start, (size_t)(i - start));
-		j++;
+		new[i] = (*p)[i + start];
+		i++;
 	}
-	return (array);
+	new[i] = '\0';
+	temp = &((*p)[end]);
+	*p = temp;
+	return (new);
 }
 
 char	**ft_strsplit(char const *s, char c)
 {
-	char			**array;
-	unsigned int	i;
-	unsigned int	count;
+	char				**str_arr;
+	char				*p;
+	unsigned int		wc;
+	unsigned int		i;
 
 	if (!s)
 		return (NULL);
+	p = (char *)s;
+	wc = ft_word_count(s, c);
+	str_arr = (char **)malloc(sizeof(char *) * (wc + 1));
+	if (str_arr == NULL)
+		return (NULL);
 	i = 0;
-	count = 1;
-	if (s[i] != c && s[i] != '\0')
-		count++;
-	while (s[i] != '\0' && s[i + 1] != '\0')
+	while (i < wc)
 	{
-		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
-			count++;
+		str_arr[i] = ft_dstrtrim(&p, c);
 		i++;
 	}
-	array = (char **)malloc(sizeof(char *) * count);
-	if (!array)
-		return (NULL);
-	if (count > 1)
-		array = ft_fillarray(s, c, array, count);
-	array[count - 1] = NULL;
-	return (array);
+	str_arr[i] = NULL;
+	return (str_arr);
 }
