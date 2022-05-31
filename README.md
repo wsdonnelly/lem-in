@@ -5,6 +5,7 @@ NORMINETTE:
 ./norm.sh
 
 VERBOSE MODE:
+./lem-in -v < <map_file>
 ./lem-in -v < maps/other_maps/108rooms.map
 
 VISUALZER:
