@@ -1,1 +1,0 @@
- maps/./generator --big-superposition > big.map && time ./lem-in < big.map
