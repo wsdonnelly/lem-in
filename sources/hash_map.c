@@ -6,16 +6,16 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/25 20:46:27 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:54:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-* slightly unnecessary hasher function
-* the lookup portion is used in the visualizer
-* opted to also use a hasher to input the rooms due to their non-linearity
+* Hash map functions
+* The "looup" feature is used extensivly in the visualizer and here
+* is built in the check if a room has been added already
 */
 
 static int	hasher(char *name, int num_rooms)

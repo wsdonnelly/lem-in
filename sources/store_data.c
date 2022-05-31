@@ -6,11 +6,16 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/25 20:52:27 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:50:48 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+** Group of functions to store successfully read input lines in a queue
+** And print (and free) them at program completion.
+*/
 
 void	print_comments(t_data *data)
 {
