@@ -6,14 +6,14 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/10 12:00:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:03:36 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-* collection of funtions to create the duplicte rooms (eg. 1in 1out)
+* Collection of funtions to create the duplicte rooms (eg. 1in 1out)
 * or single rooms for start or end
 * and all the edge connections between these rooms
 */

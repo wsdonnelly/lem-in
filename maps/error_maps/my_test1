@@ -13,8 +13,7 @@ start-a
 start-d
 a-d
 a-c
-a-b
-b-c
-b-sink
+a-c
+a-c
 d-c
-c-sink
+c-d

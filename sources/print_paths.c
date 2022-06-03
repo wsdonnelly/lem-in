@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 10:27:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:14:58 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	get_room_name(t_data *data, t_print *print, char *room_name)
 ** room-by-room. Also the number of required moves in the optimal solution is
 ** printed to the standard output.
 */
+
 void	print_paths(t_data *data)
 {
 	t_print	print;

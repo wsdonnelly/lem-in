@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:35:45 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/11 13:57:47 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:12:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("usage: ./a.out <num_rooms>\n");
+		printf("usage: ./map_gen <num_rooms>\n");
 		return (0);
 	}
 	info.num_rooms = atoi(av[1]);
 	srand(time(0));
 	info.end = rand() % info.num_rooms;
-	info.fp = fopen("rando_map", "w+");
+	info.fp = fopen("rando.map", "w+");
 	fprintf(info.fp, "%d\n", rand() % 100 + 1);
 	fprintf(info.fp, "##start\n");
 	set_rooms(&info);

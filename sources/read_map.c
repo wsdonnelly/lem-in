@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/25 20:34:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:15:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	get_start_end(t_data *data, char *line)
 }
 
 /*
- * read input data line by line and check for errors
- */
+* read input data line by line and check for errors
+*/
 
 static void	parse_data(t_data *data, t_room **graph)
 {

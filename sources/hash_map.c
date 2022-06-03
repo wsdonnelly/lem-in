@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/31 13:54:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:14:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 * Hash map functions
-* The "looup" feature is used extensivly in the visualizer and here
+* The "lookup" feature is used extensivly in the visualizer and here
 * is built in the check if a room has been added already
 */
 

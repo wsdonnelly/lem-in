@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/06/02 21:22:51 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/06/03 12:30:23 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= lem-in
 CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -g -O3
-#EXTRA_FLAGS = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits -O3 -g -fsanitize=address
+#EXTRA_FLAGS = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits 
 SRC_FILES	= main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c hash_map.c \
 linked_list.c check_rooms.c solve.c find_shortest_path.c find_fewest_moves.c free_functions.c \
 room_functions.c path_functions.c map_paths.c print_solution.c print_paths.c print_line.c store_data.c 
@@ -23,7 +23,6 @@ SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS_DIR	= ./objects/
 OBJS		= $(addprefix $(OBJS_DIR), $(SRC_FILES:.c=.o))
 LIB			= -L libft -lft
-#INCLUDES	= -I includes -I libft/includes
 INCLUDES	= -I includes -I libft/includes
 
 GREEN	= "\x1b[32m"

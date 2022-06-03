@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/24 12:24:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:13:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int	get_required_moves(int num_ants, t_paths *paths)
 ** number of moves is lower than the current best solution, the caluclated
 ** number of moves is set as the new solution.
 */
+
 void	find_fewest_moves(t_data *data, t_room *graph)
 {
 	data->shortest_path = create_room_on_path(&graph[data->end_index]);
