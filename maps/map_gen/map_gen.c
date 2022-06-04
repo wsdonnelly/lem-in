@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:35:45 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/06/03 12:12:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:41:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@ static void	set_rooms(t_info *info)
 {
 	int	i;
 
-	i = 0;
+	fprintf(info->fp, "%d %d %d\n", 0, 0, 0);
+	i = 1;
 	while (i < info->num_rooms)
 	{
 		if (i == info->end)
+		{
 			fprintf(info->fp, "##end\n");
+			fprintf(info->fp, "%d %d %d\n", i, info->num_rooms, info->num_rooms);
+			i++;
+			continue ;
+		}
 		fprintf(info->fp, "%d %d %d\n", i, \
 		rand() % info->num_rooms, rand() % info->num_rooms);
 		i++;
