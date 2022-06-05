@@ -1,5 +1,5 @@
 COMPILE (ignore deprecation warnings for minilibx)
-make && make -C visualizer
+make
 
 NORMINETTE:
 ./norm.sh
