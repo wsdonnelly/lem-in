@@ -1,4 +1,4 @@
-COMPILE (ignore deprecation warnings for minilibx)
+COMPILE:
 make
 
 NORMINETTE:
