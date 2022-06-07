@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/06/07 15:16:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/07 16:12:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
+
 static void	finish_breadth_search(t_data *data, t_room *graph)
 {
 	data->augmented_path = 1;
@@ -60,15 +60,10 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	data->shortest_path = NULL;
 	data->augmented_path = 0;
 	add_room_to_path(&graph[data->start_index], &data->queue);
-	printf("start index: %d\n", data->start_index);
 	add_room_to_path(&graph[data->start_index], &data->visited);
-	
 	while (data->queue && !data->augmented_path)
 	{
-		
 		data->neighbor = data->queue->room->neighbors;
-
-		//printf("HERE %d",data->queue->room->neighbors->next_room_index );
 		while (data->neighbor && !data->augmented_path)
 		{
 			if (data->neighbor->capacity

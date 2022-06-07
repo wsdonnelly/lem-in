@@ -6,13 +6,13 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 10:23:27 by wdonnell          #+#    #+#              #
-#    Updated: 2022/06/04 15:12:55 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/06/07 16:08:08 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -Wall -O3
 #FLAGS = -Wall -O3
 SRCS= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 ft_isdigit.c ft_isprint.c ft_itoa.c ft_memalloc.c ft_memccpy.c \
