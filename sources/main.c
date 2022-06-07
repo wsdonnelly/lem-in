@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/24 15:38:17 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:15:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+#include <stdio.h>
 static void	init_data(t_data *data)
 {
 	data->num_ants = -1;
@@ -46,6 +46,23 @@ int	main(int argc, char **argv)
 	data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
+	
+	int i = 0;
+	t_edge *temp;
+	while (i < (data.num_rooms - 2) * 2 + 2)
+	{
+		printf("room[%d] %s ", i, graph[i].name);
+		temp = graph[i].neighbors;
+
+		while (temp)
+		{
+			printf("%s ", graph[temp->next_room_index].name);
+			temp = temp->next;
+		}
+		printf("\n");
+		i++;
+	}
+	
 	if (!graph)
 		exit_error(&data, "ERROR");
 	graph[data.start_index].previous = NULL;

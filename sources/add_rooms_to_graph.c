@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/31 14:03:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:36:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+#include <stdio.h>
 /*
 * Collection of funtions to create the duplicte rooms (eg. 1in 1out)
 * or single rooms for start or end
@@ -73,6 +73,8 @@ t_data *data)
 
 	index_start = hash_map(start_room, data->size, data->graph);
 	index_end = hash_map(end_room, data->size, data->graph);
+	data->end_index = index_end;
+	data->start_index = index_start;
 	add_edges(data, index_start, index_end);
 }
 
