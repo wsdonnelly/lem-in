@@ -6,11 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/06/07 16:13:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/08 22:17:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <stdio.h>
 
 static void	init_data(t_data *data)
 {
@@ -46,7 +47,7 @@ int	main(int argc, char **argv)
 	data.graph = &graph;
 	init_data(&data);
 	read_map(&data, &graph);
-	if (!graph)
+	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
 	graph[data.start_index].previous = NULL;
 	solve(data, graph, argc);
