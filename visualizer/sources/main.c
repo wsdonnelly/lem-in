@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:30:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:59:56 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,72 +20,41 @@ void	init_info(t_info *info)
 	info->end = NULL;
 }
 
-void init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	data->zoom = 5;
+	data->x_zoom = 1;
+	data->y_zoom = 1;
+	data->x_offset = 10;
+	data->y_offset = 10;
+	data->color = 0x00FFFFFF;
+	data->alpha = 0;
+	data->beta = 0;
+	data->gamma = 0;
+	data->room_arr = NULL;
 }
 
-int	main()
+int	main(void)
 {
-	t_data data;
+	t_data	data;
 	t_info	info;
-	t_room	*room_arr = NULL;
+	t_room	*room_arr;
+	int		idx;
 
-	
+	srand(time(0));
 	init_info(&info);
 	init_data(&data);
-	
+	data.info = &info;
 	read_in_info(&info, &room_arr);
 	data.room_arr = room_arr;
-	data.info = &info;
+	idx = lookup(info.start, info.num_rooms, &room_arr);
+	room_arr[idx].in_path = 0;
+	idx = lookup(info.end, info.num_rooms, &room_arr);
+	room_arr[idx].in_path = 0;
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 1920, 1080, "visualizer");
-	/*
-	int i = 0;
-	while (i < info.num_rooms)
-	{
-		printf("arr[%d].name: %s\n", i, room_arr[i].name);
-		printf("arr[%d].x: %d\n", i, room_arr[i].x);
-		printf("arr[%d].y: %d\n", i, room_arr[i].y);
-		i++;
-	}
-	*/
+	data.win = mlx_new_window(data.mlx, 1920, 1080, " lem-in visualizer");
 	draw_graph(&data);
-	mlx_hook(data.win, 3, 0, controls, &data);
-	/*
-	printf("num ants: %d\n", info.num_ants);
-	printf("num rooms: %d\n", info.num_rooms);
-	printf("start room: %s\n", info.start);
-	printf("end room: %s\n", info.end);
-	*/
-	
-	int i = 0;
-	t_link *temp;
-	while (i < info.num_rooms)
-	{
-		printf("arr[%d].name: %s\n", i, room_arr[i].name);
-		//printf("arr[%d].x: %d\n", i, room_arr[i].x);
-		//printf("arr[%d].y: %d\n", i, room_arr[i].y);
-		temp = room_arr[i].link;
-		while (temp)
-		{
-			printf("link name : %s\n", room_arr[temp->link].name);
-			temp = temp->next;
-		}
-		printf("\n");
-		i++;
-	}
-	
-	
-	
-	
+	mlx_hook(data.win, 2, 0, controls, &data);
 	mlx_loop(data.mlx);
-
-	
-
-	//free_graph();
-
-
 	return (0);
 }
-

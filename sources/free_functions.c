@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/19 22:51:12 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/05 15:31:48 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 void	free_path(t_path **path)
 {
@@ -39,4 +39,26 @@ void	free_paths(t_paths **paths)
 		tmp1 = tmp1->next_path;
 		free(tmp2);
 	}
+}
+
+void	free_edge_list(t_edge *head)
+{
+	t_edge	*temp;
+
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		free (temp);
+	}
+}
+
+void	free_str_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		free (arr[i++]);
+	free (arr);
 }

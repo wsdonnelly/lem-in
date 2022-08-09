@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   room_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:55:36 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/24 12:24:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-t_path	*create_room_on_path(t_room room)
+t_path	*create_room_on_path(t_room *room)
 {
 	t_path	*path;
 
@@ -24,7 +24,7 @@ t_path	*create_room_on_path(t_room room)
 	return (path);
 }
 
-void	add_room_to_path(t_room room, t_path **path)
+void	add_room_to_path(t_room *room, t_path **path)
 {
 	t_path	*tmp;
 
@@ -34,7 +34,9 @@ void	add_room_to_path(t_room room, t_path **path)
 	{
 		tmp = *path;
 		while (tmp->next_room)
+		{
 			tmp = tmp->next_room;
+		}
 		tmp->next_room = create_room_on_path(room);
 	}
 }

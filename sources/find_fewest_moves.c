@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   find_fewest_moves.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:40:18 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/06/03 12:13:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	change_capacity(t_path *path, t_room *graph)
 {
 	char	*current;
 	t_edge	*neighbor;
 
-	neighbor = path->room.neighbors;
-	while (ft_strcmp(path->room.previous, graph[neighbor->next_room_index].name)
+	neighbor = path->room->neighbors;
+	while (ft_strcmp(path->room->previous, \
+	graph[neighbor->next_room_index].name)
 		&& neighbor)
 		neighbor = neighbor->next;
 	if (neighbor->capacity)
@@ -26,7 +27,7 @@ static void	change_capacity(t_path *path, t_room *graph)
 	else
 		neighbor->capacity = 1;
 	neighbor = graph[neighbor->next_room_index].neighbors;
-	current = path->room.name;
+	current = path->room->name;
 	while (ft_strcmp(current, graph[neighbor->next_room_index].name)
 		&& neighbor)
 		neighbor = neighbor->next;
@@ -36,7 +37,7 @@ static void	change_capacity(t_path *path, t_room *graph)
 		neighbor->capacity = 1;
 }
 
-static int	avg_path_len(t_paths *paths, int *mod)
+static int	get_path_len(t_paths *paths)
 {
 	int		num_paths;
 	int		total_len;
@@ -56,31 +57,35 @@ static int	avg_path_len(t_paths *paths, int *mod)
 		paths = paths->next_path;
 	}
 	total_len /= 2;
-	*mod = total_len % num_paths;
-	return (total_len / num_paths);
+	return (total_len - num_paths);
 }
 
-static int	get_required_moves(t_data data, t_paths *paths)
+static int	get_required_moves(int num_ants, t_paths *paths)
 {
 	int			required_moves;
 	static int	num_paths;
-	int			avg_path;
-	int			mod1;
-	int			mod2;
+	int			path_len;
 
 	num_paths++;
-	avg_path = avg_path_len(paths, &mod1);
-	required_moves = data.num_ants / num_paths + avg_path + mod1;
-	mod2 = data.num_ants % num_paths;
-	if ((mod1 + mod2) % num_paths == 0)
-		required_moves--;
+	path_len = get_path_len(paths);
+	required_moves = 0;
+	while (num_ants > num_paths * required_moves - path_len)
+		required_moves++;
 	return (required_moves);
 }
 
+/*
+** The latest shortest path is added to a list of all identified paths and
+** the capacities along this path are set to 0. The moves to get all ants
+** from start to end are calculated (assuming all paths are used). If the
+** number of moves is lower than the current best solution, the caluclated
+** number of moves is set as the new solution.
+*/
+
 void	find_fewest_moves(t_data *data, t_room *graph)
 {
-	data->shortest_path = create_room_on_path(graph[data->end_index]);
-	while (data->shortest_path->room.previous)
+	data->shortest_path = create_room_on_path(&graph[data->end_index]);
+	while (data->shortest_path->room->previous)
 	{
 		change_capacity(data->shortest_path, graph);
 		build_shortest_path(&data->shortest_path, graph);
@@ -88,7 +93,7 @@ void	find_fewest_moves(t_data *data, t_room *graph)
 	if (data->all_paths)
 		map_paths(data->all_paths, data->shortest_path);
 	add_shortest_path_to_all_paths(&data->all_paths, data->shortest_path);
-	data->required_moves = get_required_moves(*data, data->all_paths);
+	data->required_moves = get_required_moves(data->num_ants, data->all_paths);
 	if (!data->best_solution || data->required_moves < data->best_solution)
 	{
 		data->best_solution = data->required_moves;

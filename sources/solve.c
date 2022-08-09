@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/21 11:20:51 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/06/08 14:47:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
+
+/*
+** The functions searches for the shortest path from start to end until no more
+** valid paths are found. After each iteration, it is checked whether the
+** current combination of paths requires less moves to move the ants from start
+** to end than the current best solution.
+** If a valid solution was found, the solution is printed to the standard
+** output.
+*/
 
 void	solve(t_data data, t_room *graph, int argc)
 {
@@ -25,12 +34,16 @@ void	solve(t_data data, t_room *graph, int argc)
 	}
 	if (data.num_paths)
 	{
-		print_solution(data);
+		ft_printf("%d\n", data.num_ants);
+		print_comments(&data);
+		print_data(&data);
+		ft_putchar('\n');
+		print_solution(&data);
 		if (argc == 2)
-			print_paths(data);
+			print_paths(&data);
 		free_paths(&data.solution_paths);
 		free_paths(&data.all_paths);
 	}
 	else
-		printf("no valid path found\n"); // change to ft_printf     
+		ft_printf("no valid path found\n");
 }

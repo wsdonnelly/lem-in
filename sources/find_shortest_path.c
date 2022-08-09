@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   find_shortest_path.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:25:05 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/06/07 16:12:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 static void	finish_breadth_search(t_data *data, t_room *graph)
 {
 	data->augmented_path = 1;
-	graph[data->neighbor->next_room_index].previous = data->queue->room.name;
+	graph[data->neighbor->next_room_index].previous = data->queue->room->name;
 }
 
 static int	has_been_visited(t_edge *neighbor, t_path *visited, t_room *graph)
@@ -25,7 +25,7 @@ static int	has_been_visited(t_edge *neighbor, t_path *visited, t_room *graph)
 	tmp = visited;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->room.name, graph[neighbor->next_room_index].name))
+		if (!ft_strcmp(tmp->room->name, graph[neighbor->next_room_index].name))
 			return (1);
 		tmp = tmp->next_room;
 	}
@@ -34,9 +34,9 @@ static int	has_been_visited(t_edge *neighbor, t_path *visited, t_room *graph)
 
 static void	add_room_to_queue_and_visited_list(t_data *data, t_room *graph)
 {
-	add_room_to_path(graph[data->neighbor->next_room_index], &data->queue);
-	add_room_to_path(graph[data->neighbor->next_room_index], &data->visited);
-	graph[data->neighbor->next_room_index].previous = data->queue->room.name;
+	add_room_to_path(&graph[data->neighbor->next_room_index], &data->queue);
+	add_room_to_path(&graph[data->neighbor->next_room_index], &data->visited);
+	graph[data->neighbor->next_room_index].previous = data->queue->room->name;
 }
 
 static void	remove_first_room_from_queue(t_path **path)
@@ -48,17 +48,22 @@ static void	remove_first_room_from_queue(t_path **path)
 	free(tmp);
 }
 
+/*
+** Breadth-first-search algorithm to identify the shortest valid path from
+** start to end.
+*/
+
 void	find_shortest_path(t_data *data, t_room *graph)
 {
 	data->queue = NULL;
 	data->visited = NULL;
 	data->shortest_path = NULL;
 	data->augmented_path = 0;
-	add_room_to_path(graph[data->start_index], &data->queue);
-	add_room_to_path(graph[data->start_index], &data->visited);
+	add_room_to_path(&graph[data->start_index], &data->queue);
+	add_room_to_path(&graph[data->start_index], &data->visited);
 	while (data->queue && !data->augmented_path)
 	{
-		data->neighbor = data->queue->room.neighbors;
+		data->neighbor = data->queue->room->neighbors;
 		while (data->neighbor && !data->augmented_path)
 		{
 			if (data->neighbor->capacity

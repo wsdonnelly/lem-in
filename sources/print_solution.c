@@ -3,102 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   print_solution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/25 10:53:58 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/06/03 12:15:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-static void	get_room_name(t_data data, t_print *print, char *room_name)
+static void	count_steps(t_paths *tmp2, int best_solution)
 {
-	if (ft_strcmp(room_name, data.end))
-	{
-		print->name_len = ft_strlen(room_name) - 2;
-		print->room_name = ft_strnew(print->name_len);
-		ft_strncpy(print->room_name, room_name, print->name_len);
-	}
-	else
-		print->room_name = ft_strdup(data.end);
-}
-
-static void	print_line(t_data data, t_print *print, char *room_name)
-{
-	print->ant_num = print->line_num * data.num_paths + print->path_num
-		- print->room_num * data.num_paths;
-	if (print->print_room % 2 == 0)
-		print->room_num++;
-	if (print->ant_num > 0 && print->ant_num <= data.num_ants)
-	{
-		if (print->start_of_line && print->print_room % 2 == 0)
-			printf(" "); //change to ft_printf   
-		if (print->print_room % 2 == 0)
-		{
-			get_room_name(data, print, room_name);
-			printf("L%d-%s", print->ant_num, print->room_name); //change to ft_printf   
-			ft_strdel(&print->room_name);
-			print->start_of_line++;
-		}
-	}
-	print->print_room++;
-}
-
-void	print_solution(t_data data)
-{
-	t_print	print;
+	int		i;
 	t_path	*tmp;
-	t_paths	*tmp2;
 
-	print.line_num = -1;
-	while (++print.line_num < data.best_solution)
-	{
-		print.start_of_line = 0;
-		print.path_num = 1;
-		tmp2 = data.solution_paths;
-		while (tmp2)
-		{
-			tmp = tmp2->path->next_room;
-			print.print_room = 0;
-			print.room_num = 0;
-			while (tmp)
-			{
-				print_line(data, &print, tmp->room.name);
-				tmp = tmp->next_room;
-			}
-			tmp2 = tmp2->next_path;
-			print.path_num++;
-		}
-		printf("\n"); //change to ft_printf    
-	}
-}
-
-void	print_paths(t_data data)
-{
-	t_print	print;
-	t_path	*tmp;
-	t_paths	*tmp2;
-
-	printf("\nSolution Paths\n"); //change to ft_printf   
-	tmp2 = data.solution_paths;
 	while (tmp2)
 	{
-		printf("%s", tmp2->path->room.name); //change to ft_printf    
-		tmp = tmp2->path->next_room;
-		print.print_room = 0;
+		i = 0;
+		tmp = tmp2->path;
 		while (tmp)
 		{
-			if (print.print_room++ % 2 == 0)
-			{
-				get_room_name(data, &print, tmp->room.name);
-				printf("-%s", print.room_name); //change to ft_printf    
-				ft_strdel(&print.room_name);
-			}
 			tmp = tmp->next_room;
+			i++;
 		}
+		tmp2->steps = best_solution - i / 2 + 1;
+		tmp2->new_ant = 0;
 		tmp2 = tmp2->next_path;
-		printf("\n"); //change to ft_printf    
 	}
-	printf("\n"); //change to ft_printf   
+}
+
+static t_ant	*create_ant(int i)
+{
+	t_ant	*ant;
+
+	ant = (t_ant *)malloc(sizeof(t_ant));
+	if (!ant)
+		return (NULL);
+	ant->num = i;
+	ant->path = NULL;
+	ant->next_ant = NULL;
+	return (ant);
+}
+
+static t_ant	*create_ant_structure(int num_ants)
+{
+	t_ant	*ant;
+	t_ant	*tmp;
+	int		i;
+
+	i = 0;
+	ant = create_ant(1);
+	tmp = ant;
+	while (++i < num_ants)
+	{
+		tmp->next_ant = create_ant(i + 1);
+		tmp = tmp->next_ant;
+	}
+	return (ant);
+}
+
+/*
+** Print the solution line-by-line. All ants which are neither in start nor
+** in end are displayed. A ant structure is used to keep track of the room
+** the ant is currently in and to move the ant one room forward in each
+** iteration until the end room is reached.
+*/
+
+void	print_solution(t_data *data)
+{
+	t_ant	*ant;
+	t_ant	*tmp;
+	int		i;
+
+	count_steps(data->solution_paths, data->best_solution);
+	ant = create_ant_structure(data->num_ants);
+	i = -1;
+	while (++i < data->best_solution)
+		print_line(data, ant, i);
+	while (ant)
+	{
+		tmp = ant;
+		ant = ant->next_ant;
+		free(tmp);
+	}
 }

@@ -6,98 +6,91 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/17 16:21:54 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:15:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void set_start_end(int *start, int *end, t_data *data, char *line)
+static void	init_parse(t_parse *parse)
 {
-	char **all;
+	parse->room_check = FALSE;
+	parse->flag = FALSE;
+}
 
-	if (*start || *end)
+/*
+* activate a flag siginfying the "start" or "end" has been found
+* if the next line is valid set as "end" or "start" and deactivte flag
+*/
+
+static void	get_start_end(t_data *data, char *line)
+{
+	if (data->start_index == -1 || data->end_index == -1)
+		exit_error(data, "ERROR");
+	if (!ft_strcmp("##start", line))
 	{
-		all = ft_strsplit(line, ' ');
-		if (*start)
+		data->start_index = -1;
+		store_data(data, line);
+	}
+	else if (!ft_strcmp("##end", line))
+	{
+		data->end_index = -1;
+		store_data(data, line);
+	}
+	else
+		free(line);
+}
+
+/*
+* read input data line by line and check for errors
+*/
+
+static void	parse_data(t_data *data, t_room **graph)
+{
+	t_parse	parse;
+
+	init_parse(&parse);
+	while (get_next_line(0, &parse.line) > 0)
+	{
+		if (parse.line[0] == '#')
 		{
-			data->start = ft_strdup(all[0]);
-			*start = FALSE;
+			get_start_end(data, parse.line);
+			continue ;
 		}
-		else
+		if (ft_strchr(parse.line, (int) ' '))
 		{
-			data->end = ft_strdup(all[0]);
-			*end = FALSE;
+			if (parse.room_check)
+				exit_error(data, "ERROR");
+			check_rooms(data, parse.line);
+			continue ;
 		}
-		free_str_arr(all);
+		if (ft_strchr(parse.line, (int) '-'))
+		{
+			check_links(&parse, data, graph);
+			continue ;
+		}
+		free(parse.line);
+		exit_error(data, "ERROR");
 	}
 }
 
-static void	get_number_ants_rooms(t_data *data, char **line)
+static void	get_number_ants(t_data *data)
 {
-	//get number of ants //ADD ft_is_int()
-	if (get_next_line(0, line))
+	char	*line;
+
+	if (get_next_line(0, &line) > 0 && line[0] && is_valid_int(line) \
+	&& !ft_strchr(line, (int) ' '))
 	{
-		if (data->num_ants < 0 && !ft_strchr(*line, (int)' '))
-			data->num_ants = ft_atoi(*line);
-		else
-			data->num_ants = 0;
+		data->num_ants = ft_atoi(line);
+		free (line);
+		if (data->num_ants > 0)
+			return ;
 	}
-	//else
-		//return ERROR empty file
+	exit_error(data, "ERROR");
 }
 
 void	read_map(t_data *data, t_room **graph)
 {
-	char	*line;
-	int		start;
-	int		end;
-	int		flag;
-
-	flag = FALSE;
-	start = FALSE;
-	end = FALSE;
-
-	get_number_ants_rooms(data, &line);
-	free (line);
-	while (get_next_line(0, &line) > 0)
-	{
-		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
-		{
-			if (!ft_strcmp("##start", line))
-				start = TRUE;
-			else
-				end = TRUE;
-			free (line);
-			continue ;
-		}
-		if (line[0] == '#')
-		{
-			//get comment?
-			free (line);
-			continue ;
-		}
-		if (ft_strchr(line, (int)' '))//make better error checking
-		{
-			set_start_end(&start, &end, data, line);
-			data->num_rooms++;
-		}
-		if (ft_strchr(line, (int)'-'))//make better
-		{
-			if (!flag)
-			{
-				//printf("malloc graph\n");
-				*graph = malloc_graph(data);
-				flag = TRUE;
-			}
-			
-			create_graph(data, graph, line);
-			free (line);
-			continue;
-		}
-		free (line);
-	}
+	get_number_ants(data);
+	parse_data(data, graph);
 }
-
-
-

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/04/20 08:55:16 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/05/24 12:24:35 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "lem_in.h"
 
 void	build_shortest_path(t_path **path, t_room *graph)
 {
@@ -19,11 +19,12 @@ void	build_shortest_path(t_path **path, t_room *graph)
 	t_edge	*neighbor;
 
 	tmp1 = *path;
-	neighbor = tmp1->room.neighbors;
-	while (ft_strcmp(tmp1->room.previous, graph[neighbor->next_room_index].name)
+	neighbor = tmp1->room->neighbors;
+	while (ft_strcmp(tmp1->room->previous, \
+	graph[neighbor->next_room_index].name)
 		&& neighbor)
 		neighbor = neighbor->next;
-	tmp2 = create_room_on_path(graph[neighbor->next_room_index]);
+	tmp2 = create_room_on_path(&graph[neighbor->next_room_index]);
 	tmp2->next_room = tmp1;
 	*path = tmp2;
 }
@@ -35,6 +36,8 @@ static t_paths	*create_path_for_paths(t_path *path, int solution)
 	paths = (t_paths *)malloc(sizeof(t_paths));
 	if (!paths)
 		return (NULL);
+	paths->path = NULL;
+	paths->next_path = NULL;
 	if (solution)
 	{
 		while (path)

@@ -6,105 +6,92 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/04/19 11:18:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:44:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
 
-static void	get_number_ants(t_info *info, char **line)
-{
-	//get number of ants //ADD ft_is_int()
-	if (get_next_line(0, line))
-	{
-		if (info->num_ants < 0 && !ft_strchr(*line, (int)' '))
-			info->num_ants = ft_atoi(*line);
-		else
-			info->num_ants = 0;
-	}
-	//else
-		//return ERROR empty file
-}
-void	get_comment(t_info *info, char *line)
-{
-	char **list;
+/*
+* set random z coordinate here
+*/
 
-	list = ft_strsplit(line, ' ');
-	if (!ft_strcmp(list[1], "num_rooms"))
-		info->num_rooms = ft_atoi(list[2]);
-	else if (!ft_strcmp(list[1], "start"))
-		info->start = ft_strdup(list[2]);
-	else if (!ft_strcmp(list[1], "end"))
-		info->end = ft_strdup(list[2]);
-	free_str_arr(list);
-}
-
-t_room *malloc_room_arr(t_info *info)
+static t_room	*malloc_room_arr(t_info *info)
 {
-	t_room *temp;
+	t_room	*temp;
 	int		i;
+
 	temp = malloc(sizeof(t_room) * info->num_rooms);
-	//ERROR
+	if (!temp)
+		exit(0);
 	i = 0;
-	while (i < info->num_rooms)//init
+	while (i < info->num_rooms)
 	{
 		temp[i].name = NULL;
 		temp[i].link = NULL;
+		temp[i].z = rand() % 23;
+		temp[i].in_path = -1;
 		i++;
 	}
 	return (temp);
 }
 
+static void	init_parse(t_parse *parse)
+{
+	parse->flag = 0;
+	parse->flag2 = 0;
+	parse->start = FALSE;
+	parse->end = FALSE;
+}
+
+static void	make_room_arr(t_info *info, t_room **room_arr, t_parse *parse)
+{
+	if (info->end != NULL && !parse->flag)
+	{
+		*room_arr = malloc_room_arr(info);
+		parse->flag = 1;
+	}
+}
+
+static int	parse_input(t_info *info, t_room **room_arr, t_parse *parse)
+{
+	if (parse->line[0] == '#')
+	{
+		get_comment(info, parse->line);
+		return (1);
+	}
+	make_room_arr(info, room_arr, parse);
+	if (ft_strchr(parse->line, (int) ' ') && !ft_strchr(parse->line, (int) 'L'))
+	{
+		read_rooms(info, room_arr, parse->line);
+		return (1);
+	}
+	if (ft_strchr(parse->line, (int) '-') && !ft_strchr(parse->line, (int) 'L'))
+	{
+		add_links(room_arr, parse->line, info->num_rooms);
+		return (1);
+	}
+	if (ft_strchr(parse->line, (int) 'L'))
+	{
+		add_paths(info, room_arr, parse);
+		free (parse->line);
+		return (1);
+	}
+	return (0);
+}
 
 void	read_in_info(t_info *info, t_room **room_arr)
 {
-	char	*line;
-	int		start;
-	int		end;
-	int		flag = 0;
-	int max_coordinate;
-	//t_room *room_arr;
+	t_parse	parse;
 
-	start = FALSE;
-	end = FALSE;
-	max_coordinate = 0;
-	get_number_ants(info, &line);
-	free (line);
-	
-	while (get_next_line(0, &line) > 0)
+	init_parse(&parse);
+	get_first_line(info, &parse.line);
+	while (get_next_line(0, &parse.line) > 0)
 	{
-	
-		if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
-		{
-			free (line);
+		if (!ft_strcmp(parse.line, "Solution Paths"))
+			exit(0);
+		if (parse_input(info, room_arr, &parse))
 			continue ;
-		}
-		if (line[0] == '#')
-		{
-			get_comment(info, line);
-			free (line);
-			continue ;
-		}
-		if (info->end != NULL && !flag)
-		{
-			*room_arr = malloc_room_arr(info);
-			flag = 1;
-		}
-
-		if (ft_strchr(line, (int)' '))//make better error checking
-		{
-			read_rooms(info, room_arr, line, &max_coordinate);
-			free(line);
-			continue ;
-		}
-		if (ft_strchr(line, (int)'-'))//make better
-		{
-			add_links(room_arr, line, info->num_rooms);
-			free (line);
-			continue ;
-		}
-		free (line);
+		free (parse.line);
 	}
-	printf("MAx COOrdinate: %d\n", max_coordinate);
-
 }
