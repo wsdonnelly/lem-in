@@ -6,16 +6,18 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/13 20:04:03 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/08/22 18:19:13 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	change_capacity(t_path *path, t_room *graph)
+static void	change_capacity(t_path *path, t_room *graph, t_data *data)
 {
 	char	*current;
 	t_edge	*neighbor;
+	t_edge	*neighbor2;
+	int		in_or_out;
 
 	neighbor = path->room->neighbors;
 	while (ft_strcmp(path->room->previous, \
@@ -35,6 +37,51 @@ static void	change_capacity(t_path *path, t_room *graph)
 		neighbor->capacity = 0;
 	else
 		neighbor->capacity = 1;
+	
+	
+	neighbor = path->room->neighbors;
+	while (ft_strcmp(path->room->previous, \
+	graph[neighbor->next_room_index].name)
+		&& neighbor)
+		neighbor = neighbor->next;
+	if (ft_strcmp(current, data->start) && ft_strcmp(current, data->end) && ft_strcmp(graph[neighbor->next_room_index].name, data->start) && ft_strcmp(graph[neighbor->next_room_index].name, data->end))
+	{
+		if (ft_strcmp("t", current + ft_strlen(current) - 1))
+			in_or_out = 2;
+		else
+			in_or_out = 3;
+		if (ft_strncmp(current, graph[neighbor->next_room_index].name, ft_strlen(current) - in_or_out))
+		{
+			if (in_or_out == 3)
+			{
+				neighbor2 = graph[neighbor->next_room_index].neighbors;
+				while (ft_strncmp(graph[neighbor->next_room_index].name, \
+				graph[neighbor2->next_room_index].name, ft_strlen(graph[neighbor->next_room_index].name) - 2)
+					&& neighbor2)
+					neighbor2 = neighbor2->next;
+				neighbor = graph[neighbor2->next_room_index].neighbors;
+				while (ft_strncmp(current, \
+				graph[neighbor->next_room_index].name, ft_strlen(current) - 3)
+					&& neighbor)
+					neighbor = neighbor->next;
+				neighbor->capacity = 1;
+			}
+			else
+			{
+				neighbor2 = path->room->neighbors;
+				while (ft_strncmp(current, \
+				graph[neighbor2->next_room_index].name, ft_strlen(current) - 2)
+					&& neighbor2)
+					neighbor2 = neighbor2->next;
+				neighbor2 = graph[neighbor2->next_room_index].neighbors;
+				while (ft_strncmp(graph[neighbor->next_room_index].name, \
+				graph[neighbor2->next_room_index].name, ft_strlen(graph[neighbor->next_room_index].name) - 3)
+					&& neighbor2)
+					neighbor2 = neighbor2->next;
+				neighbor2->capacity = 0;
+			}
+		}
+	}
 }
 
 static int	get_path_len(t_paths *paths)
@@ -87,7 +134,7 @@ void	find_fewest_moves(t_data *data, t_room *graph)
 	data->shortest_path = create_room_on_path(&graph[data->end_index]);
 	while (data->shortest_path->room->previous)
 	{
-		change_capacity(data->shortest_path, graph);
+		change_capacity(data->shortest_path, graph, data);
 		build_shortest_path(&data->shortest_path, graph);
 	}
 	if (data->all_paths)

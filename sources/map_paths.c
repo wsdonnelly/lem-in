@@ -6,7 +6,7 @@
 /*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/13 20:15:46 by manuelbeele      ###   ########.fr       */
+/*   Updated: 2022/08/22 14:48:32 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	iterate_paths(t_paths *paths, int *switched, char **rooms, \
 	}
 }
 
-void	delete_rooms(t_path *shortest_path)
+static void	delete_rooms(t_path *shortest_path)
 {
 	t_path	*tmp;
 
@@ -51,7 +51,7 @@ void	delete_rooms(t_path *shortest_path)
 	free(tmp);
 }
 
-void	check_new_path(t_path *shortest_path)
+static void	check_new_path(t_path *shortest_path)
 {
 	t_path	*tmp;
 	int		switched;

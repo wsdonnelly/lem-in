@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/23 10:27:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/08/22 17:59:48 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	print_line(t_data *data, t_ant *ant, int i)
 	{
 		if (tmp2->steps > i)
 			tmp2->new_ant = 0;
+		else
+			tmp2->new_ant = 1;
 		tmp2 = tmp2->next_path;
 	}
 	tmp1 = ant;
