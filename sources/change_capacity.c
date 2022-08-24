@@ -2,13 +2,14 @@
 
 static void	update_nbr(char *s, t_room *graph, t_edge **nbr)
 {
-	while (ft_strcmp(s, graph[(*nbr)->next_room_index].name) && *nbr)
+	while (ft_strcmp(s, graph[(*nbr)->next_room_index].name) && (*nbr)->next)
 		*nbr = (*nbr)->next;
 }
 
 static void	update_nbr_n(char *s, t_room *graph, t_edge **nbr, int len)
 {
-	while (ft_strncmp(s, graph[(*nbr)->next_room_index].name, len) && *nbr)
+	while (ft_strncmp(s, graph[(*nbr)->next_room_index].name, len) \
+		&& (*nbr)->next)
 		*nbr = (*nbr)->next;
 }
 
