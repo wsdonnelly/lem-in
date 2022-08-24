@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/06/07 16:08:40 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/08/24 16:15:24 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -g -O3
 #EXTRA_FLAGS = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits 
 SRC_FILES	= main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c hash_map.c \
-linked_list.c check_rooms.c solve.c find_shortest_path.c find_fewest_moves.c free_functions.c \
+linked_list.c check_rooms.c solve.c find_shortest_path.c find_fewest_moves.c change_capacity.c free_functions.c \
 room_functions.c path_functions.c map_paths.c print_solution.c print_paths.c print_line.c store_data.c 
 SRCS_DIR	= ./sources/
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))

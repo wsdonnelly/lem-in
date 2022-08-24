@@ -6,36 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/06/03 12:13:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:17:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static void	change_capacity(t_path *path, t_room *graph)
-{
-	char	*current;
-	t_edge	*neighbor;
-
-	neighbor = path->room->neighbors;
-	while (ft_strcmp(path->room->previous, \
-	graph[neighbor->next_room_index].name)
-		&& neighbor)
-		neighbor = neighbor->next;
-	if (neighbor->capacity)
-		neighbor->capacity = 0;
-	else
-		neighbor->capacity = 1;
-	neighbor = graph[neighbor->next_room_index].neighbors;
-	current = path->room->name;
-	while (ft_strcmp(current, graph[neighbor->next_room_index].name)
-		&& neighbor)
-		neighbor = neighbor->next;
-	if (neighbor->capacity)
-		neighbor->capacity = 0;
-	else
-		neighbor->capacity = 1;
-}
 
 static int	get_path_len(t_paths *paths)
 {
@@ -87,7 +62,7 @@ void	find_fewest_moves(t_data *data, t_room *graph)
 	data->shortest_path = create_room_on_path(&graph[data->end_index]);
 	while (data->shortest_path->room->previous)
 	{
-		change_capacity(data->shortest_path, graph);
+		change_capacity(data->shortest_path, graph, data);
 		build_shortest_path(&data->shortest_path, graph);
 	}
 	if (data->all_paths)

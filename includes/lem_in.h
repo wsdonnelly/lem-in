@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/06/07 15:08:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:16:41 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
 void	solve(t_data data, t_room *graph, int argc);
 void	find_shortest_path(t_data *data, t_room *graph);
 void	find_fewest_moves(t_data *data, t_room *graph);
+void	change_capacity(t_path *path, t_room *graph, t_data *data);
 //path
 void	add_room_to_path(t_room *room, t_path **path);
 void	add_shortest_path_to_all_paths(t_paths **all_paths, \

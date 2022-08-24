@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_gen.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: manuelbeeler <manuelbeeler@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:35:45 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/06/04 15:41:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/08/13 20:18:25 by manuelbeele      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	set_links_large(t_info *info)
 		info->num = rand() % info->num_rooms;
 		if (info->num != i)
 			fprintf(info->fp, "%d-%d\n", i, info->num);
-			j++;
+		j++;
 		i++;
 	}
 }

@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/06/08 22:17:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:13:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
+#include <stdio.h> //remove me
 
 static void	init_data(t_data *data)
 {
@@ -50,6 +50,31 @@ int	main(int argc, char **argv)
 	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
 	graph[data.start_index].previous = NULL;
+/*
+	int i;
+	t_edge *temp;
+	
+	for (i = 0; i < data.size; i++)
+	{
+		if (!strcmp(graph[i].name, "Adz9out"))
+		{
+			printf("neighbors\n");
+			temp = graph[i].neighbors;
+			while (temp)
+			{
+				printf("%s\n", graph[temp->next_room_index].name);
+				temp = temp->next;
+			}
+			printf("reverse edges\n");
+			temp = graph[i].neighbors;
+			while (temp)
+			{
+				printf("%s\n", graph[temp->reverse_edge->next_room_index].name);
+				temp = temp->next;
+			}
+		}
+	}
+*/
 	solve(data, graph, argc);
 	free_graph(&graph, &data);
 	free_data(&data);
