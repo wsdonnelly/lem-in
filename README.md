@@ -13,8 +13,8 @@ lem-in < <map_file> | visualizer/./visualizer
 eg. ./lem-in < maps/other_maps/108rooms.map | visualizer/./visualizer
 
 TIME TRIALS:
-./generator --big > big.map && time ./lem-in < big.map
-./generator --big-superposition > big.map && time ./lem-in < big.map
+./generator --big > test.map && time ./lem-in < test.map
+./generator --big-superposition > test.map && time ./lem-in < test.map
 
 RANDOM MAP EXAMPLE (50 rooms piped to visualizer)
-maps/map_gen/./map_gen 50  && ./lem-in < rando.map | visualizer/./visualizer
+map_gen/./map_gen 50  && ./lem-in < rando.map | visualizer/./visualizer
