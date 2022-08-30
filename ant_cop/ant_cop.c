@@ -221,7 +221,7 @@ int	main()
 	free(line);
 	free(start);
 	free(end);
-	free_str_arr(arr);
+	//free_str_arr(arr);
 	free(ants_arr);
 	free_list(head);
 	return (0);
