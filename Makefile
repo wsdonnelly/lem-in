@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/08/25 09:50:46 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/09/15 16:10:18 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ EOC		= "\x1b[0m"
 
 all: $(NAME)
 	@echo $(GREEN) "Compiled" $(EOC)
+	@make -sC visualizer
+	@make -sC map_gen
+	@make -sC ant_cop
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIB)
@@ -47,10 +50,16 @@ clean:
 	rm -rf libft/objects/
 	rm -f test.map
 	rm -f rando.map
+	@make clean -sC visualizer
+	@make clean -sC map_gen
+	@make clean -sC ant_cop
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f libft/libft.a
+	@make fclean -sC visualizer
+	@make fclean -sC map_gen
+	@make fclean -sC ant_cop
 
 re: fclean all
 

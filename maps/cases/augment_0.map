@@ -1,4 +1,4 @@
-100
+10
 ##start
 s 0 0
 ##end
@@ -39,7 +39,6 @@ l-end
 m-end
 n-o
 o-end
-
 #
 #       a -- d - e
 #      /           \
@@ -51,3 +50,4 @@ o-end
 #      \ /  |             /	
 #       c - h - k - n - o 
 #
+#Here is the number of lines required: 8

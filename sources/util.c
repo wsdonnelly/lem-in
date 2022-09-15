@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/06/03 12:15:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:50:10 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int	exit_error(t_data *data, char *message)
 {
 	free_graph(data->graph, data);
 	free_data(data);
-	write(2, message, ft_strlen(message));
-	write(2, "\n", 1);
+	//write(2, message, ft_strlen(message));
+	//write(2, "\n", 1);
+	ft_printf("%s\n", message);
 	exit (EXIT_FAILURE);
 }
 
