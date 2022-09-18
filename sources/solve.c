@@ -6,11 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/30 14:37:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/18 11:15:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <stdio.h>
 
 /*
 ** The functions searches for the shortest path from start to end until no more
@@ -23,12 +24,26 @@
 
 void	solve(t_data data, t_room *graph, int argc)
 {
+	
 	while (data.augmented_path)
 	{
+		printf("HERE\n");
 		find_shortest_path(&data, graph);
 		if (data.augmented_path)
 		{
 			find_fewest_moves(&data, graph);
+
+
+			//test
+			t_path *test = data.shortest_path;
+			while (test)
+			{
+				printf("%s ", test->room->name);
+				test = test->next_room;
+			}
+			printf("\n");
+
+
 			data.num_paths++;
 		}
 	}

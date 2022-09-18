@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/06/07 15:08:23 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:50:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	hasher(char *name, int num_rooms)
 	i = 0;
 	while (name[i])
 	{
-		index += (int)name[i] * 13;
+		index += (int)name[i];
+		index *= 13;
 		i++;
 	}
 	return (index %= num_rooms);

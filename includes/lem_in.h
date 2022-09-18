@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/08/24 16:16:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:10:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_edge
 
 typedef struct s_room
 {
+	int				visited;
 	char			*name;
 	char			*previous;
 	struct s_edge	*neighbors;
@@ -44,8 +45,23 @@ typedef struct s_node
 	struct s_node	*next;
 }				t_node;
 
+typedef struct s_queue_node
+{
+	int			index;
+	//get rid of this
+	char *name;
+	struct s_queue_node	*next;
+}				t_queue_node;
+
+typedef struct s_queue
+{
+	struct s_queue_node	*head;
+	struct s_queue_node	*tail;
+}				t_queue;
+
 typedef struct s_path
 {
+	int						index;
 	struct s_room	*room;
 	struct s_path	*next_room;
 }				t_path;
