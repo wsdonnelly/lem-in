@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/19 10:52:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:26:59 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	
 	while (queue.head)
 	{
+		
 		cur_idx = dequeue(&queue);
-		//parent = ft_strdup(graph[cur_idx].name);
-		//printf("PARENT: %s\n", parent);
 		if (cur_idx == data->end_index)
 		{
 			data->augmented_path = 1;
@@ -108,8 +107,6 @@ void	find_shortest_path(t_data *data, t_room *graph)
 			{
 				graph[temp->next_room_index].visited = 1;
 				add_room_to_queue(&queue, temp->next_room_index);
-				//update previos to be index!
-				//graph[temp->next_room_index].previous = ft_strdup(parent);
 				graph[temp->next_room_index].previous_idx = cur_idx;
 				graph[temp->next_room_index].previous_edge = temp;
 			}
@@ -119,60 +116,3 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	//free_path(&data->queue);
 	//free_path(&data->visited);
 }
-
-/*
-void	find_shortest_path(t_data *data, t_room *graph)
-{
-	int i;
-	int temp;
-	init_visited(data, graph);
-	data->queue = NULL;
-	//data->visited = NULL;
-	data->shortest_path = NULL;
-	data->augmented_path = 0;
-	//rename add_room_to_queue
-	i = data->start_index;
-	add_room_to_path(&graph[i], &data->queue);
-	//add_room_to_path(&graph[data->start_index], &data->visited);
-	while (data->queue && !data->augmented_path)
-	{
-		
-		//graph[i] = graph[i].neighbors->next_room_index;
-		//data->neighbor = data->queue->room->neighbors;
-		//while (data->neighbor && !data->augmented_path)
-		while (graph[i].neighbors && !data->augmented_path)
-		{
-			printf("HERE\n");
-			//if (data->neighbor->capacity
-				if(graph[i].neighbors->capacity
-				&& graph[i].neighbors->next_room_index == data->end_index)
-				finish_breadth_search(data, graph);
-			else if (graph[i].neighbors->capacity
-				//&& !has_been_visited(data->neighbor, data->visited, graph))
-				//&& !has_been_visited(data->neighbor, graph))
-				&& !graph[graph[i].neighbors->next_room_index].visited)
-				add_room_to_queue_and_visited_list(data, graph, i);
-
-			//data->neighbor = data->neighbor->next;
-			//i = graph[i].neighbors->next_room_index;
-			temp = i;
-			graph[i].neighbors = graph[i].neighbors->next;
-			i = graph[temp].neighbors->next_room_index;
-		}
-		remove_first_room_from_queue(&data->queue);
-	}
-	free_path(&data->queue);
-	free_path(&data->visited);
-}
-*/
-/*
-	//testing
-		t_queue_node *test;
-		test = queue.tail;
-		while(test)
-		{
-			printf("%s ", test->name);
-			test = test->next;
-		}
-		printf("\n");
-	*/

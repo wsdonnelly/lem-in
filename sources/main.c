@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/17 19:46:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:25:27 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	read_map(&data, &graph);
 	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
-	graph[data.start_index].previous = NULL;
+	graph[data.start_index].previous_idx = -1;
 	solve(data, graph, argc);
 	free_graph(&graph, &data);
 	free_data(&data);

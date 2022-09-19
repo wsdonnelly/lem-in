@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/08/24 16:17:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:38:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static int	get_required_moves(int num_ants, t_paths *paths)
 void	find_fewest_moves(t_data *data, t_room *graph)
 {
 	data->shortest_path = create_room_on_path(&graph[data->end_index]);
-	while (data->shortest_path->room->previous)
+	while (data->shortest_path->room->previous_idx >= 0)
 	{
-		change_capacity(data->shortest_path, graph, data);
+		change_capacity(graph, data);
 		build_shortest_path(&data->shortest_path, graph);
 	}
 	if (data->all_paths)
