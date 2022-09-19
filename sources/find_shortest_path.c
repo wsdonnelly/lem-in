@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/18 12:09:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/19 10:52:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 
 
-static void add_room_to_queue(char *name, t_queue *queue, int index)
+static void add_room_to_queue(t_queue *queue, int index)
 {
 	t_queue_node *tmp;
 
@@ -28,7 +28,7 @@ static void add_room_to_queue(char *name, t_queue *queue, int index)
 		exit (0);
 	tmp->index = index;
 	//get rid of this!
-	tmp->name = ft_strdup(name);
+	//tmp->name = ft_strdup(name);
 	tmp->next = NULL;
 	if (!queue->tail)
 	{
@@ -78,21 +78,22 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	queue.tail = NULL;
 	int cur_idx;
 	//remove
-	char *parent;
+
 
 	init_visited(data, graph);
 	data->augmented_path = 0;
 	data->shortest_path = NULL;
 	//rename add_room_to_queue
 	cur_idx = data->start_index;
-	add_room_to_queue(graph[data->start_index].name, &queue, cur_idx);
+	add_room_to_queue(&queue, cur_idx);
 	graph[cur_idx].visited = 1;
-	graph[cur_idx].previous = NULL;
-	//remove
+	graph[cur_idx].previous_idx = -1;
+	graph[cur_idx].previous_edge = NULL;
+	
 	while (queue.head)
 	{
 		cur_idx = dequeue(&queue);
-		parent = ft_strdup(graph[cur_idx].name);
+		//parent = ft_strdup(graph[cur_idx].name);
 		//printf("PARENT: %s\n", parent);
 		if (cur_idx == data->end_index)
 		{
@@ -106,9 +107,11 @@ void	find_shortest_path(t_data *data, t_room *graph)
 			if (!graph[temp->next_room_index].visited && temp->capacity)
 			{
 				graph[temp->next_room_index].visited = 1;
-				add_room_to_queue(graph[temp->next_room_index].name, &queue, temp->next_room_index);
+				add_room_to_queue(&queue, temp->next_room_index);
 				//update previos to be index!
-				graph[temp->next_room_index].previous = ft_strdup(parent);
+				//graph[temp->next_room_index].previous = ft_strdup(parent);
+				graph[temp->next_room_index].previous_idx = cur_idx;
+				graph[temp->next_room_index].previous_edge = temp;
 			}
 			temp = temp->next;
 		}
