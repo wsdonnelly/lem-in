@@ -6,22 +6,38 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 09:17:15 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/19 13:36:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:36:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include<stdio.h>
 
+static void add_room_to_stack(int index, t_data *data)
+{
+	t_queue_node *tmp;
+
+	tmp = malloc(sizeof(t_queue_node));
+	if(!tmp)
+		exit(0);
+	tmp->index = index;
+	tmp->next = data->cur_path;
+	data->cur_path = tmp;
+	
+}
+
 void	change_capacity(t_room *graph, t_data *data)
 {
-	data->shortest_path = create_room_on_path(&graph[data->end_index]);
 	//avoid setting capacity of edge connecting end to 0;
 	int idx = graph[data->end_index].previous_idx;
 
+	data->cur_path = NULL;
+	add_room_to_stack(data->end_index, data);
+	//data->shortest_path = create_room_on_path(&graph[data->end_index]);
 	while (graph[idx].previous_idx >= 0)
 	{
-		data->shortest_path = create_room_on_path(&graph[data->end_index]);
+		add_room_to_stack(idx, data);
+		//data->shortest_path = create_room_on_path(&graph[data->end_index]);
 		graph[idx].previous_edge->capacity ^= 1;
 		graph[idx].previous_edge->reverse_edge->capacity ^= 1;
 		idx = graph[idx].previous_idx;

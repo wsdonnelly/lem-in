@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/19 11:27:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:36:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ typedef struct s_data
 	int				best_solution;
 	int				required_moves;
 	int				num_paths;
+	//test
+	struct s_queue_node *cur_path;
 	struct s_path	*queue;
 	struct s_path	*visited;
 	struct s_path	*shortest_path;

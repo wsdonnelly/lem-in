@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/19 13:38:48 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:42:26 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,19 @@ void	solve(t_data data, t_room *graph, int argc)
 		find_shortest_path(&data, graph);
 		if (data.augmented_path)
 		{
-			//change_capacity(graph, &data);
+			change_capacity(graph, &data);
 			
-			find_fewest_moves(&data, graph);
+			//find_fewest_moves(&data, graph);
 
-	/*
 			//test
-			t_path *test = data.shortest_path;
+			t_queue_node *test = data.cur_path;
 			while (test)
 			{
-				printf("%s ", test->room->name);
-				test = test->next_room;
+				printf("%s ", graph[test->index].name);
+				test = test->next;
 			}
 			printf("\n");
-*/
+
 
 			data.num_paths++;
 			
@@ -59,8 +58,8 @@ void	solve(t_data data, t_room *graph, int argc)
 		print_solution(&data);
 		if (argc == 2)
 			print_paths(&data);
-		free_paths(&data.solution_paths);
-		free_paths(&data.all_paths);
+		//free_paths(&data.solution_paths);
+		//free_paths(&data.all_paths);
 	}
 	else
 		ft_printf("no valid path found\n");

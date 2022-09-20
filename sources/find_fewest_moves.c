@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/19 13:38:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:41:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+#include <stdio.h>
 static int	get_path_len(t_paths *paths)
 {
 	int		num_paths;
@@ -59,12 +59,15 @@ static int	get_required_moves(int num_ants, t_paths *paths)
 
 void	find_fewest_moves(t_data *data, t_room *graph)
 {
-	data->shortest_path = create_room_on_path(&graph[data->end_index]);
+	
+	//data->shortest_path = create_room_on_path(&graph[data->end_index]);
 	while (data->shortest_path->room->previous_idx >= 0)
 	{
+		printf("in FFM\n");
 		change_capacity(graph, data);
-		build_shortest_path(&data->shortest_path, graph);
+		//build_shortest_path(&data->shortest_path, graph);
 	}
+	
 	if (data->all_paths)
 		map_paths(data->all_paths, data->shortest_path);
 	add_shortest_path_to_all_paths(&data->all_paths, data->shortest_path);

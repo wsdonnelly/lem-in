@@ -6,12 +6,13 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/19 13:37:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:42:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+/*
 void	build_shortest_path(t_path **path, t_room *graph)
 {
 	t_path	*tmp1;
@@ -20,13 +21,13 @@ void	build_shortest_path(t_path **path, t_room *graph)
 
 	tmp1 = *path;
 	neighbor = tmp1->room->neighbors;
-	while ((tmp1->room->previous_idx != neighbor->next_room_index)&& neighbor)
+	while ((tmp1->room->previous_idx != neighbor->next_room_index) && neighbor)
 		neighbor = neighbor->next;
 	tmp2 = create_room_on_path(&graph[neighbor->next_room_index]);
 	tmp2->next_room = tmp1;
 	*path = tmp2;
 }
-
+*/
 static t_paths	*create_path_for_paths(t_path *path, int solution)
 {
 	t_paths	*paths;

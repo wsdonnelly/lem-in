@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/19 13:26:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:41:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	find_shortest_path(t_data *data, t_room *graph)
 	graph[cur_idx].previous_idx = -1;
 	graph[cur_idx].previous_edge = NULL;
 	
+	//printf("in FSP\n");
 	while (queue.head)
 	{
 		
