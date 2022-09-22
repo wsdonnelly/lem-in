@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 11:14:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:12:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void init_visited(t_data *data, t_room *graph)
 
 //search directly in graph using index values
 //set augmented path as true or false and sets previous
-void	bfs(t_data *data, t_room *graph)
+void	bfs(t_data *data, t_room *graph, int flag)
 {
 	t_edge *temp;
 	t_queue queue;
@@ -80,6 +80,7 @@ void	bfs(t_data *data, t_room *graph)
 
 	init_visited(data, graph);
 	data->augmented_path = 0;
+	
 	//data->shortest_path = NULL;
 	
 	cur_idx = data->start_index;
@@ -102,7 +103,7 @@ void	bfs(t_data *data, t_room *graph)
 		temp = graph[cur_idx].neighbors;
 		while (temp)
 		{
-			if (!graph[temp->next_room_index].visited && temp->capacity)
+			if (!graph[temp->next_room_index].visited && temp->capacity == flag)
 			{
 				graph[temp->next_room_index].visited = 1;
 				add_room_to_queue(&queue, temp->next_room_index);
@@ -116,7 +117,7 @@ void	bfs(t_data *data, t_room *graph)
 	//free_path(&data->queue);
 	//free_path(&data->visited);
 }
-
+/*
 void	anti_bfs(t_data *data, t_room *graph)
 {
 	t_edge *temp;
@@ -166,3 +167,4 @@ void	anti_bfs(t_data *data, t_room *graph)
 	//free_path(&data->queue);
 	//free_path(&data->visited);
 }
+*/

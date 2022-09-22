@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/22 11:51:39 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:05:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int	main(int argc, char **argv)
 	print_graph_test(graph, &data);
 
 
-	solve(data, graph);
+	solve(&data, graph);
+	get_best_paths(&data);
+	
 	//solve(data, graph, argc);
 	free_graph(&graph, &data);
 	free_data(&data);
