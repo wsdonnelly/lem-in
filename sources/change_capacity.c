@@ -6,12 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 12:58:08 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:03:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include<stdio.h>
 
 /*
 static void add_room_to_stack(int index, t_data *data)
@@ -42,9 +41,11 @@ void create_path_set(t_data *data, t_queue_node *path_to_add)
 		data->path_set = tmp_path;
 	else
 	{
-		while (last)
+		
+		while (last->next_path)
 			last = last->next_path;
 		last->next_path = tmp_path;
+		
 	}
 }
 

@@ -6,12 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 12:56:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:19:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
 /*
 void print_path_test(t_data *data, t_room *graph)
 {
@@ -27,30 +26,41 @@ void print_path_test(t_data *data, t_room *graph)
 	printf("\n");
 }
 */
-void print_path_test(t_data *data, t_room *graph)
+//updated
+static void print_path_test(t_data *data, t_room *graph)
 {
 	t_queue_node *tmp;
-
-	tmp = data->cur_path;
-	printf("current path:\n");
-	while (tmp)
+	t_path_set *tmp_path;
+	
+	tmp_path = data->path_set;
+	
+	while (tmp_path)
 	{
-		printf("%s ", graph[tmp->index].name);
-		tmp = tmp->next;
+		printf("current path:\n");
+		tmp = tmp_path->path;
+		while (tmp)
+		{
+			printf("%s ", graph[tmp->index].name);
+			tmp = tmp->next;
+		}
+		tmp_path = tmp_path->next_path;
+		printf("\n");
 	}
 	printf("\n");
 }
 void	solve(t_data data, t_room *graph)
 {
 	//first time through
+	int try = 2;
 
 	data.path_set = NULL;
 	bfs(&data, graph);
 	if (data.augmented_path)
 	{
 		change_capacity(&data, graph, TRUE);
-		//print_path_test(&data, graph);
+		printf("\nFIRST BFS\n");
 		create_path_set(&data, data.cur_path);
+		print_path_test(&data, graph);
 	}
 	else
 	{
@@ -72,12 +82,15 @@ void	solve(t_data data, t_room *graph)
 		anti_bfs(&data, graph);
 		if (data.augmented_path)
 		{
-		change_capacity(&data, graph, TRUE);
-		printf("in here\n");
-		//print_path_test(&data, graph);
-		create_path_set(&data, data.cur_path);
+			change_capacity(&data, graph, TRUE);
+			create_path_set(&data, data.cur_path);
+			//printf("PATH SET %d\n", try);
+			//print_path_test(&data, graph);
 		}
+		try++;
 	}
+	printf("OUTSIDE\n");
+	print_path_test(&data, graph);
 }
 
 

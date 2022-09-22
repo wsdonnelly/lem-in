@@ -6,11 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:43:24 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/25 21:10:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:43:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visualizer.h"
+#include <stdio.h>
 
 void	get_first_line(t_info *info, char **line)
 {
@@ -34,18 +35,23 @@ void	get_comment(t_info *info, char *line)
 {
 	char	**list;
 
-	if (!ft_strcmp("##start", line) || !ft_strcmp("##end", line))
-	{
-		free(line);
-		return ;
-	}
 	list = ft_strsplit(line, ' ');
+	//printf("list[0]: %s\n", list[0]);
 	if (!ft_strcmp(list[0], "#num_rooms"))
+	{
+		//printf("list[1] %s\n", list[1]);
 		info->num_rooms = ft_atoi(list[1]);
+	}
 	else if (!ft_strcmp(list[0], "#start"))
+	{
+		//printf("list[1] %s\n", list[1]);
 		info->start = ft_strdup(list[1]);
+	}
 	else if (!ft_strcmp(list[0], "#end"))
+	{
+		//printf("list[1] %s\n", list[1]);
 		info->end = ft_strdup(list[1]);
+	}
 	free_str_arr(list);
 	free(line);
 }
