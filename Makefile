@@ -6,15 +6,19 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/09/19 13:30:33 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/09/21 22:34:27 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME		= lem-in
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -O3 -g
-SRC_FILES	= main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c hash_map.c \
+CFLAGS		= -Wall -Wextra -Werror -O3 -g -fsanitize=address
+SRC_FILES = main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c hash_map.c \
+linked_list.c check_rooms.c \
+solve.c BFS.c change_capacity.c \
+free_functions.c print_solution.c print_paths.c print_line.c store_data.c 
+#SRC_FILES	= main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c hash_map.c \
 linked_list.c check_rooms.c solve.c find_shortest_path.c change_capacity.c free_functions.c \
 room_functions.c path_functions.c find_fewest_moves.c map_paths.c print_solution.c print_paths.c print_line.c store_data.c 
 SRCS_DIR	= ./sources/

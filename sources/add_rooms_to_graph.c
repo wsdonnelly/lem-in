@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/19 13:24:08 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/22 09:08:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	set_start_rooms(char *start_room, char *room_2, t_data *data)
 {
 	t_name	name;
 
-	name.two_in = ft_strjoin(room_2, "in");
-	name.two_out = ft_strjoin(room_2, "out");
+	name.two_in = ft_strjoin(room_2, "I");
+	name.two_out = ft_strjoin(room_2, "O");
 	name.index_start = hash_map(start_room, data->size, data->graph);
 	data->start_index = name.index_start;
 	name.index_2in = hash_map(name.two_in, data->size, data->graph);
@@ -52,8 +52,8 @@ void	set_end_rooms(char *end_room, char *room_2, t_data *data)
 {
 	t_name	name;
 
-	name.two_in = ft_strjoin(room_2, "in");
-	name.two_out = ft_strjoin(room_2, "out");
+	name.two_in = ft_strjoin(room_2, "I");
+	name.two_out = ft_strjoin(room_2, "O");
 	name.index_end = hash_map(end_room, data->size, data->graph);
 	data->end_index = name.index_end;
 	name.index_2in = hash_map(name.two_in, data->size, data->graph);
@@ -82,10 +82,10 @@ void	set_rooms(char **room, t_data *data)
 {
 	t_name	name;
 
-	name.one_in = ft_strjoin(room[0], "in");
-	name.one_out = ft_strjoin(room[0], "out");
-	name.two_in = ft_strjoin(room[1], "in");
-	name.two_out = ft_strjoin(room[1], "out");
+	name.one_in = ft_strjoin(room[0], "I");
+	name.one_out = ft_strjoin(room[0], "O");
+	name.two_in = ft_strjoin(room[1], "I");
+	name.two_out = ft_strjoin(room[1], "O");
 	name.index_1in = hash_map(name.one_in, data->size, data->graph);
 	free(name.one_in);
 	name.index_1out = hash_map(name.one_out, data->size, data->graph);

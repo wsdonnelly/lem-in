@@ -5,62 +5,130 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 09:42:26 by wdonnell         ###   ########.fr       */
+/*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/09/22 12:56:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include <stdio.h>
-
 /*
-** The functions searches for the shortest path from start to end until no more
-** valid paths are found. After each iteration, it is checked whether the
-** current combination of paths requires less moves to move the ants from start
-** to end than the current best solution.
-** If a valid solution was found, the solution is printed to the standard
-** output.
-*/
-
-void	solve(t_data data, t_room *graph, int argc)
+void print_path_test(t_data *data, t_room *graph)
 {
-	
-	while (data.augmented_path)
+	t_queue_node *tmp;
+
+	tmp = data->cur_path;
+	printf("current path:\n");
+	while (tmp)
 	{
-		//printf("HERE\n");
-		find_shortest_path(&data, graph);
-		if (data.augmented_path)
-		{
-			change_capacity(graph, &data);
-			
-			//find_fewest_moves(&data, graph);
-
-			//test
-			t_queue_node *test = data.cur_path;
-			while (test)
-			{
-				printf("%s ", graph[test->index].name);
-				test = test->next;
-			}
-			printf("\n");
-
-
-			data.num_paths++;
-			
-		}
+		printf("%s ", graph[tmp->index].name);
+		tmp = tmp->next;
 	}
-	if (data.num_paths)
+	printf("\n");
+}
+*/
+void print_path_test(t_data *data, t_room *graph)
+{
+	t_queue_node *tmp;
+
+	tmp = data->cur_path;
+	printf("current path:\n");
+	while (tmp)
 	{
-		ft_printf("%d\n", data.num_ants);
-		print_comments(&data);
-		print_data(&data);
-		ft_putchar('\n');
-		print_solution(&data);
-		if (argc == 2)
-			print_paths(&data);
-		//free_paths(&data.solution_paths);
-		//free_paths(&data.all_paths);
+		printf("%s ", graph[tmp->index].name);
+		tmp = tmp->next;
+	}
+	printf("\n");
+}
+void	solve(t_data data, t_room *graph)
+{
+	//first time through
+
+	data.path_set = NULL;
+	bfs(&data, graph);
+	if (data.augmented_path)
+	{
+		change_capacity(&data, graph, TRUE);
+		//print_path_test(&data, graph);
+		create_path_set(&data, data.cur_path);
 	}
 	else
-		ft_printf("no valid path found\n");
+	{
+		ft_printf("ERROR no valid path found\n");
+		exit (0);
+	}
+
+	//set all flows
+	while(data.augmented_path)
+	{
+		bfs(&data, graph);
+		if (data.augmented_path)
+			change_capacity(&data, graph, FALSE);
+	}
+	//get shortests paths upto max flow
+	data.augmented_path = 1;
+	while (data.augmented_path)
+	{
+		anti_bfs(&data, graph);
+		if (data.augmented_path)
+		{
+		change_capacity(&data, graph, TRUE);
+		printf("in here\n");
+		//print_path_test(&data, graph);
+		create_path_set(&data, data.cur_path);
+		}
+	}
 }
+
+
+/*
+void	solve(t_data data, t_room *graph)
+{
+	int try = 2;
+	int i;
+
+
+	//first time through
+	//forward
+	bfs(&data, graph);
+	if (data.augmented_path)
+	{
+		change_capacity(&data, graph, TRUE);
+		print_path_test(&data, graph);
+	}
+	else
+	{
+		ft_printf("ERROR no valid path found\n");
+		exit (0);
+	}
+	print_graph_test(graph, &data);
+	while(data.augmented_path)
+	{
+		//checks if an additional path is possible
+		bfs(&data, graph);
+		printf("AUG PATH FOUND\n");
+		if (data.augmented_path)
+		{
+
+			change_capacity(&data, graph, TRUE);
+			print_path_test(&data, graph);
+			//print_graph_test(graph, &data);
+			
+			i = 0;
+			while (i < try)
+			{
+				anti_bfs(&data, graph);
+				printf("AUG PATH? ->%d\n", data.augmented_path);
+				if (data.augmented_path)
+				{
+					
+				change_capacity(&data, graph, TRUE);
+				print_path_test(&data, graph);
+				}
+				i++;
+			}
+		}
+		try++;
+	}
+}
+*/
