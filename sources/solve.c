@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 17:12:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:41:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	solve(t_data *data, t_room *graph)
 	{
 		//data.cur_path = NULL;
 		change_capacity(data, graph, TRUE);
-		printf("\nFIRST BFS\n");
+		//printf("\nFIRST BFS\n");
 		create_path_set(data, data->cur_path);
-		print_path_test(data, graph);
+		//print_path_test(data, graph);
 	}
 	else
 	{
@@ -91,7 +91,7 @@ void	solve(t_data *data, t_room *graph)
 		}
 		try++;
 	}
-	printf("OUTSIDE\n");
+	printf("\nPATHS, first one is original BFS\n");
 	
 	print_path_test(data, graph);
 }
