@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:17:30 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/25 20:53:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:15:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@
 
 static t_room	*malloc_graph(t_data *data)
 {
-	int		size;
+	//int		size;
 	int		i;
 	t_room	*temp;
 
-	size = (data->num_rooms - 2) * 2 + 2;
-	data->size = size;
-	temp = (t_room *)malloc(sizeof(t_room) * size);
+	temp = (t_room *)malloc(sizeof(t_room) * data->num_rooms);
 	if (!temp)
 		exit_error(data, "ERROR");
 	i = 0;
-	while (i < size)
+	while (i < data->num_rooms)
 	{
 		temp[i].name = NULL;
 		temp[i].neighbors = NULL;

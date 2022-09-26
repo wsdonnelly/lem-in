@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 11:56:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:34:39 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void init_visited(t_data *data, t_room *graph)
 	int i;
 
 	i = 0;
-	while (i < data->size)
+	while (i < data->num_rooms)
 		graph[i++].visited = 0;
 }
 

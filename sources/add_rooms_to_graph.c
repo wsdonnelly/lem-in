@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 20:23:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:44:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,64 +20,32 @@
 
 static void	add_edges(t_data *data, int idx_a, int idx_b)
 {
-	t_edge	*forward;
-	t_edge	*reverse;
+	
+	add_edge(data, idx_a, idx_b);
+	add_edge(data, idx_b, idx_a);
 
-	forward = add_edge(data, idx_a, idx_b);
-	if (forward)
-	{
-		reverse = add_reverse_edge(data, idx_b, idx_a, forward);
-		forward->reverse_edge = reverse;
-	}
 }
 
-void	set_start_rooms(char *start_room, char *room_2, t_data *data)
+void	set_rooms(char **room, t_data *data)
 {
-	t_name	name;
+	int index1;
+	int index2;
 
-	name.two_in = ft_strjoin(room_2, "I");
-	name.two_out = ft_strjoin(room_2, "O");
-	name.index_start = hash_map(start_room, data->size, data->graph);
-	data->start_index = name.index_start;
-	name.index_2in = hash_map(name.two_in, data->size, data->graph);
-	free(name.two_in);
-	name.index_2out = hash_map(name.two_out, data->size, data->graph);
-	free(name.two_out);
-	add_edges(data, name.index_start, name.index_2in);
-	add_edges(data, name.index_2in, name.index_2out);
-	add_edges(data, name.index_2out, name.index_start);
+	
+	index1 = hash_map(room[0], data->num_rooms, data->graph);
+	index2 = hash_map(room[1], data->num_rooms, data->graph);
+	if (!ft_strcmp(room[0], data->start))
+		data->start_index = index1;
+	else if (!ft_strcmp(room[1], data->start))
+		data->start_index = index2;
+	else if (!ft_strcmp(room[0], data->end))
+		data->end_index = index1;
+	else if (!ft_strcmp(room[1], data->end))
+		data->end_index = index2;
+	add_edges(data, index1, index2);
+
 }
-
-void	set_end_rooms(char *end_room, char *room_2, t_data *data)
-{
-	t_name	name;
-
-	name.two_in = ft_strjoin(room_2, "I");
-	name.two_out = ft_strjoin(room_2, "O");
-	name.index_end = hash_map(end_room, data->size, data->graph);
-	data->end_index = name.index_end;
-	name.index_2in = hash_map(name.two_in, data->size, data->graph);
-	free(name.two_in);
-	name.index_2out = hash_map(name.two_out, data->size, data->graph);
-	free(name.two_out);
-	add_edges(data, name.index_end, name.index_2in);
-	add_edges(data, name.index_2in, name.index_2out);
-	add_edges(data, name.index_2out, name.index_end);
-}
-
-void	both_start_end(char *start_room, char *end_room, \
-t_data *data)
-{
-	int	index_start;
-	int	index_end;
-
-	index_start = hash_map(start_room, data->size, data->graph);
-	index_end = hash_map(end_room, data->size, data->graph);
-	data->end_index = index_end;
-	data->start_index = index_start;
-	add_edges(data, index_start, index_end);
-}
-
+/*
 void	set_rooms(char **room, t_data *data)
 {
 	t_name	name;
@@ -86,16 +54,17 @@ void	set_rooms(char **room, t_data *data)
 	name.one_out = ft_strjoin(room[0], "O");
 	name.two_in = ft_strjoin(room[1], "I");
 	name.two_out = ft_strjoin(room[1], "O");
-	name.index_1in = hash_map(name.one_in, data->size, data->graph);
+	name.index_1in = hash_map(name.one_in, data->num_rooms, data->graph);
 	free(name.one_in);
-	name.index_1out = hash_map(name.one_out, data->size, data->graph);
+	name.index_1out = hash_map(name.one_out, data->num_rooms, data->graph);
 	free(name.one_out);
-	name.index_2in = hash_map(name.two_in, data->size, data->graph);
+	name.index_2in = hash_map(name.two_in, data->num_rooms, data->graph);
 	free(name.two_in);
-	name.index_2out = hash_map(name.two_out, data->size, data->graph);
+	name.index_2out = hash_map(name.two_out, data->num_rooms, data->graph);
 	free(name.two_out);
 	add_edges(data, name.index_1in, name.index_1out);
 	add_edges(data, name.index_1out, name.index_2in);
 	add_edges(data, name.index_2in, name.index_2out);
 	add_edges(data, name.index_2out, name.index_1in);
 }
+*/

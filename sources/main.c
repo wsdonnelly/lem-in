@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/26 19:18:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:56:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_data(t_data *data)
 {
 	data->num_ants = -1;
 	data->num_rooms = 0;
-	data->size = -1;
+	//data->size = -1;
 	data->start = NULL;
 	data->end = NULL;
 	data->store_input_head = NULL;
@@ -39,7 +39,7 @@ void print_graph_test(t_room *graph, t_data *data)
 	int i = 0;
 	t_edge *tmp;
 
-	while (i < data->size)
+	while (i < data->num_rooms)
 	{
 		printf("%s === neighbors: ", graph[i].name);
 		tmp = graph[i].neighbors;
@@ -79,6 +79,7 @@ int	main(int argc, char **argv)
 
 
 	solve(&data, graph);
+	print_graph_test(graph, &data);
 	//put_ants_on_path(&data);
 	
 	//solve(data, graph, argc);

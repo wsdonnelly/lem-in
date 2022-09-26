@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/24 14:26:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:37:41 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,8 @@ void	add_to_graph(t_data *data, char *line)
 		free_str_arr(room);
 		exit_error(data, "ERROR");
 	}
-	if (!ft_strcmp(room[0], data->start) && ft_strcmp(room[1], data->end))
-		set_start_rooms(room[0], room[1], data);
-	else if (!ft_strcmp(room[1], data->start) && ft_strcmp(room[0], data->end))
-		set_start_rooms(room[1], room[0], data);
-	else if (!ft_strcmp(room[0], data->end) && ft_strcmp(room[1], data->start))
-		set_end_rooms(room[0], room[1], data);
-	else if (!ft_strcmp(room[1], data->end) && ft_strcmp(room[0], data->start))
-		set_end_rooms(room[1], room[0], data);
-	else if (!ft_strcmp(room[0], data->start) && !ft_strcmp(room[1], data->end))
-		both_start_end(room[0], room[1], data);
-	else if (!ft_strcmp(room[0], data->end) && !ft_strcmp(room[1], data->start))
-		both_start_end(room[1], room[0], data);
-	else
-		set_rooms(room, data);
+
+	set_rooms(room, data);
 	free_str_arr(room);
 	store_data(data, line);
 }

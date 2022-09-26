@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/15 15:50:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:16:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_graph(t_room **graph, t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->size)
+	while (i < data->num_rooms)
 	{
 		if ((*graph)[i].name)
 			free((*graph)[i].name);

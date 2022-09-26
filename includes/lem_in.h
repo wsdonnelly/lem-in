@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 19:19:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:16:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct s_data
 {
 	int				num_ants;
 	int				num_rooms;
-	int				size;
 	char			*start;
 	char			*end;
 	t_line			*store_input_head;
@@ -130,14 +129,9 @@ typedef struct s_data
 
 typedef struct s_name
 {
-	char	*one_in;
-	char	*one_out;
-	char	*two_in;
-	char	*two_out;
-	int		index_1in;
-	int		index_1out;
-	int		index_2in;
-	int		index_2out;
+	char *name;
+	int		index_1;
+	int		index_2;
 	int		index_end;
 	int		index_start;
 }				t_name;
