@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 10:53:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:19:28 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ typedef struct s_path_set
 	struct s_path_set		*next_path;
 }				t_path_set;
 
-typedef struct s_all_paths
+typedef struct s_path_group
 {
-	struct s_path_set		*next_path_set;
+	struct s_path_set		*paths;
+	struct s_path_group	*next_path_group;
 	int									min_lines;
-}								t_all_paths;
+}								t_path_group;
 
 
 //old stuff
@@ -117,7 +118,7 @@ typedef struct s_data
 	int				num_paths;
 	struct s_queue_node *cur_path;
 	struct s_path_set *path_set;
-	struct s_all_paths *paths_all;
+	struct s_path_group *path_group;
 
 	//struct s_path	*queue;
 	//struct s_path	*visited;
@@ -216,7 +217,8 @@ void print_graph_test(t_room *graph, t_data *data);
 
 void create_path_set(t_data *data, t_queue_node *path_to_add, int count);
 void get_best_paths(t_data *data);
-void solve(t_data *data, t_room *graph);
-int	change_capacity(t_data *data, t_room *graph, int save);
+int change_capacity(t_data *data, t_room *graph, int save);
 void put_ants_on_path(t_data *data);
+void create_path_group(t_data *data);
+void	solve(t_data *data, t_room *graph);
 #endif

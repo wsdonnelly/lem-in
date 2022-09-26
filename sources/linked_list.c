@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/19 13:24:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:23:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward)
 	t_edge	**head;
 
 	head = &(*data->graph)[index1].neighbors;
+	
 	temp = malloc(sizeof(t_edge));
 	if (!temp)
 		exit_error(data, "ERROR");
 	temp->next_room_index = next;
+
 	temp->capacity = 0;
 	temp->reverse_edge = forward;
 	temp->next = *head;

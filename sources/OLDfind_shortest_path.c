@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_shortest_path.c                               :+:      :+:    :+:   */
+/*   OLDfind_shortest_path.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/20 09:41:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:33:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void init_visited(t_data *data, t_room *graph)
 	int i;
 
 	i = 0;
-	while (i < data->num_rooms)
+	while (i < data->size)
 		graph[i++].visited = 0;
 }
 
