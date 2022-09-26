@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/22 17:05:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:53:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	data.graph = &graph;
 	
 	init_data(&data);
-	printf("here\n");
+	
 	read_map(&data, &graph);
 	
 	if (!graph || data.start_index == -2 || data.end_index == -2)
@@ -75,11 +75,11 @@ int	main(int argc, char **argv)
 	graph[data.start_index].previous_idx = -1;
 	
 	//
-	print_graph_test(graph, &data);
+	//print_graph_test(graph, &data);
 
 
 	solve(&data, graph);
-	get_best_paths(&data);
+	put_ants_on_path(&data);
 	
 	//solve(data, graph, argc);
 	free_graph(&graph, &data);

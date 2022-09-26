@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 17:12:06 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:53:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,20 @@ typedef struct s_queue
 typedef struct s_path_set
 {
 	struct s_queue_node	*path;
-	struct s_path_set *next_path;
+	int									steps;
+	int									ants_on_path;
+	int									lines;
+	struct s_path_set		*next_path;
 }				t_path_set;
 
+typedef struct s_all_paths
+{
+	struct s_path_set		*next_path_set;
+	int									min_lines;
+}								t_all_paths;
+
+
+//old stuff
 typedef struct s_path
 {
 	int						index;
@@ -104,9 +115,9 @@ typedef struct s_data
 	int				best_solution;
 	int				required_moves;
 	int				num_paths;
-	//test
 	struct s_queue_node *cur_path;
 	struct s_path_set *path_set;
+	struct s_all_paths *paths_all;
 
 	//struct s_path	*queue;
 	//struct s_path	*visited;
@@ -189,7 +200,6 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
 //void	find_fewest_moves(t_data *data, t_room *graph);
 void	bfs(t_data *data, t_room *graph, int flag);
 void	anti_bfs(t_data *data, t_room *graph);
-void	change_capacity(t_data *data, t_room *graph, int save);
 //path
 //void	add_room_to_path(t_room *room, t_path **path);
 //void	add_shortest_path_to_all_paths(t_paths **all_paths, \
@@ -204,7 +214,9 @@ void	map_paths(t_paths *all_paths, t_path *shortest_path);
 //new and tests
 void print_graph_test(t_room *graph, t_data *data);
 
-void create_path_set(t_data *data, t_queue_node *path_to_add);
+void create_path_set(t_data *data, t_queue_node *path_to_add, int count);
 void get_best_paths(t_data *data);
 void solve(t_data *data, t_room *graph);
+int	change_capacity(t_data *data, t_room *graph, int save);
+void put_ants_on_path(t_data *data);
 #endif

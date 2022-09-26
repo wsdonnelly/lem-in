@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 16:52:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:53:30 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void add_room_to_stack(int index, t_data *data)
 	data->cur_path = tmp;
 }
 */
-void create_path_set(t_data *data, t_queue_node *path_to_add)
+void create_path_set(t_data *data, t_queue_node *path_to_add, int count)
 {
 		t_path_set *tmp_path;
 		t_path_set *last;
@@ -35,6 +35,9 @@ void create_path_set(t_data *data, t_queue_node *path_to_add)
 	if (!tmp_path)
 			exit(0);
 	tmp_path->path = path_to_add;
+	tmp_path->steps = count;
+	tmp_path->ants_on_path = 0;
+	tmp_path->lines = 0;
 	tmp_path->next_path = NULL;
 	last = data->path_set;
 	if (!data->path_set)
@@ -47,19 +50,20 @@ void create_path_set(t_data *data, t_queue_node *path_to_add)
 	}
 }
 
-static void add_room_to_stack(int index, t_data *data)
+static void add_room_to_stack(int index, t_data *data, int *count)
 {
 	t_queue_node *tmp;
 
 	tmp = malloc(sizeof(t_queue_node));
 	if(!tmp)
 		exit(0);
+	(*count)++;
 	tmp->index = index;
 	tmp->next = data->cur_path;
 	data->cur_path = tmp;
 }
 
-static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev)
+static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *count)
 {
 	int len;
 
@@ -68,24 +72,28 @@ static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev)
 	if (graph[idx].name[len - 1] == 'I' || graph[idx].name[len - 1] == 'O')
 		graph[idx].name[len - 1] = '\0';
 	if (ft_strcmp(prev, graph[idx].name))
-		add_room_to_stack(idx, data);
+		add_room_to_stack(idx, data, count);
 }
 
-void	change_capacity(t_data *data, t_room *graph, int save)
+int change_capacity(t_data *data, t_room *graph, int save)
 {
+	int count;
+
+	count = 0;
 	//avoid setting capacity of edge connecting end to 0;
 	int idx = graph[data->end_index].previous_idx;
 	char *prev = graph[data->end_index].name;
 	data->cur_path = NULL;
 	if (save)
-		add_room_to_stack(data->end_index, data);
+		add_room_to_stack(data->end_index, data, &count);
 	while (graph[idx].previous_idx >= 0)
 	{
 		if (save)
-			filter_rooms(data, graph, idx, prev);
+			filter_rooms(data, graph, idx, prev, &count);
 		graph[idx].previous_edge->capacity ^= 1;
 		graph[idx].previous_edge->reverse_edge->capacity ^= 1;
 		prev = graph[idx].name;
 		idx = graph[idx].previous_idx;
 	}
+	return (count);
 }

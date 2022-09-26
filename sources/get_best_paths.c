@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 16:23:56 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/23 12:57:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:09:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void get_best_paths(t_data *data)
 	int i;
 	int j;
 	t_path_set *start;
-	int total_moves;
-	int ants_on_path;
-	int rem;
+	//int total_moves;
+	//int ants_on_path;
+	//int rem;
 
 	moves = get_moves(data->path_set->path, data->num_ants);
 	printf("lines req on first path: %d\n", moves);
@@ -54,10 +54,10 @@ void get_best_paths(t_data *data)
 		start = data->path_set->next_path;
 		while (j < try && start)
 		{
-			ants_on_path = data->num_ants / try;
-			rem = data->num_ants % try
-			if (!data->num_ants % try && j == 0)
-				ants_on_path = data->num_ants / try + 1;
+			//ants_on_path = data->num_ants / try;
+			//rem = data->num_ants % try;
+			//if (!data->num_ants % try && j == 0)
+				//ants_on_path = data->num_ants / try + 1;
 
 			
 			moves = get_moves(start->path, data->num_ants);
