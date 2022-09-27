@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 21:54:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:57:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void create_path_set(t_data *data, t_queue_node *path_to_add, int count)
 	tmp_path->ants_on_path = 0;
 	tmp_path->lines = 0;
 	tmp_path->next_path = NULL;
-
 	//find current end of path group
 	cur = data->path_group;
 	while (cur->next_path_group)
@@ -64,18 +63,6 @@ void create_path_set(t_data *data, t_queue_node *path_to_add, int count)
 			last = last->next_path;
 		last->next_path = tmp_path;
 	}
-
-/*
-	last = data->path_set;
-	if (!data->path_set)
-		data->path_set = tmp_path;
-	else
-	{
-		while (last->next_path)
-			last = last->next_path;
-		last->next_path = tmp_path;
-	}
-*/
 }
 
 static void add_room_to_stack(int index, t_data *data, int *count)
@@ -91,40 +78,29 @@ static void add_room_to_stack(int index, t_data *data, int *count)
 	data->cur_path = tmp;
 }
 
-/*
-static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *count)
-{
-	int len;
-
-	//it doesnt matter changing the name in the graph because program only referenceces index 
-	len = ft_strlen(graph[idx].name);
-	if (graph[idx].name[len - 1] == 'I' || graph[idx].name[len - 1] == 'O')
-		graph[idx].name[len - 1] = '\0';
-	if (ft_strcmp(prev, graph[idx].name))
-		add_room_to_stack(idx, data, count);
-}
-*/
-int change_capacity(t_data *data, t_room *graph, int save)
+int change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
 	int count;
 
 	count = 0;
-	//avoid setting capacity of edge connecting end to 0;
-	int idx = graph[data->end_index].previous_idx;
-
+	int idx = data->end_index;
 	data->cur_path = NULL;
-	if (save)
-		add_room_to_stack(data->end_index, data, &count);
 	while (graph[idx].previous_idx >= 0)
 	{
 		if (save)
-
 			add_room_to_stack(idx, data, &count);
-	
-		graph[idx].previous_edge->capacity ^= 1;
-		//graph[idx].previous_edge->reverse_edge->capacity ^= 1;
-		
-
+		if (flow)
+		{
+			graph[idx].previous_edge->flow = 1;
+			graph[idx].previous_edge->reverse_edge->flow = 0;
+			graph[idx].previous_edge->capacity = 1;
+			graph[idx].previous_edge->reverse_edge->capacity = 0;
+		}
+		else
+		{
+			graph[idx].previous_edge->capacity = 0;
+			graph[idx].previous_edge->reverse_edge->capacity = 1;
+		}
 		idx = graph[idx].previous_idx;
 	}
 	return (count);

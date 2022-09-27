@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 21:16:42 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:57:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_edge
 {
 	int				next_room_index;
 	int				capacity;
+	int				flow;
 	struct s_edge	*reverse_edge;
 	struct s_edge	*next;
 
@@ -127,15 +128,6 @@ typedef struct s_data
 	struct s_paths	*solution_paths;
 }				t_data;
 
-typedef struct s_name
-{
-	char *name;
-	int		index_1;
-	int		index_2;
-	int		index_end;
-	int		index_start;
-}				t_name;
-
 typedef struct s_ant
 {
 	int				num;
@@ -167,9 +159,9 @@ void	check_rooms(t_data *data, char *line);
 //graph creation
 void	add_to_graph(t_data *data, char *line);
 void	set_rooms(char **room, t_data *data);
-void	both_start_end(char *start_room, char *end_room, t_data *data);
-void	set_end_rooms(char *end_room, char *room_2, t_data *data);
-void	set_start_rooms(char *start_room, char *room_2, t_data *data);
+//void	both_start_end(char *start_room, char *end_room, t_data *data);
+////void	set_end_rooms(char *end_room, char *room_2, t_data *data);
+//void	set_start_rooms(char *start_room, char *room_2, t_data *data);
 //store_data
 void	store_data(t_data *data, char *line);
 void	print_data(t_data *data);
@@ -189,20 +181,10 @@ int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);
 t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
-//solver
 
-//void	find_shortest_path(t_data *data, t_room *graph);
-//void	find_fewest_moves(t_data *data, t_room *graph);
-void	bfs(t_data *data, t_room *graph, int flag);
-void	anti_bfs(t_data *data, t_room *graph);
-//path
-//void	add_room_to_path(t_room *room, t_path **path);
-//void	add_shortest_path_to_all_paths(t_paths **all_paths, \
-//t_path *shortest_path);
-//t_path	*create_room_on_path(t_room *room);
-//void	build_shortest_path(t_path **path, t_room *graph);
-//void	copy_all_paths_to_solution(t_paths **solution_paths, \
-//t_paths *all_paths);
+void	capacity_bfs(t_data *data, t_room *graph, int flag);
+void	flow_bfs(t_data *data, t_room *graph, int flag);
+
 void	free_path(t_path **path);
 void	map_paths(t_paths *all_paths, t_path *shortest_path);
 
@@ -210,8 +192,8 @@ void	map_paths(t_paths *all_paths, t_path *shortest_path);
 void print_graph_test(t_room *graph, t_data *data);
 
 void create_path_set(t_data *data, t_queue_node *path_to_add, int count);
-void get_best_paths(t_data *data);
-int change_capacity(t_data *data, t_room *graph, int save);
+//void get_best_paths(t_data *data);
+int change_capacity(t_data *data, t_room *graph, int save, int flow);
 void put_ants_on_path(t_data *data);
 void create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);

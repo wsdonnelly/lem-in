@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/26 21:56:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:06:23 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void print_graph_test(t_room *graph, t_data *data)
 		printf("\n");
 		i++;
 	}
+	printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -79,7 +80,7 @@ int	main(int argc, char **argv)
 
 
 	solve(&data, graph);
-	print_graph_test(graph, &data);
+	
 	//put_ants_on_path(&data);
 	
 	//solve(data, graph, argc);

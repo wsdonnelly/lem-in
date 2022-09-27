@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 21:44:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:12:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@
 
 static void	add_edges(t_data *data, int idx_a, int idx_b)
 {
+	t_edge *edge1;
+	t_edge *edge2;
 	
-	add_edge(data, idx_a, idx_b);
-	add_edge(data, idx_b, idx_a);
+	edge1 = add_edge(data, idx_a, idx_b);
+	edge2 = add_edge(data, idx_b, idx_a);
+
+	edge1->reverse_edge = edge2;
+	edge2->reverse_edge = edge1;
 
 }
 

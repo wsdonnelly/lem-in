@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 20:31:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:57:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ static void reset_capacities(t_data *data, t_room *graph)
 
 }
 */
+
+//change cap (data, graph, SAVE, FLOW)
+
 void	solve(t_data *data, t_room *graph)
 {
 	//int i;
@@ -112,125 +115,26 @@ void	solve(t_data *data, t_room *graph)
 
 	data->path_group = NULL;
 	data->path_set = NULL;
+
 	
-	/*
-	bfs(data, graph, 1);
-	if (data->augmented_path)
-	{
-		steps = change_capacity(data, graph, TRUE);
-		create_path_group(data);
-		create_path_set(data, data->cur_path, steps);
-	}
-	else
-	{
-		ft_printf("ERROR no valid path found\n");
-		exit (0);
-	}
- */
-
-	while (data->augmented_path)
-	{
-		bfs(data, graph, 1);
-		if (data->augmented_path)
-		{
-			//reset_capacities(data, graph);
-			steps = change_capacity(data, graph, TRUE);
-			create_path_group(data);
-			create_path_set(data, data->cur_path, steps);
-		}
-	}
-/*
-data->augmented_path = 1;
-	while (data->augmented_path)
-	{
-		//print_graph_test(graph, data);
-		printf("\n");
-		bfs(data, graph, 0);
-		if (data->augmented_path)
-		{
-			steps = change_capacity(data, graph, TRUE);
-			create_path_group(data);
-			create_path_set(data, data->cur_path, steps);
-		}
-
-	}
-*/
-	print_path_test(data, graph);
-	
-}
-
-/*
-	while (data->augmented_path)
-	{
-		//run a forward search to check if another path exists
-		bfs(data, graph, 1);
-			if (data->augmented_path)
-			{
-				change_capacity(data, graph, FALSE);
-				create_path_group(data);
-				i = 0;
-				while(i < try)
-				{
-					bfs(data, graph, 0);
-					steps = change_capacity(data, graph, TRUE);
-					create_path_set(data, data->cur_path, steps);
-					i++;
-				}
-			}
-			try++;
-	}
-
-	print_path_test(data, graph);
-}
-*/
-
-/*
-void	solve(t_data *data, t_room *graph)
-{
-	//first time through
-	int try = 2;
-	int steps;
-
-	data->path_set = NULL;
-	bfs(data, graph, 1);
-	if (data->augmented_path)
-	{
-		//data.cur_path = NULL;
-		steps = change_capacity(data, graph, TRUE);
-		//printf("\nFIRST BFS\n");
-		create_path_set(data, data->cur_path, steps);
-		//print_path_test(data, graph);
-	}
-	else
-	{
-		ft_printf("ERROR no valid path found\n");
-		exit (0);
-	}
-
-	//set all flows
 	while(data->augmented_path)
 	{
-		bfs(data, graph, 1);
-		if (data->augmented_path)
-			change_capacity(data, graph, FALSE);
-	}
-	//get shortests paths upto max flow
-	data->augmented_path = 1;
-	while (data->augmented_path)
-	{
-		bfs(data, graph, 0);
-		if (data->augmented_path)
+		//do bfs and set current flow state
+		flow_bfs(data, graph, 0);
+		change_capacity(data, graph, FALSE, TRUE);
+		while (data->augmented_path)
 		{
-			//data.cur_path = NULL;
-			steps = change_capacity(data, graph, TRUE);
-			create_path_set(data, data->cur_path, steps);
-			//printf("PATH SET %d\n", try);
-			//print_path_test(&data, graph);
+			//find shortest paths through current flow state
+			capacity_bfs(data, graph, 1);
+			create_path_group(data);
+			steps = change_capacity(data, graph, TRUE, FALSE);
 		}
-		try++;
 	}
-	printf("\nPATHS, first one is original BFS\n");
 	
+	//set capacitys to be the same
+	//do bfs to find path via capacities
+	//reset capacities but keep flow
+
+	//repete
 	print_path_test(data, graph);
 }
-*/
