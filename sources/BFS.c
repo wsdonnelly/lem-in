@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/27 10:38:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:33:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int dequeue(t_queue *queue)
 	return (idx);
 }
 
-static void init_visited(t_data *data, t_room *graph)
+void init_visited(t_data *data, t_room *graph)
 {
 	int i;
 
@@ -76,7 +76,7 @@ void	flow_bfs(t_data *data, t_room *graph, int flag)
 	queue.head = NULL;
 	queue.tail = NULL;
 	init_visited(data, graph);
-	data->augmented_path = 0;
+	data->flow_path = 0;
 	cur_idx = data->start_index;
 
 	add_room_to_queue(&queue, cur_idx);
@@ -89,7 +89,8 @@ void	flow_bfs(t_data *data, t_room *graph, int flag)
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
 		{
-			data->augmented_path = 1;
+			data->flow_path = 1;
+			data->capacity_path = 1;
 			//would getting rid of this free the Q?
 			break ;
 		}
@@ -117,7 +118,7 @@ void	capacity_bfs(t_data *data, t_room *graph, int flag)
 	queue.head = NULL;
 	queue.tail = NULL;
 	init_visited(data, graph);
-	data->augmented_path = 0;
+	data->capacity_path = 0;
 	cur_idx = data->start_index;
 
 	add_room_to_queue(&queue, cur_idx);
@@ -130,14 +131,14 @@ void	capacity_bfs(t_data *data, t_room *graph, int flag)
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
 		{
-			data->augmented_path = 1;
+			data->capacity_path = 1;
 			//would getting rid of this free the Q?
 			break ;
 		}
 		temp = graph[cur_idx].neighbors;
 		while (temp)
 		{
-			if (!graph[temp->next_room_index].visited && temp->capacity == flag)
+			if (!graph[temp->next_room_index].visited && temp->capacity == flag && temp->flow && !graph[temp->next_room_index].in_path)
 			{
 				graph[temp->next_room_index].visited = 1;
 				add_room_to_queue(&queue, temp->next_room_index);

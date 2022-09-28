@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:46:53 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 21:37:41 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:32:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	names_in_list(t_data *data, char *name1, char *name2)
 * read each link and add each room to graph (if not already added)
 */
 
-void	add_to_graph(t_data *data, char *line)
+void	add_to_graph(t_data *data, t_room *graph, char *line)
 {
 	char	**room;
 
@@ -54,7 +54,7 @@ void	add_to_graph(t_data *data, char *line)
 		exit_error(data, "ERROR");
 	}
 
-	set_rooms(room, data);
+	set_rooms(room, data, graph);
 	free_str_arr(room);
 	store_data(data, line);
 }

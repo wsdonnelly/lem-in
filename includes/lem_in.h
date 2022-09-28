@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/27 10:57:13 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:28:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ typedef struct s_edge
 	int				capacity;
 	int				flow;
 	struct s_edge	*reverse_edge;
+	struct s_edge	*twin_edge;
 	struct s_edge	*next;
 
 }				t_edge;
 
 typedef struct s_room
 {
+	int in_path;
 	int				visited;
 	char			*name;
 	int previous_idx;
@@ -112,7 +114,8 @@ typedef struct s_data
 	int				start_index;
 	t_room			**graph;
 	t_node			*name_list;
-	int				augmented_path;
+	int				flow_path;
+	int				capacity_path;
 	int				best_solution;
 	int				required_moves;
 	int				num_paths;
@@ -157,8 +160,8 @@ void	read_map(t_data *data, t_room **graph);
 void	check_links(t_parse *parse, t_data *data, t_room **graph);
 void	check_rooms(t_data *data, char *line);
 //graph creation
-void	add_to_graph(t_data *data, char *line);
-void	set_rooms(char **room, t_data *data);
+void	add_to_graph(t_data *data, t_room *graph, char *line);
+void	set_rooms(char **room, t_data *data, t_room *graph);
 //void	both_start_end(char *start_room, char *end_room, t_data *data);
 ////void	set_end_rooms(char *end_room, char *room_2, t_data *data);
 //void	set_start_rooms(char *start_room, char *room_2, t_data *data);
@@ -179,8 +182,8 @@ void	print_paths(t_data *data);
 void	print_line(t_data *data, t_ant *ant, int i);
 int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
-t_edge	*add_edge(t_data *data, int index1, int index2);
-t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
+//t_edge	*add_edge(t_data *data, int index1, int index2);
+//t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
 
 void	capacity_bfs(t_data *data, t_room *graph, int flag);
 void	flow_bfs(t_data *data, t_room *graph, int flag);
@@ -197,4 +200,5 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow);
 void put_ants_on_path(t_data *data);
 void create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);
+void init_visited(t_data *data, t_room *graph);
 #endif

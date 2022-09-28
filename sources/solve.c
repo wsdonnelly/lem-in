@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/27 10:57:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:10:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void print_path_test(t_data *data, t_room *graph)
 		printf("path_group-->>>\n");
 		while (tmp_path)
 		{
-			printf("current path:\n");
+			//printf("current path:\n");
 			tmp = tmp_path->path;
-			printf("count in path set: %d\n", tmp_path->steps);
+			//printf("count in path set: %d\n", tmp_path->steps);
 			while (tmp)
 			{
 				printf("%s ", graph[tmp->index].name);
@@ -91,9 +91,10 @@ static void reset_capacities(t_data *data, t_room *graph)
 	t_edge *tmp;
 
 	i = 0;
-	while (i < data->size)
+	while (i < data->num_rooms)
 	{
 		tmp = graph[i].neighbors;
+		graph[i].in_path = 0;
 		while (tmp)
 		{
 			tmp->capacity = 1;
@@ -104,9 +105,6 @@ static void reset_capacities(t_data *data, t_room *graph)
 
 }
 */
-
-//change cap (data, graph, SAVE, FLOW)
-
 void	solve(t_data *data, t_room *graph)
 {
 	//int i;
@@ -115,20 +113,65 @@ void	solve(t_data *data, t_room *graph)
 
 	data->path_group = NULL;
 	data->path_set = NULL;
-
-	
-	while(data->augmented_path)
+	data->flow_path = 1;
+	//data->capacity_path = 1;
+	print_graph_test(graph, data);
+	while(data->flow_path)
 	{
+		printf("here in flow\n");
+		
+		//do bfs and set current flow state
+		flow_bfs(data, graph, 0);
+		steps = change_capacity(data, graph, TRUE, TRUE);
+		print_graph_test(graph, data);
+		create_path_group(data);
+		create_path_set(data, data->cur_path, steps);
+
+		//if (data->flow_path)
+			//print_graph_test(graph, data);
+		
+		//reset_capacities(data, graph);
+	}
+
+	print_path_test(data, graph);
+}
+
+//change cap (data, graph, SAVE, FLOW)
+
+/*
+void	solve(t_data *data, t_room *graph)
+{
+	//int i;
+	//int try = 1;
+	int steps;
+
+	data->path_group = NULL;
+	data->path_set = NULL;
+	data->flow_path = 1;
+	//data->capacity_path = 1;
+	
+	while(data->flow_path)
+	{
+		printf("here in flow\n");
 		//do bfs and set current flow state
 		flow_bfs(data, graph, 0);
 		change_capacity(data, graph, FALSE, TRUE);
-		while (data->augmented_path)
+		//if (data->flow_path)
+			//print_graph_test(graph, data);
+
+		while (data->capacity_path)
 		{
 			//find shortest paths through current flow state
 			capacity_bfs(data, graph, 1);
-			create_path_group(data);
-			steps = change_capacity(data, graph, TRUE, FALSE);
+			if (data->capacity_path)
+			{
+				printf("here in cap\n");
+				create_path_group(data);
+				steps = change_capacity(data, graph, TRUE, FALSE);
+				create_path_set(data, data->cur_path, steps);
+			}
 		}
+		reset_capacities(data, graph);
 	}
 	
 	//set capacitys to be the same
@@ -138,3 +181,4 @@ void	solve(t_data *data, t_room *graph)
 	//repete
 	print_path_test(data, graph);
 }
+*/
