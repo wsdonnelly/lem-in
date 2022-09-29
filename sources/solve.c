@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 17:20:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:29:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,20 +135,20 @@ void	solve(t_data *data, t_room *graph)
 			create_path_group(data);
 			create_path_set(data, data->cur_path, steps);
 			//print_graph_test(graph, data);
-			/*
+			init_in_path(data, graph);
 			while (data->shortest_path)
 			{
 				path_bfs(data, graph);
 				if (data->shortest_path)
 				{
+					create_path_group(data);
 					printf("found a shortest path\n");
 					steps = change_capacity(data, graph, TRUE, FALSE);
 					create_path_set(data, data->cur_path, steps);
 					print_graph_test(graph, data);
 				}
 			}
-			*/
-			init_in_path(data, graph);
+			
 		}
 	}
 	print_path_test(data, graph);
