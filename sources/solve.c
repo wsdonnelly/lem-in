@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/28 16:10:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:46:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ void	solve(t_data *data, t_room *graph)
 		//do bfs and set current flow state
 		flow_bfs(data, graph, 0);
 		steps = change_capacity(data, graph, TRUE, TRUE);
-		print_graph_test(graph, data);
+		if (data->flow_path)
+			print_graph_test(graph, data);
 		create_path_group(data);
 		create_path_set(data, data->cur_path, steps);
 
-		//if (data->flow_path)
-			//print_graph_test(graph, data);
+		
 		
 		//reset_capacities(data, graph);
 	}

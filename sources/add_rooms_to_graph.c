@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/28 16:34:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:08:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static t_edge	*add_edge(t_data *data, t_room *graph,int index1, int index2)
 	temp->capacity = 1;
 	temp->flow = 0;
 	temp->reverse_edge = NULL;
-	temp->twin_edge = NULL;
 	temp->next = graph[index1].neighbors;
 	graph[index1].neighbors = temp;
 	return (temp);
@@ -63,28 +62,19 @@ static void	add_edges(t_data *data, t_room *graph, int idx_a, int idx_b)
 {
 	t_edge *edge1;
 	t_edge *edge2;
-	t_edge *edge3;
-	t_edge *edge4;
+	
 
-	//edges
+
+	//edge forward a -> b
 	edge1 = add_edge(data, graph, idx_a, idx_b);
-	//its rev edge
+	//its rev edge residual b -> a
+	//can relplace 'actual' reverse edge
 	edge2 = add_edge(data, graph, idx_b, idx_a);
 	//point between the two
 	edge1->reverse_edge = edge2;
 	edge2->reverse_edge = edge1;
 
-
-	//twin edges
-	edge3 = add_edge(data, graph, idx_b, idx_a);
-	//its rev edge
-	edge4 = add_edge(data, graph, idx_a, idx_b);
-
-	edge3->reverse_edge = edge4;
-	edge4->reverse_edge = edge3;
-
-	edge1->twin_edge = edge3;
-	edge3->twin_edge = edge1;
+	
 
 }
 

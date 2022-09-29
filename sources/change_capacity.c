@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/28 16:35:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:45:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow)
 			add_room_to_stack(idx, data, &count);
 		if (flow)
 		{
-			graph[idx].previous_edge->flow += 1;
-			graph[idx].previous_edge->reverse_edge->flow -= 1;
-			//graph[idx].previous_edge->twin_edge->flow -= 1;
-			//graph[idx].previous_edge->twin_edge->reverse_edge->flow += 1;
+			graph[idx].previous_edge->flow = 1;
+			//graph[idx].previous_edge->capacity = 0; 
+			graph[idx].previous_edge->reverse_edge->flow = 0;
+			//graph[idx].previous_edge->reverse_edge->capacity += 1;
 		}
 		else
 		{

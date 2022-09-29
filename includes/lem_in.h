@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/28 16:28:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:09:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_edge
 	int				capacity;
 	int				flow;
 	struct s_edge	*reverse_edge;
-	struct s_edge	*twin_edge;
 	struct s_edge	*next;
 
 }				t_edge;
