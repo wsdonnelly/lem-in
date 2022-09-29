@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 10:32:06 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 11:19:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void init_visited(t_data *data, t_room *graph)
 
 //search directly in graph using index values
 //set augmented path as true or false and sets previous
-void	flow_bfs(t_data *data, t_room *graph, int flag)
+void	flow_bfs(t_data *data, t_room *graph)
 {
 	t_edge *temp;
 	t_queue queue;
@@ -90,14 +90,14 @@ void	flow_bfs(t_data *data, t_room *graph, int flag)
 		if (cur_idx == data->end_index)
 		{
 			data->flow_path = 1;
-			data->capacity_path = 1;
+			//data->shortest_path = 1;
 			//would getting rid of this free the Q?
 			break ;
 		}
 		temp = graph[cur_idx].neighbors;
 		while (temp)
 		{
-			if (!graph[temp->next_room_index].visited && temp->flow == flag && temp->capacity > temp->flow)
+			if (!graph[temp->next_room_index].visited && !temp->flow)
 			{
 				graph[temp->next_room_index].visited = 1;
 				add_room_to_queue(&queue, temp->next_room_index);
@@ -109,7 +109,7 @@ void	flow_bfs(t_data *data, t_room *graph, int flag)
 	}
 }
 
-void	capacity_bfs(t_data *data, t_room *graph, int flag)
+void	path_bfs(t_data *data, t_room *graph)
 {
 	t_edge *temp;
 	t_queue queue;
@@ -118,7 +118,7 @@ void	capacity_bfs(t_data *data, t_room *graph, int flag)
 	queue.head = NULL;
 	queue.tail = NULL;
 	init_visited(data, graph);
-	data->capacity_path = 0;
+	data->shortest_path = 0;
 	cur_idx = data->start_index;
 
 	add_room_to_queue(&queue, cur_idx);
@@ -131,14 +131,14 @@ void	capacity_bfs(t_data *data, t_room *graph, int flag)
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
 		{
-			data->capacity_path = 1;
+			data->shortest_path = 1;
 			//would getting rid of this free the Q?
 			break ;
 		}
 		temp = graph[cur_idx].neighbors;
 		while (temp)
 		{
-			if (!graph[temp->next_room_index].visited && temp->capacity == flag && temp->flow && !graph[temp->next_room_index].in_path)
+			if (!graph[temp->next_room_index].visited && temp->flow && !graph[temp->next_room_index].in_path)
 			{
 				graph[temp->next_room_index].visited = 1;
 				add_room_to_queue(&queue, temp->next_room_index);

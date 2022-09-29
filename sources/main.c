@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/28 13:35:30 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 12:43:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void print_graph_test(t_room *graph, t_data *data)
 		tmp = graph[i].neighbors;
 		while (tmp)
 		{
-			printf("%s, cap: %d -- flow: %d | ", graph[tmp->next_room_index].name, tmp->capacity, tmp->flow);
+			//printf("%s, cap: %d -- flow: %d | ", graph[tmp->next_room_index].name, tmp->capacity, tmp->flow);
+			printf("%s, flow: %d | ", graph[tmp->next_room_index].name, tmp->flow);
 			tmp = tmp->next;
 		}
 		printf("\n");
@@ -78,10 +79,18 @@ int	main(int argc, char **argv)
 	//
 	//print_graph_test(graph, &data);
 
-
-	solve(&data, graph);
 	
-	//put_ants_on_path(&data);
+	solve(&data, graph);
+
+	t_path_group *tmp;
+	tmp = data.path_group;
+	while (tmp)
+	{
+		put_ants_on_path(&data, tmp);
+		tmp = tmp->next_path_group;
+		printf("\n");
+	}
+	
 	
 	//solve(data, graph, argc);
 	free_graph(&graph, &data);

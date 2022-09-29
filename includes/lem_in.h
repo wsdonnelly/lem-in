@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 10:09:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 12:23:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_data
 	t_room			**graph;
 	t_node			*name_list;
 	int				flow_path;
-	int				capacity_path;
+	int				shortest_path;
 	int				best_solution;
 	int				required_moves;
 	int				num_paths;
@@ -184,8 +184,8 @@ int		hash_map(char *name, int num_rooms, t_room **graph);
 //t_edge	*add_edge(t_data *data, int index1, int index2);
 //t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
 
-void	capacity_bfs(t_data *data, t_room *graph, int flag);
-void	flow_bfs(t_data *data, t_room *graph, int flag);
+void	path_bfs(t_data *data, t_room *graph);
+void	flow_bfs(t_data *data, t_room *graph);
 
 void	free_path(t_path **path);
 void	map_paths(t_paths *all_paths, t_path *shortest_path);
@@ -196,7 +196,7 @@ void print_graph_test(t_room *graph, t_data *data);
 void create_path_set(t_data *data, t_queue_node *path_to_add, int count);
 //void get_best_paths(t_data *data);
 int change_capacity(t_data *data, t_room *graph, int save, int flow);
-void put_ants_on_path(t_data *data);
+void put_ants_on_path(t_data *data, t_path_group *path_group);
 void create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);
 void init_visited(t_data *data, t_room *graph);
