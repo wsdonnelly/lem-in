@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 11:56:33 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:03:28 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int dequeue(t_queue *queue)
 	return (idx);
 }
 
-static void init_visited(t_data *data, t_room *graph)
+void init_visited(t_data *data, t_room *graph)
 {
 	int i;
 
@@ -65,24 +65,17 @@ static void init_visited(t_data *data, t_room *graph)
 		graph[i++].visited = 0;
 }
 
-//search directly in graph using index values
-//set augmented path as true or false and sets previous
-void	bfs(t_data *data, t_room *graph, int flag)
+
+void	flow_bfs(t_data *data, t_room *graph)
 {
 	t_edge *temp;
 	t_queue queue;
-
+	int cur_idx;
+	
 	queue.head = NULL;
 	queue.tail = NULL;
-	int cur_idx;
-	//remove
-
-
 	init_visited(data, graph);
-	data->augmented_path = 0;
-	
-	//data->shortest_path = NULL;
-	
+	data->flow_path = 0;
 	cur_idx = data->start_index;
 
 	add_room_to_queue(&queue, cur_idx);
@@ -93,17 +86,17 @@ void	bfs(t_data *data, t_room *graph, int flag)
 	while (queue.head)
 	{
 		cur_idx = dequeue(&queue);
-		//printf("cur room: %s\n", graph[cur_idx].name);
 		if (cur_idx == data->end_index)
 		{
-			data->augmented_path = 1;
+			data->flow_path = 1;
+			data->shortest_path = 1;
+			//would getting rid of this free the Q?
 			break ;
 		}
-	
 		temp = graph[cur_idx].neighbors;
 		while (temp)
 		{
-			if (!graph[temp->next_room_index].visited && temp->capacity == flag)
+			if (!graph[temp->next_room_index].visited && !temp->flow)
 			{
 				graph[temp->next_room_index].visited = 1;
 				add_room_to_queue(&queue, temp->next_room_index);
@@ -113,7 +106,46 @@ void	bfs(t_data *data, t_room *graph, int flag)
 			temp = temp->next;
 		}
 	}
-	//printf("YUP aug pather here: %d\n", data->augmented_path);
-	//free_path(&data->queue);
-	//free_path(&data->visited);
+}
+
+void	path_bfs(t_data *data, t_room *graph)
+{
+	t_edge *temp;
+	t_queue queue;
+	int cur_idx;
+	
+	queue.head = NULL;
+	queue.tail = NULL;
+	init_visited(data, graph);
+	data->shortest_path = 0;
+	cur_idx = data->start_index;
+
+	add_room_to_queue(&queue, cur_idx);
+	graph[cur_idx].visited = 1;
+	graph[cur_idx].previous_idx = -1;
+	graph[cur_idx].previous_edge = NULL;
+
+	while (queue.head)
+	{
+		cur_idx = dequeue(&queue);
+		if (cur_idx == data->end_index)
+		{
+			data->shortest_path = 1;
+			//would getting rid of this free the Q?
+			break ;
+		}
+		temp = graph[cur_idx].neighbors;
+		while (temp)
+		{
+			if (!graph[temp->next_room_index].visited && temp->flow && !graph[temp->next_room_index].in_path)
+			{
+				graph[temp->next_room_index].visited = 1;
+				graph[temp->next_room_index].in_path = 1;
+				add_room_to_queue(&queue, temp->next_room_index);
+				graph[temp->next_room_index].previous_idx = cur_idx;
+				graph[temp->next_room_index].previous_edge = temp;
+			}
+			temp = temp->next;
+		}
+	}
 }

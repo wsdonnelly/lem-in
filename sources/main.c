@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/26 19:18:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:39:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_data(t_data *data)
 	data->start_index = -2;
 	data->end_index = -2;
 	data->name_list = NULL;
-	data->augmented_path = 1;
+	data->flow_path = 1;
 	data->best_solution = 0;
 	data->required_moves = 0;
 	data->num_paths = 0;
@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 	graph[data.start_index].previous_idx = -1;
 	
 	//
-	print_graph_test(graph, &data);
+	//print_graph_test(graph, &data);
 
 
 	solve(&data, graph);

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/26 19:18:27 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:05:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void create_path_group(t_data *data)
 	}
 }
 
-void create_path_set(t_data *data, t_queue_node *path_to_add, int count)
+void create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 {
 		t_path_set *tmp_path;
 		t_path_set *last;
@@ -45,7 +45,7 @@ void create_path_set(t_data *data, t_queue_node *path_to_add, int count)
 	if (!tmp_path)
 			exit(0);
 	tmp_path->path = path_to_add;
-	tmp_path->steps = count;
+	tmp_path->steps = steps;
 	tmp_path->ants_on_path = 0;
 	tmp_path->lines = 0;
 	tmp_path->next_path = NULL;
@@ -104,7 +104,7 @@ static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *
 		add_room_to_stack(idx, data, count);
 }
 */
-int change_capacity(t_data *data, t_room *graph, int save)
+int change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
 	int count;
 
@@ -120,11 +120,11 @@ int change_capacity(t_data *data, t_room *graph, int save)
 		if (save)
 			//filter_rooms(data, graph, idx, prev, &count);
 			add_room_to_stack(idx, data, &count);
-	
-		graph[idx].previous_edge->capacity ^= 1;
-		graph[idx].previous_edge->reverse_edge->capacity ^= 1;
-		
-		//prev = graph[idx].name;
+		if (flow)
+		{
+			graph[idx].previous_edge->flow = 1;
+			graph[idx].previous_edge->reverse_edge->flow = 0;
+		}
 		idx = graph[idx].previous_idx;
 	}
 	return (count);

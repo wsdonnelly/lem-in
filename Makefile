@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/09/26 10:53:32 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/09/29 15:00:14 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,19 +51,19 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 
 clean:
 	rm -rf $(OBJS_DIR)
-	rm -rf libft/objects/
+#	rm -rf libft/objects/
 	rm -f test.map
 	rm -f rando.map
-	@make clean -sC visualizer
-	@make clean -sC map_gen
-	@make clean -sC ant_cop
+#	@make clean -sC visualizer
+#	@make clean -sC map_gen
+#	@make clean -sC ant_cop
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f libft/libft.a
-	@make fclean -sC visualizer
-	@make fclean -sC map_gen
-	@make fclean -sC ant_cop
+#	rm -f libft/libft.a
+#	@make fclean -sC visualizer
+#	@make fclean -sC map_gen
+#	@make fclean -sC ant_cop
 
 re: fclean all
 
