@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 11:17:30 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 12:36:54 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:51:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static t_room	*malloc_graph(t_data *data)
 		temp[i].name = NULL;
 		temp[i].neighbors = NULL;
 		temp[i].in_path = 0;
+		temp[i].flow_in = NULL;
+		temp[i].flow_out = NULL;
 		i++;
 	}
 	return (temp);

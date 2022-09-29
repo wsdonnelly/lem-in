@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 13:16:15 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:18:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void	add_edges(t_data *data, t_room *graph, int idx_a, int idx_b)
 	//point between the two
 	edge1->reverse_edge = edge2;
 	edge2->reverse_edge = edge1;
-
 }
 
 void	set_rooms(char **room, t_data *data, t_room *graph)
