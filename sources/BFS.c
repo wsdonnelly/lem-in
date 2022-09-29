@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 13:51:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:18:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,10 @@ void	flow_bfs(t_data *data, t_room *graph)
 			break ;
 		}
 		temp = graph[cur_idx].neighbors;
-		//if (graph[cur_idx].flow_in && graph[cur_idx].flow_out)
-			
 		while (temp)
 		{
-			if (!temp->flow)
+			if (!graph[temp->next_room_index].visited && temp->res_capacity > 0)
 			{
-				
-
 					graph[temp->next_room_index].visited = 1;
 					add_room_to_queue(&queue, temp->next_room_index);
 					graph[temp->next_room_index].previous_idx = cur_idx;

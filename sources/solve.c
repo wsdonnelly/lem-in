@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 12:36:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:41:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	solve(t_data *data, t_room *graph)
 
 	while(data->flow_path)
 	{
+		
 		flow_bfs(data, graph);
 		if (data->flow_path)
 		{
@@ -93,6 +94,7 @@ void	solve(t_data *data, t_room *graph)
 			create_path_group(data);
 			while (data->shortest_path)
 			{
+				printf("here\n");
 				path_bfs(data, graph);
 				if (data->shortest_path)
 				{
