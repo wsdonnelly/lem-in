@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/29 14:39:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 16:26:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void print_graph_test(t_room *graph, t_data *data)
 		tmp = graph[i].neighbors;
 		while (tmp)
 		{
-			printf("%s -> cap: %d | ", graph[tmp->next_room_index].name, tmp->capacity);
+			printf("%s -> flow: %d -- in_path %d |", graph[tmp->next_room_index].name, tmp->flow,  graph[tmp->next_room_index].in_path);
 			tmp = tmp->next;
 		}
 		printf("\n");

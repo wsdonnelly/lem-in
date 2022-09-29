@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 14:41:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:19:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward)
 	temp->next_room_index = next;
 
 	temp->capacity = 0;
+	temp->flow = 1;
 	temp->reverse_edge = forward;
 	temp->next = *head;
 	*head = temp;

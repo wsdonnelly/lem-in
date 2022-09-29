@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 15:03:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:20:47 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ void	path_bfs(t_data *data, t_room *graph)
 			if (!graph[temp->next_room_index].visited && temp->flow && !graph[temp->next_room_index].in_path)
 			{
 				graph[temp->next_room_index].visited = 1;
-				graph[temp->next_room_index].in_path = 1;
 				add_room_to_queue(&queue, temp->next_room_index);
 				graph[temp->next_room_index].previous_idx = cur_idx;
 				graph[temp->next_room_index].previous_edge = temp;

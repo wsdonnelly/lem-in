@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 15:05:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:21:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,15 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow)
 		{
 			graph[idx].previous_edge->flow = 1;
 			graph[idx].previous_edge->reverse_edge->flow = 0;
+			//graph[idx].previous_edge->reverse_edge->flow = 1;
+
 		}
+		else
+		{
+			if(idx != data->end_index)
+				graph[idx].in_path = 1;
+		}
+		
 		idx = graph[idx].previous_idx;
 	}
 	return (count);
