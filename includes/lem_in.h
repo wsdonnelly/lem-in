@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 19:14:24 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:59:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,21 +113,20 @@ typedef struct s_data
 	t_line			*store_input_tail;
 	int				end_index;
 	int				start_index;
+	//remove and fix this?
 	t_room			**graph;
 	t_node			*name_list;
 	int				flow_path;
 	int				shortest_path;
-	int				best_solution;
-	int				required_moves;
-	int				num_paths;
+	
 	struct s_queue_node *cur_path;
 	struct s_path_set *path_set;
 	struct s_path_group *path_group;
 
-	//struct s_path	*queue;
-	//struct s_path	*visited;
-	//struct s_path	*shortest_path;
-	//struct s_edge	*neighbor;
+	//? 
+	//int			required_moves;
+	//int				num_paths;
+	int				best_solution;
 	struct s_paths	*all_paths;
 	struct s_paths	*solution_paths;
 }				t_data;
@@ -157,15 +156,13 @@ typedef struct s_parse
 
 //parser
 void	read_map(t_data *data, t_room **graph);
-//void	get_start_end(t_data *data, char *line);
+
 void	check_links(t_parse *parse, t_data *data, t_room **graph);
 void	check_rooms(t_data *data, char *line);
 //graph creation
 void	add_to_graph(t_data *data, t_room *graph, char *line);
 void	set_rooms(char **room, t_data *data, t_room *graph);
-//void	both_start_end(char *start_room, char *end_room, t_data *data);
-////void	set_end_rooms(char *end_room, char *room_2, t_data *data);
-//void	set_start_rooms(char *start_room, char *room_2, t_data *data);
+
 //store_data
 void	store_data(t_data *data, char *line);
 void	print_data(t_data *data);
@@ -183,8 +180,6 @@ void	print_paths(t_data *data);
 void	print_line(t_data *data, t_ant *ant, int i);
 int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
-//t_edge	*add_edge(t_data *data, int index1, int index2);
-//t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
 
 void	path_bfs(t_data *data, t_room *graph);
 void	flow_bfs(t_data *data, t_room *graph);

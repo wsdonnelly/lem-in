@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 18:41:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:13:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void print_path_test(t_data *data, t_room *graph)
 	printf("\n");
 }
 
+
 static void reset_in_path(t_data *data, t_room *graph)
 {
 	int i;
@@ -102,13 +103,19 @@ void	solve(t_data *data, t_room *graph)
 					create_path_set(data, data->cur_path, steps);
 				}
 			}
+			//put ants on curent paths and save current max lines
+			//compare to best solution
+			//if curmax lines is >= previous max_lines
+			//return previous path set
 			reset_in_path(data, graph);
 		}
 	}
 	print_path_test(data, graph);
 }
 
+
 /*
+//checkflows
 void	solve(t_data *data, t_room *graph)
 {
 	int steps;
@@ -123,24 +130,11 @@ void	solve(t_data *data, t_room *graph)
 		if (data->flow_path)
 		{
 			printf("found a flow path...\n");
-			steps = change_capacity(data, graph, FALSE, TRUE);
-			//create_path_group(data);
-			//create_path_set(data, data->cur_path, steps);
-		//	print_path_test(data, graph);
-			//print_graph_test(graph, data);
-			data->shortest_path = 1;
+			steps = change_capacity(data, graph, TRUE, TRUE);
 			create_path_group(data);
-			while (data->shortest_path)
-			{
-				path_bfs(data, graph);
-				if (data->shortest_path)
-				{
-					printf("found a shortest path...\n");
-					steps = change_capacity(data, graph, TRUE, FALSE);
-					create_path_set(data, data->cur_path, steps);
-				}
-			}
-			reset_in_path(data, graph);
+			create_path_set(data, data->cur_path, steps);
+			//print_path_test(data, graph);
+
 		}
 	}
 	print_path_test(data, graph);

@@ -6,18 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 19:18:42 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:38:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
-
-/*
-** Breadth-first-search algorithm to identify the shortest valid path from
-** start to end.
-*/
-
 
 static void add_room_to_queue(t_queue *queue, int index)
 {
@@ -38,8 +31,6 @@ static void add_room_to_queue(t_queue *queue, int index)
 	queue->tail = tmp;
 }
 
-
-//get idx
 static int dequeue(t_queue *queue)
 {
 	t_queue_node *tmp;
@@ -65,7 +56,6 @@ void init_visited(t_data *data, t_room *graph)
 		graph[i++].visited = 0;
 }
 
-//search directly in graph using index values
 //set augmented path as true or false and sets previous
 void	flow_bfs(t_data *data, t_room *graph)
 {
