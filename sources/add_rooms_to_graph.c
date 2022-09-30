@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 14:18:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:20:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,17 @@ static void	add_edges(t_data *data, t_room *graph, int idx_a, int idx_b)
 {
 	t_edge *edge1;
 	t_edge *edge2;
-	
 
-	//edge forward a -> b
+	//edge forward flow == 1 or 0
 	edge1 = add_edge(data, graph, idx_a, idx_b);
-	//its rev edge residual b -> a 
+	//its rev edge cap - flow 
 	edge2 = add_edge(data, graph, idx_b, idx_a);
 	//point between the two
 	edge1->reverse_edge = edge2;
 	edge2->reverse_edge = edge1;
+
+
+
 }
 
 void	set_rooms(char **room, t_data *data, t_room *graph)

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 11:45:56 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/30 15:13:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:57:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,29 @@ void put_ants_on_path(t_data *data, t_path_group *path_group)
 			if (!path_num && ants_at_start)
 			{
 				//add ant to current path
-				cur_path->lines = cur_path->steps + cur_path->ants_on_path;
+				//cur_path->lines = cur_path->steps + cur_path->ants_on_path - 1;
 				cur_path->ants_on_path++;
 				ants_at_start--;
 			}
 			else if (ants_at_start > (path_num * (cur_path->steps - (diff / path_num))))
 			{
 				//add ant to current path
-				cur_path->lines = cur_path->steps + cur_path->ants_on_path;
+				//cur_path->lines = cur_path->steps + cur_path->ants_on_path;
 				cur_path->ants_on_path++;
 				ants_at_start--;
 			}
+			//cur_path->lines = cur_path->steps + cur_path->ants_on_path - 1;
 			diff += cur_path->steps;
 			path_num++;
 			cur_path = cur_path->next_path;
 		}
 	}
-
+	cur_path = path_group->paths;
+	while(cur_path && cur_path->ants_on_path)
+	{
+		cur_path->lines = cur_path->steps + cur_path->ants_on_path - 1;
+		cur_path = cur_path->next_path;
+	}
 	//tester
 	cur_path = path_group->paths;
 	while (cur_path)
@@ -57,7 +63,7 @@ void put_ants_on_path(t_data *data, t_path_group *path_group)
 	}
 }
 
-void 
+
 /*
 void put_ants_on_path(t_data *data, t_path_group *path_group)
 {
