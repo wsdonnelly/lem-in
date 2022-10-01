@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/30 16:15:52 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/01 13:12:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "ft_printf.h"
 # include <limits.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 #include<stdio.h>
 
@@ -78,7 +79,7 @@ typedef struct s_path_group
 {
 	struct s_path_set		*paths;
 	struct s_path_group	*next_path_group;
-	int									min_lines;
+	//int									min_lines;
 }								t_path_group;
 
 
@@ -198,4 +199,5 @@ void put_ants_on_path(t_data *data, t_path_group *path_group);
 void create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);
 void init_visited(t_data *data, t_room *graph);
+t_path_group *compare_paths(t_data *data);
 #endif

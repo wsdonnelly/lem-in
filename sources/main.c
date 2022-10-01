@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/30 13:57:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:58:24 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,8 @@ int	main(int argc, char **argv)
 
 	
 	solve(&data, graph);
-	//compare_paths();
-	t_path_group *tmp;
-	tmp = data.path_group;
-	while (tmp)
-	{
-		put_ants_on_path(&data, tmp);
-		tmp = tmp->next_path_group;
-		printf("\n");
-	}
+	compare_paths(&data);
+
 	
 	
 	//solve(data, graph, argc);
