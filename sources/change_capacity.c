@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 14:56:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:45:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,21 +105,7 @@ static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *
 	
 }
 */
-static void filter_all_rooms(t_data *data, t_room *graph)
-{
-	int len;
-	int i;
-	
-	i = 0;
-	while (i < data->size)
-	{
-		len = ft_strlen(graph[i].name);
-		if (graph[i].name[len - 1] == 'I' || graph[i].name[len - 1] == 'O')
-				graph[i].name[len - 1] = '\0';
-		i++;
-	}
 
-}
 
 int change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
@@ -127,7 +113,7 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow)
 
 	count = 0;
 	//filter all rooms
-	filter_all_rooms(data, graph);
+	//filter_all_rooms(data, graph);
 	//avoid setting capacity of edge connecting end to 0;
 	int idx = graph[data->end_index].previous_idx;
 	char *prev = graph[data->end_index].name;
@@ -148,8 +134,13 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow)
 		}
 		else if(!flow)
 		{
+			//add both in and out rooms 
 			if(idx != data->end_index)
+			{
 				graph[idx].in_path = 1;
+				graph[graph[idx].in_or_out].in_path = 1;
+			}
+			
 		}
 		prev = graph[idx].name;
 		idx = graph[idx].previous_idx;
