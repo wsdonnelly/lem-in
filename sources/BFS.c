@@ -6,18 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 15:03:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:01:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
-
-/*
-** Breadth-first-search algorithm to identify the shortest valid path from
-** start to end.
-*/
-
 
 static void add_room_to_queue(t_queue *queue, int index)
 {
@@ -37,7 +30,6 @@ static void add_room_to_queue(t_queue *queue, int index)
 	queue->tail->next = tmp;
 	queue->tail = tmp;
 }
-
 
 //get idx
 static int dequeue(t_queue *queue)

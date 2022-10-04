@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 15:45:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:53:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 		t_path_set *last;
 		t_path_group *cur;
 
-	//create path * on path_set. ADD the end of list
+	//create path * on path_set and add to the end of list
 	tmp_path = malloc(sizeof(t_path_set));
 	if (!tmp_path)
 			exit(0);
@@ -64,18 +64,6 @@ void create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 			last = last->next_path;
 		last->next_path = tmp_path;
 	}
-
-/*
-	last = data->path_set;
-	if (!data->path_set)
-		data->path_set = tmp_path;
-	else
-	{
-		while (last->next_path)
-			last = last->next_path;
-		last->next_path = tmp_path;
-	}
-*/
 }
 
 static void add_room_to_stack(int index, t_data *data, int *count)
@@ -91,30 +79,11 @@ static void add_room_to_stack(int index, t_data *data, int *count)
 	data->cur_path = tmp;
 }
 
-/*
-static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *count)
-{
-	int len;
-
-	//it doesnt matter changing the name in the graph because program only referenceces index 
-	len = ft_strlen(graph[idx].name);
-	if (graph[idx].name[len - 1] == 'I' || graph[idx].name[len - 1] == 'O')
-		graph[idx].name[len - 1] = '\0';
-	if (ft_strcmp(prev, graph[idx].name))
-		add_room_to_stack(idx, data, count);
-	
-}
-*/
-
-
 int change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
 	int count;
 
 	count = 0;
-	//filter all rooms
-	//filter_all_rooms(data, graph);
-	//avoid setting capacity of edge connecting end to 0;
 	int idx = graph[data->end_index].previous_idx;
 	char *prev = graph[data->end_index].name;
 	data->cur_path = NULL;
@@ -140,7 +109,6 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow)
 				graph[idx].in_path = 1;
 				graph[graph[idx].in_or_out].in_path = 1;
 			}
-			
 		}
 		prev = graph[idx].name;
 		idx = graph[idx].previous_idx;

@@ -6,12 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/09/29 16:26:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:54:09 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
 
 static void	init_data(t_data *data)
 {
@@ -26,16 +25,10 @@ static void	init_data(t_data *data)
 	data->end_index = -2;
 	data->name_list = NULL;
 	data->flow_path = 1;
-	data->best_solution = 0;
-	data->required_moves = 0;
-	data->num_paths = 0;
-	data->all_paths = NULL;
-	data->solution_paths = NULL;
 }
 
 void print_graph_test(t_room *graph, t_data *data)
 {
-	//graph print test
 	int i = 0;
 	t_edge *tmp;
 
@@ -74,14 +67,9 @@ int	main(int argc, char **argv)
 		exit_error(&data, "ERROR");
 	graph[data.start_index].previous_idx = -1;
 	
-	//
-	//print_graph_test(graph, &data);
-
-
 	solve(&data, graph);
-	//put_ants_on_path(&data);
-	
-	//solve(data, graph, argc);
+	compare_paths(&data);
+
 	free_graph(&graph, &data);
 	free_data(&data);
 	return (0);

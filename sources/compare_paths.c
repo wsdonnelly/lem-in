@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   room_functions.c                                   :+:      :+:    :+:   */
+/*   compare_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/05/24 12:24:50 by wdonnell         ###   ########.fr       */
+/*   Created: 2022/10/01 12:53:40 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/10/04 16:53:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_path	*create_room_on_path(t_room *room)
+
+t_path_group *compare_paths(t_data *data)
 {
-	t_path	*path;
+	t_path_group *tmp;
+	t_path_group *best;
+	int count;
 
-	path = (t_path *)malloc(sizeof(t_path));
-	if (!path)
-		return (NULL);
-	path->room = room;
-	path->next_room = NULL;
-	return (path);
-}
-
-void	add_room_to_path(t_room *room, t_path **path)
-{
-	t_path	*tmp;
-
-	if (!*path)
-		*path = create_room_on_path(room);
-	else
+	count = INT_MAX;
+	tmp = data->path_group;
+	while (tmp)
 	{
-		tmp = *path;
-		while (tmp->next_room)
+		put_ants_on_path(data, tmp);
+		if (tmp->paths->lines < count)
 		{
-			tmp = tmp->next_room;
+			count = tmp->paths->lines;
+			best = tmp;
 		}
-		tmp->next_room = create_room_on_path(room);
+		tmp = tmp->next_path_group;
+		printf("\n");
 	}
+	printf("BEST---> %d\n", count);
+	return (best);
 }

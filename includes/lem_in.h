@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 15:45:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:46:04 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct s_queue
 typedef struct s_path_set
 {
 	struct s_queue_node	*path;
-	int									steps;
-	int									ants_on_path;
-	int									lines;
+	int						steps;
+	int						ants_on_path;
+	int						lines;
 	struct s_path_set		*next_path;
 }				t_path_set;
 
@@ -79,28 +79,9 @@ typedef struct s_path_group
 	int									min_lines;
 }								t_path_group;
 
-
 //old stuff
-typedef struct s_path
-{
-	int						index;
-	struct s_room	*room;
-	struct s_path	*next_room;
-}				t_path;
 
-typedef struct s_paths
-{
-	struct s_path	*path;
-	int				steps;
-	int				new_ant;
-	struct s_paths	*next_path;
-}				t_paths;
 
-typedef struct s_line
-{
-	char			*line;
-	struct s_line	*next;
-}				t_line;
 
 typedef struct s_data
 {
@@ -109,27 +90,18 @@ typedef struct s_data
 	int				size;
 	char			*start;
 	char			*end;
-	t_line			*store_input_head;
-	t_line			*store_input_tail;
+	struct s_line			*store_input_head;
+	struct s_line			*store_input_tail;
 	int				end_index;
 	int				start_index;
 	t_room			**graph;
 	t_node			*name_list;
 	int				flow_path;
 	int			shortest_path;
-	int				best_solution;
-	int				required_moves;
-	int				num_paths;
 	struct s_queue_node *cur_path;
 	struct s_path_set *path_set;
 	struct s_path_group *path_group;
 
-	//struct s_path	*queue;
-	//struct s_path	*visited;
-	//struct s_path	*shortest_path;
-	//struct s_edge	*neighbor;
-	struct s_paths	*all_paths;
-	struct s_paths	*solution_paths;
 }				t_data;
 
 typedef struct s_name
@@ -146,28 +118,18 @@ typedef struct s_name
 	int		index_start;
 }				t_name;
 
-typedef struct s_ant
-{
-	int				num;
-	struct s_path	*path;
-	int				name_len;
-	char			*room_name;
-	struct s_ant	*next_ant;
-}				t_ant;
-
-typedef struct s_print
-{
-	int		print_room;
-	char	*room_name;
-	int		name_len;
-}				t_print;
-
 typedef struct s_parse
 {
 	char	*line;
 	int		flag;
 	int		room_check;
 }				t_parse;
+
+typedef struct s_line
+{
+	char			*line;
+	struct s_line	*next;
+}				t_line;
 
 //parser
 void	read_map(t_data *data, t_room **graph);
@@ -191,30 +153,15 @@ void	free_edge_list(t_edge *head);
 void	free_data(t_data *data);
 int		exit_error(t_data *data, char *message);
 int		is_valid_int(char *num);
-void	free_paths(t_paths **paths);
-void	print_solution(t_data *data);
-void	print_paths(t_data *data);
-void	print_line(t_data *data, t_ant *ant, int i);
+
+
 int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);
 t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
-//solver
 
-//void	find_shortest_path(t_data *data, t_room *graph);
-//void	find_fewest_moves(t_data *data, t_room *graph);
 void	flow_bfs(t_data *data, t_room *graph);
 void	path_bfs(t_data *data, t_room *graph);
-//path
-//void	add_room_to_path(t_room *room, t_path **path);
-//void	add_shortest_path_to_all_paths(t_paths **all_paths, \
-//t_path *shortest_path);
-//t_path	*create_room_on_path(t_room *room);
-//void	build_shortest_path(t_path **path, t_room *graph);
-//void	copy_all_paths_to_solution(t_paths **solution_paths, \
-//t_paths *all_paths);
-void	free_path(t_path **path);
-void	map_paths(t_paths *all_paths, t_path *shortest_path);
 
 //new and tests
 void print_graph_test(t_room *graph, t_data *data);
@@ -222,7 +169,8 @@ void print_graph_test(t_room *graph, t_data *data);
 void create_path_set(t_data *data, t_queue_node *path_to_add, int steps);
 void get_best_paths(t_data *data);
 int change_capacity(t_data *data, t_room *graph, int save, int flow);
-void put_ants_on_path(t_data *data);
 void create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);
+t_path_group *compare_paths(t_data *data);
+void put_ants_on_path(t_data *data, t_path_group *path_group);
 #endif
