@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/01 13:13:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:57:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void add_room_to_stack(int index, t_data *data, int *count)
 int change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
 	int count;
+	t_edge *out;
 
 	count = 0;
 	int idx = data->end_index;
@@ -92,9 +93,25 @@ int change_capacity(t_data *data, t_room *graph, int save, int flow)
 		if (flow)
 		{
 			graph[idx].previous_edge->res_capacity -= 1;
-			graph[idx].previous_edge->flow = 1; 
 			graph[idx].previous_edge->reverse_edge->res_capacity += 1;
+
+			graph[idx].previous_edge->flow = 1;
 			graph[idx].previous_edge->reverse_edge->flow = 0;
+
+			graph[idx].previous_edge->is_backtrack = 0;
+			graph[idx].previous_edge->reverse_edge->is_backtrack = 1;
+			
+			graph[idx].has_flow = 1;
+		
+			if (idx != data->end_index || idx != data->start_index)
+			{
+				graph[idx].in_edge = graph[idx].previous_edge;
+				graph[idx].out_edge = out;
+
+			}
+				out = graph[idx].previous_edge;
+			
+
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/30 16:21:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:10:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	solve(t_data *data, t_room *graph)
 
 	while(data->flow_path)
 	{
-		
+	
 		flow_bfs(data, graph);
 		if (data->flow_path)
 		{

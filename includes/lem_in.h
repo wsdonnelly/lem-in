@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/01 13:12:43 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:47:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,19 @@ typedef struct s_edge
 	int				next_room_index;
 	int				res_capacity;
 	int				flow;
+	int				is_backtrack;
 	struct s_edge	*reverse_edge;
-	struct s_edge	*forward_edge;
 	struct s_edge	*next;
 
 }				t_edge;
 
 typedef struct s_room
 {
-	int in_path;
-	struct s_edge	*flow_in;
-	struct s_edge	*flow_out;
+	int must_backtrack;
+	struct s_edge	*in_edge;
+	struct s_edge	*out_edge;
+	int		in_path;
+	int		has_flow;
 	int				visited;
 	char			*name;
 	int previous_idx;

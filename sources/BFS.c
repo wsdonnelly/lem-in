@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/30 16:20:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:59:23 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,41 @@ void	flow_bfs(t_data *data, t_room *graph)
 
 	while (queue.head)
 	{
+			
 		cur_idx = dequeue(&queue);
+		if (graph[cur_idx].previous_edge)
+			printf("%s, hasflow: %d, must backtrack: %d \n", graph[cur_idx].name, graph[cur_idx].has_flow, graph[cur_idx].must_backtrack);
 		if (cur_idx == data->end_index)
 		{
 			data->flow_path = 1;
 			//data->shortest_path = 1;
 			//would getting rid of this free the Q?
+			printf("\n");
 			break ;
 		}
 		temp = graph[cur_idx].neighbors;
 		while (temp)
 		{
-			if (!graph[temp->next_room_index].visited && temp->res_capacity > 0)
+			if (temp->res_capacity > 0)
 			{
+					
+				//if((graph[cur_idx].has_flow && !graph[cur_idx].previous_edge->is_backtrack && temp->is_backtrack && temp->next_room_index != data->start_index) \
+		//	|| (!graph[cur_idx].has_flow && !graph[temp->next_room_index].visited) \
+			//	|| (graph[cur_idx].has_flow && (graph[cur_idx].previous_edge->is_backtrack || graph[temp->next_room_index].visited) && !graph[temp->next_room_index].visited && !temp->is_backtrack))
+				//if((temp->is_backtrack && temp->next_room_index != data->start_index) || !graph[temp->next_room_index].visited)
+				if()
+				{
+					//if (graph[temp->next_room_index].has_flow && !temp->is_backtrack)
+						//graph[temp->next_room_index].must_backtrack = 1;
+					//else if (graph[temp->next_room_index].must_backtrack && temp->is_backtrack)
+						//graph[temp->next_room_index].must_backtrack = 0;
+					
+	
 					graph[temp->next_room_index].visited = 1;
 					add_room_to_queue(&queue, temp->next_room_index);
 					graph[temp->next_room_index].previous_idx = cur_idx;
 					graph[temp->next_room_index].previous_edge = temp;
+				}
 			}
 			temp = temp->next;
 		}

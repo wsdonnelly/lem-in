@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/30 16:20:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:55:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_edge	*add_edge(t_data *data, t_room *graph,int index1, int index2)
 		exit_error(data, "ERROR");
 	temp->next_room_index = index2;
 	temp->res_capacity = 1;
+	temp->is_backtrack = 0;
 	temp->flow = 0;
 	temp->reverse_edge = NULL;
 	temp->next = graph[index1].neighbors;
