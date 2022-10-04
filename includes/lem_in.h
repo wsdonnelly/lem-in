@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 16:52:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:18:38 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_edge
 
 typedef struct s_room
 {
+	int				in_or_out;
 	int				visited;
 	int				in_path;
 	char			*name;

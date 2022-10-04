@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 17:20:47 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:03:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	path_bfs(t_data *data, t_room *graph)
 
 	while (queue.head)
 	{
+		
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
 		{

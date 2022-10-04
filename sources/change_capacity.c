@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/29 17:21:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:56:32 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,37 +102,56 @@ static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *
 		graph[idx].name[len - 1] = '\0';
 	if (ft_strcmp(prev, graph[idx].name))
 		add_room_to_stack(idx, data, count);
+	
 }
 */
+static void filter_all_rooms(t_data *data, t_room *graph)
+{
+	int len;
+	int i;
+	
+	i = 0;
+	while (i < data->size)
+	{
+		len = ft_strlen(graph[i].name);
+		if (graph[i].name[len - 1] == 'I' || graph[i].name[len - 1] == 'O')
+				graph[i].name[len - 1] = '\0';
+		i++;
+	}
+
+}
+
 int change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
 	int count;
 
 	count = 0;
+	//filter all rooms
+	filter_all_rooms(data, graph);
 	//avoid setting capacity of edge connecting end to 0;
 	int idx = graph[data->end_index].previous_idx;
-	//char *prev = graph[data->end_index].name;
+	char *prev = graph[data->end_index].name;
 	data->cur_path = NULL;
 	if (save)
 		add_room_to_stack(data->end_index, data, &count);
 	while (graph[idx].previous_idx >= 0)
 	{
 		if (save)
-			//filter_rooms(data, graph, idx, prev, &count);
-			add_room_to_stack(idx, data, &count);
+		{
+			if(ft_strcmp(prev, graph[idx].name))
+				add_room_to_stack(idx, data, &count);
+		}
 		if (flow)
 		{
 			graph[idx].previous_edge->flow = 1;
 			graph[idx].previous_edge->reverse_edge->flow = 0;
-			//graph[idx].previous_edge->reverse_edge->flow = 1;
-
 		}
-		else
+		else if(!flow)
 		{
 			if(idx != data->end_index)
 				graph[idx].in_path = 1;
 		}
-		
+		prev = graph[idx].name;
 		idx = graph[idx].previous_idx;
 	}
 	return (count);
