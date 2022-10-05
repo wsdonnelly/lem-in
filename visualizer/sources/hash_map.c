@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 10:35:23 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/22 13:56:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:50:23 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ int	hasher(char *name, int num_rooms)
 {
 	int	i;
 	int	index;
-//maybe change to unsigned
+
 	index = 0;
 	i = 0;
 	while (name[i])
 	{
 		index += ((int)name[i]);
-		index /= 13;
 		i++;
 	}
 	index %= num_rooms;
@@ -32,6 +31,7 @@ int	hasher(char *name, int num_rooms)
 int	hash_map(char *name, t_info *info, t_room **room_arr)
 {
 	int	index;
+
 	index = hasher(name, info->num_rooms);
 	while ((*room_arr)[index].name != NULL)
 	{

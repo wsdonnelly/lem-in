@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 12:22:41 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/09/20 16:31:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 13:31:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,14 @@ int	main(void)
 	srand(time(0));
 	init_info(&info);
 	init_data(&data);
-	
 	data.info = &info;
 	read_in_info(&info, &room_arr);
-	printf("HERE\n");
 	data.room_arr = room_arr;
 	idx = lookup(info.start, info.num_rooms, &room_arr);
 	room_arr[idx].in_path = 0;
 	idx = lookup(info.end, info.num_rooms, &room_arr);
 	room_arr[idx].in_path = 0;
-	
 	data.mlx = mlx_init();
-	
 	data.win = mlx_new_window(data.mlx, 1920, 1080, " lem-in visualizer");
 	draw_graph(&data);
 	mlx_hook(data.win, 2, 0, controls, &data);
