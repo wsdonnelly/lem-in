@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/05 14:25:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:48:47 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	main(int argc, char **argv)
 	if (!data.path_group)
 		exit_error(&data, "no valid path found");
 	compare_paths(&data);
-	print_comments(&data);
-	print_data(&data);
+	//print_comments(&data);
+	//print_data(&data);
 	free_graph(&graph, &data);
 	free_data(&data);
 	return (0);
