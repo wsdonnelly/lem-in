@@ -6,48 +6,29 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 14:33:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:09:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void	add_room_to_queue(t_queue *queue, int index)
+static void	enqueue(t_queue *queue, int index)
 {
-	t_queue_node	*tmp;
-
-	tmp = malloc(sizeof(t_queue_node));
-	if (!tmp)
-		exit (0);
-	tmp->index = index;
-	tmp->next = NULL;
-	if (!queue->tail)
-	{
-		queue->head = tmp;
-		queue->tail = tmp;
-		return ;
-	}
-	queue->tail->next = tmp;
-	queue->tail = tmp;
+	queue->tail++;
+	queue->queue[queue->tail] = index;
 }
 
 static int	dequeue(t_queue *queue)
 {
-	t_queue_node	*tmp;
-	int						idx;
+	int	idx;
 
-	if (!queue->head)
-		return (-1);
-	tmp = queue->head;
-	queue->head = queue->head->next;
-	if (!queue->head)
-		queue->tail = NULL;
-	idx = tmp->index;
-	free(tmp);
+	idx = queue->queue[queue->head];
+	queue->head++;
 	return (idx);
+
 }
 
-void	init_visited(t_data *data, t_room *graph)
+static void	init_visited(t_data *data, t_room *graph)
 {
 	int	i;
 
@@ -56,22 +37,35 @@ void	init_visited(t_data *data, t_room *graph)
 		graph[i++].visited = 0;
 }
 
+static int	*create_queue(t_data *data)
+{
+	int *arr;
+
+	arr = (int *)malloc(sizeof(int) * data->size);
+	if (!arr)
+		exit (0);
+	return (arr);
+}
+
 void	flow_bfs(t_data *data, t_room *graph)
 {
 	t_edge	*temp;
 	t_queue	queue;
 	int			cur_idx;
 
-	queue.head = NULL;
-	queue.tail = NULL;
+	queue.head = 0;
+	queue.tail = -1;
+	
+	queue.queue = create_queue(data);
+	
 	init_visited(data, graph);
 	data->flow_path = 0;
 	cur_idx = data->start_index;
-	add_room_to_queue(&queue, cur_idx);
+	enqueue(&queue, cur_idx);
 	graph[cur_idx].visited = 1;
 	graph[cur_idx].previous_idx = -1;
 	graph[cur_idx].previous_edge = NULL;
-	while (queue.head)
+	while (queue.head <= queue.tail)
 	{
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
@@ -87,14 +81,16 @@ void	flow_bfs(t_data *data, t_room *graph)
 			if (!graph[temp->next_room_index].visited && !temp->flow)
 			{
 				graph[temp->next_room_index].visited = 1;
-				add_room_to_queue(&queue, temp->next_room_index);
+				enqueue(&queue, temp->next_room_index);
 				graph[temp->next_room_index].previous_idx = cur_idx;
 				graph[temp->next_room_index].previous_edge = temp;
 			}
 			temp = temp->next;
 		}
 	}
+	free(queue.queue);
 }
+
 
 void	path_bfs(t_data *data, t_room *graph)
 {
@@ -102,16 +98,21 @@ void	path_bfs(t_data *data, t_room *graph)
 	t_queue	queue;
 	int			cur_idx;
 
-	queue.head = NULL;
-	queue.tail = NULL;
+	queue.head = 0;
+	queue.tail = -1;
+
+	queue.queue = create_queue(data);
+
 	init_visited(data, graph);
 	data->shortest_path = 0;
 	cur_idx = data->start_index;
-	add_room_to_queue(&queue, cur_idx);
+
+	enqueue(&queue, cur_idx);
+
 	graph[cur_idx].visited = 1;
 	graph[cur_idx].previous_idx = -1;
 	graph[cur_idx].previous_edge = NULL;
-	while (queue.head)
+	while (queue.head <= queue.tail)
 	{
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
@@ -126,11 +127,12 @@ void	path_bfs(t_data *data, t_room *graph)
 			if (!graph[temp->next_room_index].visited && temp->flow && !graph[temp->next_room_index].in_path)
 			{
 				graph[temp->next_room_index].visited = 1;
-				add_room_to_queue(&queue, temp->next_room_index);
+				enqueue(&queue, temp->next_room_index);
 				graph[temp->next_room_index].previous_idx = cur_idx;
 				graph[temp->next_room_index].previous_edge = temp;
 			}
 			temp = temp->next;
 		}
 	}
+	free(queue.queue);
 }

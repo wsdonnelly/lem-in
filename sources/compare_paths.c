@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:53:40 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 14:18:12 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:51:35 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ t_path_group	*compare_paths(t_data *data)
 		}
 		tmp = tmp->next_path_group;
 	}
-	//printf("BEST---> %d\n", count);
+	printf("BEST---> %d\n", count);
 	return (best);
 }

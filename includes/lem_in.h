@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 14:38:57 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:57:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ typedef struct s_queue_node
 
 typedef struct s_queue
 {
-	struct s_queue_node	*head;
-	struct s_queue_node	*tail;
-}				t_queue;
+	int	head;
+	int	tail;
+	int *queue;
+}			t_queue;
 
 typedef struct s_path_set
 {
