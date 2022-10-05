@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 14:23:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:42:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	create_path_group(t_data *data)
 	tmp = malloc(sizeof(t_path_group));
 	if (!tmp)
 		exit(0);
-	tmp->min_lines = 0;
 	tmp->paths = NULL;
 	tmp->next_path_group = NULL;
 	last = data->path_group;

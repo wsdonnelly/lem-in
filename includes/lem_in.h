@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 15:57:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 18:42:21 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef struct s_path_group
 {
 	struct s_path_set		*paths;
 	struct s_path_group	*next_path_group;
-	int									min_lines;
 }								t_path_group;
 
 typedef struct s_data
