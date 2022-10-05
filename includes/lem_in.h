@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 16:46:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:38:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,36 @@
 
 typedef struct s_edge
 {
-	int				next_room_index;
-	int				capacity;
-	int				flow;
+	int						next_room_index;
+	int						capacity;
+	int						flow;
 	struct s_edge	*reverse_edge;
 	struct s_edge	*next;
 
-}				t_edge;
+}								t_edge;
 
 typedef struct s_room
 {
-	int				in_or_out;
-	int				visited;
-	int				in_path;
-	char			*name;
-	int previous_idx;
+	int						in_or_out;
+	int						visited;
+	int						in_path;
+	char					*name;
+	int						previous_idx;
 	struct s_edge	*previous_edge;
 	struct s_edge	*neighbors;
-}				t_room;
+}								t_room;
 
 typedef struct s_node
 {
-	char			*name;
+	char					*name;
 	struct s_node	*next;
-}				t_node;
+}								t_node;
 
 typedef struct s_queue_node
 {
-	int			index;
+	int									index;
 	struct s_queue_node	*next;
-}				t_queue_node;
+}								t_queue_node;
 
 typedef struct s_queue
 {
@@ -79,29 +79,24 @@ typedef struct s_path_group
 	int									min_lines;
 }								t_path_group;
 
-//old stuff
-
-
-
 typedef struct s_data
 {
-	int				num_ants;
-	int				num_rooms;
-	int				size;
-	char			*start;
-	char			*end;
-	struct s_line			*store_input_head;
-	struct s_line			*store_input_tail;
-	int				end_index;
-	int				start_index;
-	t_room			**graph;
-	t_node			*name_list;
-	int				flow_path;
-	int			shortest_path;
-	struct s_queue_node *cur_path;
-	struct s_path_set *path_set;
-	struct s_path_group *path_group;
-
+	int									num_ants;
+	int									num_rooms;
+	int									size;
+	char								*start;
+	char								*end;
+	int									end_index;
+	int									start_index;
+	int									flow_path;
+	int									shortest_path;
+	struct s_queue_node	*cur_path;
+	struct s_path_set		*path_set;
+	struct s_path_group	*path_group;
+	struct s_line				*store_input_head;
+	struct s_line				*store_input_tail;
+	t_room							**graph;
+	t_node							*name_list;
 }				t_data;
 
 typedef struct s_name
@@ -127,7 +122,7 @@ typedef struct s_parse
 
 typedef struct s_line
 {
-	char			*line;
+	char					*line;
 	struct s_line	*next;
 }				t_line;
 
@@ -153,24 +148,20 @@ void	free_edge_list(t_edge *head);
 void	free_data(t_data *data);
 int		exit_error(t_data *data, char *message);
 int		is_valid_int(char *num);
-
-
 int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);
 t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
-
 void	flow_bfs(t_data *data, t_room *graph);
 void	path_bfs(t_data *data, t_room *graph);
-
 //new and tests
-void print_graph_test(t_room *graph, t_data *data);
-
-void create_path_set(t_data *data, t_queue_node *path_to_add, int steps);
-void get_best_paths(t_data *data);
-int change_capacity(t_data *data, t_room *graph, int save, int flow);
-void create_path_group(t_data *data);
+void	print_graph_test(t_room *graph, t_data *data);
+void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps);
+void	get_best_paths(t_data *data);
+int		change_capacity(t_data *data, t_room *graph, int save, int flow);
+void	create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);
-t_path_group *compare_paths(t_data *data);
-void put_ants_on_path(t_data *data, t_path_group *path_group);
+t_path_group	*compare_paths(t_data *data);
+void	put_ants_on_path(t_data *data, t_path_group *path_group);
+
 #endif

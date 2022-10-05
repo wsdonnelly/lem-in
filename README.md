@@ -9,7 +9,7 @@ VERBOSE MODE:
 eg. ./lem-in -v < maps/other_maps/108rooms.map
 
 VISUALZER:
-lem-in < <map_file> | visualizer/./visualizer
+lem-in < <map_file> | ./visualizer/visualizer
 eg. ./lem-in < maps/other_maps/108rooms.map | ./visualizer/visualizer
 
 TIME TRIALS:
@@ -17,7 +17,7 @@ TIME TRIALS:
 ./generator --big-superposition > test.map && time ./lem-in < test.map
 
 RANDOM MAP EXAMPLE (50 rooms piped to visualizer)
-map_gen/./map_gen 50  && ./lem-in < rando.map | ./visualizer/visualizer
+./map_gen/map_gen 50  && ./lem-in < rando.map | ./visualizer/visualizer
 
 ANT_COP
 Checks output for errors

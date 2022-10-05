@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 10:29:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:27:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,20 @@ static void print_path_test(t_data *data, t_room *graph)
 	printf("\n");
 }
 */
-static void init_in_path(t_data *data, t_room *graph)
+static void	init_in_path(t_data *data, t_room *graph)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->size)
 		graph[i++].in_path = 0;
 }
 
-
-static void filter_all_rooms(t_data *data, t_room *graph)
+static void	filter_all_rooms(t_data *data, t_room *graph)
 {
-	int len;
-	int i;
-	
+	int	len;
+	int	i;
+
 	i = 0;
 	while (i < data->size)
 	{
@@ -70,29 +69,24 @@ static void filter_all_rooms(t_data *data, t_room *graph)
 //change_capacity(data, graph, SAVE, FLOW)
 void	solve(t_data *data, t_room *graph)
 {
-	int steps;
+	int	steps;
 
 	data->path_group = NULL;
 	data->path_set = NULL;
-
 	filter_all_rooms(data, graph);
 	while (data->flow_path)
 	{
 		flow_bfs(data, graph);
 		if (data->flow_path)
 		{
-			//printf("found a flow\n");
 			change_capacity(data, graph, FALSE, TRUE);
 			create_path_group(data);
 			init_in_path(data, graph);
-			
 			while (data->shortest_path)
 			{
-
 				path_bfs(data, graph);
 				if (data->shortest_path)
 				{
-					//printf("found a shortest path\n");
 					steps = change_capacity(data, graph, TRUE, FALSE);
 					create_path_set(data, data->cur_path, steps);
 				}

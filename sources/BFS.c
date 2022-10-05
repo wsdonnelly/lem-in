@@ -6,15 +6,15 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 17:01:43 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:33:36 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void add_room_to_queue(t_queue *queue, int index)
+static void	add_room_to_queue(t_queue *queue, int index)
 {
-	t_queue_node *tmp;
+	t_queue_node	*tmp;
 
 	tmp = malloc(sizeof(t_queue_node));
 	if (!tmp)
@@ -31,11 +31,10 @@ static void add_room_to_queue(t_queue *queue, int index)
 	queue->tail = tmp;
 }
 
-//get idx
-static int dequeue(t_queue *queue)
+static int	dequeue(t_queue *queue)
 {
-	t_queue_node *tmp;
-	int idx;
+	t_queue_node	*tmp;
+	int						idx;
 
 	if (!queue->head)
 		return (-1);
@@ -48,33 +47,30 @@ static int dequeue(t_queue *queue)
 	return (idx);
 }
 
-void init_visited(t_data *data, t_room *graph)
+void	init_visited(t_data *data, t_room *graph)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->size)
 		graph[i++].visited = 0;
 }
 
-
 void	flow_bfs(t_data *data, t_room *graph)
 {
-	t_edge *temp;
-	t_queue queue;
-	int cur_idx;
-	
+	t_edge	*temp;
+	t_queue	queue;
+	int			cur_idx;
+
 	queue.head = NULL;
 	queue.tail = NULL;
 	init_visited(data, graph);
 	data->flow_path = 0;
 	cur_idx = data->start_index;
-
 	add_room_to_queue(&queue, cur_idx);
 	graph[cur_idx].visited = 1;
 	graph[cur_idx].previous_idx = -1;
 	graph[cur_idx].previous_edge = NULL;
-
 	while (queue.head)
 	{
 		cur_idx = dequeue(&queue);
@@ -102,24 +98,21 @@ void	flow_bfs(t_data *data, t_room *graph)
 
 void	path_bfs(t_data *data, t_room *graph)
 {
-	t_edge *temp;
-	t_queue queue;
-	int cur_idx;
-	
+	t_edge	*temp;
+	t_queue	queue;
+	int			cur_idx;
+
 	queue.head = NULL;
 	queue.tail = NULL;
 	init_visited(data, graph);
 	data->shortest_path = 0;
 	cur_idx = data->start_index;
-
 	add_room_to_queue(&queue, cur_idx);
 	graph[cur_idx].visited = 1;
 	graph[cur_idx].previous_idx = -1;
 	graph[cur_idx].previous_edge = NULL;
-
 	while (queue.head)
 	{
-		
 		cur_idx = dequeue(&queue);
 		if (cur_idx == data->end_index)
 		{

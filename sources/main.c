@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/05 13:35:31 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:25:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_data(t_data *data)
 	data->flow_path = 1;
 }
 
+//remove in master branch
 void print_graph_test(t_room *graph, t_data *data)
 {
 	int i = 0;
@@ -58,22 +59,18 @@ int	main(int argc, char **argv)
 	}
 	graph = NULL;
 	data.graph = &graph;
-	
 	init_data(&data);
-	
 	read_map(&data, &graph);
-	
 	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
+	//needed?
 	graph[data.start_index].previous_idx = -1;
-	
 	solve(&data, graph);
-	if(!data.path_group)
+	if (!data.path_group)
 		exit_error(&data, "no valid path found");
 	compare_paths(&data);
 	print_comments(&data);
 	print_data(&data);
-
 	free_graph(&graph, &data);
 	free_data(&data);
 	return (0);
