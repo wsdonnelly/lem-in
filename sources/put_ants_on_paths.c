@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 11:45:56 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 16:54:40 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 10:29:01 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void put_ants_on_path(t_data *data, t_path_group *path_group)
 		cur_path->lines = cur_path->steps + cur_path->ants_on_path - 1;
 		cur_path = cur_path->next_path;
 	}
+	/*
 	//tester
 	cur_path = path_group->paths;
 	while (cur_path)
@@ -55,4 +56,5 @@ void put_ants_on_path(t_data *data, t_path_group *path_group)
 		printf("ants on path %d | lines: %d\n", cur_path->ants_on_path, cur_path->lines);
 		cur_path = cur_path->next_path;
 	}
+	*/
 }

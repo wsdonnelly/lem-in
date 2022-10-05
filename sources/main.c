@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/04 16:54:09 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 10:29:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	main(int argc, char **argv)
 	
 	solve(&data, graph);
 	compare_paths(&data);
+	print_comments(&data);
+	print_data(&data);
 
 	free_graph(&graph, &data);
 	free_data(&data);

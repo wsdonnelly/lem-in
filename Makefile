@@ -6,18 +6,18 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/10/04 16:42:59 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/10/05 11:45:25 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME		= lem-in
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -O3 -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+#CFLAGS		= -Wall -Wextra -Werror -O3
 SRC_FILES = main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c \
 hash_map.c linked_list.c check_rooms.c solve.c BFS.c change_capacity.c \
 free_functions.c  store_data.c put_ants_on_paths.c compare_paths.c
-
 SRCS_DIR	= ./sources/
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS_DIR	= ./objects/

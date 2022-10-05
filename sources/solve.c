@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 16:32:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/05 10:29:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+/*
 static void print_path_test(t_data *data, t_room *graph)
 {
 	t_queue_node *tmp;
@@ -38,7 +38,7 @@ static void print_path_test(t_data *data, t_room *graph)
 	}
 	printf("\n");
 }
-
+*/
 static void init_in_path(t_data *data, t_room *graph)
 {
 	int i;
@@ -81,7 +81,7 @@ void	solve(t_data *data, t_room *graph)
 		flow_bfs(data, graph);
 		if (data->flow_path)
 		{
-			printf("found a flow\n");
+			//printf("found a flow\n");
 			change_capacity(data, graph, FALSE, TRUE);
 			create_path_group(data);
 			init_in_path(data, graph);
@@ -92,12 +92,12 @@ void	solve(t_data *data, t_room *graph)
 				path_bfs(data, graph);
 				if (data->shortest_path)
 				{
-					printf("found a shortest path\n");
+					//printf("found a shortest path\n");
 					steps = change_capacity(data, graph, TRUE, FALSE);
 					create_path_set(data, data->cur_path, steps);
 				}
 			}
 		}
 	}
-	print_path_test(data, graph);
+	//print_path_test(data, graph);
 }
