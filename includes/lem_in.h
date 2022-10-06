@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 15:00:37 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:05:43 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,11 @@ typedef struct s_line
 	struct s_line	*next;
 }				t_line;
 
-typedef struct s_paths 
+typedef struct s_paths
 {
 	struct s_path_group	*tmp_group;
-	struct s_path_set		*path_set;
-	struct s_path_set		*tmp_path;
+	struct s_path_set	*path_set;
+	struct s_path_set	*tmp_path;
 	struct s_queue_node	*room;
 	struct s_queue_node	*tmp_room;
 }				t_paths;
