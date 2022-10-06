@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 14:00:36 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 15:00:37 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,15 @@ typedef struct s_line
 	struct s_line	*next;
 }				t_line;
 
+typedef struct s_paths 
+{
+	struct s_path_group	*tmp_group;
+	struct s_path_set		*path_set;
+	struct s_path_set		*tmp_path;
+	struct s_queue_node	*room;
+	struct s_queue_node	*tmp_room;
+}				t_paths;
+
 //parser
 void			read_map(t_data *data, t_room **graph);
 void			check_links(t_parse *parse, t_data *data, t_room **graph);
@@ -136,22 +145,22 @@ void			set_rooms(char **room, t_data *data);
 void			both_start_end(char *start_room, char *end_room, t_data *data);
 void			set_end_rooms(char *end_room, char *room_2, t_data *data);
 void			set_start_rooms(char *start_room, char *room_2, t_data *data);
+t_edge			*add_edge(t_data *data, int index1, int index2);
+t_edge			*add_reverse_edge(t_data *data, int index1, \
+				int next, t_edge *forward);
 //store_data
 void			store_data(t_data *data, char *line);
 void			print_data(t_data *data);
 void			print_comments(t_data *data);
-//util and additional functions
+//free functions
+void			free_paths(t_path_group *path_group);
 void			free_str_arr(char **arr);
 void			free_graph(t_room **graph, t_data *data);
-void			free_edge_list(t_edge *head);
 void			free_data(t_data *data);
+//additional functions
+int				hash_map(char *name, int num_rooms, t_room **graph);
 int				exit_error(t_data *data, char *message);
 int				is_valid_int(char *num);
-//additional
-int				hash_map(char *name, int num_rooms, t_room **graph);
-t_edge			*add_edge(t_data *data, int index1, int index2);
-t_edge			*add_reverse_edge(t_data *data, int index1, \
-				int next, t_edge *forward);
 //BFS
 void			bfs(t_data *data, t_room *graph, int path);
 void			enqueue(t_queue *queue, int index);

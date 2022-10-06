@@ -6,50 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:07:34 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 11:26:31 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 14:47:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void	free_graph(t_room **graph, t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->size)
-	{
-		if ((*graph)[i].name)
-			free((*graph)[i].name);
-		free_edge_list((*graph)[i].neighbors);
-		i++;
-	}
-	if (*graph)
-		free (*graph);
-}
-
-void	free_name_list(t_node *head)
-{
-	t_node	*temp;
-
-	while (head)
-	{
-		temp = head;
-		head = head->next;
-		free (temp->name);
-		free (temp);
-	}
-}
-
-void	free_data(t_data *data)
-{
-	if (data->start)
-		free(data->start);
-	if (data->end)
-		free(data->end);
-	if (data->name_list)
-		free_name_list(data->name_list);
-}
 
 int	exit_error(t_data *data, char *message)
 {
