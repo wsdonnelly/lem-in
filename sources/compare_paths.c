@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:53:40 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 20:49:10 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:30:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_path_group	*compare_paths(t_data *data)
 {
 	t_path_group	*tmp;
 	t_path_group	*best;
-	int						count;
+	int				count;
 
 	count = INT_MAX;
 	tmp = data->path_group;

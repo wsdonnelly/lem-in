@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 12:13:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 13:49:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,23 @@ static void	add_room_to_stack(int index, t_data *data, int *count)
 	data->cur_path = tmp;
 }
 
+static void	update_selected(t_data *data, t_room *graph, int idx, int flow)
+{
+	if (flow)
+	{
+		graph[idx].previous_edge->flow = 1;
+		graph[idx].previous_edge->reverse_edge->flow = 0;
+	}
+	else if (!flow)
+	{
+		if (idx != data->end_index)
+		{
+			graph[idx].in_path = 1;
+			graph[graph[idx].in_or_out].in_path = 1;
+		}
+	}
+}
+
 int	change_capacity(t_data *data, t_room *graph, int save, int flow)
 {
 	int		count;
@@ -93,19 +110,7 @@ int	change_capacity(t_data *data, t_room *graph, int save, int flow)
 			if (ft_strcmp(prev, graph[idx].name))
 				add_room_to_stack(idx, data, &count);
 		}
-		if (flow)
-		{
-			graph[idx].previous_edge->flow = 1;
-			graph[idx].previous_edge->reverse_edge->flow = 0;
-		}
-		else if (!flow)
-		{
-			if (idx != data->end_index)
-			{
-				graph[idx].in_path = 1;
-				graph[graph[idx].in_or_out].in_path = 1;
-			}
-		}
+		update_selected(data, graph, idx, flow);
 		prev = graph[idx].name;
 		idx = graph[idx].previous_idx;
 	}
