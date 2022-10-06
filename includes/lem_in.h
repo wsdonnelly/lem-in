@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 11:16:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:57:17 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ typedef struct s_path_group
 
 typedef struct s_data
 {
-	int									num_ants;
-	int									num_rooms;
-	int									size;
-	char								*start;
-	char								*end;
-	int									end_index;
-	int									start_index;
+	int					num_ants;
+	int					num_rooms;
+	int					size;
+	char				*start;
+	char				*end;
+	int					end_index;
+	int					start_index;
 	int									flow_path;
 	int									shortest_path;
 	struct s_queue_node	*cur_path;
@@ -152,8 +152,9 @@ int		hash_map(char *name, int num_rooms, t_room **graph);
 //linked list
 t_edge	*add_edge(t_data *data, int index1, int index2);
 t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward);
-void	flow_bfs(t_data *data, t_room *graph);
-void	path_bfs(t_data *data, t_room *graph);
+//void	flow_bfs(t_data *data, t_room *graph);
+//void	path_bfs(t_data *data, t_room *graph);
+void	bfs(t_data *data, t_room *graph, int path);
 //new and tests
 void	print_graph_test(t_room *graph, t_data *data);
 void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps);

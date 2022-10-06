@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 14:27:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:58:02 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-/*
+
 static void print_path_test(t_data *data, t_room *graph)
 {
 	t_queue_node *tmp;
@@ -38,7 +38,7 @@ static void print_path_test(t_data *data, t_room *graph)
 	}
 	printf("\n");
 }
-*/
+
 static void	init_in_path(t_data *data, t_room *graph)
 {
 	int	i;
@@ -66,7 +66,8 @@ static void	filter_all_rooms(t_data *data, t_room *graph)
 	}
 }
 
-//change_capacity(data, graph, SAVE, FLOW)
+//change_capacity(data, graph, SAVE?, FLOW?)
+//bfs(data, graph, PATH?)
 void	solve(t_data *data, t_room *graph)
 {
 	int	steps;
@@ -76,7 +77,7 @@ void	solve(t_data *data, t_room *graph)
 	filter_all_rooms(data, graph);
 	while (data->flow_path)
 	{
-		flow_bfs(data, graph);
+		bfs(data, graph, FALSE);
 		if (data->flow_path)
 		{
 			change_capacity(data, graph, FALSE, TRUE);
@@ -84,7 +85,7 @@ void	solve(t_data *data, t_room *graph)
 			init_in_path(data, graph);
 			while (data->shortest_path)
 			{
-				path_bfs(data, graph);
+				bfs(data, graph, TRUE);
 				if (data->shortest_path)
 				{
 					steps = change_capacity(data, graph, TRUE, FALSE);
@@ -93,5 +94,5 @@ void	solve(t_data *data, t_room *graph)
 			}
 		}
 	}
-	//print_path_test(data, graph);
+	print_path_test(data, graph);
 }
