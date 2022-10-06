@@ -6,16 +6,16 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 18:42:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:15:54 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	create_path_group(t_data *data)
+void create_path_group(t_data *data)
 {
-	t_path_group	*tmp;
-	t_path_group	*last;
+	t_path_group *tmp;
+	t_path_group *last;
 
 	tmp = malloc(sizeof(t_path_group));
 	if (!tmp)
@@ -33,25 +33,27 @@ void	create_path_group(t_data *data)
 	}
 }
 
-void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
+void create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 {
-	t_path_set		*tmp_path;
-	t_path_set		*last;
-	t_path_group	*cur;
+		t_path_set *tmp_path;
+		t_path_set *last;
+		t_path_group *cur;
 
-	//create path * on path_set and add to the end of list
+	//create path * on path_set. ADD the end of list
 	tmp_path = malloc(sizeof(t_path_set));
 	if (!tmp_path)
-		exit(0);
+			exit(0);
 	tmp_path->path = path_to_add;
 	tmp_path->steps = steps;
 	tmp_path->ants_on_path = 0;
 	tmp_path->lines = 0;
 	tmp_path->next_path = NULL;
+
 	//find current end of path group
 	cur = data->path_group;
 	while (cur->next_path_group)
 		cur = cur->next_path_group;
+
 	last = cur->paths;
 	if (!cur->paths)
 		cur->paths = tmp_path;
@@ -61,14 +63,26 @@ void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 			last = last->next_path;
 		last->next_path = tmp_path;
 	}
+
+/*
+	last = data->path_set;
+	if (!data->path_set)
+		data->path_set = tmp_path;
+	else
+	{
+		while (last->next_path)
+			last = last->next_path;
+		last->next_path = tmp_path;
+	}
+*/
 }
 
-static void	add_room_to_stack(int index, t_data *data, int *count)
+static void add_room_to_stack(int index, t_data *data, int *count)
 {
-	t_queue_node	*tmp;
+	t_queue_node *tmp;
 
 	tmp = malloc(sizeof(t_queue_node));
-	if (!tmp)
+	if(!tmp)
 		exit(0);
 	(*count)++;
 	tmp->index = index;
@@ -76,15 +90,32 @@ static void	add_room_to_stack(int index, t_data *data, int *count)
 	data->cur_path = tmp;
 }
 
-int	change_capacity(t_data *data, t_room *graph, int save, int flow)
+/*
+static void filter_rooms(t_data *data, t_room *graph, int idx, char *prev, int *count)
 {
-	int		count;
-	int		idx;
-	char	*prev;
+	int len;
+
+	//it doesnt matter changing the name in the graph because program only referenceces index 
+	len = ft_strlen(graph[idx].name);
+	if (graph[idx].name[len - 1] == 'I' || graph[idx].name[len - 1] == 'O')
+		graph[idx].name[len - 1] = '\0';
+	if (ft_strcmp(prev, graph[idx].name))
+		add_room_to_stack(idx, data, count);
+	
+}
+*/
+
+
+int change_capacity(t_data *data, t_room *graph, int save, int flow)
+{
+	int count;
 
 	count = 0;
-	idx = graph[data->end_index].previous_idx;
-	prev = graph[data->end_index].name;
+	//filter all rooms
+	//filter_all_rooms(data, graph);
+	//avoid setting capacity of edge connecting end to 0;
+	int idx = graph[data->end_index].previous_idx;
+	char *prev = graph[data->end_index].name;
 	data->cur_path = NULL;
 	if (save)
 		add_room_to_stack(data->end_index, data, &count);
@@ -92,7 +123,7 @@ int	change_capacity(t_data *data, t_room *graph, int save, int flow)
 	{
 		if (save)
 		{
-			if (ft_strcmp(prev, graph[idx].name))
+			if(ft_strcmp(prev, graph[idx].name))
 				add_room_to_stack(idx, data, &count);
 		}
 		if (flow)
@@ -100,14 +131,15 @@ int	change_capacity(t_data *data, t_room *graph, int save, int flow)
 			graph[idx].previous_edge->flow = 1;
 			graph[idx].previous_edge->reverse_edge->flow = 0;
 		}
-		else if (!flow)
+		else if(!flow)
 		{
 			//add both in and out rooms 
-			if (idx != data->end_index)
+			if(idx != data->end_index)
 			{
 				graph[idx].in_path = 1;
 				graph[graph[idx].in_or_out].in_path = 1;
 			}
+			
 		}
 		prev = graph[idx].name;
 		idx = graph[idx].previous_idx;

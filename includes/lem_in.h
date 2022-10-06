@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 18:42:21 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:16:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,7 @@ void	create_path_group(t_data *data);
 void	solve(t_data *data, t_room *graph);
 t_path_group	*compare_paths(t_data *data);
 void	put_ants_on_path(t_data *data, t_path_group *path_group);
+
+void print_ants(t_path_group *best);
 
 #endif
