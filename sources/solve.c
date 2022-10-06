@@ -6,18 +6,18 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 11:58:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:15:46 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static void print_path_test(t_data *data, t_room *graph)
+static void	print_path_test(t_data *data, t_room *graph)
 {
-	t_queue_node *tmp;
-	t_path_set *tmp_path;
-	t_path_group *cur_group;
-	
+	t_queue_node	*tmp;
+	t_path_set		*tmp_path;
+	t_path_group	*cur_group;
+
 	cur_group = data->path_group;
 	while (cur_group)
 	{
@@ -66,8 +66,11 @@ static void	filter_all_rooms(t_data *data, t_room *graph)
 	}
 }
 
-//change_capacity(data, graph, SAVE?, FLOW?)
-//bfs(data, graph, PATH?)
+/*
+* change_capacity(data, graph, SAVE?, FLOW?)
+* bfs(data, graph, PATH?)
+*/
+
 void	solve(t_data *data, t_room *graph)
 {
 	int	steps;

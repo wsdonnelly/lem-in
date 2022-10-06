@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 15:01:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:16:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	print_data(t_data *data)
 	temp = data->store_input_head;
 	while (temp)
 	{
-		//ft_putendl(temp->line);
 		ft_printf("%s\n", temp->line);
 		cpy = temp;
 		temp = temp->next;

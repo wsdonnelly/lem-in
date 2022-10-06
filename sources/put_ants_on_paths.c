@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 11:45:56 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 11:40:16 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:14:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	get_lines(t_path_set *cur_path)
 
 void	put_ants_on_path(t_data *data, t_path_group *path_group)
 {
-	int					ants_at_start;
-	int					diff;
-	int					path_num;
+	int			ants_at_start;
+	int			diff;
+	int			path_num;
 	t_path_set	*cur_path;
 
 	ants_at_start = data->num_ants;
@@ -52,7 +52,7 @@ void	put_ants_on_path(t_data *data, t_path_group *path_group)
 		}
 	}
 	get_lines(path_group->paths);
-		
+	
 	//tester
 	cur_path = path_group->paths;
 	while (cur_path)
