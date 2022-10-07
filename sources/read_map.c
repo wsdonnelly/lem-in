@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 10:01:55 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/05 11:32:47 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:34:45 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	parse_data(t_data *data, t_room **graph)
 	init_parse(&parse);
 	while (get_next_line(0, &parse.line) > 0)
 	{
+		
 		if (parse.line[0] == '#')
 		{
 			get_start_end(data, parse.line);
@@ -66,6 +67,7 @@ static void	parse_data(t_data *data, t_room **graph)
 		}
 		if (ft_strchr(parse.line, (int) '-'))
 		{
+			
 			check_links(&parse, data, graph);
 			continue ;
 		}
@@ -82,13 +84,10 @@ static void	get_number_ants(t_data *data)
 	&& !ft_strchr(line, (int) ' '))
 	{
 		data->num_ants = ft_atoi(line);
+		free (line);
 		if (data->num_ants > 0)
-		{
-			store_data(data, line);
 			return ;
-		}
 	}
-	free (line);
 	exit_error(data, "ERROR");
 }
 
@@ -96,4 +95,5 @@ void	read_map(t_data *data, t_room **graph)
 {
 	get_number_ants(data);
 	parse_data(data, graph);
+	
 }
