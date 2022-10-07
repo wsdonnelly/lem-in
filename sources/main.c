@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/06 14:37:59 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:39:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_room	*graph;
-	//t_path_group *best;
+
 
 	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
 	{
@@ -67,12 +67,11 @@ int	main(int argc, char **argv)
 	//needed?
 	graph[data.start_index].previous_idx = -1;
 	solve(&data, graph);
-	//if (!data.path_group)
-	//	exit_error(&data, "no valid path found");
-	//best = compare_paths(&data);
-	print_comments(&data);
-	print_data(&data);
-	//print_ants(best);
+	if (!data.path_group || !data.path_group->paths)
+		exit_error(&data, "no valid path found");
+	compare_paths(&data);
+	//print_comments(&data);
+	//print_data(&data);
 
 	free_graph(&graph, &data);
 	free_paths(data.path_group);

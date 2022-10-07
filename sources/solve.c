@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 12:15:46 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:39:55 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	solve(t_data *data, t_room *graph)
 	int	steps;
 
 	data->path_group = NULL;
-	data->path_set = NULL;
+	//data->path_set = NULL;
 	filter_all_rooms(data, graph);
 	while (data->flow_path)
 	{

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 14:37:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:39:57 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	update_selected(t_data *data, t_room *graph, int idx, int flow)
 		if (idx != data->end_index)
 		{
 			graph[idx].in_path = 1;
-			graph[graph[idx].in_or_out].in_path = 1;
+			//graph[graph[idx].in_or_out].in_path = 1;
 		}
 	}
 }
