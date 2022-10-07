@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/07 12:05:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:00:47 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_edge	*add_edge(t_data *data, int index1, int index2)
 	temp = *head;
 	while (temp)
 	{
-		if (temp->next_room_index == index2 && temp->capacity == 1)
+		//if (temp->next_room_index == index2 && temp->capacity == 1)
+		if (temp->next_room_index == index2 && temp->flow == 0)
 			return (NULL);
 		temp = temp->next;
 	}
@@ -34,7 +35,7 @@ t_edge	*add_edge(t_data *data, int index1, int index2)
 		exit_error(data, "ERROR");
 	temp->next_room_index = index2;
 	temp->is_forward = 1;
-	temp->capacity = 1;
+	//temp->capacity = 1;
 	temp->flow = 0;
 	temp->reverse_edge = NULL;
 	temp->next = *head;
@@ -54,7 +55,7 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward)
 		exit_error(data, "ERROR");
 	temp->next_room_index = next;
 
-	temp->capacity = 0;
+	//temp->capacity = 0;
 	temp->is_forward = 0;
 	temp->flow = 1;
 	temp->reverse_edge = forward;

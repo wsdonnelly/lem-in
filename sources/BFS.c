@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/07 14:09:11 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:01:03 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path)
 	}
 }
 */
+
 static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path, t_data *data)
 {
 	t_edge	*temp;
