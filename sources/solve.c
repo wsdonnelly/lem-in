@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/07 12:39:55 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:04:33 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	solve(t_data *data, t_room *graph)
 		bfs(data, graph, FALSE);
 		if (data->flow_path)
 		{
+			printf("found a flow\n");
 			change_capacity(data, graph, FALSE, TRUE);
 			create_path_group(data);
 			init_in_path(data, graph);
