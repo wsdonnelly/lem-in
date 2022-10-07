@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/07 13:06:01 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 14:09:11 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path, t_
 	{
 		if (!path)
 		{
-			if (!graph[temp->next_room_index].visited && !path && !temp->flow)
+			if (!graph[temp->next_room_index].visited && !temp->flow)
 			{
 				graph[temp->next_room_index].visited = 1;
 				enqueue(queue, temp->next_room_index);

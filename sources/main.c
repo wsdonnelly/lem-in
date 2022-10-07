@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/07 12:39:53 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/07 14:11:39 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void print_graph_test(t_room *graph, t_data *data)
 
 	while (i < data->size)
 	{
-		printf("%s === neighbors: ", graph[i].name);
+		printf("%s === forward neighbors: ", graph[i].name);
 		tmp = graph[i].neighbors;
 		while (tmp)
 		{
-			printf("%s -> flow: %d -- in_path %d |", graph[tmp->next_room_index].name, tmp->flow,  graph[tmp->next_room_index].in_path);
+			if (tmp->is_forward)
+				printf("%s -> flow: %d | ", graph[tmp->next_room_index].name, tmp->flow);
 			tmp = tmp->next;
 		}
 		printf("\n");
