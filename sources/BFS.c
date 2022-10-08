@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/07 16:01:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:40:07 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,14 @@ static void	init_bfs(t_data *data, t_room *graph, t_queue *queue, int path)
 	graph[data->start_index].previous_idx = -1;
 	graph[data->start_index].previous_edge = NULL;
 }
-/*
-static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path)
-{
-	t_edge	*temp;
 
-	temp = graph[idx].neighbors;
-	while (temp)
-	{
-		if (!graph[temp->next_room_index].visited \
-		&& ((path && (temp->flow && !graph[temp->next_room_index].in_path)) \
-		|| (!path && !temp->flow)))
-		{
-			graph[temp->next_room_index].visited = 1;
-			enqueue(queue, temp->next_room_index);
-			graph[temp->next_room_index].previous_idx = idx;
-			graph[temp->next_room_index].previous_edge = temp;
-		}
-		temp = temp->next;
-	}
+static void	update_neighbors(t_room *graph, t_queue *queue, t_edge	*temp, int idx)
+{
+	graph[temp->next_room_index].visited = 1;
+	enqueue(queue, temp->next_room_index);
+	graph[temp->next_room_index].previous_idx = idx;
+	graph[temp->next_room_index].previous_edge = temp;
 }
-*/
 
 static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path, t_data *data)
 {
@@ -54,26 +41,20 @@ static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path, t_
 	temp = graph[idx].neighbors;
 	while (temp)
 	{
-		if (!path)
+		if (!graph[temp->next_room_index].visited)
 		{
-			if (!graph[temp->next_room_index].visited && !temp->flow)
+			if (!path)
 			{
-				graph[temp->next_room_index].visited = 1;
-				enqueue(queue, temp->next_room_index);
-				graph[temp->next_room_index].previous_idx = idx;
-				graph[temp->next_room_index].previous_edge = temp;
+				if (!temp->flow)
+					update_neighbors(graph, queue, temp, idx);
 			}
-		}
-		else
-		{
-			if (!graph[temp->next_room_index].visited && !graph[temp->next_room_index].in_path)
+			else
 			{
-				if(((temp->next_room_index != data->end_index && temp->flow) && temp->is_forward) || ((temp->next_room_index == data->end_index) && temp->is_forward))
+				if (!graph[temp->next_room_index].in_path)
 				{
-					graph[temp->next_room_index].visited = 1;
-					enqueue(queue, temp->next_room_index);
-					graph[temp->next_room_index].previous_idx = idx;
-					graph[temp->next_room_index].previous_edge = temp;
+					if (((temp->next_room_index != data->end_index && temp->flow) && temp->is_forward) \
+					|| ((temp->next_room_index == data->end_index) && temp->is_forward))
+						update_neighbors(graph, queue, temp, idx);
 				}
 			}
 		}

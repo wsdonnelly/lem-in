@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/04 15:42:15 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:50:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ static void	add_edges(t_data *data, int idx_a, int idx_b)
 void	set_start_rooms(char *start_room, char *room_2, t_data *data)
 {
 	t_name	name;
-	t_room *graph;
 
-	graph = *(data->graph);
 	name.two_in = ft_strjoin(room_2, "I");
 	name.two_out = ft_strjoin(room_2, "O");
 	name.index_start = hash_map(start_room, data->size, data->graph);
@@ -45,8 +43,6 @@ void	set_start_rooms(char *start_room, char *room_2, t_data *data)
 	free(name.two_in);
 	name.index_2out = hash_map(name.two_out, data->size, data->graph);
 	free(name.two_out);
-	graph[name.index_2in].in_or_out = name.index_2out;
-	graph[name.index_2out].in_or_out = name.index_2in;
 	add_edges(data, name.index_start, name.index_2in);
 	add_edges(data, name.index_2in, name.index_2out);
 	add_edges(data, name.index_2out, name.index_start);
@@ -55,9 +51,7 @@ void	set_start_rooms(char *start_room, char *room_2, t_data *data)
 void	set_end_rooms(char *end_room, char *room_2, t_data *data)
 {
 	t_name	name;
-	t_room *graph;
 
-	graph = *(data->graph);
 	name.two_in = ft_strjoin(room_2, "I");
 	name.two_out = ft_strjoin(room_2, "O");
 	name.index_end = hash_map(end_room, data->size, data->graph);
@@ -66,8 +60,6 @@ void	set_end_rooms(char *end_room, char *room_2, t_data *data)
 	free(name.two_in);
 	name.index_2out = hash_map(name.two_out, data->size, data->graph);
 	free(name.two_out);
-	graph[name.index_2in].in_or_out = name.index_2out;
-	graph[name.index_2out].in_or_out = name.index_2in;
 	add_edges(data, name.index_end, name.index_2in);
 	add_edges(data, name.index_2in, name.index_2out);
 	add_edges(data, name.index_2out, name.index_end);
@@ -89,9 +81,7 @@ t_data *data)
 void	set_rooms(char **room, t_data *data)
 {
 	t_name	name;
-	t_room *graph;
 
-	graph = *(data->graph);
 	name.one_in = ft_strjoin(room[0], "I");
 	name.one_out = ft_strjoin(room[0], "O");
 	name.two_in = ft_strjoin(room[1], "I");
@@ -104,10 +94,6 @@ void	set_rooms(char **room, t_data *data)
 	free(name.two_in);
 	name.index_2out = hash_map(name.two_out, data->size, data->graph);
 	free(name.two_out);
-	graph[name.index_1in].in_or_out = name.index_1out;
-	graph[name.index_1out].in_or_out = name.index_1in;
-	graph[name.index_2in].in_or_out = name.index_2out;
-	graph[name.index_2out].in_or_out = name.index_2in;
 	add_edges(data, name.index_1in, name.index_1out);
 	add_edges(data, name.index_1out, name.index_2in);
 	add_edges(data, name.index_2in, name.index_2out);

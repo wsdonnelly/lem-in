@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/10/07 15:17:52 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/10/08 10:55:39 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -O3
 SRC_FILES = main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c \
 hash_map.c check_rooms.c solve.c BFS.c BFS_util.c change_capacity.c \
-free_functions.c  free_functions_2.c store_data.c put_ants_on_paths.c compare_paths.c linked_list.c
+free_functions.c  free_functions_2.c store_data.c put_ants_on_paths.c compare_paths.c add_edges.c
 SRCS_DIR	= ./sources/
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS_DIR	= ./objects/
