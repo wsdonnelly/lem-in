@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/08 10:56:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:07:36 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "ft_printf.h"
 # include <limits.h>
 # include <stdlib.h>
-//remove in master testing printf only 
+//remove in master testing printf only
 #include<stdio.h>
 
 # define TRUE 1
@@ -68,6 +68,7 @@ typedef struct s_path_set
 	int					steps;
 	int					ants_on_path;
 	int					lines;
+	int					fst_ant_num;
 	struct s_queue_node	*path;
 	struct s_path_set	*next_path;
 }				t_path_set;
@@ -174,6 +175,10 @@ int				change_capacity(t_data *data, \
 				t_room *graph, int save, int flow);
 void			put_ants_on_path(t_data *data, t_path_group *path_group);
 t_path_group	*compare_paths(t_data *data);
+//print results and verbose
+void	print_verbose(t_data *data, t_path_group *group, t_room *graph);
+void	set_fst_ant(t_path_group *group);
+void	print_result(t_path_group *group, t_room *graph);
 //test stuff to remove in master
 void			print_graph_test(t_room *graph, t_data *data);
 void			print_ants(t_path_group *best);

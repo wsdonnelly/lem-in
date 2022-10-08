@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/08 10:42:28 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/08 17:05:51 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_room	*graph;
-
+	t_path_group	*result;
 
 	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
 	{
@@ -70,7 +70,11 @@ int	main(int argc, char **argv)
 	solve(&data, graph);
 	if (!data.path_group || !data.path_group->paths)
 		exit_error(&data, "no valid path found");
-	compare_paths(&data);
+	result = NULL;
+	result = compare_paths(&data);
+	set_fst_ant(result);
+	print_result(result, graph);
+	// print_verbose(&data, result, graph); --> ready in print.result.c
 	//print_comments(&data);
 	//print_data(&data);
 
