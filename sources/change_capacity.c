@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_capacity.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/09 13:52:40 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/11 11:33:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ static void	update_selected(t_data *data, t_room *graph, int idx, int flow)
 	{
 		if (idx != data->end_index)
 			graph[idx].in_path = 1;
+		else
+		{
+			if (graph[idx].previous_idx == data->start_index)
+				graph[idx].in_path = 1;
+		}
+
 	}
 }
 

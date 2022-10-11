@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 10:30:25 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:52:00 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	print_result(t_path_group *group, t_room *graph, t_data *data)
 	int			ant;
 	int			fst_ant;
 	t_path_set	*set;
-
+	
 	set_ant_nums(group->paths, data);
 	line = 1;
 	while (line <= group->paths->lines)
