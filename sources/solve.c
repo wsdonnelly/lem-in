@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 16:23:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:37:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	solve(t_data *data, t_room *graph)
 			init_in_path(data, graph);
 			while (data->shortest_path)
 			{
-				printf("herdfdfger\n");
 				bfs(data, graph, TRUE);
 				if (data->shortest_path)
 				{
