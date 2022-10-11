@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 11:45:16 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/11 13:23:44 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 
 	ft_printf("PATHS USED:\n");
 	set = group->paths;
-	while(set)
+	while (set)
 	{
 		path = set->path;
 		ft_printf("%s->", data->start);
 		while (path)
 		{
 			ft_printf("%s", graph[path->index].name);
-			if(path->next)
+			if (path->next)
 				ft_printf("->");
 			path = path->next;
 		}
@@ -44,7 +44,7 @@ int	init_ant_nums(t_path_group *group)
 
 	tmp = group->paths;
 	paths = 0;
-	while(tmp)
+	while (tmp)
 	{
 		tmp->ant_nums = (int *)malloc(sizeof (int) * tmp->ants_on_path);
 		i = 0;
@@ -68,7 +68,7 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 	ant = 1;
 	start = set;
 	i = 0;
-	while(i < data->num_ants)
+	while (i < data->num_ants)
 	{
 		set = start;
 		while (set && (i < set->ants_on_path))

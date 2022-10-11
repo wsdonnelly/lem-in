@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 11:25:29 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:18:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_edge
 	int				next_room_index;
 	int				is_forward;
 	int				flow;
-	//int				in_path;
 	struct s_edge	*reverse_edge;
 	struct s_edge	*next;
 

@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compare_paths.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/01 12:53:40 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 13:22:28 by wdonnell         ###   ########.fr       */
+/*   Created: 2021/11/23 14:43:27 by mbeeler           #+#    #+#             */
+/*   Updated: 2022/10/11 12:28:53 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-t_path_group	*compare_paths(t_data *data)
-{
-	t_path_group	*tmp;
-	t_path_group	*best;
-	int				count;
+# include "libft.h"
+# define BUFF_SIZE 2560
+# define FD_SIZE 4096
 
-	count = INT_MAX;
-	tmp = data->path_group;
-	while (tmp)
-	{
-		put_ants_on_path(data, tmp);
-		if (tmp->paths->lines < count)
-		{
-			count = tmp->paths->lines;
-			best = tmp;
-		}
-		tmp = tmp->next_path_group;
-	}
-	return (best);
-}
+int		get_next_line(const int fd, char **line);
+
+#endif

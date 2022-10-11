@@ -5,67 +5,140 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 14:43:19 by mbeeler           #+#    #+#             */
-/*   Updated: 2022/09/20 16:19:20 by wdonnell         ###   ########.fr       */
+/*   Created: 2021/12/12 15:18:42 by wdonnell          #+#    #+#             */
+/*   Updated: 2022/10/11 12:34:31 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_check_line(char **line, char **str)
+int	add_new_line(char *temp, int fd, int len, t_list **head)
 {
-	*str = ft_strchr(*line, '\n');
-	if (*str)
+	t_list	*new;
+
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
 	{
-		**str = '\0';
-		*str += 1;
-		if (**str == '\0')
-			*str = NULL;
-		else
-			*str = ft_strdup(*str);
-		return (1);
+		free(temp);
+		return (0);
+	}
+	new->ln = ft_strsub(temp, 0, (size_t)len);
+	new->fd = fd;
+	new->next = *head;
+	if (*head != NULL)
+		(new->next)->prev = new;
+	new->prev = NULL;
+	*head = new;
+	return (1);
+}
+
+int	find_next_line(t_list **head, char **line, int fd)
+{
+	t_list	*temp;
+
+	if (*head == NULL)
+		return (0);
+	temp = *head;
+	while (temp->next != NULL)
+		temp = temp->next;
+	while (temp != NULL)
+	{
+		if (temp->fd == fd)
+		{
+			*line = temp->ln;
+			if (temp->next)
+				(temp->next)->prev = temp->prev;
+			if (temp->prev)
+				(temp->prev)->next = temp->next;
+			else
+				*head = temp->next;
+			free(temp);
+			return (1);
+		}
+		temp = temp->prev;
 	}
 	return (0);
 }
 
-static int	ft_iterate_line(char **line, char *buf, char **str)
+int	add_lines_from_temp(char **temp, int fd, t_list **head)
 {
-	char	*tmp;
+	int		len;
+	char	*temp2;
 
-	if (!*line)
-		*line = ft_strdup(buf);
-	else
+	len = 0;
+	while ((*temp)[len])
 	{
-		tmp = *line;
-		*line = ft_strjoin(*line, buf);
-		ft_strdel(&tmp);
+		if ((*temp)[len] == '\n')
+		{
+			if (!add_new_line(*temp, fd, len, head))
+				return (0);
+			temp2 = *temp;
+			*temp = ft_strsub(temp2, (unsigned int)len + 1, \
+			(size_t)((ft_strlen(temp2) - (size_t)(len + 1))));
+			if (!temp)
+			{
+				free (temp2);
+				return (0);
+			}
+			free (temp2);
+			len = 0;
+			continue ;
+		}
+		len++;
 	}
-	if (!*line)
-		return (-1);
-	return (ft_check_line(line, str));
+	return (1);
+}
+
+int	read_in(char **temp, int fd, t_list	**head)
+{
+	ssize_t		ret;
+	char		buf[BUFF_SIZE + 1];
+	char		*temp2;
+
+	ret = 1;
+	while (ret)
+	{
+		ret = read(fd, &buf, BUFF_SIZE);
+		if (ret == -1)
+			return (0);
+		buf[ret] = '\0';
+		temp2 = *temp;
+		*temp = ft_strjoin(temp2, buf);
+		if (!(*temp))
+		{
+			free (temp2);
+			return (0);
+		}
+		free (temp2);
+		if (!add_lines_from_temp(temp, fd, head))
+			return (0);
+	}
+	return (1);
 }
 
 int	get_next_line(const int fd, char **line)
 {
-	int					ret;
-	char				buf[BUFF_SIZE + 1];
-	static char			*str[FD_SIZE];
+	static t_list	*head = NULL;
+	char			*temp;
 
-	if (read(fd, buf, 0) == -1 || fd < 0 || fd > FD_SIZE - 1 || line == NULL)
+	if (!line || fd < 0 || BUFF_SIZE < 1 || fd > MAX_FD)
 		return (-1);
-	*line = str[fd];
-	if (str[fd] && ft_check_line(line, &str[fd]))
-		return (1);
-	ret = read(fd, buf, BUFF_SIZE);
-	while (ret)
+	temp = ft_strnew(1);
+	if (!read_in(&temp, fd, &head))
 	{
-		buf[ret] = '\0';
-		ret = ft_iterate_line(line, buf, &str[fd]);
-		if (ret != 0)
-			return (ret);
-		ret = read(fd, buf, BUFF_SIZE);
+		free(temp);
+		return (-1);
 	}
-	if (*line)
-		return (1);
-	return (0);
+	if (ft_strlen(temp) > 0)
+	{
+		if (!add_new_line(temp, fd, (int)ft_strlen(temp), &head))
+			return (-1);
+		free(temp);
+		return (find_next_line(&head, line, fd));
+	}
+	else
+	{
+		free (temp);
+		return (find_next_line(&head, line, fd));
+	}
 }

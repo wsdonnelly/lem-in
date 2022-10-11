@@ -6,13 +6,14 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/11 15:06:38 by wdonnell          #+#    #+#              #
-#    Updated: 2022/09/15 14:06:40 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/10/11 13:36:18 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= ant_cop
 CC 		= gcc
-CFLAGS	= -Wall -Wextra -Werror -O3
+#CFLAGS	= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 SRCS	= ant_cop.c functions.c ft_strsplit.c
 OBJS	= $(SRCS:.c=.o)
 
