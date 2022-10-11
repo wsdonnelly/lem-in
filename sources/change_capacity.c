@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_capacity.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 11:33:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:20:18 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 	tmp_path->steps = steps;
 	tmp_path->ants_on_path = 0;
 	tmp_path->lines = 0;
-	tmp_path->paths_total = 0;
+	tmp_path->line_start = 0;
 	tmp_path->ant_nums = NULL;
 	tmp_path->next_path = NULL;
 	cur = data->path_group;
