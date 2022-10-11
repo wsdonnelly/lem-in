@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 14:21:22 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/11 14:27:18 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 
 	ft_printf("PATHS USED:\n");
 	set = group->paths;
-	while(set)
+	while (set)
 	{
 		path = set->path;
 		ft_printf("%s->", data->start);
 		while (path)
 		{
 			ft_printf("%s", graph[path->index].name);
-			if(path->next)
+			if (path->next)
 				ft_printf("->");
 			path = path->next;
 		}
@@ -42,7 +42,7 @@ void	init_ant_nums(t_path_group *group)
 	int			i;
 
 	tmp = group->paths;
-	while(tmp)
+	while (tmp)
 	{
 		tmp->ant_nums = (int *)malloc(sizeof (int) * tmp->ants_on_path);
 		i = 0;
@@ -64,7 +64,7 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 	ant = 1;
 	start = set;
 	i = 0;
-	while(i < data->num_ants)
+	while (i < data->num_ants)
 	{
 		set = start;
 		while (set && (i < set->ants_on_path))
@@ -80,11 +80,8 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 void	print_ant(t_path_set *set, t_room *graph, int line, int ant)
 {
 	t_queue_node	*path;
-	int	count;
-	// int	start;
+	int				count;
 
-	// start = line;
-	// ft_printf("line:%d", line);
 	path = set->path;
 	count = 1;
 	if (line < 1 || line > set->steps)
@@ -93,7 +90,6 @@ void	print_ant(t_path_set *set, t_room *graph, int line, int ant)
 	{
 		if (line == count)
 		{
-			// printf("stat:%d", line_start);
 			if (!set->line_start)
 				ft_printf(" ");
 			ft_printf("L%d-%s", ant, graph[path->index].name);
