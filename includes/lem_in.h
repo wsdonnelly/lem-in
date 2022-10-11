@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/11 13:18:08 by wdonnell         ###   ########.fr       */
+=======
+/*   Updated: 2022/10/11 14:21:54 by akilk            ###   ########.fr       */
+>>>>>>> fcd39e4619c78aadb03849fb7e57d8691ae5d446
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +72,7 @@ typedef struct s_path_set
 	int					steps;
 	int					ants_on_path;
 	int					lines;
-	int					paths_total;
+	int					line_start;
 	int					*ant_nums;
 	struct s_queue_node	*path;
 	struct s_path_set	*next_path;
@@ -179,7 +183,7 @@ void			put_ants_on_path(t_data *data, t_path_group *path_group);
 t_path_group	*compare_paths(t_data *data);
 //print results and verbose
 void	print_verbose(t_data *data, t_path_group *group, t_room *graph);
-int		init_ant_nums(t_path_group *group);
+void	init_ant_nums(t_path_group *group);
 void	print_result(t_path_group *group, t_room *graph, t_data *data);
 //test stuff to remove in master
 void			print_graph_test(t_room *graph, t_data *data);

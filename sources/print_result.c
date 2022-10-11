@@ -6,7 +6,11 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/11 13:23:44 by wdonnell         ###   ########.fr       */
+=======
+/*   Updated: 2022/10/11 14:27:18 by akilk            ###   ########.fr       */
+>>>>>>> fcd39e4619c78aadb03849fb7e57d8691ae5d446
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +40,16 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 	}
 }
 
-int	init_ant_nums(t_path_group *group)
+void	init_ant_nums(t_path_group *group)
 {
 	t_path_set	*tmp;
 	int			i;
-	int			paths;
 
 	tmp = group->paths;
+<<<<<<< HEAD
 	paths = 0;
+=======
+>>>>>>> fcd39e4619c78aadb03849fb7e57d8691ae5d446
 	while (tmp)
 	{
 		tmp->ant_nums = (int *)malloc(sizeof (int) * tmp->ants_on_path);
@@ -53,10 +59,8 @@ int	init_ant_nums(t_path_group *group)
 			tmp->ant_nums[i] = -1;
 			i++;
 		}
-		paths++;
 		tmp = tmp->next_path;
 	}
-	return (paths);
 }
 
 void	set_ant_nums(t_path_set *set, t_data *data)
@@ -84,7 +88,7 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 void	print_ant(t_path_set *set, t_room *graph, int line, int ant)
 {
 	t_queue_node	*path;
-	int	count;
+	int				count;
 
 	path = set->path;
 	count = 1;
@@ -93,7 +97,13 @@ void	print_ant(t_path_set *set, t_room *graph, int line, int ant)
 	while (path)
 	{
 		if (line == count)
-			ft_printf("L%d-%s ", ant, graph[path->index].name);
+		{
+			if (!set->line_start)
+				ft_printf(" ");
+			ft_printf("L%d-%s", ant, graph[path->index].name);
+			set->line_start = 0;
+			break ;
+		}
 		path = path->next;
 		count++;
 	}
@@ -111,6 +121,7 @@ void	print_result(t_path_group *group, t_room *graph, t_data *data)
 	while (line <= group->paths->lines)
 	{
 		set = group->paths;
+		set->line_start = 1;
 		while (set)
 		{
 			ant = 0;
