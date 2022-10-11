@@ -6,11 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/11 13:23:44 by wdonnell         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/11 14:27:18 by akilk            ###   ########.fr       */
->>>>>>> fcd39e4619c78aadb03849fb7e57d8691ae5d446
+/*   Updated: 2022/10/11 15:15:50 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +42,6 @@ void	init_ant_nums(t_path_group *group)
 	int			i;
 
 	tmp = group->paths;
-<<<<<<< HEAD
-	paths = 0;
-=======
->>>>>>> fcd39e4619c78aadb03849fb7e57d8691ae5d446
 	while (tmp)
 	{
 		tmp->ant_nums = (int *)malloc(sizeof (int) * tmp->ants_on_path);
