@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 11:33:04 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:54:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	init_bfs(t_data *data, t_room *graph, t_queue *queue, int path)
 static void	update_neighbors(t_room *graph, t_queue *queue, t_edge	*temp, int idx)
 {
 	graph[temp->next_room_index].visited = 1;
-	
 	enqueue(queue, temp->next_room_index);
 	graph[temp->next_room_index].previous_idx = idx;
 	graph[temp->next_room_index].previous_edge = temp;
