@@ -6,7 +6,7 @@
 /*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 11:45:16 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/11 14:27:18 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 
 	ft_printf("PATHS USED:\n");
 	set = group->paths;
-	while(set)
+	while (set)
 	{
 		path = set->path;
 		ft_printf("%s->", data->start);
 		while (path)
 		{
 			ft_printf("%s", graph[path->index].name);
-			if(path->next)
+			if (path->next)
 				ft_printf("->");
 			path = path->next;
 		}
@@ -36,15 +36,13 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 	}
 }
 
-int	init_ant_nums(t_path_group *group)
+void	init_ant_nums(t_path_group *group)
 {
 	t_path_set	*tmp;
 	int			i;
-	int			paths;
 
 	tmp = group->paths;
-	paths = 0;
-	while(tmp)
+	while (tmp)
 	{
 		tmp->ant_nums = (int *)malloc(sizeof (int) * tmp->ants_on_path);
 		i = 0;
@@ -53,10 +51,8 @@ int	init_ant_nums(t_path_group *group)
 			tmp->ant_nums[i] = -1;
 			i++;
 		}
-		paths++;
 		tmp = tmp->next_path;
 	}
-	return (paths);
 }
 
 void	set_ant_nums(t_path_set *set, t_data *data)
@@ -68,7 +64,7 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 	ant = 1;
 	start = set;
 	i = 0;
-	while(i < data->num_ants)
+	while (i < data->num_ants)
 	{
 		set = start;
 		while (set && (i < set->ants_on_path))
@@ -84,7 +80,7 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 void	print_ant(t_path_set *set, t_room *graph, int line, int ant)
 {
 	t_queue_node	*path;
-	int	count;
+	int				count;
 
 	path = set->path;
 	count = 1;
@@ -93,7 +89,13 @@ void	print_ant(t_path_set *set, t_room *graph, int line, int ant)
 	while (path)
 	{
 		if (line == count)
-			ft_printf("L%d-%s ", ant, graph[path->index].name);
+		{
+			if (!set->line_start)
+				ft_printf(" ");
+			ft_printf("L%d-%s", ant, graph[path->index].name);
+			set->line_start = 0;
+			break ;
+		}
 		path = path->next;
 		count++;
 	}
@@ -111,6 +113,7 @@ void	print_result(t_path_group *group, t_room *graph, t_data *data)
 	while (line <= group->paths->lines)
 	{
 		set = group->paths;
+		set->line_start = 1;
 		while (set)
 		{
 			ant = 0;

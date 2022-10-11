@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/11 11:25:26 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:20:52 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 	}
 	graph = NULL;
 	data.graph = &graph;
-	
+
 	read_map(&data, &graph);
 	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 		exit_error(&data, "no valid path found");
 	result = NULL;
 	result = compare_paths(&data);
-	result->paths->paths_total = init_ant_nums(result);
+	init_ant_nums(result);
 	print_data(&data);
 	ft_printf("\n");
 	print_result(result, graph, &data);
