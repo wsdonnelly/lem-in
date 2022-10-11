@@ -23,4 +23,4 @@ ANT_COP
 Checks output for errors
 and counts lines
 ./lem-in < <input.map> | ant_cop/./ant_cop
-eg. ./generator --big > test.map && ./lem-in < test.map | ant_cop/./ant_cop
+eg. ./generator --big > test.map && ./lem-in < test.map | ./ant_cop/ant_cop

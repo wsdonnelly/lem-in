@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/10 14:11:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:23:49 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_data
 	int					start_index;
 	int					flow_path;
 	int					shortest_path;
+	int					verbose;
 	struct s_queue_node	*cur_path;
 	struct s_path_group	*path_group;
 	struct s_line		*store_input_head;

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/10 20:45:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:18:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	read_in_info(t_info *info, t_room **room_arr)
 	init_parse(&parse);
 	while (get_next_line(0, &parse.line))
 	{
-		if (!ft_strcmp(parse.line, "Solution Paths") \
+		if (!ft_strcmp(parse.line, "PATHS USED") \
 		|| !ft_strcmp(parse.line, "no valid path found") \
 		|| !ft_strcmp(parse.line, "ERROR"))
 		{

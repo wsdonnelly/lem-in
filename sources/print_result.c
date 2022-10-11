@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/09 16:34:00 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/11 10:30:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,10 @@ void	print_result(t_path_group *group, t_room *graph, t_data *data)
 		}
 		ft_printf("\n");
 		line++;
+	}
+	if (data->verbose)
+	{
+		ft_printf("\n");
+		print_verbose(data, group, graph);
 	}
 }

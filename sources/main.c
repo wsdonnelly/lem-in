@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/10 20:56:02 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:38:40 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_data(t_data *data)
 	data->end_index = -2;
 	data->name_list = NULL;
 	data->flow_path = 1;
+	data->verbose = 0;
 }
 
 //remove in master branch
@@ -54,14 +55,20 @@ int	main(int argc, char **argv)
 	t_room	*graph;
 	t_path_group	*result;
 
-	if (argc > 2 || (argc == 2 && ft_strcmp(argv[1], "-v")))
+	init_data(&data);
+	if (argc >= 2)
 	{
-		ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
-		return (1);
+		if(argc == 2 && !ft_strcmp(argv[1], "-v"))
+			data.verbose = 1;
+		else
+		{
+			ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
+			return (1);
+		}
 	}
 	graph = NULL;
 	data.graph = &graph;
-	init_data(&data);
+	
 	read_map(&data, &graph);
 	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
@@ -76,10 +83,6 @@ int	main(int argc, char **argv)
 	print_data(&data);
 	ft_printf("\n");
 	print_result(result, graph, &data);
-	// print_verbose(&data, result, graph); --> ready in print.result.c
-	//print_comments(&data);
-
-
 	free_graph(&graph, &data);
 	free_paths(data.path_group);
 	free_data(&data);

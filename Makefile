@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+         #
+#    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/10/08 17:02:31 by akilk            ###   ########.fr        #
+#    Updated: 2022/10/11 10:24:52 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME		= lem-in
 CC			= clang
-#CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
-CFLAGS		= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+#CFLAGS		= -Wall -Wextra -Werror -O3
 SRC_FILES = main.c read_map.c read_map_extras.c util.c make_graph.c add_rooms_to_graph.c \
 hash_map.c check_rooms.c solve.c BFS.c BFS_util.c change_capacity.c \
 free_functions.c  free_functions_2.c store_data.c put_ants_on_paths.c compare_paths.c add_edges.c print_result.c
