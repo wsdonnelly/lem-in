@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 10:52:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:45:16 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 	ant = 1;
 	start = set;
 	i = 0;
-	while(ant <= data->num_ants)
+	while(i < data->num_ants)
 	{
 		set = start;
 		while (set && (i < set->ants_on_path))
@@ -105,7 +105,7 @@ void	print_result(t_path_group *group, t_room *graph, t_data *data)
 	int			ant;
 	int			fst_ant;
 	t_path_set	*set;
-	
+
 	set_ant_nums(group->paths, data);
 	line = 1;
 	while (line <= group->paths->lines)
