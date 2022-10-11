@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 11:54:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:27:06 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	init_bfs(t_data *data, t_room *graph, t_queue *queue, int path)
 	graph[data->start_index].previous_edge = NULL;
 }
 
-static void	update_neighbors(t_room *graph, t_queue *queue, t_edge	*temp, int idx)
+static void	update_neighbors(t_room *graph, t_queue *queue, \
+t_edge	*temp, int idx)
 {
 	graph[temp->next_room_index].visited = 1;
 	enqueue(queue, temp->next_room_index);
@@ -34,6 +35,7 @@ static void	update_neighbors(t_room *graph, t_queue *queue, t_edge	*temp, int id
 	graph[temp->next_room_index].previous_edge = temp;
 }
 
+/*
 static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path, t_data *data)
 {
 	t_edge	*temp;
@@ -79,6 +81,63 @@ void	bfs(t_data *data, t_room *graph, int path)
 			break ;
 		}
 		check_neighbors(graph, &queue, cur_idx, path, data);
+	}
+	free(queue.queue);
+}
+*/
+
+static void	flow_neighbors(t_room *graph, t_queue *queue, int idx)
+{
+	t_edge	*temp;
+
+	temp = graph[idx].neighbors;
+	while (temp)
+	{
+		if (!graph[temp->next_room_index].visited && !temp->flow)
+			update_neighbors(graph, queue, temp, idx);
+		temp = temp->next;
+	}
+}
+
+static void	path_neighbors(t_room *graph, t_queue *queue, int idx, t_data *data)
+{
+	t_edge	*temp;
+
+	temp = graph[idx].neighbors;
+	while (temp)
+	{
+		if (!graph[temp->next_room_index].visited \
+		&& !graph[temp->next_room_index].in_path)
+		{
+			if (((temp->next_room_index != data->end_index \
+			&& temp->flow) && temp->is_forward) \
+			|| ((temp->next_room_index == data->end_index) && temp->is_forward))
+				update_neighbors(graph, queue, temp, idx);
+		}
+		temp = temp->next;
+	}
+}
+
+void	bfs(t_data *data, t_room *graph, int path)
+{
+	t_queue	queue;
+	int		cur_idx;
+
+	init_bfs(data, graph, &queue, path);
+	while (queue.head <= queue.tail)
+	{
+		cur_idx = dequeue(&queue);
+		if (cur_idx == data->end_index)
+		{
+			if (!path)
+				data->flow_path = 1;
+			data->shortest_path = 1;
+			break ;
+		}
+		if (path)
+			path_neighbors(graph, &queue, cur_idx, data);
+		else
+			flow_neighbors(graph, &queue, cur_idx);
 	}
 	free(queue.queue);
 }

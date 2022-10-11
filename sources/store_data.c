@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 09:14:32 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/10 18:30:00 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:28:36 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	print_data(t_data *data)
 		free(cpy->line);
 		free(cpy);
 	}
+	ft_printf("\n");
 }
 
 void	store_data(t_data *data, char *line)

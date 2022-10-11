@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:49:06 by jjuntune          #+#    #+#             */
-/*   Updated: 2022/10/11 15:14:07 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:51:08 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,33 @@ static void	init_data(t_data *data)
 	data->verbose = 0;
 }
 
-int	main(int argc, char **argv)
+static void	check_args(int ac, char **av, t_data *data)
 {
-	t_data	data;
-	t_room	*graph;
-	t_path_group	*result;
-
-	init_data(&data);
-	if (argc >= 2)
+	if (ac >= 2)
 	{
-		if(argc == 2 && !ft_strcmp(argv[1], "-v"))
-			data.verbose = 1;
+		if (ac == 2 && !ft_strcmp(av[1], "-v"))
+			data->verbose = 1;
 		else
 		{
 			ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
-			return (1);
+			exit(1);
 		}
 	}
+}
+
+int	main(int ac, char **av)
+{
+	t_data			data;
+	t_room			*graph;
+	t_path_group	*result;
+
+	init_data(&data);
+	check_args(ac, av, &data);
 	graph = NULL;
 	data.graph = &graph;
-
 	read_map(&data, &graph);
 	if (!graph || data.start_index == -2 || data.end_index == -2)
 		exit_error(&data, "ERROR");
-	//needed?
-	graph[data.start_index].previous_idx = -1;
 	solve(&data, graph);
 	if (!data.path_group || !data.path_group->paths)
 		exit_error(&data, "no valid path found");
@@ -60,7 +62,6 @@ int	main(int argc, char **argv)
 	result = compare_paths(&data);
 	init_ant_nums(result);
 	print_data(&data);
-	ft_printf("\n");
 	print_result(result, graph, &data);
 	free_graph(&graph, &data);
 	free_paths(data.path_group);
