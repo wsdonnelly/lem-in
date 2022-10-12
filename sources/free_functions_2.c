@@ -6,15 +6,15 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:01:23 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 11:44:03 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:55:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void free_result(t_path_group *result)
+void	free_result(t_path_group *result)
 {
-	t_path_set *tmp;
+	t_path_set	*tmp;
 
 	tmp = result->paths;
 	while (tmp)
@@ -44,7 +44,6 @@ void	free_paths(t_path_group *path_group)
 			}
 			path.path_set = path.path_set->next_path;
 			free(path.tmp_path);
-			
 		}
 		path_group = path_group->next_path_group;
 		free(path.tmp_group);
