@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 11:39:20 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:51:25 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,59 +135,59 @@ typedef struct s_paths
 }				t_paths;
 
 //parser
-void					read_map(t_data *data, t_room **graph);
-void					check_links(t_parse *parse, t_data *data, \
-							t_room **graph);
-void					check_rooms(t_data *data, char *line);
+void			read_map(t_data *data, t_room **graph);
+void			check_links(t_parse *parse, t_data *data, \
+					t_room **graph);
+void			check_rooms(t_data *data, char *line);
 //graph creation
-void					add_to_graph(t_data *data, char *line);
-void					set_rooms(char **room, t_data *data);
-void					both_start_end(char *start_room, char *end_room, \
-							t_data *data);
-void					set_end_rooms(char *end_room, char *room_2, \
-							t_data *data);
-void					set_start_rooms(char *start_room, char *room_2, \
-							t_data *data);
-t_edge				*add_edge(t_data *data, int index1, int index2);
-t_edge				*add_reverse_edge(t_data *data, int index1, \
-							int next, t_edge *forward);
+void			add_to_graph(t_data *data, char *line);
+void			set_rooms(char **room, t_data *data);
+void			both_start_end(char *start_room, char *end_room, \
+					t_data *data);
+void			set_end_rooms(char *end_room, char *room_2, \
+					t_data *data);
+void			set_start_rooms(char *start_room, char *room_2, \
+					t_data *data);
+t_edge			*add_edge(t_data *data, int index1, int index2);
+t_edge			*add_reverse_edge(t_data *data, int index1, int next, \
+t_edge *forward);
 //store_data
-void					store_data(t_data *data, char *line);
-void					print_data(t_data *data);
+void			store_data(t_data *data, char *line);
+void			print_data(t_data *data);
 //free functions
-void					free_paths(t_path_group *path_group);
-void					free_str_arr(char **arr);
-void					free_graph(t_room **graph, t_data *data);
-void					free_data(t_data *data);
-void					free_result(t_path_group *path_group);
+void			free_paths(t_path_group *path_group);
+void			free_str_arr(char **arr);
+void			free_graph(t_room **graph, t_data *data);
+void			free_data(t_data *data);
+void			free_result(t_path_group *path_group);
 //additional functions
-int						hash_map(char *name, int num_rooms, t_room **graph);
-int						exit_error(t_data *data, char *message);
-int						is_valid_int(char *num);
+int				hash_map(char *name, int num_rooms, t_room **graph);
+int				exit_error(t_data *data, char *message);
+int				is_valid_int(char *num);
 //BFS
-void					bfs(t_data *data, t_room *graph, int path);
-void					enqueue(t_queue *queue, int index);
-int						dequeue(t_queue *queue);
-void					init_visited(t_data *data, t_room *graph);
-int						*create_queue(t_data *data, t_queue *queue);
+void			bfs(t_data *data, t_room *graph, int path);
+void			enqueue(t_queue *queue, int index);
+int				dequeue(t_queue *queue);
+void			init_visited(t_data *data, t_room *graph);
+int				*create_queue(t_data *data, t_queue *queue);
 //solve
-void					solve(t_data *data, t_room *graph);
-void					create_path_group(t_data *data);
-void					create_path_set(t_data *data, \
-							t_queue_node *path_to_add, int steps);
-int						change_capacity(t_data *data, \
-							t_room *graph, int save, int flow);
-void					put_ants_on_path(t_data *data, \
-							t_path_group *path_group);
+void			solve(t_data *data, t_room *graph);
+void			create_path_group(t_data *data);
+void			create_path_set(t_data *data, \
+					t_queue_node *path_to_add, int steps);
+int				change_capacity(t_data *data, \
+					t_room *graph, int save, int flow);
+void			put_ants_on_path(t_data *data, \
+					t_path_group *path_group);
 t_path_group	*compare_paths(t_data *data);
 //print results and verbose
-void					print_verbose(t_data *data, t_path_group *group, \
-							t_room *graph);
-void					init_ant_nums(t_path_group *group);
-void					print_result(t_path_group *group, t_room *graph, \
-							t_data *data);
+void			print_verbose(t_data *data, t_path_group *group, \
+					t_room *graph);
+void			init_ant_nums(t_path_group *group);
+void			print_result(t_path_group *group, t_room *graph, \
+					t_data *data);
 //test stuff to remove in master
-void					print_graph_test(t_room *graph, t_data *data);
-void					print_ants(t_path_group *best);
+void			print_graph_test(t_room *graph, t_data *data);
+void			print_ants(t_path_group *best);
 
 #endif

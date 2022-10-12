@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:21:28 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/06 11:18:15 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:39:12 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (!*s1)
+	if (!*s1 || !*s2)
 		return (0);
 	while (*s1 && *s1 == *s2)
 	{

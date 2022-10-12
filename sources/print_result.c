@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 21:45:18 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/12 14:56:22 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 	t_queue_node	*path;
 	t_path_set		*set;
 
+	ft_printf("\n");
 	ft_printf("PATHS USED:\n");
 	set = group->paths;
 	while (set)
@@ -127,10 +128,5 @@ void	print_result(t_path_group *group, t_room *graph, t_data *data)
 		}
 		ft_printf("\n");
 		line++;
-	}
-	if (data->verbose)
-	{
-		ft_printf("\n");
-		print_verbose(data, group, graph);
 	}
 }

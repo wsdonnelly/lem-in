@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:06:35 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 11:44:19 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 14:59:51 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ static void	check_args(int ac, char **av, t_data *data)
 	}
 }
 
+static void	free_all(t_data *data, t_room *graph, t_path_group	*result)
+{
+	free_result(result);
+	free_graph(&graph, data);
+	free_paths(data->path_group);
+	free_data(data);
+}
+
 int	main(int ac, char **av)
 {
 	t_data			data;
@@ -63,9 +71,8 @@ int	main(int ac, char **av)
 	init_ant_nums(result);
 	print_data(&data);
 	print_result(result, graph, &data);
-	free_result(result);
-	free_graph(&graph, &data);
-	free_paths(data.path_group);
-	free_data(&data);
+	if (data.verbose)
+		print_verbose(&data, result, graph);
+	free_all(&data, graph, result);
 	return (0);
 }
