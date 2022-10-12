@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 15:17:38 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:43:42 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	read_in_info(t_info *info, t_room **room_arr)
 			ft_putendl(parse.line);
 			exit(0);
 		}
-		if (!strcmp(parse.line, "PATHS USED:"))
+		if (!strcmp(parse.line, "PATHS USED:") \
+		|| strstr(parse.line, "Lines used:") )
 			break ;
 		if (parse_input(info, room_arr, &parse))
 			continue ;
