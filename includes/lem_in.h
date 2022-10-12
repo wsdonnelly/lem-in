@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 11:15:32 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:39:20 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void					free_paths(t_path_group *path_group);
 void					free_str_arr(char **arr);
 void					free_graph(t_room **graph, t_data *data);
 void					free_data(t_data *data);
+void					free_result(t_path_group *path_group);
 //additional functions
 int						hash_map(char *name, int num_rooms, t_room **graph);
 int						exit_error(t_data *data, char *message);

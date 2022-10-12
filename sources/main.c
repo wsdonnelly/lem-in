@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:06:35 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 11:06:44 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:44:19 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int ac, char **av)
 	init_ant_nums(result);
 	print_data(&data);
 	print_result(result, graph, &data);
+	free_result(result);
 	free_graph(&graph, &data);
 	free_paths(data.path_group);
 	free_data(&data);
