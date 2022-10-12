@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/11 15:15:50 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 21:45:18 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ void	set_ant_nums(t_path_set *set, t_data *data)
 	ant = 1;
 	start = set;
 	i = 0;
-	while (i < data->num_ants)
+	while (ant <= data->num_ants)
 	{
 		set = start;
-		while (set && (i < set->ants_on_path))
+		while (set)
 		{
-			set->ant_nums[i] = ant;
+			if (i < set->ants_on_path)
+				set->ant_nums[i] = ant++;
 			set = set->next_path;
-			ant++;
 		}
 		i++;
 	}
