@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:29:26 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 16:27:06 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 11:09:34 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,57 +34,6 @@ t_edge	*temp, int idx)
 	graph[temp->next_room_index].previous_idx = idx;
 	graph[temp->next_room_index].previous_edge = temp;
 }
-
-/*
-static void	check_neighbors(t_room *graph, t_queue *queue, int idx, int path, t_data *data)
-{
-	t_edge	*temp;
-
-	temp = graph[idx].neighbors;
-	while (temp)
-	{
-		if (!graph[temp->next_room_index].visited)
-		{
-			if (!path)
-			{
-				if (!temp->flow)
-					update_neighbors(graph, queue, temp, idx);
-			}
-			else
-			{
-				if (!graph[temp->next_room_index].in_path)
-				{
-					if (((temp->next_room_index != data->end_index && temp->flow) && temp->is_forward) \
-					|| ((temp->next_room_index == data->end_index) && temp->is_forward))
-						update_neighbors(graph, queue, temp, idx);
-				}
-			}
-		}
-		temp = temp->next;
-	}
-}
-
-void	bfs(t_data *data, t_room *graph, int path)
-{
-	t_queue	queue;
-	int		cur_idx;
-
-	init_bfs(data, graph, &queue, path);
-	while (queue.head <= queue.tail)
-	{
-		cur_idx = dequeue(&queue);
-		if (cur_idx == data->end_index)
-		{
-			if (!path)
-				data->flow_path = 1;
-			data->shortest_path = 1;
-			break ;
-		}
-		check_neighbors(graph, &queue, cur_idx, path, data);
-	}
-	free(queue.queue);
-}
-*/
 
 static void	flow_neighbors(t_room *graph, t_queue *queue, int idx)
 {

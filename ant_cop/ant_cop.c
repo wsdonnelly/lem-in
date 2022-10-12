@@ -226,12 +226,12 @@ int	main()
 			i++;
 		}
 	}
-	free(line);
-	free(start);
-	free(end);
+//	free(line);
+//	free(start);
+//free(end);
 	//free_str_arr(arr);
-	free(ants_arr);
-	free_list(head);
+//	free(ants_arr);
+//	free_list(head);
 	return (0);
 }
 
