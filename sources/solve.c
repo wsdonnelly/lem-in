@@ -6,39 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:27:44 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 11:54:49 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:37:14 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-/*
-static void	print_path_test(t_data *data, t_room *graph)
-{
-	t_queue_node	*tmp;
-	t_path_set		*tmp_path;
-	t_path_group	*cur_group;
 
-	cur_group = data->path_group;
-	while (cur_group)
-	{
-		tmp_path = cur_group->paths;
-		printf("path_group-->>>\n");
-		while (tmp_path)
-		{
-			tmp = tmp_path->path;
-			while (tmp)
-			{
-				printf("%s ", graph[tmp->index].name);
-				tmp = tmp->next;
-			}
-			tmp_path = tmp_path->next_path;
-			printf("\n");
-		}
-		cur_group = cur_group->next_path_group;
-	}
-	printf("\n");
-}
-*/
 static void	init_in_path(t_data *data, t_room *graph)
 {
 	int	i;
@@ -96,5 +69,4 @@ void	solve(t_data *data, t_room *graph)
 			}
 		}
 	}
-	//print_path_test(data, graph);
 }

@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:53:46 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 12:27:45 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 16:45:47 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,14 @@ static int	parse_input(t_info *info, t_room **room_arr, t_parse *parse)
 void	read_in_info(t_info *info, t_room **room_arr)
 {
 	t_parse	parse;
-
+	int ret;
 
 	init_parse(&parse);
-	while (get_next_line(0, &parse.line))
+	while ( (ret = get_next_line(0, &parse.line)))
 	{
 		
-		printf("%s\n", parse.line);
+		printf("%s ret: %d\n", parse.line, ret);
+
 		if (!ft_strcmp(parse.line, "PATHS USED") \
 		|| !ft_strcmp(parse.line, "no valid path found") \
 		|| !ft_strcmp(parse.line, "ERROR"))

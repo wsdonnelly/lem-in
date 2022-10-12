@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 15:14:56 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:56:18 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 	tmp_path->ants_on_path = 0;
 	tmp_path->lines = 0;
 	tmp_path->line_start = 0;
-	tmp_path->ant_nums = NULL;
 	tmp_path->next_path = NULL;
 	cur = data->path_group;
 	while (cur->next_path_group)
