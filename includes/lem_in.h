@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:32:03 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 14:51:25 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:13:52 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_data
 	int					flow_path;
 	int					shortest_path;
 	int					verbose;
+	int					print_lines;
 	struct s_queue_node	*cur_path;
 	struct s_path_group	*path_group;
 	struct s_line		*store_input_head;

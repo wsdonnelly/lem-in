@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:06:35 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 14:59:51 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:25:36 by akilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_data(t_data *data)
 	data->name_list = NULL;
 	data->flow_path = 1;
 	data->verbose = 0;
+	data->print_lines = 0;
 }
 
 static void	check_args(int ac, char **av, t_data *data)
@@ -34,9 +35,11 @@ static void	check_args(int ac, char **av, t_data *data)
 	{
 		if (ac == 2 && !ft_strcmp(av[1], "-v"))
 			data->verbose = 1;
+		else if (ac == 2 && !ft_strcmp(av[1], "-l"))
+			data->print_lines = 1;
 		else
 		{
-			ft_putstr_fd("Usage: ./lem-in [-v]\n", 2);
+			ft_putstr_fd("Usage: ./lem-in [-v] [-l]\n", 2);
 			exit(1);
 		}
 	}
@@ -48,6 +51,14 @@ static void	free_all(t_data *data, t_room *graph, t_path_group	*result)
 	free_graph(&graph, data);
 	free_paths(data->path_group);
 	free_data(data);
+}
+
+static void	print_flags(t_data *data, t_path_group *result, t_room *graph)
+{
+	if (data->verbose)
+		print_verbose(data, result, graph);
+	if (data->print_lines)
+		ft_printf("Lines used: %d\n", result->paths->lines);
 }
 
 int	main(int ac, char **av)
@@ -71,8 +82,7 @@ int	main(int ac, char **av)
 	init_ant_nums(result);
 	print_data(&data);
 	print_result(result, graph, &data);
-	if (data.verbose)
-		print_verbose(&data, result, graph);
+	print_flags(&data, result, graph);
 	free_all(&data, graph, result);
 	return (0);
 }
