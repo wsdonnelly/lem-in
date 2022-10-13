@@ -6,12 +6,12 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:10:33 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/08 10:50:05 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:09:05 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-#include <stdio.h>
+
 /*
 * Collection of funtions to create the duplicte rooms (eg. 1in 1out)
 * or single rooms for start or end
