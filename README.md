@@ -16,7 +16,7 @@ eg. ./lem-in -l < maps/basic_maps/108rooms.map
 
 VISUALZER:
 lem-in < <map_file> | ./visualizer/visualizer
-eg. ./lem-in < maps/basic_maps/108rooms.map | ./visualizer/visualizer
+eg. ./map_gen/map_gen 50  && ./lem-in < rando.map | ./visualizer/visualizer
 
 TIME TRIALS:
 ./generator --big > test.map && time ./lem-in < test.map
@@ -35,3 +35,13 @@ Checks output for errors:
 and counts lines
 ./lem-in < <input.map> | <reletive path to ant_cop binary>
 eg. ./generator --big > test.map && ./lem-in < test.map | ../ant_cop/ant_cop
+
+EXAMPLE TEST SCRIPTS:
+for i in {1..10}; do ./generator --big-superposition > test.map && ./lem-in < test.map | ../ant_cop/ant_cop; done
+for i in {1..10}; do ./generator --big > test.map && ./lem-in < test.map | ../ant_cop/ant_cop; done
+for i in {1..10}; do ./generator --flow-one > test.map && ./lem-in < test.map | ../ant_cop/ant_cop; done
+for i in {1..10}; do ./generator --flow-ten > test.map && ./lem-in < test.map | ../ant_cop/ant_cop; done
+for i in {1..10}; do ./generator --flow-thousand > test.map && ./lem-in < test.map | ../ant_cop/ant_cop; done
+for FILE in maps/error_maps/*; do ./lem-in < $FILE; done
+for FILE in maps/basic_maps/*; do ./lem-in < $FILE | ../ant_cop/ant_cop; done 
+for FILE in maps/cases/*; do ./lem-in < $FILE | ../ant_cop/ant_cop; done 

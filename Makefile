@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/10/13 15:33:49 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/10/13 15:46:50 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ all: $(NAME)
 	@echo $(GREEN) "Compiled" $(EOC)
 	@make -sC visualizer
 	@make -sC map_gen
-	@make -sC ant_cop
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME) $(LIB)
