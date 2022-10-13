@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/10/12 15:25:15 by wdonnell         ###   ########.fr        #
+#    Updated: 2022/10/13 15:33:49 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,14 +52,12 @@ clean:
 	rm -f rando.map
 	@make clean -sC visualizer
 	@make clean -sC map_gen
-	@make clean -sC ant_cop
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f libft/libft.a#
 	@make fclean -sC visualizer
 	@make fclean -sC map_gen
-	@make fclean -sC ant_cop
 
 re: fclean all
 
