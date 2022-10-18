@@ -15,7 +15,8 @@ https://cdn.intra.42.fr/pdf/pdf/6610/lem-in.en.pdf
  - make
 (Ignore deprecation warnings associated with minilibx compilation, the ancient library used in the Visualizer)
 - Usage: ./lem-in < <map_file>
-
+- generator can be used to make random graphs. The generator graphs also state the number of lines expected as an accuracy estimate.
+- ex: ./generator --flow-ten | ./lem-in
 
 **VERBOSE MODE: Show paths taken**
 - ./lem-in -v < <map_file>
@@ -27,7 +28,7 @@ https://cdn.intra.42.fr/pdf/pdf/6610/lem-in.en.pdf
 
 ## VISUALZER:
 - ./lem-in < <map_file> | ./visualizer/visualizer
-- ./map_gen/map_gen 50  && ./lem-in < rando.map | ./visualizer/visualizer
+- ./lem-in < maps/basic_maps/108rooms.map | ./visualizer/visualizer
 
 ## RANDOM MAP GENERATOR
 - Example: 50 rooms piped to visualizer
@@ -36,6 +37,9 @@ https://cdn.intra.42.fr/pdf/pdf/6610/lem-in.en.pdf
 **TIME TRIALS:**
 - ./generator --big > test.map && time ./lem-in < test.map
 - ./generator --big-superposition > test.map && time ./lem-in < test.map
+
+**ACCURACY TRIALS:**
+- ./generator --big-superposition > test.map && ./lem-in -l < test.map && grep -m 1 '#Here is the number of lines required:' test.map
 
 ## ANT_COP:
 git clone git@github.com:wsdonnelly/ant_cop.git ant_cop && make -C ant_cop

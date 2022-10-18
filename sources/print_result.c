@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:41:48 by akilk             #+#    #+#             */
-/*   Updated: 2022/10/12 14:56:22 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:11:16 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 	t_path_set		*set;
 
 	ft_printf("\n");
-	ft_printf("PATHS USED:\n");
+	ft_printf("\x1b[32mPATHS USED:\n");
 	set = group->paths;
 	while (set)
 	{
@@ -35,6 +35,7 @@ void	print_verbose(t_data *data, t_path_group *group, t_room *graph)
 		ft_printf("\n");
 		set = set->next_path;
 	}
+	ft_printf("\x1b[0m");
 }
 
 void	init_ant_nums(t_path_group *group)
@@ -46,6 +47,8 @@ void	init_ant_nums(t_path_group *group)
 	while (tmp)
 	{
 		tmp->ant_nums = (int *)malloc(sizeof (int) * tmp->ants_on_path);
+		if (!tmp->ant_nums)
+			exit(0);
 		i = 0;
 		while (i < tmp->ants_on_path)
 		{

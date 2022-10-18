@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:37:19 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/18 12:10:34 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:31:13 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_edge	*add_edge(t_data *data, int index1, int index2)
 			return (NULL);
 		temp = temp->next;
 	}
-	temp = malloc(sizeof(t_edge));
+	temp = (t_edge *)malloc(sizeof(t_edge));
 	if (!temp)
 		exit_error(data, "ERROR");
 	temp->next_room_index = index2;
@@ -47,7 +47,7 @@ t_edge	*add_reverse_edge(t_data *data, int index1, int next, t_edge *forward)
 	t_edge	**head;
 
 	head = &(*data->graph)[index1].neighbors;
-	temp = malloc(sizeof(t_edge));
+	temp = (t_edge *)malloc(sizeof(t_edge));
 	if (!temp)
 		exit_error(data, "ERROR");
 	temp->next_room_index = next;

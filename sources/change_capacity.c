@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:21:17 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/11 15:56:18 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:32:29 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	create_path_group(t_data *data)
 	t_path_group	*tmp;
 	t_path_group	*last;
 
-	tmp = malloc(sizeof(t_path_group));
+	tmp = (t_path_group *)malloc(sizeof(t_path_group));
 	if (!tmp)
 		exit(0);
 	tmp->paths = NULL;
@@ -39,7 +39,7 @@ void	create_path_set(t_data *data, t_queue_node *path_to_add, int steps)
 	t_path_set		*last;
 	t_path_group	*cur;
 
-	tmp_path = malloc(sizeof(t_path_set));
+	tmp_path = (t_path_set *)malloc(sizeof(t_path_set));
 	if (!tmp_path)
 		exit(0);
 	tmp_path->path = path_to_add;
@@ -66,7 +66,7 @@ static void	add_room_to_stack(int index, t_data *data, int *count)
 {
 	t_queue_node	*tmp;
 
-	tmp = malloc(sizeof(t_queue_node));
+	tmp = (t_queue_node *)malloc(sizeof(t_queue_node));
 	if (!tmp)
 		exit(0);
 	(*count)++;

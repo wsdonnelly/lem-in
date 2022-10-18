@@ -6,7 +6,7 @@
 /*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 10:31:28 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/05/20 14:51:14 by wdonnell         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:10:48 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	add_name_to_list(t_node **head, char *name)
 {
 	t_node	*temp;
 
-	temp = malloc(sizeof(t_node));
+	temp = (t_node *)malloc(sizeof(t_node));
 	if (!temp)
 		return (0);
 	temp->name = ft_strdup(name);
@@ -110,6 +110,8 @@ static int	check_coordinate_errors(t_data *data, char *line)
 
 void	check_rooms(t_data *data, char *line)
 {
+	if (line[0] == 'L')
+		exit_error(data, "ERROR");
 	if (!check_coordinate_errors(data, line))
 	{
 		free(line);

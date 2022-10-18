@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akilk <akilk@student.hive.fi>              +#+  +:+       +#+        */
+/*   By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:06:35 by wdonnell          #+#    #+#             */
-/*   Updated: 2022/10/12 15:25:36 by akilk            ###   ########.fr       */
+/*   Updated: 2022/10/18 14:03:35 by wdonnell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	print_flags(t_data *data, t_path_group *result, t_room *graph)
 	if (data->verbose)
 		print_verbose(data, result, graph);
 	if (data->print_lines)
-		ft_printf("Lines used: %d\n", result->paths->lines);
+		ft_printf("\x1b[32mLines used: %d\n\x1b[0m", result->paths->lines);
 }
 
 int	main(int ac, char **av)
