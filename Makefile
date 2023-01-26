@@ -6,7 +6,7 @@
 #    By: wdonnell <wdonnell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 09:21:12 by wdonnell          #+#    #+#              #
-#    Updated: 2022/10/13 15:46:50 by wdonnell         ###   ########.fr        #
+#    Updated: 2023/01/26 12:45:58 by wdonnell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f libft/libft.a#
+	rm -f libft/libft.a
 	@make fclean -sC visualizer
 	@make fclean -sC map_gen
 
